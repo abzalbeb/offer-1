@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narx bo‘yicha filtr</title>
+    <style>
+        .product {
+            border: 1px solid #ddd;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .price-slider {
+            margin: 20px 0;
+        }
+        #priceSlider {
+            width: 200px;
+            appearance: none;
+            height: 5px;
+            border-radius: 5px;
+            background: #ddd;
+        }
+        .value-bubble {
+            position: relative;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Reset tugmasi -->
+<div onclick="reset()" class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault MuiChip-clickable MuiChip-clickableColorDefault MuiChip-filledDefault css-vlf20"
+     tabindex="0" role="button">
+    <span class="MuiChip-label MuiChip-labelSmall css-tavflp">Reset</span>
+</div>
+
+<hr>
+
+<!-- Slider -->
+<div class="price-slider">
+    <span class="price-label">Price</span>
+    <div style="left: 81%;" class="value-bubble" id="bubble">80₾</div>
+    <div class="labels">
+        <span>0₾</span>
+        <input type="range" min="0" max="100" value="80" class="range" id="priceSlider">
+        <span>All</span>
+    </div>
+</div>
+
+<!-- Mahsulotlar -->
+<div class="product" data-price="20">Tovar A (20₾)</div>
+<div class="product" data-price="45">Tovar B (45₾)</div>
+<div class="product" data-price="80">Tovar C (80₾)</div>
+<div class="product" data-price="95">Tovar D (95₾)</div>
+<div class="product" data-price="100">Tovar E (100₾)</div>
+
+<script>
+function filter_radio(key) {
+    if (key == 0) {
+        document.querySelector(".jss31").style = "display:none";
+    }
+}
+
+function reset() {
+    window.location.reload();
+}
+
+// Radio buttonlar ishlashi (agar bo‘lsa)
+document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('click', () => {
+        document.querySelectorAll('input[type="radio"]').forEach(r => {
+            if (r !== radio) r.checked = false;
+        });
+    });
+});
+
+const slider = document.getElementById("priceSlider");
+const bubble = document.getElementById("bubble");
+const products = document.querySelectorAll(".product");
+
+// Boshlang'ich holat (CSS bo‘yicha)
+bubble.style.left = "68%";
+
+function updateSlider() {
+    let val = +slider.value;
+    let max = +slider.max;
+    let percentage = (val / max) * 100;
+
+    slider.style.background = `linear-gradient(to right, #007bff ${percentage}%, #ddd ${percentage}%)`;
+    bubble.textContent = val + "₾";
+
+    const sliderWidth = slider.offsetWidth;
+    const bubbleWidth = bubble.offsetWidth;
+    const offset = (percentage / 100) * (sliderWidth - 22);
+    bubble.style.left = offset + 40 + "px";
+
+    // Narx bo‘yicha filtrlash
+    products.forEach(product => {
+        let price = +product.getAttribute("data-price");
+        if (price <= val) {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
+    });
+}
+
+// Slider harakatida ishlasin
+slider.addEventListener("input", updateSlider);
+
+// Sahifa yuklanganda boshlang'ich filtr
+updateSlider();
+</script>
+
+</body>
+</html>
