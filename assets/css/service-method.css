@@ -376,6 +376,12 @@ h1, h2, h3, h4, h5, h6, p {
         align-items: center !important;
         
     }
+    #footer-destop{
+        display: none;
+    }
+    #message-destop{
+        display: none !important;
+    }
 }
 @media (max-width: 599.95px) {
     .jss578 {
@@ -390,14 +396,14 @@ h1, h2, h3, h4, h5, h6, p {
 }
 .Login_banner_Mobile, .mobile_banner {
     background-color: #fff;
-    background-image: url('../assets/image/backgroundRegister.16cd4e684cb959594932.png');
+    background-image: url('../assets/image/backgroundRegister.16cd4e684cb959594932.png') !important;
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     height: 100%;
     object-fit: cover;
     width: 100%;
-    z-index: -1;
+   
 }
 
 .jss184 {
@@ -475,13 +481,13 @@ h1, h2, h3, h4, h5, h6, p {
   /* Tooltip */
   .tooltip-flag {
     position: absolute;
-    top: 65px;
+    top: 62px;
     left: 50%;
     transform: translateX(-50%);
     background: #fff;
     border-radius: 8px;
-    width: 70px;
-    padding: 6px 7px;
+    width: 80px;
+    height: 75px;
     display: flex;           /* Yonma-yon joylash */
     align-items: center;     /* Vertikal markazlash */
     gap: 6px;                /* Oraliq */
@@ -494,14 +500,37 @@ h1, h2, h3, h4, h5, h6, p {
     transition: opacity 0.25s ease;
     white-space: nowrap;
     z-index: 100;
+    cursor: pointer;
   }
 
   .tooltip-flag img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     object-fit: cover;
     display: block;
+  }
+  .img-postion-1{
+    position: relative;
+    top: 23px;
+    right: 15px;
+  }
+    .img-postion-2{
+    position: relative;
+    right: 15px;
+  }
+  .text-postion-1{
+    position: relative;
+    top: -5px !important;
+  }
+    .text-postion-2{
+    position: relative;
+    top: -30px !important;
+  }
+  .tooltip-flag span{
+    position: relative;
+    left: 17px;
+       font-family: "Kanit", sans-serif !important;
   }
 
   /* Hover bo'lganda chiqish */
@@ -509,3 +538,62 @@ h1, h2, h3, h4, h5, h6, p {
     opacity: 1;
     pointer-events: auto;
   }
+  .jss2 {
+    width: 155px;
+    height: 47px;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 28px;
+}
+.css-dt10u0 .MuiChip-avatar {
+    margin-left: 4px;
+}
+.css-dt10u0 .MuiChip-avatar {
+    margin-left: 5px;
+    margin-right: -6px;
+    width: 24px;
+    height: 24px;
+    color: rgb(0, 0, 0);
+    font-size: 0.75rem;
+}
+.jss3 {
+    background: none;
+    object-fit: contain;
+    border-radius: 0;
+    margin-bottom: 0.7px;
+}
+.css-1hdwea4 {
+    position: relative;
+    display: flex
+;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.25rem;
+    line-height: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    user-select: none;
+    color: rgb(30, 136, 229);
+    /* background: rgb(144, 202, 249); */
+}
+.css-k62kit {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 11px;
+    padding-right: 11px;
+    white-space: nowrap;
+}
+.css-1e9y6v2 .MuiChip-avatar {
+    margin-left: 5px;
+    margin-right: -6px;
+    width: 24px;
+    height: 24px;
+    color: rgb(0, 0, 0);
+    font-size: 0.75rem;
+}
