@@ -152,7 +152,7 @@ continueBtn.addEventListener("click", () => {
   sessionStorage.setItem("selectedLocation", JSON.stringify(tempSelectedLocation));
 
   // Boshqa sahifaga o‘tiladi (manzilni o'zgartiring)
-  window.location.href = "otherpage.html";
+  window.location.href = "../address-details/";
 });
 
 
