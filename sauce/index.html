@@ -36,6 +36,87 @@
     <title>Domino's Pizza</title>
     <!-- <script defer="defer" src="https://dominospizza.ge/static/js/main.6ac56c5c.js"></script> -->
     <link href="https://dominospizza.ge/static/css/main.f30fce83.css" rel="stylesheet">
+         <link rel="stylesheet" href="../assets/css/terms-main.css">
+<style>
+    .css-k62kit {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-left: 11px;
+        padding-right: 11px;
+        white-space: nowrap;
+    }
+
+    body {
+        margin: 0px;
+        color: rgb(0, 0, 0);
+        font-family: Roboto, Helvetica, Arial, sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 1.5;
+        letter-spacing: 0.00938em;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .navbar-header {
+        display: flex;
+        gap: 10px;
+    }
+
+    .container-navabar-img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .Kanit-Regular {
+        font-family: "Kanit", sans-serif !important;
+        letter-spacing: -0.2px;
+        /* Harflarni yaqinlashtirish */
+        font-weight: 600;
+    }
+
+    .aaasad {
+        font-size: 14px;
+    }
+
+    .p-style {
+        font-family: "Kanit", sans-serif !important;
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .footer-p-style {
+        font-family: "Kanit", sans-serif !important;
+    }
+
+    .saddsd {
+        display: block !important;
+    }
+
+    .jss1 {
+        padding: 20px 55px 20px 55px !important;
+        margin-bottom: 60px !important;
+    }
+
+    @media (max-width: 600px) {
+        .jss1 {
+            padding: 20px 10px 20px 10px !important;
+            margin-bottom: 60px !important;
+        }
+    }
+
+    @media (max-width: 599px) {
+        .jss1 {
+            padding: 25px !important;
+            margin-bottom: 50px !important;
+        }
+    }
+
+    .active-link {
+        color: #e80045 !important;
+    }
+</style>
     <style data-jss="" data-meta="makeStyles">
         .jss712 {
             padding: 30px 75px 20px 75px;
@@ -1423,83 +1504,109 @@
     <div id="root">
         <div class="Toastify"></div>
         <div class="MuiBox-root css-9hh926">
-            <section class="header">
+            <section class="header" id="header-destop">
                 <div style="padding-inline: 15px;">
                     <div style="align-items: center; display: grid; grid-template-columns: 1fr 1fr 1fr;">
                         <div style="display: flex; gap: 12px; align-items: center;">
-                            <div class="MuiStack-root css-1mzerio"><a href="/service-method">
-                                    <div class="MuiChip-root MuiChip-outlined MuiChip-sizeMedium MuiChip-colorDefault MuiChip-outlinedDefault jss713  css-dt10u0"
+                            <div class="MuiStack-root css-1mzerio navbar-header"><a href="/service-method">
+                                    <div class="MuiChip-root MuiChip-outlined MuiChip-sizeMedium MuiChip-colorDefault MuiChip-outlinedDefault jss2 Kanit-Regular css-dt10u0 container-navabar-img"
                                         style="background: rgb(227, 24, 54); color: rgb(255, 255, 255);">
-                                        <div class="MuiAvatar-root MuiAvatar-circular MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorDefault jss714 css-1hdwea4"
+                                        <div class="MuiAvatar-root MuiAvatar-circular MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorDefault jss3 css-1hdwea4"
                                             style="width: 30px; height: 30px;"><img alt="bike"
-                                                src="https://dominospizza.ge/static/media/shop-white.f9932044a442888258cf4888ce686068.svg"
+                                                src="https://dominospizza.ge/static/media/bike-white.c750e44adb7ca082feca9c0ac6e6bd23.svg"
                                                 class="MuiAvatar-img css-1hy9t21"></div><span
-                                            class="MuiChip-label MuiChip-labelMedium css-k62kit">Branch</span>
+                                            class="MuiChip-label MuiChip-labelMedium css-k62kit"><span
+                                                class="aaasad">Home Delivery</span></span>
                                     </div>
                                 </a><a href="/choose-store">
-                                    <div class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault jss713  css-1e9y6v2"
+                                    <div class="MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorDefault MuiChip-filledDefault jss2 Kanit-Regular css-1e9y6v2 container-navabar-img"
                                         style="background: rgb(255, 255, 255); outline: rgb(0, 120, 174) solid 1px; color: rgb(0, 120, 174);">
-                                        <div class="MuiAvatar-root MuiAvatar-circular MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorDefault jss714 css-1hdwea4"
+                                        <div class="MuiAvatar-root MuiAvatar-circular MuiChip-avatar MuiChip-avatarMedium MuiChip-avatarColorDefault jss3 css-1hdwea4"
                                             style="width: 30px; height: 30px;"><img alt="store"
                                                 src="https://dominospizza.ge/static/media/shop-blue.6c03fcec101d19ac945e53c16ec7bd05.svg"
                                                 class="MuiAvatar-img css-1hy9t21"></div><span
-                                            class="MuiChip-label MuiChip-labelMedium css-14vsv3w">Isani</span>
+                                            class="MuiChip-label MuiChip-labelMedium css-14vsv3w"><span
+                                                class="aaasad">Select Address</span></span>
                                     </div>
                                 </a></div>
                         </div>
                         <div style="display: flex; justify-content: center;"><img
-                                src="https://dominospizza.ge/static/media/dominos_blue_logo.c0fd9781d3faea268710.webp" alt="Dominos Logo"
-                                width="178" height="38" style="cursor: pointer;"></div>
+                                src="https://dominospizza.ge/static/media/dominos_blue_logo.c0fd9781d3faea268710.webp"
+                                alt="Dominos Logo" width="178" height="38" style="cursor: pointer;"></div>
                         <div style="display: flex; align-items: center; justify-content: flex-end;">
                             <div class="header-icons"><a href="/stores">
-                                    <div><img
-                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAPmSURBVHgBvZdZjA5ZGIZfM2aVmekxM8b0yDhjjFmS2UfEjfyxNIJogogQHeLKvsUFSbcgQawRd2JJEBcSxI0tNCKWC1tiSUQjNLGLfef9+vsqfZw+1bp//99v8qSqvvrqnLdOna2A/Gso2UIqyXM7biUlaEA5coCcJONJG4v9a0bOGQ55lrOKykgji3U2E0VebEZDGDppRkS9yWVyg+wiZ8zAaLu/kBxEntTPKhN1Is/IsCCnmFzz4sfJEORB68hEOz8XMZKoF7lNmpBJ0E6ec50iGfI7ufOW3ArSk7QilY1rSZR779n5Z0aiu+SWd/2+HV+QL8hD0hTaT2rTBfI1eUmaxcw4soJ08MzEdNM7/4S8Ii2gTf8j2Ue+Ip+auZh+IudJS3IiVpkYqbCEQjKVHLNzoafl/Un+MORzDLTjZtKeXJIKyKwUI2OgLVlOulodb6gU2uk+8mJyPci77oGaQ3EvGWHnGVR3zL+gLSjlNrf7BWQadJR19eoo9gtMerfzYiWoHqaJJpONQUxac4F3LTNvkZ076NB9RM5aHRVmWtQ9rEMeqPTeDp7jkiC2Gjpz+pLn1nnXE6ATnK9WZsAF8bVkih84TWYGSTJzSm8vDOL7Iwa7WRmJPoe2QAa1y0FHpvTPquE7G9rrdwQPy3eW5mxjJJL5oyDIbW6mk9h5stjKKEe6ysh66EtXLVgyJGUtCYff/+8QX0nWQD9znxRDjhwm/yRmYGZaRpJzES+DjrSYVpH5YfBGpJAPrfDWQTxpyR+CeEGKGYnLit0liP8NnYdaBHHshC7jvqZZ4YtT4mF+aUpcXmo4uUg+9uLyeSYEuVUdWFZVGYbNoN9cXGdIR7Ic2jGPQjuuzB29zWSS/58hm6dl5FvozNsWuhQUWR2jyDzoSPwSNV+0aoGTKXw3WUquQpuvP3SoboIueDLlXyGD7a0kLk38q+UPMmMS/578Bh1RMuU/ho7KpWZiLLSFjyJFDtrM+dQQM9TnbYkO+TeTqATasWsobT8jycUp92QeOQT9DCJpepnOW0dyZWs518sVldp1Oepo5gh0rboVuScr+hzyC3kKXSC/I9siubLN2E5+Rh0UMyNzhYNukNL0ygxcsNwl5APyTZC3CPoTVyfFzDRCdpJVW7YWyb5XPvMA1EONkVuNQ/U6k0E9XyyXZuQ/uty7dqinYmYe2FFm1XuR+03teD+It4PuYxKFfxBZmblOppM9qP4F8fUEuge6GcRHQn/e/H8lhyzkkP2kJ+taX3u+sA7lyh4nEysol31GFs7reAeJGZltnV07ZCdZqZsYvlxw9ONSb43f3w3QpmxoDodGXgOnDwH92dNxKAAAAABJRU5ErkJggg=="
-                                            alt="Dominos Stores">
-                                        <p style="color: black;">Stores</p>
+                                    <div><img src="../assets/image/navbarlogo1.png" alt="Dominos Stores">
+                                        <p style="color: black;" class="p-style">Stores</p>
                                     </div>
                                 </a><a href="/tracking">
-                                    <div><img
-                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAKqSURBVHgB5ZdbiE1RGMf/cwzGZZqR0TDUbHkSRXmRpyEpSig1yYN5EUVEUkq55cXDoESpyTyQN/c8KRReGJcIGZwht9xyiVxy+f/n+05nZnce9j6ddWZq/vXrrLXX3met8+1v/dd3gLw2kofkNflCzpMIgTXIP9vIZHKcvCWXyHOyl7wi9xFIGdJCqkkXWUo6yEeyjGwje0gtAuo62UTuxK5P90XtI2sRSBmfaCRpj43dJj/IJzIJgaQFKNy/SEOB8Trym3xDIGkB92BJtsiRamChV1IqOTsQUBvIATIRFnbtgmew5IvICwROwlqfpNH7VaTS29oFbSiD1pMLsWsR6UQZzCini7DXIQ0lT2AeUTaNJ1myBLYld6EPFMHM5y9Z6dcWkCNkrvc3e7/O+0rWFcjbeirFH5LpnIK5os6Cp2QIzAvuwjxjMPlMHpHvZKwv5hr6gY4hoGsm0XJfxMCWDrcKb8vkZGY3yRtyC5bAUe7mCpRW9TA7H+eTyFtOwKqrEbBTV5/ryGpyFSWWdsR2b8tT5LCHYFWVfvllWNk328cbShmBqbCTVWqGnayaZAxZRf752BYyzxczDEVqMdmN/JY7Cwt3tff3w0o6FbgTCjyv0M8nnRkklxKq2ds6snVQ/fG+3qfC+tX7o2Bm9RN20salhcncKtMs4CQszJJcrx1m29LL2L2avN4nmRIb02ufQYaT92n8+wwsm5NI1jyLHCWHyWmYzSuKSkpVWIpWVcLvwzSkkybK+qcOqgfkHflAtvo9SsKmhN/XXTM2Ip12Ir8l45oDqzcSq5WMRjopERWFqMCYri9EGbSGXEFvx91BDqII6cFijlolXWuPBenX16AIzSTnkF7abjdgVvwYJSpyFQ2VbS3elwvKanOJqnbW203e74L99+il/8nvkEHpERWKAAAAAElFTkSuQmCC"
-                                            alt="Track">
-                                        <p style="color: black;">Tracker</p>
+                                    <div><img src="../assets/image/navbarlogo2.png" alt="Track">
+                                        <p style="color: black;" class="p-style">Tracker</p>
                                     </div>
                                 </a>
-                                <div>
-                                    <div class=""><img
-                                            src="data:image/png;base64,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"
-                                            alt="Flag">
-                                        <p>ENG</p>
+                                <div class="flag-wrapper">
+                                    <div style="cursor: pointer;">
+                                        <img src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png" alt="ENG">
+                                        <p class="p-style" style="font-weight: 500;">ENG</p>
+                                    </div>
+
+                                    <div class="tooltip-flag">
+                                        <div>
+                                            <img class="img-postion-1" src="../assets/image/britsht.png" alt="GEO">
+                                            <span class="text-postion-1">UK</span>
+                                        </div>
+                                        <div>
+                                            <img class="img-postion-2"
+                                                src="../assets/image/gruziya.png"
+                                                alt="GEO">
+                                            <span class="text-postion-2">GEO</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="pointer"><svg width="42px" height="34px" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="12" cy="9" r="3" stroke="#000" stroke-width="1"></circle>
-                                        <circle cx="12" cy="12" r="10" stroke="#000" stroke-width="1"></circle>
-                                        <path
-                                            d="M17.9691 20C17.81 17.1085 16.9247 15 11.9999 15C7.07521 15 6.18991 17.1085 6.03076 20"
-                                            stroke="#000" stroke-width="1" stroke-linecap="round"></path>
-                                    </svg>
-                                    <p>Login</p>
-                                </div>
+                                <!-- <div class="">
+                                    <div class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-uzejuo"
+                                        style="color: rgb(0, 0, 0); font-weight: bold; font-size: 12px; text-transform: uppercase;">
+                                        AB</div>
+                                    <p class="text-overflow" style="max-width: 90px;">Abzal</p>
+                                </div> -->
                                 <div class="MuiStack-root css-16mqrq1"><span class="MuiBadge-root css-1afh8op">
                                         <div
                                             style="cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAANxSURBVHgBvZfpq8xhFMe/92YnW7gId2TNXiL7WkSJSOIN4h8QJSVLkuUF8UIpZXthiyxZEklZ31iSfbmWKPuS7OH77Zwx5447Y0Z37rc+ze88y/ye5ZzzPD8A2EAekTLyktwmi0gdVJE+k14kEdhKHpBmKLCKyEIy0u0apCV5Qz6Qb2Q0qlgJ8hA2e21NKxRQRRnKl5JPpAX5SQ6iMPqRaQBDyRKyiuwgV0Jdwn8fhrJB5EywG3q72K+X93nntt7dHhlU0xvLH16n1c0l89PKnqL8as4ga9LaXCatgz2W7C1GxfpK7pGO5BbpHuqekM5p7eWsTYNdD+bEUe29b1JjyJFMA5COkWHkHFJRIl2CLWfUF1I72E3I92D3INfT+vQnFzL5gDSALCfLyF6k9k7SHreFLavUGBa6sR5pfUphUZWUJl9aDZl1nnQi92FbMjzUnYLNuJ//7iQrkXK6Fd4/GT2zSV2yzu3xsBVAtgH88j/UTOUHzckFr9M2yD9Ou32HfEQqMr56WdKWfxwNdhe3kc0HpOMwZ1GIDQjlcqZOwVauKAm2tuRLsDXYZ8HW7OVbWVdA0gy1bDqc1pL6Xt6O9ISFqdSVNCAd3FbUTIc5sSSnnQQLPUnbdlcP/1oBOVkXb9wuDFjOlAjttPy1gq3/fe/PGpi25LPbfWD+kbN2k1EwxxviZVrustBmAVkc7JukjT8P9r5JbSZT40j/pbMwP5A/JP3gOWw7krN+QaqHPip/6c/KfldD3TD4/uc6gGP+YnXS0ZxwHsNWRM/KfB1DnZywxJ8HkrekG9kFyyl/8kFRDgNQUnkFOxmPI5VkMimB8gdVUlq1fWR1LMwWBbqSzSMzYdlQqXUOsktePhmWO3JSpgHI8w/DZqyYnQFLSmVZ/ku54BpSjvrfKvYX6YwfAUvF22FbUCVSyO0n02AzGooCqqItUHjJa4v9dzjKH0SVoW2wW3eFYXgCFqvK/5tQGJ2Ep/WKVkBn+CzYaXUL5c/0ypTSd9Y8oETSG4X5ODmEv++aWTUFlsE2wm42+UqOvQe2pQnkKb1cYTkB9hV1Ks/+PUJ/JbLbsTKXs0CnmTKhzvwDsBmUIHdNJOu9vwavi0ppPgPQbVaHkL6iG3nZc+Qu5ZJxZIvbOrieIU/pI0NeexF/X8lzkW7XiqYbpG+s+A20tbGRk6yhqwAAAABJRU5ErkJggg=="
-                                                alt="Cart" style="display: block;">
-                                            <p class=""
-                                                style="color: black; margin: 0px; text-align: center; white-space: nowrap;">
+                                            <img src="../assets/image/cart.png" alt="Cart" style="display: block;">
+                                            <p class="kanit-Regular"
+                                                style="color: black; margin: 0px; text-align: center; white-space: nowrap; font-weight:500">
                                                 Cart</p>
                                         </div><span
-                                            class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-1r81tyw">0</span>
+                                            class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-1r81tyw"></span>
                                     </span></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+            <section class="header-mobile" id="header-mobile">
+                <div style="padding-inline: 0px;">
+                    <div style="align-items: center; display: block; grid-template-columns: 1fr 1fr 1fr;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;"><button
+                                onclick="openMenu()"
+                                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-148fdm8"
+                                tabindex="0" type="button"><svg
+                                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
+                                    aria-hidden="true" viewBox="0 0 24 24" data-testid="MenuIcon"
+                                    style="font-size: 2rem;">
+                                    <path d="M3 18h18v-2H3zm0-5h18v-2H3zm0-7v2h18V6z"></path>
+                                </svg><span class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                            <div style="display: flex; justify-content: center;"><img
+                                    src="https://dominospizza.ge/static/media/dominos_blue_logo.c0fd9781d3faea268710.webp"
+                                    alt="Dominos Logo" width="126" height="27" style="cursor: pointer;"></div>
+                            <div style="width: 41px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <nav></nav>
+            </section>
             <div class="categories-main" style="position: sticky; top: 0px; z-index: 1300; transition: 1s;">
                 <div
-                    style="display: flex; justify-content: space-between; align-items: center; gap: 12px; white-space: nowrap; box-shadow: rgb(173, 173, 173) 0px 2px 2px 0px; padding-bottom: 12px; padding-top: 12px; padding-inline: 50px;">
+                    style="display: flex; justify-content: space-between; padding-bottom: 12px; padding-top: 12px; align-items: center; overflow: scroll; gap: 12px; white-space: nowrap; box-shadow: rgb(173, 173, 173) 0px 2px 2px 0px; padding-inline: 50px;">
                     <div><a href="/offers" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
                                 <div><img src="https://deykvccewcmn1.cloudfront.net/Offer_in_active.svg" width="60"
@@ -1574,10 +1681,10 @@
                         </a></div>
                     <div><a href="/sauce" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="https://deykvccewcmn1.cloudfront.net/sauce_active.svg" width="60"
+                                <div><img src="https://deykvccewcmn1.cloudfront.net/sauce_inactive.svg" width="60"
                                         height="60" alt="Sauce" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
-                                    style="font-weight: normal; font-size: 20px; color: rgb(209, 10, 10);">Sauce</p>
+                                    style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Sauce</p>
                             </div>
                         </a></div>
                 </div>
@@ -1786,6 +1893,93 @@
                 </div>
             </div>
         </div>
+         <div class="footer-main" style="margin-top: 0px;" id="footer-destop">
+            <div class="footer-inner padding-inline">
+                <div class="footer-content">
+                    <div class="footer-list-container">
+                        <ul class="footer-list">
+                            <li><a href="/about"><span class="span-li footer-p-style">About Domino's</span></a></li>
+                            <li><span class="span-li footer-p-style" style="cursor: default;">Hygiene Certificate</span>
+                            </li>
+                            <li><a href="/join-our-team"><span class="span-li footer-p-style">Join Our Team</span></a>
+                            </li>
+                        </ul>
+                        <ul class="footer-list">
+                            <li><a href="/terms-and-conditions"><span class="span-li footer-p-style">Terms
+                                        and Conditions</span></a>
+                            </li>
+                            <li><a href="/privacy-policy"><span class="span-li footer-p-style">Privacy Policy</span></a>
+                            </li>
+                            <li><a href="/delivery-policy"><span class="span-li footer-p-style">Delivery
+                                        Policy</span></a></li>
+                            <li><a href="/return-policy"><span class="span-li footer-p-style">Return Policy</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-icons-sec">
+                        <div style="display: flex; align-items: center; gap: 18px;"><img
+                                src="https://dominospizza.ge/static/media/halal.708164dc956fb390d017.webp" alt="Halal"
+                                width="62" height="62" loading="lazy"><img
+                                src="https://dominospizza.ge/static/media/time.8f2b09be0b7041d86372.webp" alt="30-min"
+                                width="104" height="76" loading="lazy"><img
+                                src="https://dominospizza.ge/static/media/pizza_oven.3bd307ade23251814945.webp"
+                                alt="oven" width="59" height="58" loading="lazy"></div>
+                        <p class="Kanit-Light text-blue footer-p-style" style="text-align: center; font-weight:300">©
+                            Geopizza LLC All rights reserved
+                            2025 | Developed by <a href="https://www.hitech-prime.com/" target="_blank" rel="noreferrer"
+                                class="text-blue hover-underline footer-p-style"> HiTech Prime </a></p>
+                    </div>
+                    <div class="footer-social-sec Kanit-SemiBold">
+                        <div style="display: flex; align-items: center; justify-content: flex-start; gap: 18px;"><a
+                                href="https://www.facebook.com/dominosgeorgia" target="_blank" rel="noreferrer"><img
+                                    src="https://dominospizza.ge/static/media/facebook.afa882cddf3eb3b9aafc.webp"
+                                    alt="Facebook" width="43" height="43" loading="lazy"></a><a
+                                href="https://www.instagram.com/dominos_geo" target="_blank" rel="noreferrer"><img
+                                    src="https://dominospizza.ge/static/media/instagram.66021d99fd4d624741e6.webp"
+                                    alt="Instagram" width="43" height="43" loading="lazy"></a><a
+                                href="https://www.tiktok.com/@dominos_georgia" target="_blank" rel="noreferrer"><img
+                                    src="https://dominospizza.ge/static/media/tiktok.adab40c4bec32de925ff.webp"
+                                    alt="Tiktok" width="43" height="43" loading="lazy"></a></div>
+                        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                            <div style="text-align: start;"><a href="tel:032 2 99 88 88">
+                                    <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                                        <div><img
+                                                src="https://dominospizza.ge/static/media/phone_call_1.38932115677a1630e6d1.webp"
+                                                alt="Phone" width="20" height="20" loading="lazy"></div>
+                                        <p style="font-size: 16px; font-weight:600" class="footer-p-style">032 2 99 88
+                                            88</p>
+                                    </div>
+                                </a>
+                                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                                    <div><img src="https://dominospizza.ge/static/media/mail.74f86af7c0ea74279ad3.webp"
+                                            alt="Mail" width="20" height="20" loading="lazy"></div>
+                                    <p style="font-size: 16px; font-weight:600"><a class="text-blue footer-p-style"
+                                            href="mailto:info@dominospizza.ge">info@dominospizza.ge</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="position: fixed; bottom: 70px; right: 4px; display: flex; justify-content: flex-end;"
+            id="massage-mobile">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div><a href="https://m.me/dominosgeorgia?ref=chat" target="_blank" rel="noopener noreferrer"><img
+                            src="https://dominospizza.ge/static/media/messenger.bdb78ff46cdfba34c11a.png" height="40"
+                            width="40" alt="messenger" loading="lazy"></a></div>
+                <p style="font-size: 12px; " class="footer-p-style">Contact Us</p>
+            </div>
+        </div>
+        <div style="position: fixed; bottom: 70px; right: 20px; display: flex; justify-content: flex-end;"
+            id="message-destop">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div><a href="https://m.me/dominosgeorgia?ref=chat" target="_blank" rel="noopener noreferrer"><img
+                            src="https://dominospizza.ge/static/media/messenger.bdb78ff46cdfba34c11a.png" height="60"
+                            width="60" alt="messenger" loading="lazy"></a></div>
+                <p style="font-size: 16px; " class="footer-p-style">Contact Us</p>
+            </div>
+        </div>
         <div class="bottom-nav">
             <div
                 style="border-radius: 100px; padding: 8px; display: flex; justify-content: center; align-items: center; background: rgb(0, 120, 174);">
@@ -1794,11 +1988,13 @@
                     <path fill="#fff"
                         d="m38.92,17.4h0S22.6,1.08,22.6,1.08c-.7-.7-1.62-1.08-2.6-1.08s-1.91.38-2.6,1.08L1.09,17.39s-.01.01-.02.02c-1.43,1.44-1.43,3.77,0,5.2.65.65,1.52,1.03,2.44,1.07.04,0,.08,0,.11,0h.65v12.01c0,2.38,1.93,4.31,4.31,4.31h6.38c.65,0,1.17-.52,1.17-1.17v-9.41c0-1.08.88-1.97,1.97-1.97h3.77c1.08,0,1.97.88,1.97,1.97v9.41c0,.65.52,1.17,1.17,1.17h6.38c2.38,0,4.31-1.93,4.31-4.31v-12.01h.6c.98,0,1.91-.38,2.6-1.08,1.43-1.44,1.43-3.77,0-5.21Z">
                     </path>
-                </svg></div>
+                </svg>
+            </div>
             <div
                 style="border-radius: 100px; padding: 8px; display: flex; justify-content: center; align-items: center; background: rgb(0, 120, 174);">
-                <img src="https://dominospizza.ge/static/media/shop-white.f9932044a442888258cf4888ce686068.svg" alt="BUY FROM BRANCH"
-                    style="height: 38px; width: 38px; object-fit: contain;"></div>
+                <img src="https://dominospizza.ge/static/media/shop-white.f9932044a442888258cf4888ce686068.svg"
+                    alt="BUY FROM BRANCH" style="height: 38px; width: 38px; object-fit: contain;">
+            </div>
             <div
                 style="border-radius: 100px; padding: 8px; display: flex; justify-content: center; align-items: center; background: rgb(0, 120, 174);">
                 <svg width="30" height="30" id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg"
@@ -1812,7 +2008,8 @@
                     <path fill="#fff"
                         d="m7.89,22.62c-.62,0-1.13.51-1.13,1.13s.51,1.13,1.13,1.13,1.13-.51,1.13-1.13-.51-1.13-1.13-1.13Z">
                     </path>
-                </svg></div>
+                </svg>
+            </div>
             <div
                 style="border-radius: 100px; padding: 8px; display: flex; justify-content: center; align-items: center; background: rgb(0, 120, 174);">
                 <span class="MuiBadge-root css-1rzb3uu"><svg width="30" height="30" id="Layer_1" data-name="Layer 1"
@@ -1824,70 +2021,156 @@
                         class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-qxzn03">2</span></span>
             </div>
         </div>
-        <div class="footer-main" style="margin-top: 80px;">
-            <div class="footer-inner padding-inline">
-                <div class="footer-content">
-                    <div class="footer-list-container">
-                        <ul style="padding-left: 10px;" class="footer-list">
-                            <li><a href="/about"><span class="span-li">About Domino's</span></a></li>
-                            <li><span class="span-li" style="cursor: default;">Hygiene Certificate</span></li>
-                            <li><a href="/join-our-team"><span class="span-li">Join Our Team</span></a></li>
-                        </ul>
-                        <ul style="padding-left: 10px;" class="footer-list">
-                            <li><a href="/terms-and-conditions"><span class="span-li">Terms and
-                                        Conditions</span></a></li>
-                            <li><a href="/privacy-policy"><span class="span-li">Privacy Policy</span></a></li>
-                            <li><a href="/delivery-policy"><span class="span-li">Delivery Policy</span></a></li>
-                            <li><a href="/return-policy"><span class="span-li">Return Policy</span></a></li>
-                        </ul>
+    </div>
+           <div role="presentation" class="MuiDrawer-root MuiDrawer-modal MuiModal-root MuiModal-hidden css-12snods"
+        style="overflow: hidden; z-index: 9999999;">
+        <div aria-hidden="true" class="MuiBackdrop-root MuiModal-backdrop css-919eu4"
+            style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1);"></div>
+        <div tabindex="0" data-testid="sentinelStart"></div>
+        <div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation16 MuiDrawer-paper MuiDrawer-paperAnchorLeft css-15xvzt3"
+            tabindex="-1" style="transform: none; transition: transform 225ms cubic-bezier(0, 0, 0.2, 1);"
+            id="menuClose" onclick="menuClose()">
+            <div class="sideBar_containe">
+                <div><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1yxmbwk"
+                        tabindex="0" type="button" style="padding-left: 30px; padding-top: 22px;"><svg
+                            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
+                            aria-hidden="true" viewBox="0 0 24 24" data-testid="MenuIcon" style="font-size: 2rem;">
+                            <path d="M3 18h18v-2H3zm0-5h18v-2H3zm0-7v2h18V6z"></path>
+                        </svg><span class="MuiTouchRipple-root css-w0pj6f"></span></button>
+
+                    <div class="top_flag-icon">
+                        <div class="lang_Ge"><img src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png" loading="lazy" height="26"
+                                width="26" alt="flag ge"></div>
+                        <div class="lang_Ge"><img
+                                src="../assets/image/britsht.png"
+                                loading="lazy" height="26" width="26" alt="flag ge"></div>
+                        <div class="lang_Ge"><img src="../assets/image/gruziya.png" loading="lazy" height="26"
+                                width="26" alt="flag ge"></div>
                     </div>
-                    <div class="footer-icons-sec">
-                        <div style="display: flex; align-items: center; gap: 18px;"><img
-                                src="https://dominospizza.ge/static/media/halal.708164dc956fb390d017.webp" alt="Halal"
-                                width="62" height="62" loading="lazy"><img
-                                src="https://dominospizza.ge/static/media/time.8f2b09be0b7041d86372.webp" alt="30-min"
-                                width="104" height="76" loading="lazy"><img
-                                src="https://dominospizza.ge/static/media/pizza_oven.3bd307ade23251814945.webp"
-                                alt="oven" width="59" height="58" loading="lazy"></div>
-                        <p class="text-blue" style="text-align: center; font-weight: 300;">© Geopizza LLC All rights
-                            reserved
-                            2025 | Developed by <a href="https://www.hitech-prime.com/" target="_blank" rel="noreferrer"
-                                class="text-blue hover-underline"> HiTech Prime </a></p>
+                    <hr class="MuiDivider-root MuiDivider-fullWidth css-mf11to">
+                    <div class="scrollable">
+                        <div class="user-tooltip"><a href="/order-history">
+                                <li class="MuiListItem-root MuiListItem-gutters css-qfmzwt">
+                                    <div class="MuiListItemIcon-root list_item_icon css-kj3bb2"
+                                        style="padding-left: 32px; width: 20px; height: 20px; padding-right: 25px; font-size: 16px;">
+                                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv"
+                                            focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                                            data-testid="DescriptionOutlinedIcon">
+                                            <path
+                                                d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8zm4 18H6V4h7v5h5z">
+                                            </path>
+                                        </svg>
+                                    </div><span class="list_item_text">Order History</span>
+                                </li>
+                            </a><a href="/favorites">
+                                <li class="MuiListItem-root MuiListItem-gutters css-qfmzwt">
+                                    <div class="MuiListItemIcon-root list_item_icon css-kj3bb2"
+                                        style="padding-left: 32px; width: 20px; height: 20px; padding-right: 25px; font-size: 16px;">
+                                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv"
+                                            focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                                            data-testid="FavoriteBorderOutlinedIcon">
+                                            <path
+                                                d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3m-4.4 15.55-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05">
+                                            </path>
+                                        </svg>
+                                    </div><span class="list_item_text">Favorites</span>
+                                </li>
+                            </a><a href="/rewards">
+                                <li class="MuiListItem-root MuiListItem-gutters css-qfmzwt">
+                                    <div class="MuiListItemIcon-root list_item_icon css-kj3bb2"
+                                        style="padding-left: 32px; width: 20px; height: 20px; padding-right: 25px; font-size: 16px;">
+                                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv"
+                                            focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                                            data-testid="RedeemOutlinedIcon">
+                                            <path
+                                                d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2m-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1M9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1m11 15H4v-2h16zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20z">
+                                            </path>
+                                        </svg>
+                                    </div><span class="list_item_text">Rewards</span>
+                                </li>
+                            </a>
+                        </div>
+                        <hr class="MuiDivider-root MuiDivider-fullWidth css-mf11to">
+                        <div class="list_item">
+                            <ul class="list_item_ul">
+                                <li><a href="/about"><span class="span-li Kanit-Extra-Light fs-16 text-blue">About
+                                            Domino's</span></a></li>
+                                <li><a href="/stores"><span
+                                            class="span-li Kanit-Extra-Light fs-16 text-blue">Stores</span></a></li>
+                                <li><span class="span-li Kanit-Extra-Light fs-16 text-blue">Hygiene Certificate</span>
+                                </li>
+                                <li><a href="/join-our-team"><span
+                                            class="span-li Kanit-Extra-Light fs-16 text-blue">Join Our Team</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <hr class="MuiDivider-root MuiDivider-fullWidth css-mf11to">
+                        <div class="list_item">
+                            <ul class="list_item_ul">
+                                <li><a href="/terms-and-conditions"><span
+                                            class="span-li Kanit-Extra-Light fs-16 text-blue">Terms and
+                                            Conditions</span></a></li>
+                                <li><a href="/privacy-policy"><span
+                                            class="span-li Kanit-Extra-Light fs-16 text-blue">Privacy Policy</span></a>
+                                </li>
+                                <li><a href="/delivery-policy"><span
+                                            class="span-li Kanit-Extra-Light fs-16 text-blue">Delivery Policy</span></a>
+                                </li>
+                                <li><a href="/return-policy"><span
+                                            class="span-li Kanit-Extra-Light fs-16 text-blue">Return Policy</span></a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="footer-social-sec Kanit-SemiBold">
-                        <div class="footer-social"
-                            style="display: flex; align-items: center; justify-content: flex-start; gap: 18px;"><a
-                                href="https://www.facebook.com/dominosgeorgia" target="_blank" rel="noreferrer"><img
-                                    src="https://dominospizza.ge/static/media/facebook.afa882cddf3eb3b9aafc.webp"
-                                    alt="Facebook" width="43" height="43" loading="lazy"></a><a
-                                href="https://www.instagram.com/dominos_geo" target="_blank" rel="noreferrer"><img
-                                    src="https://dominospizza.ge/static/media/instagram.66021d99fd4d624741e6.webp"
-                                    alt="Instagram" width="43" height="43" loading="lazy"></a><a
-                                href="https://www.tiktok.com/@dominos_georgia" target="_blank" rel="noreferrer"><img
-                                    src="https://dominospizza.ge/static/media/tiktok.adab40c4bec32de925ff.webp"
-                                    alt="Tiktok" width="43" height="43" loading="lazy"></a></div>
-                        <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                            <div style="text-align: start;"><a href="tel:032 2 99 88 88">
-                                    <div class="media_img" class="tovar_img" style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                                        <div><img
-                                                src="https://dominospizza.ge/static/media/phone_call_1.38932115677a1630e6d1.webp"
-                                                alt="Phone" width="20" height="20" loading="lazy"></div>
-                                        <p style="font-size: 16px;">032 2 99 88 88</p>
-                                    </div>
-                                </a>
-                                <div class="media_img" class="tovar_img" style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                                    <div><img src="https://dominospizza.ge/static/media/mail.74f86af7c0ea74279ad3.webp"
-                                            alt="Mail" width="20" height="20" loading="lazy"></div>
-                                    <p style="font-size: 16px;"><a class="text-blue"
-                                            href="mailto:info@dominospizza.ge">info@dominospizza.ge</a></p>
-                                </div>
+                </div>
+                <hr class="MuiDivider-root MuiDivider-fullWidth css-mf11to">
+                <div class="footer" style="position: absolute; left: 40px; margin-top: 20px;">
+                    <div style="display: flex; align-items: center; gap: 18px;"><a href="https://www.facebook.com"
+                            target="_blank" rel="noreferrer"><img
+                                src="../assets/image/facebook.afa882cddf3eb3b9aafc.webp" alt="Facebook" width="25"
+                                height="25" loading="lazy"></a><a href="https://www.instagram.com" target="_blank"
+                            rel="noreferrer"><img src="../assets/image/instagram.66021d99fd4d624741e6.webp"
+                                alt="Instagram" width="25" height="25" loading="lazy"></a><a
+                            href="https://www.tiktok.com" target="_blank" rel="noreferrer"><img
+                                src="../assets/image/tiktok.adab40c4bec32de925ff.webp" alt="Tiktok" width="25"
+                                height="25" loading="lazy"></a></div>
+                    <div><a href="tel:032 2 99 88 88">
+                            <p class="Kanit-Regular fs-16 text-blue" style="font-weight: 400;">032 2 99 88 88</p>
+                        </a></div>
+                    <div><a href="mailto:info@dominospizza.ge">
+                            <p class="Kanit-Regular fs-16 text-blue" style="font-weight: 400;">info@dominospizza.ge</p>
+                        </a></div>
+                    <div style="text-align: center;">
+                        <div style="display: flex; align-items: center; gap: 4px;">
+                            <div class="Kanit-Regular fs-16 text-gray"
+                                style="display: flex; align-items: center; gap: 4px;"><svg
+                                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-14enq8" focusable="false"
+                                    aria-hidden="true" viewBox="0 0 24 24" data-testid="AccessAlarmOutlinedIcon">
+                                    <path
+                                        d="m22 5.72-4.6-3.86-1.29 1.53 4.6 3.86zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM12.5 8H11v6l4.75 2.85.75-1.23-4-2.37zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9m0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7">
+                                    </path>
+                                </svg>
+                                <p class="Kanit-Regular fs-16 text-gray" style="font-weight: 300;">11:00 </p>
+                            </div>
+                            <div class="Kanit-Regular fs-16 text-gray"
+                                style="display: flex; align-items: center; gap: 4px;"><svg
+                                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1mtjo9i" focusable="false"
+                                    aria-hidden="true" viewBox="0 0 24 24" data-testid="AccessAlarmOutlinedIcon">
+                                    <path
+                                        d="m22 5.72-4.6-3.86-1.29 1.53 4.6 3.86zM7.88 3.39 6.6 1.86 2 5.71l1.29 1.53zM12.5 8H11v6l4.75 2.85.75-1.23-4-2.37zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9m0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7">
+                                    </path>
+                                </svg>
+                                <p class="Kanit-Regular fs-16 text-gray" style="font-weight: 300;">01:30 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div tabindex="0" data-testid="sentinelEnd"></div>
     </div>
+<script src="../assets/js/terms-main.js"></script>
+
     <script type="module" defer="defer" src="https://www.googletagmanager.com/gtag/js?id=G-909K1GHXTJ"></script>
     <script>function loadFBPixel() { try { e = window, t = document, n = "script", e.fbq || (o = e.fbq = function () { o.callMethod ? o.callMethod.apply(o, arguments) : o.queue.push(arguments) }, e._fbq || (e._fbq = o), o.push = o, o.loaded = !0, o.version = "2.0", o.queue = [], (a = t.createElement(n)).async = !0, a.src = "https://connect.facebook.net/en_US/fbevents.js", (i = t.getElementsByTagName(n)[0]).parentNode.insertBefore(a, i)), fbq("init", "275867525480309"), fbq("track", "PageView") } catch (e) { console.error("FB Pixel initialization error:", e) } var e, t, n, o, a, i } setTimeout(loadFBPixel, 5e3)</script>
     <iframe allow="join-ad-interest-group" data-tagging-id="AW-16453014359" data-load-time="1754975532915" height="0"
