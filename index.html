@@ -1696,7 +1696,15 @@
                         </g>
                     </svg></div>
                 <div class="jss30">
-                    <div class="jss54" style="cursor: pointer; position: relative; overflow: hidden;">
+                    <div 
+                        data-id="1" 
+                        data-img="https://deykvccewcmn1.cloudfront.net/20250403124228383_Medium.webp" 
+                        data-title="1+1 Medium Pizzas" 
+                        data-description="Buy one Medium Pizza and get second for free" 
+                        data-price="27.90" 
+                        data-aksiya-price="55.80" 
+
+                        class="jss54 card_product" style="cursor: pointer; position: relative; overflow: hidden;">
                         <div class="media_img" style="position: relative; border-radius: 11px;"><img
                                 src="https://deykvccewcmn1.cloudfront.net/20250403124228383_Medium.webp"
                                 alt="1+1 Medium Pizzas" width="100%" height="188px"
@@ -1715,7 +1723,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="jss54" style="cursor: pointer; position: relative; overflow: hidden;">
+                    <div data-id="2" 
+                        data-img="https://deykvccewcmn1.cloudfront.net/20250319102214947_483387853_1815969655613230_7490774769414293800_n.webp" 
+                        data-title="2x Cheese Bread + Sauce" 
+                        data-description="free Dipping Sauce (Cheddar or Yogurt)" 
+                        data-price="21.80" 
+                        data-aksiya-price="26.80"
+                         class="jss54 card_product" style="cursor: pointer; position: relative; overflow: hidden;">
                         <div class="media_img" style="position: relative; border-radius: 11px;"><img
                                 src="https://deykvccewcmn1.cloudfront.net/20250319102214947_483387853_1815969655613230_7490774769414293800_n.webp"
                                 alt="2x Cheese Bread + Sauce" width="100%" height="188px"
@@ -1887,7 +1901,14 @@
                                 </g>
                             </g>
                         </svg></div>
-                    <div class="jss30">
+                    <div class="jss30" class="card_product" 
+                        data-id="2" 
+                        data-img="https://deykvccewcmn1.cloudfront.net/20250620091628501_chilli.webp" 
+                        data-title="1+1 Medium Pizzas" 
+                        data-description="Buy one Medium Pizza and get second for fre" 
+                        data-price="27.90" 
+                        data-aksiya-price="55.80" 
+                        >
                         <div class="jss32" id="special" style="cursor: pointer;">
                             <div class="jss34" style="padding: 0px;">
                                 <div class="jss35"><label
@@ -3551,15 +3572,6 @@
                 <p style="font-size: 12px; " class="footer-p-style">Contact Us</p>
             </div>
         </div>
-        <div style="position: fixed; bottom: 70px; right: 20px; display: flex; justify-content: flex-end;"
-            id="message-destop">
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <div><a href="https://m.me/dominosgeorgia?ref=chat" target="_blank" rel="noopener noreferrer"><img
-                            src="https://dominospizza.ge/static/media/messenger.bdb78ff46cdfba34c11a.png" height="60"
-                            width="60" alt="messenger" loading="lazy"></a></div>
-                <p style="font-size: 16px; " class="footer-p-style">Contact Us</p>
-            </div>
-        </div>
         <div class="bottom-nav">
             <div
                 style="border-radius: 100px; padding: 8px; display: flex; justify-content: center; align-items: center; background: rgb(0, 120, 174);">
@@ -3750,6 +3762,46 @@
         <div tabindex="0" data-testid="sentinelEnd"></div>
     </div>
 <script src="../assets/js/terms-main.js"></script>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    document.querySelectorAll(".jss1 button").forEach(btn => {
+    btn.addEventListener("click", function() {
+        let product = this.closest(".card_product");
+
+        // Ma'lumotlarni olish
+        let id = product.dataset.id;
+        let img = product.dataset.img;
+        let title = product.dataset.title;
+        let description = product.dataset.description;
+        let price = parseFloat(product.dataset.price);
+        let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice);
+
+        // Savatda borligini tekshirish
+        let existing = cart.find(item => item.id === id);
+
+        if (existing) {
+            existing.count += 1; // bor bo‘lsa sonini oshirish
+        } else {
+            // yangi qo‘shish
+            cart.push({ 
+                id, 
+                img, 
+                title, 
+                description, 
+                price, 
+                aksiyaPrice, 
+                count: 1 
+            });
+        }
+
+        // LocalStorage’ga saqlash
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+    });
+});
+</script>
 
     <script type="module" defer="defer" src="https://www.googletagmanager.com/gtag/js?id=G-909K1GHXTJ"></script>
     <script>function loadFBPixel() { try { e = window, t = document, n = "script", e.fbq || (o = e.fbq = function () { o.callMethod ? o.callMethod.apply(o, arguments) : o.queue.push(arguments) }, e._fbq || (e._fbq = o), o.push = o, o.loaded = !0, o.version = "2.0", o.queue = [], (a = t.createElement(n)).async = !0, a.src = "https://connect.facebook.net/en_US/fbevents.js", (i = t.getElementsByTagName(n)[0]).parentNode.insertBefore(a, i)), fbq("init", "275867525480309"), fbq("track", "PageView") } catch (e) { console.error("FB Pixel initialization error:", e) } var e, t, n, o, a, i } setTimeout(loadFBPixel, 5e3)</script>
