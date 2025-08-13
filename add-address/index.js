@@ -131,29 +131,39 @@ addressInput.addEventListener("input", function () {
       .catch(() => {
         pacContainer.style.display = "none";
       });
-  }, 400);
+  }, 100);
 });
 
 // Dropdown tashqarisiga bosganda yopish
-document.addEventListener("click", e => {
-  if (!addressInput.contains(e.target) && !pacContainer.contains(e.target)) {
-    pacContainer.style.display = "none";
-  }
-});
-
-// Button bosilganda bajariladigan funksiya
 continueBtn.addEventListener("click", () => {
   if (!tempSelectedLocation) {
     alert("Iltimos, biror location tanlang.");
     return;
   }
 
-  // Tanlangan location sessionStorage ga saqlanadi
-  sessionStorage.setItem("selectedLocation", JSON.stringify(tempSelectedLocation));
+  // 1) Agar editAddress mavjud bo'lsa — uni yangilab qaytarish
+  let editAddress = sessionStorage.getItem("editAddress");
+  if (editAddress) {
+    editAddress = JSON.parse(editAddress);
 
-  // Boshqa sahifaga o‘tiladi (manzilni o'zgartiring)
+    // faqat location ma'lumotlarini yangilaymiz
+    const updatedEdit = {
+      ...editAddress,
+      lat: tempSelectedLocation.lat,
+      lon: tempSelectedLocation.lon,
+      display_name: tempSelectedLocation.display_name
+    };
+
+    sessionStorage.setItem("editAddress", JSON.stringify(updatedEdit));
+    window.location.href = "../address-details/";
+    return; // shu yerda to'xtaymiz
+  }
+
+  // 2) Oddiy yangi manzil qo'shish holati
+  sessionStorage.setItem("selectedLocation", JSON.stringify(tempSelectedLocation));
   window.location.href = "../address-details/";
 });
+
 
 
 // Autocomplete ishga tushgandan keyin
@@ -167,3 +177,25 @@ if (pacContainer && input.parentElement) {
     pacContainer.style.left = "0";
     pacContainer.style.width = input.offsetWidth + "px";
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  const editAddress = sessionStorage.getItem("editAddress");
+  if (editAddress) {
+    const parsed = JSON.parse(editAddress);
+    
+    // Inputga mavjud manzilni chiqaramiz
+    if (addressInput) {
+      addressInput.value = parsed.display_name || "";
+    }
+
+    // Agar map bo'lsa, marker joylashtirib qo'yamiz
+    if (parsed.lat && parsed.lon) {
+      const lat = parsed.lat;
+      const lon = parsed.lon;
+
+      // Bu joyda sening xarita update qiluvchi funksiyang bo'lishi kerak.
+      // Masalan:
+      updateMapMarker(lat, lon, parsed.display_name);
+    }
+  }
+});
