@@ -1703,7 +1703,13 @@
             <div class="jss1">
                 <div class="jss30">
                     <div class="jss32">
-                        <div class="jss34">
+                        <div class="jss34 product" 
+                                data-id="1" 
+                                data-img="https://deykvccewcmn1.cloudfront.net/20250423093042122_áááá¢áá¤ááá200.webp" 
+                                data-title="Gourmet Potato" 
+                                data-description="200gr Gourmet Potato, Mexican Sauce" 
+                                data-price="8.90" 
+                                data-aksiya-price="">>
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
                                         class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-7avhyl"
@@ -2296,6 +2302,47 @@
         <div tabindex="0" data-testid="sentinelEnd"></div>
     </div>
 <script src="../assets/js/terms-main.js"></script>
+
+<script>
+// LocalStorage’dan savatni olish yoki bo‘sh massiv yaratish
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// Barcha tugmalarni ishlatish
+document.querySelectorAll(".jss41").forEach(btn => {
+    btn.addEventListener("click", function() {
+        let product = this.closest(".product");
+
+        // Ma'lumotlarni olish
+        let id = product.dataset.id;
+        let img = product.dataset.img;
+        let title = product.dataset.title;
+        let description = product.dataset.description;
+        let price = parseFloat(product.dataset.price);
+        let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice);
+
+        // Savatda borligini tekshirish
+        let existing = cart.find(item => item.id === id);
+
+        if (existing) {
+            existing.count += 1; // bor bo‘lsa sonini oshirish
+        } else {
+            // yangi qo‘shish
+            cart.push({ 
+                id, 
+                img, 
+                title, 
+                description, 
+                price, 
+                aksiyaPrice, 
+                count: 1 
+            });
+        }
+
+        // LocalStorage’ga saqlash
+        localStorage.setItem("cart", JSON.stringify(cart));
+    });
+});
+</script>
 
     <script type="module" defer="defer" src="https://www.googletagmanager.com/gtag/js?id=G-909K1GHXTJ"></script>
     <script>function loadFBPixel() { try { e = window, t = document, n = "script", e.fbq || (o = e.fbq = function () { o.callMethod ? o.callMethod.apply(o, arguments) : o.queue.push(arguments) }, e._fbq || (e._fbq = o), o.push = o, o.loaded = !0, o.version = "2.0", o.queue = [], (a = t.createElement(n)).async = !0, a.src = "https://connect.facebook.net/en_US/fbevents.js", (i = t.getElementsByTagName(n)[0]).parentNode.insertBefore(a, i)), fbq("init", "275867525480309"), fbq("track", "PageView") } catch (e) { console.error("FB Pixel initialization error:", e) } var e, t, n, o, a, i } setTimeout(loadFBPixel, 5e3)</script>

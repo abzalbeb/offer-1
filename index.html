@@ -1748,7 +1748,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="jss54" style="cursor: pointer; position: relative; overflow: hidden;">
+                    <div data-id="3" 
+                        data-img="https://deykvccewcmn1.cloudfront.net/20250408133518776_Large.webp" 
+                        data-title="1+1 Large Pizzas" 
+                        data-description="Buy One Large Pizza & Get Second for Free" 
+                        data-price="39.90" 
+                        data-aksiya-price="79.80"
+                         class="jss54 card_product" style="cursor: pointer; position: relative; overflow: hidden;">
                         <div class="media_img" style="position: relative; border-radius: 11px;"><img
                                 src="https://deykvccewcmn1.cloudfront.net/20250408133518776_Large.webp"
                                 alt="1+1 Large Pizzas" width="100%" height="188px"
@@ -1767,7 +1773,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="jss54" style="cursor: pointer; position: relative; overflow: hidden;">
+                    <div data-id="4" 
+                        data-img="https://deykvccewcmn1.cloudfront.net/20250319102929151_485214381_2149391828907380_8575532242961282579_n.webp" 
+                        data-title="2x Garlic Bread + Sauce" 
+                        data-description="free Dipping Sauce (Yogurt or Hot)" 
+                        data-price="11.80" 
+                        data-aksiya-price="14.30"
+                         class="jss54 card_product" style="cursor: pointer; position: relative; overflow: hidden;">
                         <div class="media_img" style="position: relative; border-radius: 11px;"><img
                                 src="https://deykvccewcmn1.cloudfront.net/20250319102929151_485214381_2149391828907380_8575532242961282579_n.webp"
                                 alt="2x Garlic Bread + Sauce" width="100%" height="188px"
@@ -1786,7 +1798,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="jss54" style="cursor: pointer; position: relative; overflow: hidden;">
+                    <div data-id="5" 
+                        data-img="https://deykvccewcmn1.cloudfront.net/20250403114339061_20250220102556190_478419410_1320169422561797_8745076524178242176_n.webp" 
+                        data-title="Mega Week" 
+                        data-description="Buy 3 Medium Pizzas" 
+                        data-price="27.90" 
+                        data-aksiya-price="83.70"
+                         class="jss54 card_product" style="cursor: pointer; position: relative; overflow: hidden;">
                         <div class="media_img" style="position: relative; border-radius: 11px;"><img
                                 src="https://deykvccewcmn1.cloudfront.net/20250403114339061_20250220102556190_478419410_1320169422561797_8745076524178242176_n.webp"
                                 alt="Mega Week" width="100%" height="188px"
@@ -3764,44 +3782,28 @@
 <script src="../assets/js/terms-main.js"></script>
 
 <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    document.querySelectorAll(".jss1 button").forEach(btn => {
+  document.querySelectorAll(".jss1 button").forEach(btn => {
     btn.addEventListener("click", function() {
         let product = this.closest(".card_product");
 
-        // Ma'lumotlarni olish
-        let id = product.dataset.id;
-        let img = product.dataset.img;
-        let title = product.dataset.title;
-        let description = product.dataset.description;
-        let price = parseFloat(product.dataset.price);
-        let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice);
+        // Mahsulot ma'lumotlarini olish
+        let productData = {
+            id: product.dataset.id,
+            img: product.dataset.img,
+            title: product.dataset.title,
+            description: product.dataset.description,
+            price: parseFloat(product.dataset.price),
+            aksiyaPrice: parseFloat(product.dataset.aksiyaPrice)
+        };
 
-        // Savatda borligini tekshirish
-        let existing = cart.find(item => item.id === id);
+        // Tanlangan mahsulotni LocalStorage’ga vaqtincha saqlash
+        localStorage.setItem("selectedProduct", JSON.stringify(productData));
 
-        if (existing) {
-            existing.count += 1; // bor bo‘lsa sonini oshirish
-        } else {
-            // yangi qo‘shish
-            cart.push({ 
-                id, 
-                img, 
-                title, 
-                description, 
-                price, 
-                aksiyaPrice, 
-                count: 1 
-            });
-        }
-
-        // LocalStorage’ga saqlash
-        localStorage.setItem("cart", JSON.stringify(cart));
-
+        // order.html sahifasiga o'tish
+        window.location.href = "details";
     });
 });
-</script>
+  </script>
 
     <script type="module" defer="defer" src="https://www.googletagmanager.com/gtag/js?id=G-909K1GHXTJ"></script>
     <script>function loadFBPixel() { try { e = window, t = document, n = "script", e.fbq || (o = e.fbq = function () { o.callMethod ? o.callMethod.apply(o, arguments) : o.queue.push(arguments) }, e._fbq || (e._fbq = o), o.push = o, o.loaded = !0, o.version = "2.0", o.queue = [], (a = t.createElement(n)).async = !0, a.src = "https://connect.facebook.net/en_US/fbevents.js", (i = t.getElementsByTagName(n)[0]).parentNode.insertBefore(a, i)), fbq("init", "275867525480309"), fbq("track", "PageView") } catch (e) { console.error("FB Pixel initialization error:", e) } var e, t, n, o, a, i } setTimeout(loadFBPixel, 5e3)</script>
