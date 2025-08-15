@@ -1524,6 +1524,7 @@
     <script type="module" src="https://www.googletagmanager.com/gtag/js?id=G-909K1GHXTJ" async=""></script>
     <script type="text/javascript" async=""
         src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/16453014359/?random=1754943328037&amp;cv=11&amp;fst=1754943328037&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=gtag.config&amp;gtm=45je5870v9191813065za200zd9191813065xec&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=101509157~103116026~103200004~103233427~104527907~104528500~104684208~104684211~104948813~105033763~105033765~105103161~105103163~105113531~105135708~105135710~105231380~105231382&amp;u_w=1536&amp;u_h=864&amp;url=https%3A%2F%2Fdominospizza.ge%2Fbread&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Domino's%20Pizza&amp;npa=0&amp;auid=1905322772.1754746788&amp;uaa=x86&amp;uab=64&amp;uafvl=Not%253BA%253DBrand%3B99.0.0.0%7CGoogle%2520Chrome%3B139.0.7258.66%7CChromium%3B139.0.7258.66&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=19.0.0&amp;uaw=0&amp;fledge=1&amp;data=event%3Dgtag.config&amp;rfmt=3&amp;fmt=4"></script>
+        <link rel="stylesheet" href="./main.css">
 </head>
 
 <body style=""><noscript>You need to enable JavaScript to run this app.</noscript>
@@ -1595,21 +1596,55 @@
                                         AB</div>
                                     <p class="text-overflow" style="max-width: 90px;">Abzal</p>
                                 </div> -->
-                                <div class="MuiStack-root css-16mqrq1"><span class="MuiBadge-root css-1afh8op">
-                                        <div
-                                            style="cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <div class="MuiStack-root css-16mqrq1" aria-labelledby=":r2p" style="position: relative;">
+                                        <span class="MuiBadge-root css-1afh8op">
+
+                                        <div class="cart-popup" >
+                                           <div class="triangle"></div>
+                                            <!-- <div class="cart-popup-img" style="text-align: center; margin-bottom: 10px;">
+                                                <img src="https://dominospizza.ge/static/media/empty_cart.ce51a99a8179668c0c85.png" alt="Empty Cart">
+                                            </div> -->
+                                            <div class="cart-item-map-container">
+                                                <div class="item-card-container">
+                                                    <div class="img-cart-item">
+                                                        <img src="https://dominosge.s3.eu-central-1.amazonaws.com/Cheese-Bread-Bacon-&-Jalapeno.webp" alt="">
+                                                    </div>
+                                                    <div class="card-text-info-item">
+                                                        <p>Cheese Bread (classic)</p>
+                                                        <span>Mozzarella, cheddar, bacon and jalapeno
+
+</span>
+                                                    </div>
+                                                    <div class="card-price-item">
+                                                        <p class=" fs-18 text-red redflag" style="font-size: 15px;">10.90<b>₾</b></p>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="cart-order-container-btn">
+                                            <div class="view-btn"><button class="view-cart-btn">VIEW CART</button></div>
+                                            <div class="cart-total"><p>Total:<span class="redflag"> 0.00</span></p>  </div>
+                                            </div>
+                                        </div>
+
+                                            <div style="cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                             <img src="../assets/image/cart.png" alt="Cart" style="display: block;">
-                                            <p class="kanit-Regular"
-                                                style="color: black; margin: 0px; text-align: center; white-space: nowrap; font-weight:500">
-                                                Cart</p>
-                                        </div><span
-                                            class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-1r81tyw"></span>
-                                    </span></div>
+                                            <p class="kanit-Regular" style="color: black; margin: 0px; text-align: center; white-space: nowrap; font-weight:500">
+                                                Cart
+                                            </p>
+                                            </div>
+
+                                            <span class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-1r81tyw"></span>
+                                        </span>
+                                        </div>
+
+                                    
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+</div>
             <section class="header-mobile" id="header-mobile">
                 <div style="padding-inline: 0px;">
                     <div style="align-items: center; display: block; grid-template-columns: 1fr 1fr 1fr;">
@@ -1794,6 +1829,80 @@
                         <div style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
                     <div class="jss32">
+                        <div class="jss34">
+                            <div class="jss35"><label
+                                    class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
+                                        class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-7avhyl"
+                                        aria-label="Add/Remove product from favorites" style="z-index: 1;"><input
+                                            class="PrivateSwitchBase-input css-1m9pwf3" name="favorite" type="checkbox"
+                                            data-indeterminate="false"><svg
+                                            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-14h0jh8"
+                                            focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                                            data-testid="FavoriteBorderIcon">
+                                            <path
+                                                d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3m-4.4 15.55-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05">
+                                            </path>
+                                        </svg><span class="MuiTouchRipple-root css-w0pj6f"></span></span><span
+                                        class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-9l3uo3"></span></label>
+                            </div>
+                            <div style="display: flex; justify-content: center;"><img
+                                    src="https://deykvccewcmn1.cloudfront.net/Cheese_Bread_Bacon_&amp;_Jalapeno.webp"
+                                    loading="eager" alt="Cheese Bread Bacon &amp; Jalapenio" decoding="async"
+                                    style="width: 220px; height: 120px; object-fit: contain; aspect-ratio: 1.5 / 1;">
+                            </div>
+                            <div style="min-height: 110px; display: flex; flex-direction: column;">
+                                <div style="flex: 1 1 0%;">
+                                    <p class="jss36  text-trauncate" style="font-weight: bold;">Cheese
+                                        Bread Bacon &amp; Jalapenio</p>
+                                    <p class="jss37 text-trauncate">Mozzarella, cheddar, bacon and jalapeno</p>
+                                </div>
+                                <div class="jss40">
+                                    <div>
+                                        <p class=" fs-18 text-red">10.90<b>₾</b></p>
+                                    </div><button class="jss41 " aria-label="Add to cart">Order</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="position: absolute; top: 10px; left: 10px; display: block;"></div>
+                    </div>
+                                        <div class="jss32">
+                        <div class="jss34">
+                            <div class="jss35"><label
+                                    class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
+                                        class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-7avhyl"
+                                        aria-label="Add/Remove product from favorites" style="z-index: 1;"><input
+                                            class="PrivateSwitchBase-input css-1m9pwf3" name="favorite" type="checkbox"
+                                            data-indeterminate="false"><svg
+                                            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-14h0jh8"
+                                            focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                                            data-testid="FavoriteBorderIcon">
+                                            <path
+                                                d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3m-4.4 15.55-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05">
+                                            </path>
+                                        </svg><span class="MuiTouchRipple-root css-w0pj6f"></span></span><span
+                                        class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-9l3uo3"></span></label>
+                            </div>
+                            <div style="display: flex; justify-content: center;"><img
+                                    src="https://deykvccewcmn1.cloudfront.net/Cheese_Bread_Bacon_&amp;_Jalapeno.webp"
+                                    loading="eager" alt="Cheese Bread Bacon &amp; Jalapenio" decoding="async"
+                                    style="width: 220px; height: 120px; object-fit: contain; aspect-ratio: 1.5 / 1;">
+                            </div>
+                            <div style="min-height: 110px; display: flex; flex-direction: column;">
+                                <div style="flex: 1 1 0%;">
+                                    <p class="jss36  text-trauncate" style="font-weight: bold;">Cheese
+                                        Bread Bacon &amp; Jalapenio</p>
+                                    <p class="jss37 text-trauncate">Mozzarella, cheddar, bacon and jalapeno</p>
+                                </div>
+                                <div class="jss40">
+                                    <div>
+                                        <p class=" fs-18 text-red">10.90<b>₾</b></p>
+                                    </div><button class="jss41 " aria-label="Add to cart">Order</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="position: absolute; top: 10px; left: 10px; display: block;"></div>
+                    </div>
+                                        <div class="jss32">
                         <div class="jss34">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span

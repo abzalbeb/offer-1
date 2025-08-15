@@ -9,9 +9,9 @@
     <meta name="facebook-domain-verification" content="xhjkxyjza91gn3nus3x27givvpd2ht">
     <link rel="icon" type="image/x-icon" href="/favicon.png">
     <title>Domino's Pizza</title>
-    <script defer="defer" src="/static/js/main.6ac56c5c.js"></script>
+    <!-- <script defer="defer" src="/static/js/main.6ac56c5c.js"></script> -->
     <link href="https://dominospizza.ge/static/css/main.f30fce83.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="./main.css"> -->
+    <link rel="stylesheet" href="./main.css">
     <style data-jss="" data-meta="makeStyles">
         .jss1 {
             padding: 30px 75px 20px 75px;
@@ -1345,22 +1345,23 @@
                 <nav></nav>
             </section>
 
-            <div class="login_banner">
+            <div class="login_banner" id="mobile-destop-container">
                 <div style="display: flex; align-items: center; justify-content: center; height: 87vh;">
-                    <div
-                        style="background: white; border-radius: 25px; display: flex; justify-content: space-between; flex-direction: column; padding: 22px; width: 800px; height: 488px; position: relative;">
+                    <div class="containerdetails"
+                        style="background: white; border-radius: 25px; display: flex; justify-content: space-between; flex-direction: column; padding: 22px; width: 800px; height: 450px; position: relative;">
                         <div>
                             <div style="display: flex; align-items: flex-end; gap: 8px; margin-bottom: 12px;">
-                                <div><img src="/static/media/bike-blue.d8efb9be9998cea2da9972ac068a72e2.svg" height="35"
-                                        width="35" alt="Delivery"></div>
+                                <div><img
+                                        src="https://dominospizza.ge/static/media/bike-blue.d8efb9be9998cea2da9972ac068a72e2.svg"
+                                        height="35" width="35" alt="Delivery"></div>
                                 <h2 class="text-blue fs-16 Kanit-SemiBold">Home Delivery</h2>
                             </div>
-                            <div class="jss107">
+                            <div class="jss28">
                                 <div>
                                     <div><img
                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAWCAYAAADeiIy1AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEfSURBVHgBvZS9asJgFIbfFgqFllYodGiXQi+hdCgUEWcHB9FJ8Aa8Ca/AO3AQ3QVd/VlFENwlouggggquom+IQkxO4ucX4wPPcnI45+T7A27EnWJehKbpP/2jGzqiNVqmW1yB30PRnYcGjSMgP3Tp08RuApp8wZp2p6g50JtXsXufRplDMyc92hbi5j7moUEf7qmjtu/fcC+rAQ2cTapCTlHIi0jFvJbuQYjNhdhCiD3hQqY4nXRAHx05Q0fOCho04F6WLk3Curwt4XsLGqSgfrSP5qDBK9Qvq+mYPnsV87tHa1inSpUSrDdQixc6w/m/Meg7ApJASHsj0fRpUscV+aATockI8nsYiJjQKIuQKNiaFBAyFdrBDTBf509cyB40HpUE9xJHEgAAAABJRU5ErkJggg=="
                                             alt="Location"></div>
-                                    <p class="fs-14 Kanit-Light text-trauncate">674H+G6 Bekobod, Uzbekistan</p>
+                                    <p class="fs-14 Kanit-Light text-trauncate"></p>
                                 </div><button
                                     class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary fs-14 Kanit-Light text-black css-1bfuqwl"
                                     tabindex="0" type="button">Change<span
@@ -1368,122 +1369,111 @@
                             </div>
                             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 css-sayu3r"
                                 style="margin-bottom: 32px;">
-                                <div
-                                    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-6 MuiGrid-grid-lg-6 MuiGrid-grid-xl-6 css-rpybyc">
-                                    <form autocomplete="off" style="width: 100%;"><input autocomplete="false"
-                                            name="hidden" type="text" style="display: none;">
-                                        <div
-                                            class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-feqhe6">
-                                            <div
-                                                class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall jss83 Kanit-Light css-1az92gf">
-                                                <input aria-invalid="false" autocomplete="off" id=":r5:"
-                                                    placeholder="Building Name" type="text"
-                                                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputSizeSmall jss83 Kanit-Light css-s97oza"
-                                                    value=""></div>
+                                <div class="input-form">
+                                    <div class="container-input">
+                                        <div class="input-name">
+                                            <input type="text" class="required building-name" id="buildingDestop"
+                                                placeholder="Building Name">
                                         </div>
-                                    </form>
-                                </div>
-                                <div
-                                    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-6 MuiGrid-grid-lg-6 MuiGrid-grid-xl-6 css-rpybyc">
-                                    <form autocomplete="off" style="width: 100%;"><input autocomplete="false"
-                                            name="hidden" type="text" style="display: none;">
-                                        <div
-                                            class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-feqhe6">
-                                            <div
-                                                class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall jss83 Kanit-Light css-1az92gf">
-                                                <input aria-invalid="false" autocomplete="off" id=":r6:"
-                                                    placeholder="Entrance" type="text"
-                                                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputSizeSmall jss83 Kanit-Light css-s97oza"
-                                                    value=""></div>
+                                        <div class="input-name">
+                                            <input type="text" class="required entrance" placeholder="Entrance" id="entranceDestop">
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 css-sayu3r"
-                                style="margin-bottom: 32px;">
-                                <div
-                                    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-6 MuiGrid-grid-lg-6 MuiGrid-grid-xl-6 css-rpybyc">
-                                    <form autocomplete="off" style="width: 100%;"><input autocomplete="false"
-                                            name="hidden" type="text" style="display: none;">
-                                        <div
-                                            class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-feqhe6">
-                                            <div
-                                                class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall jss83 Kanit-Light css-1az92gf">
-                                                <input aria-invalid="false" autocomplete="off" id=":r7:"
-                                                    placeholder="Door Code (Optional)" type="text"
-                                                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputSizeSmall jss83 Kanit-Light css-s97oza"
-                                                    value=""></div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div
-                                    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-6 MuiGrid-grid-lg-6 MuiGrid-grid-xl-6 css-rpybyc">
-                                    <form autocomplete="off" style="width: 100%;"><input autocomplete="false"
-                                            name="hidden" type="text" style="display: none;">
-                                        <div
-                                            class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-feqhe6">
-                                            <div
-                                                class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall jss83 Kanit-Light css-1az92gf">
-                                                <input aria-invalid="false" autocomplete="off" id=":r8:"
-                                                    placeholder="Floor" type="text"
-                                                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputSizeSmall jss83 Kanit-Light css-s97oza"
-                                                    value=""></div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 css-sayu3r"
-                                style="margin-bottom: 32px;">
-                                <div
-                                    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-6 MuiGrid-grid-lg-6 MuiGrid-grid-xl-6 css-rpybyc">
-                                    <form autocomplete="off" style="width: 100%;"><input autocomplete="false"
-                                            name="hidden" type="text" style="display: none;">
-                                        <div
-                                            class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-feqhe6">
-                                            <div
-                                                class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall jss83 Kanit-Light css-1az92gf">
-                                                <input aria-invalid="false" autocomplete="off" id=":r9:"
-                                                    placeholder="Apartment" type="text"
-                                                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputSizeSmall jss83 Kanit-Light css-s97oza"
-                                                    value=""></div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div
-                                    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-6 MuiGrid-grid-lg-6 MuiGrid-grid-xl-6 css-rpybyc">
-                                    <form autocomplete="off" style="width: 100%;"><input autocomplete="false"
-                                            name="hidden" type="text" style="display: none;">
-                                        <div
-                                            class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-feqhe6">
-                                            <div
-                                                class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall jss83 Kanit-Light css-1az92gf">
-                                                <input aria-invalid="false" autocomplete="off" id=":ra:"
-                                                    placeholder="Home, Work..(Optional)" type="text"
-                                                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputSizeSmall jss83 Kanit-Light css-s97oza"
-                                                    value=""></div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div
-                                class="MuiGrid-root MuiGrid-grid-xs-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12 MuiGrid-grid-xl-12 css-rfnosa">
-                                <form autocomplete="off" style="width: 100%;"><input autocomplete="false" name="hidden"
-                                        type="text" style="display: none;">
-                                    <div
-                                        class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-feqhe6">
-                                        <div
-                                            class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall jss83 Kanit-Light css-1az92gf">
-                                            <input aria-invalid="false" autocomplete="off" id=":rb:"
-                                                placeholder="Other Instruction For The Courier (Optional)" type="text"
-                                                class="MuiInputBase-input MuiInput-input MuiInputBase-inputSizeSmall jss83 Kanit-Light css-s97oza"
-                                                value=""></div>
                                     </div>
-                                </form>
+                                    <div class="container-input">
+                                        <div class="input-name">
+                                            <input type="text" class="optional door-code"
+                                                placeholder="Door Code (Optional)" id="doorCodeDestop">
+                                        </div>
+                                        <div class="input-name">
+                                            <input type="text" class="required floor" placeholder="Floor" id="FloorDestop">
+                                        </div>
+                                    </div>
+                                    <div class="container-input">
+                                        <div class="input-name">
+                                            <input type="text" class="required apartment" placeholder="Apartment" id="ApartmentDestop">
+                                        </div>
+                                        <div class="input-name">
+                                            <input type="text" class="optional home-work"
+                                                placeholder="Home, Work..(Optional)" id="homeWorkDestop">
+                                        </div>
+                                    </div>
+                                    <div class="container-input">
+                                        <div class="input-name">
+                                            <input type="text" class="optional courier-instruction"
+                                                placeholder="Other Instruction For The Courier (Optional)" id="OptionalDestop">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div><button
-                            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth jss92 fs-14 Kanit-Regular css-np2orv"
-                            tabindex="0" type="button">Save Address<span
+                            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth jss92 fs-14 Kanit-Regular css-np2orv jss13"
+                            tabindex="0" type="button" id="saveAddressBtn">Save Address<span
                                 class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="Login_banner_Mobile" id="login_banner-mobile"
+                style="height: 100dvh; display: flex; flex-direction: column;background-image: url(../assets/image/backgroundRegister.16cd4e684cb959594932.png) !important;">
+                <div style="">
+                    <div
+                        style="display: flex; justify-content: start; align-items: flex-end; gap: 8px; padding-top: 10px; margin-left: 40px;">
+                        <div><img
+                                src="https://dominospizza.ge/static/media/bike-blue.d8efb9be9998cea2da9972ac068a72e2.svg"
+                                height="35" width="35" alt="Delivery"></div>
+                        <h2 class="text-blue fs-24 Kanit-SemiBold">Home Delivery</h2>
+                    </div>
+                    <div style="padding: 12px 22px 12px 32px; border-radius: 25px;">
+                        <div class="jss344"
+                            style="display: block; border: none; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px; border-radius: 50px; padding: 0px 18px; height: 80px; background: rgb(255, 255, 255);">
+                            <div>
+                                <div style="padding-top: 20px; color: rgb(90, 85, 85);"><img
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAQCAYAAAAiYZ4HAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFeSURBVHgBjVK/S8NQEL67tFUUodXBxUHXTi22DoKQOHRwFXTUjgUHZ8FBEaWDiFMHFydX/wGRuNVWoVDBScjgaGyGukT7zvdSY35Qot+Q3Pfu+y737oIQgm2U1glwR4YFAMwyc5cIrvp9vJhrtWylQfXo6YUsYPpaUh1GwwJ2jZzZsYYGY+lBvhYhGcpUpDe9vB0RMxwA0wIwF704wDxzupbSgLaUytMK3pu+a5+ERJ2eUSbZ6r7XP0FF3pFX/CziZyPexwfhecCwIN2gQQImB+4gRLPSwI7PBKY24gYhxsJnNskLdnxGQPWfIcBTPp95Xy3XSBP1QM9dtPXSLiGdwX/AXJWL/LoMt5UMzSS5PUcwHP1ZHLiRM5uWmhLMmO1TYDQT9NY407EKKDjDqkqMqO2kNFqbMO9fIwb1OTkxI2pihwRUpm6az79l4/WGf27mUG5g2UXenL19fAnnvwGGPHi/7vPjggAAAABJRU5ErkJggg=="
+                                        alt="Location"></div>
+                                <p class="fs-14 Kanit-Light text-trauncate " id="jss23-p"
+                                    style="padding-top: 0px; padding-left: 20px; color: rgb(90, 85, 85);    position: relative;left: 16px;top: -17px;"></p>
+                            </div><br><button
+                                class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary fs-14 Kanit-Medium text-blue css-1bfuqwl"
+                                tabindex="0" type="button" id="MuiButtonBase-root"
+                                style="color: rgb(0, 120, 174); background-color: rgb(255, 255, 255); border: none; border-radius: 0px; padding: 0px; margin-top: -30px;margin-left:8px;font-family: 'Kanit', sans-serif !important;text-transform: capitalize;">Change<span
+                                    class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                        </div>
+                                <div class="input-form">
+                                    <div class="container-input">
+                                        <div class="input-name">
+                                            <input type="text" class="required building-name" id="buildingMobile"
+                                                placeholder="Building Name">
+                                        </div>
+                                        <div class="input-name">
+                                            <input type="text" class="required entrance" placeholder="Entrance" id="entranceMobile">
+                                        </div>
+                                        <div class="input-name">
+                                            <input type="text" class="optional door-code"
+                                                placeholder="Door Code (Optional)" id="doorCodeMobile">
+                                        </div>
+                                        <div class="input-name">
+                                            <input type="text" class="required floor" placeholder="Floor" id="FloorMobile">
+                                        </div>
+                                        <div class="input-name">
+                                            <input type="text" class="required apartment" placeholder="Apartment" id="ApartmentMobile">
+                                        </div>
+                                        <div class="input-name">
+                                            <input type="text" class="optional home-work"
+                                                placeholder="Home, Work..(Optional)" id="homeWorkMobile">
+                                        </div>
+                                          <div class="input-name">
+                                            <input type="text" class="optional courier-instruction"
+                                                placeholder="Other Instruction For The Courier (Optional)" id="OptionalMobile">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                        <div style="margin-top: 24px; margin-inline: 24px;"><button id="saveAddressBtnMobile"
+                                class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth jss329 fs-16 Kanit-Regular css-np2orv"
+                                tabindex="0" type="button" style="border-radius: 10px; height: 61px;width:100%; font-weight:400;">Save Address<span
+                                    class="MuiTouchRipple-root css-w0pj6f"></span></button></div>
                     </div>
                 </div>
             </div>
@@ -1720,7 +1710,7 @@
     <script type="module" defer="defer" src="https://www.googletagmanager.com/gtag/js?id=G-909K1GHXTJ"></script>
 
     <script src="../assets/js/service-method.js"></script>
-    <!-- <script src="./index.js"></script> -->
+    <script src="./index.js"></script>
 </body>
 
 </html>

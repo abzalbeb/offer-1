@@ -9,7 +9,8 @@
     <meta name="facebook-domain-verification" content="xhjkxyjza91gn3nus3x27givvpd2ht">
     <link rel="icon" type="image/x-icon" href="/favicon.png">
     <title>Domino's Pizza</title>
-    <link href="../assets/css/main.f30fce83.css" rel="stylesheet">
+    <script defer="defer" src="/static/js/main.6ac56c5c.js"></script>
+    <link href="https://dominospizza.ge/static/css/main.f30fce83.css" rel="stylesheet">
     <link rel="stylesheet" href="./main.css">
     <style data-jss="" data-meta="makeStyles">
         .jss1 {
@@ -1154,6 +1155,9 @@
         }
     </style>
     <style data-emotion="css-global" data-s=""></style>
+    <script type="module" src="https://www.googletagmanager.com/gtag/js?id=G-909K1GHXTJ" async=""></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
@@ -1224,8 +1228,6 @@
         iframe {
             width: 100%;
             height: 100%;
-            position: relative;
-            z-index: 999999 !important;
         }
 
         /* Optional: kichik ekranlarda balandlikni biroz kamaytirish */
@@ -1233,14 +1235,6 @@
             .card-map {
                 height: 220px;
             }
-        }
-        .container-iframe{
-    width: 100%;
-    height: 550px;
-}
-        .map-iframe{
-                       width: 100%;
-            height: 100%; 
         }
     </style>
 </head>
@@ -1351,80 +1345,57 @@
                 <nav></nav>
             </section>
 
-            <div class="login_banner" id="login_banner" style="padding-bottom: 10px;">
+            <div class="login_banner" id="login_banner_3">
                 <div style="display: flex; align-items: center; justify-content: center; height: 87vh;">
-                    <div class="containerAddMap"
-                        style="background: white; border-radius: 25px; display: flex; justify-content: space-between; flex-direction: column; padding: 22px; width: 800px; height: 500px; position: relative;">
-                        <div style="display: flex; align-items: flex-end; justify-content: space-between;">
-                            <div style="display: flex; align-items: flex-end; gap: 8px;">
-                                <div><img
-                                        src="https://dominospizza.ge/static/media/bike-blue.d8efb9be9998cea2da9972ac068a72e2.svg"
-                                        height="35" width="35" alt="Delivery"></div>
-                                <h2 class="text-blue fs-16 Kanit-SemiBold">Home Delivery</h2>
+                    <div class="containerAddreses"
+                        style="background: white; border-radius: 25px; display: flex; justify-content: space-between; flex-direction: column; padding: 22px; width: 800px; height: 488px;">
+                        <div style="display: flex; align-items: flex-end; gap: 8px;">
+                            <div><img
+                                    src="https://dominospizza.ge/static/media/bike-blue.d8efb9be9998cea2da9972ac068a72e2.svg"
+                                    alt="delivery">
                             </div>
-                            <p class="text-blue Kanit-Light fs-14 hover-underline pointer">My Addresses</p>
+                            <h2 class="text-blue" style="font-family: 'Kanit', sans-serif !important;font-weight:500">
+                                Home Delivery</h2>
+                        </div><span class="text-black fs-14 Kanit-Light fs-500"
+                            style="text-transform: uppercase; padding-left: 8px;font-family: 'Kanit', sans-serif !important;font-weight:300 !important;">Your
+                            Registered Addresses</span>
+                        <div style="height: 330px; overflow: hidden scroll;">
+                            <div id="address-container">
+                                <!-- Mana shu yerga JS orqali divlar qo'shiladi -->
+                            </div>
                         </div>
-                        <div>
-                            <div
-                                style="width: 100%; height: 330px; border-radius: 30px; box-shadow: lightgrey 0px 4px 3px 1px; overflow: hidden; position: relative;">
-                                <div
-                                    style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);">
-                                    <div id="map"></div>
-                                </div>
-                            </div>
-                            <div
-                                style="display: flex; position: absolute; top: 70px; left: 55px; right: 55px; padding: 8px 8px 8px 18px; border-radius: 25px; background: white; gap: 12px; box-shadow: 1px 1px 1px 1px hsla(0, 0%, 68%, .488);">
-                                <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-d5nl9o" focusable="false"
-                                    aria-hidden="true" viewBox="0 0 24 24" data-testid="SearchSharpIcon">
-                                    <path
-                                        d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14">
-                                    </path>
-                                </svg>
-                                <div class="google-map-autocomplete" >
-                                    <div class=""><input placeholder="Enter a location" value="" type="text" id="addressInput"
-                                            class="pac-target-input" autocomplete="off" >
-                                    </div>
-                                </div>
-
-                                   <div class="pac-container pac-logo hdpi"
-                        style="width: 628px; position: absolute; left: 300px; top: 270px; display: none;z-index: 1000;">
-                        
+                        <div style="display: flex; gap: 12px;"><button onclick="addNewAddress()"
+                                class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth jss12 fs-14 Kanit-Regular fs-600 css-np2orv"
+                                tabindex="0" type="button">Add New Address<span
+                                    class="MuiTouchRipple-root css-w0pj6f"></span></button><button
+                                class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth jss13 fs-14 Kanit-Regular fs-600 css-np2orv"
+                                tabindex="0" type="button">continue with chosen location<span
+                                    class="MuiTouchRipple-root css-w0pj6f"></span></button></div>
                     </div>
-                            </div>
-                            <div style="display: flex; justify-content: center; padding-inline: 44px;"><button
-                                    class="text-white Kanit-SemiBold fs-16 btnLocation"
-                                    style="border-radius: 25px; background: rgb(3, 140, 200); padding: 8px 0px; width: 100%; margin-top: 20px; cursor: pointer; border: none;">Continue
-                                    with Chosen Location</button></div>
-
-                        </div>
-                    </div>
-                    
                 </div>
             </div>
-            
-            <div class="Login_banner_Mobile" id="Login_banner_Mobile" style="background-image: url(../assets/image/backgroundRegister.16cd4e684cb959594932.png) !important;margin-top:15px;display:none">
-                <div
-                    style="display: flex; align-items: center;  height: 60px; margin-left: 20px;">
-                    <div style=""><img src="https://dominospizza.ge/static/media/bike-blue.d8efb9be9998cea2da9972ac068a72e2.svg" height="45"
-                            width="50" alt="Delivery"></div>
-                    <h2 class="text-blue fs-24 Kanit-SemiBold">Home Delivery</h2>
+            <div class="Login_banner_Mobile" id="Login_banner_Mobile_3"
+                style="padding:0; height: 100dvh; position: fixed; margin-bottom: 20px;background-image: url(../assets/image/backgroundRegister.16cd4e684cb959594932.png) !important;z-index:9999;">
+                <div style="display: flex; align-items: flex-end; justify-content: start; gap: 8px; margin-left: 40px;">
+                    <div style=""><img
+                            src="https://dominospizza.ge/static/media/bike-blue.d8efb9be9998cea2da9972ac068a72e2.svg"
+                            height="35" width="35" alt="rider"></div>
+                    <h2 class="text-blue fs-24 Kanit-SemiBold" style="font-weight:600">Home Delivery</h2>
                 </div>
-                                 <div style="display:flex; width:90%;margin:auto; padding: 8px 8px 8px 18px; border-radius: 25px; background: white; gap: 12px;    box-shadow: 0 2px 4px 0 hsla(0, 0%, 68%, .488);top:0% !important;"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-d5nl9o" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="SearchSharpIcon"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg>
-                                    <div class="google-map-autocomplete"><div class=""><input placeholder="Search" value="" id="addressInputMobile" class="pac-target-input" autocomplete="off"></div></div></div>
-                                                    <div class="pac-container pac-containerMobile  pac-logo hdpi"
-                        style="width: 90%; position: absolute; left: 300px; top: 100px; display: none;z-index: 9999999;">
-                        
-                    </div>
-                <div class="container-mobile-google-map" style="width: 100%;height:100%; margin-top:20px">
-                    <div class="container-iframe" style="margin-bottom: 24px;">
-                        <div class="map-iframe"></div>
-                    </div>
-                    
-                    <div class="btn-iframe-add" style="width: 87%;margin:auto; padding-bottom:20px">
-                        <button class="text-white Kanit-SemiBold btnLocationMobile fs-16" style="border-radius: 10px; background: rgb(3, 140, 200); padding: 8px 0px; width: 100%; margin-top: 0px; cursor: pointer; border: none;">Continue with Chosen Location</button>
-                    </div>
-                </div>
+                <div class="address_pill_containner" id="address-container-mobile">
 
+                </div>
+                <div
+                    style="display: flex; gap: 12px; padding-top: 24px; flex-direction: column; position: sticky; bottom: 20px; background: rgb(255, 255, 255);width:90%;margin:auto;">
+                    <button onclick="addNewAddress()"
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth jss407 fs-16 Kanit-Regular fs-600 text-blue css-np2orv btnaaa"
+                        tabindex="0" type="button"
+                        style="border-radius: 10px; border: none;  color: rgb(0, 120, 173); height: 61px;">Add
+                        New Address<span class="MuiTouchRipple-root css-w0pj6f"></span></button><button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth jss408 fs-16 Kanit-Regular fs-600 css-np2orv btnasdd"
+                        tabindex="0" type="button" style="border-radius: 10px; height: 61px;">continue with chosen
+                        location<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                </div>
             </div>
         </div>
 

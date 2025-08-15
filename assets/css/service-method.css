@@ -5,7 +5,7 @@
 
 .header-mobile {
     background: #fff;
-    box-shadow: 0 2px 4px 0 hsla(0, 0%, 68%, .488);
+    box-shadow: 0 2px 4px 0 hsla(0, 0%, 68%, .488) !important;
     left: 0;
     right: 0;
     z-index: 25;
@@ -56,6 +56,8 @@ svg:not(:root) {
 @media (max-width:900px) {
     #header-mobile{
         display: block;
+        position: relative;
+        z-index: 9999;
     }
     #header-destop{
         display: none;
