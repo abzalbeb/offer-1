@@ -8,7 +8,7 @@ function openMenu() {
     drawer.style.transition = 'none';
     drawer.style.transform = 'translateX(-250px)'; // boshlang'ich joy
     drawer.style.visibility = 'visible';
-    drawer.style.zIndex = '999999';
+    drawer.style.zIndex = '9999999';
     drawer.classList.remove('MuiModal-hidden', 'css-12snods');
     drawer.classList.add('css-y28f86');
 
