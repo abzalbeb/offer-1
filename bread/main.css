@@ -134,6 +134,11 @@
     display: -webkit-box;
     overflow: hidden;
 }
-.card-price-item p{
-
+.css-1afh8op .MuiBadge-badge {
+    top: 0px;
+    right: 0px;
 }
+.countCart{
+    display: none;
+}
+

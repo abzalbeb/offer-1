@@ -47,12 +47,15 @@
     bottom: 305px !important    ;
 }
 }
-@media (max-width:893px) {
+@media (max-width:900px) {
         .mapContainer{
         width: 700px !important;
         height: 400px !important;
         position: relative;
-        top: -20px;
+        top: 15px;
+    }
+        .login_banner {
+        height: 90vh !important;
     }
     .iframe-map-location-store {
     width: 400px;
@@ -68,9 +71,7 @@
 @media (max-width:774px) {
             .mapContainer{
         width: 600px !important;
-        height: 400px !important;
         position: relative;
-        top: -20px;
     }
         .iframe-map-location-store {
     width: 300px;
