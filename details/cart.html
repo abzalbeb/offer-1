@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Savat (Cart)</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px; }
+    .order-item {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    .order-item img { border-radius: 8px; }
+    .order-item h3 { margin: 0; }
+    .order-item p { margin: 5px 0; }
+    button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button.edit { background: #4CAF50; color: #fff; }
+    button.delete { background: #f44336; color: #fff; }
+  </style>
+</head>
+<body>
+  <h1>🛒 Savat</h1>
+  <div id="cartContainer"></div>
+
+  <script>
+    // Savatni ko‘rsatish
+    function displayCart() {
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      const cartContainer = document.getElementById('cartContainer');
+      cartContainer.innerHTML = '';
+
+      if (orders.length === 0) {
+        cartContainer.innerHTML = '<p>Savat bo‘sh</p>';
+        return;
+      }
+
+      orders.forEach((order, index) => {
+        const orderDiv = document.createElement('div');
+        orderDiv.className = 'order-item';
+        orderDiv.innerHTML = `
+          <img src="${order.img}" alt="${order.title}" width="80">
+          <div>
+            <h3>${order.title}</h3>
+            <p>${order.description}</p>
+            <p><b>Miqdor:</b> ${order.quantity}</p>
+            <p><b>Umumiy narx:</b> ${order.totalPrice}₾</p>
+            <button class="edit" onclick="editOrder(${index})">✏ Edit</button>
+            <button class="delete" onclick="deleteOrder(${index})">❌ O‘chirish</button>
+          </div>
+        `;
+        cartContainer.appendChild(orderDiv);
+      });
+    }
+
+    // Edit tugmasi bosilganda
+    function editOrder(index) {
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      if (index >= 0 && index < orders.length) {
+        const order = orders[index];
+
+        // Edit rejim flagini qo‘yamiz
+        localStorage.setItem("editMode", "true");
+
+        // Mahsulotni vaqtincha saqlaymiz
+        localStorage.setItem("editingOrder", JSON.stringify({ order, index }));
+
+        // Add-to-cart sahifasiga yo‘naltiramiz
+        window.location.href = "./";
+      }
+    }
+
+    // Buyurtmani o‘chirish
+    function deleteOrder(index) {
+      let orders = JSON.parse(localStorage.getItem('orders')) || [];
+      orders.splice(index, 1);
+      localStorage.setItem('orders', JSON.stringify(orders));
+      displayCart();
+    }
+
+    // Sahifa yuklanganda cartni ko‘rsatish
+    document.addEventListener('DOMContentLoaded', displayCart);
+  </script>
+</body>
+</html>
