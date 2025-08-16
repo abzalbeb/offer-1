@@ -2397,8 +2397,8 @@
                                                     <p class="">You Can Select The Material You Want To Add</p>
                                                     <div
                                                         style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 22px;">
-                                                        <div
-                                                            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a for_vibor_0" data-title="Corn" data-price="+2.5₾" >
+                                                        <div data-title="Corn" data-price="+2.5₾"
+                                                            class="for_vibor_0 MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a"  >
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
                                                                 <div style="flex-grow: 0.3;"><img
@@ -3498,8 +3498,8 @@
                                                     <p class="">You Can Select The Material You Want To Add</p>
                                                     <div
                                                         style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 22px;">
-                                                        <div
-                                                            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a for_vibor_1" data-title="Corn" data-price="+2.5₾" >
+                                                        <div data-title="Corn" data-price="+2.5₾"
+                                                            class="for_vibor_1 MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a"  >
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
                                                                 <div style="flex-grow: 0.3;"><img
@@ -4555,48 +4555,46 @@ function initializePage() {
 function loadExistingOrder() {
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     if (!product || !product.title) return;
-
-    // product bo‘yicha hamma mos orderlarni olish
-    const existingOrders = orders.filter(order =>
-        order.title === product.title &&
+    
+    // Find the most recent order matching our product
+    const existingOrder = orders.reverse().find(order => 
+        order.title === product.title && 
         order.description === product.description
     );
-
-    if (existingOrders.length === 0) return;
-
-    // Har bir orderni yuklash
-    existingOrders.forEach(existingOrder => {
-        // Miqdorni yangilash
+    
+    if (existingOrder) {
+        // Update count
         count = existingOrder.quantity;
         updateQuantity();
-
-        // Har bir pizzani yuklash
+        
+        // Load all pizzas from the order
         existingOrder.pizzas.forEach((pizza, index) => {
             const block = document.querySelector(`.pizza-block[data-id="${index}"]`);
-            if (!block) return;
-
-            // Bonus card topish
-            const cards = block.querySelectorAll('.bonus_card');
-            let matchingCard = null;
-
-            cards.forEach(card => {
-                if (card.querySelector('h2').textContent === pizza.title) {
-                    matchingCard = card;
-                }
-            });
-
-            if (matchingCard) {
-                // Pizzani tanlash
-                selectPizza(index, matchingCard);
-
-                // Ingredientlarni yuklash
-                if (pizza.ingredients && pizza.ingredients.length > 0) {
-                    loadIngredients(index, pizza.ingredients);
+            if (block) {
+                // Find the card that matches this pizza
+                const cards = block.querySelectorAll('.bonus_card');
+                let matchingCard = null;
+                
+                cards.forEach(card => {
+                    if (card.querySelector('h2').textContent === pizza.title) {
+                        matchingCard = card;
+                    }
+                });
+                
+                if (matchingCard) {
+                    // Select this pizza
+                    selectPizza(index, matchingCard);
+                    
+                    // Load ingredients
+                    if (pizza.ingredients && pizza.ingredients.length > 0) {
+                        loadIngredients(index, pizza.ingredients);
+                    }
                 }
             }
         });
-    });
+    }
 }
+
 function selectPizza(id, card) {
     const bonusCards = document.querySelector(`#bonus_cards_${id}`);
     const selectedCard = document.querySelector(`#selected_card_${id}`);
@@ -4628,50 +4626,52 @@ function selectPizza(id, card) {
 
 function loadIngredients(pizzaId, ingredients) {
     if (!ingredients || !ingredients.length) return;
-
+    
     const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
     if (!container) return;
-
-    // ❌ Bitta marta tozalash
+    
     container.innerHTML = '';
     selectedItemsMap.set(pizzaId, new Set());
-
+    
+    // Barcha ingredientlarni yuklash
+    let ingredientsHTML = '';
+    
     ingredients.forEach(ing => {
         const key = ing.name + ing.price;
         selectedItemsMap.get(pizzaId).add(key);
-
-        // Ingredient tugmasini topish
-        const ingredientBtn = document.querySelector(
-            `.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}[data-title="${ing.name}"][data-price="${ing.price}"]`
-        );
-
-        if (ingredientBtn) {
-            ingredientBtn.classList.add('for_active_1');
-        }
-
-        // Ingredient elementini yaratish
-const ingredientDiv = document.createElement('div');
-ingredientDiv.dataset.key = key;
-ingredientDiv.style.cssText =
-    "width: 350px; display: flex; justify-content: space-between; margin-bottom: 5px;";
-
-ingredientDiv.innerHTML = `
-    <div style="display: flex; justify-content: space-between; flex: 1 1 0%;">
-        <span class="fs-13 for_ingradient_title">${ing.name}</span>
-    </div>
-    <div style="display: flex; align-items: center; gap: 8px;">
-        <span class="fs-13 for_ingradient_price">+${ing.price}</span>
-        <svg class="delete-icon" viewBox="0 0 24 24" style="cursor:pointer; width: 20px; height: 20px;">
-            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM8 9h8v10H8zm7.5-5-1-1h-5l-1 1H5v2h14V4z"></path>
-        </svg>
-    </div>
-`;
-
-        ingredientDiv.querySelector('.delete-icon').addEventListener('click', () => {
+        
+        // Tegishli tugmani faollashtirish
+        document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}`).forEach(btn => {
+            if (btn.dataset.title === ing.name && btn.dataset.price === ing.price) {
+                btn.classList.add('for_active_1');
+            }
+        });
+        
+        // HTML qismini qo'shib borish
+        ingredientsHTML += `
+            <div data-key="${key}" style="width: 350px; display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <div style="display: flex; justify-content: space-between; flex: 1 1 0%;">
+                    <span class="fs-13 for_ingradient_title">${ing.name}</span>
+                    <span class="fs-13 for_ingradient_price">${ing.price}</span>
+                </div>
+                <div>
+                    <svg class="delete-icon" viewBox="0 0 24 24" style="cursor:pointer; width: 20px; height: 20px;">
+                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM8 9h8v10H8zm7.5-5-1-1h-5l-1 1H5v2h14V4z"></path>
+                    </svg>
+                </div>
+            </div>
+        `;
+    });
+    
+    // Barcha ingredientlarni bir vaqtda qo'shish
+    container.innerHTML = ingredientsHTML;
+    
+    // O'chirish tugmalariga hodisa qo'shish
+    container.querySelectorAll('.delete-icon').forEach(icon => {
+        const key = icon.closest('[data-key]').dataset.key;
+        icon.addEventListener('click', () => {
             removeIngredient(pizzaId, key);
         });
-
-        container.appendChild(ingredientDiv);
     });
 }
 
