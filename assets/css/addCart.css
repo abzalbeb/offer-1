@@ -37,6 +37,12 @@
     border: none;
     color: white;
     cursor: pointer;
+            font-family: "Kanit", sans-serif !important;
+
+}
+.cart-total p{
+            font-family: "Kanit", sans-serif !important;
+
 }
 .redflag{
     color: rgb(227, 24, 54) !important;
