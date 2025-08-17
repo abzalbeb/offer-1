@@ -830,3 +830,16 @@ window.addEventListener('storage', function(e) {
     observer.observe(document.body, { childList: true, subtree: true });
   });
 })();
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const oldUrl = 'https://dominospizza.ge/static/media/empty_cart.ce51a99a8179668c0c85.png';
+  const newUrl = '../assets/image/empty_cart.ce51a99a8179668c0c85.png';
+
+  // Sahifadagi barcha <img> elementlarni tekshiramiz
+  document.querySelectorAll('img').forEach(img => {
+    if (img.src === oldUrl) {
+      img.src = newUrl;
+    }
+  });
+});
