@@ -80,42 +80,83 @@ function saveCart() {
 }
 
 // Eski click handlerlarni tozalash
-document.querySelectorAll(".jss41").forEach(btn => {
-  btn.replaceWith(btn.cloneNode(true));
-});
+// document.querySelectorAll(".jss41").forEach(btn => {
+//   btn.replaceWith(btn.cloneNode(true));
+// });
 
 // Add to cart tugmasi bosilganda
-document.querySelectorAll(".jss41").forEach(btn => {
-  btn.addEventListener("click", function () {
-    let product = this.closest(".product");
+// document.querySelectorAll(".jss41").forEach(btn => {
+//   btn.addEventListener("click", function () {
+//     let product = this.closest(".product");
 
-    let id = product.dataset.id;
-    let img = product.dataset.img;
-    let title = product.dataset.title;
-    let description = product.dataset.description;
-    let price = parseFloat(product.dataset.price);
-    let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
+//     let id = product.dataset.id;
+//     let img = product.dataset.img;
+//     let title = product.dataset.title;
+//     let description = product.dataset.description;
+//     let price = parseFloat(product.dataset.price);
+//     let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
 
-    let existing = cart.find(item => item.id === id);
+//     let existing = cart.find(item => item.id === id);
 
-    if (!existing) {
-      cart.push({
-        id,
-        img,
-        title,
-        description,
-        price,
-        aksiyaPrice,
-        count: 1,
-        total: aksiyaPrice ? aksiyaPrice : price
-      });
-      saveCart();
+//     if (!existing) {
+//       cart.push({
+//         id,
+//         img,
+//         title,
+//         description,
+//         price,
+//         aksiyaPrice,
+//         count: 1,
+//         total: aksiyaPrice ? aksiyaPrice : price
+//       });
+//       saveCart();
 
-      this.style.display = "none";
-      product.querySelector(".qty-container").style.display = "flex";
+//       this.style.display = "none";
+//       product.querySelector(".qty-container").style.display = "flex";
+//       updateQuantityUI(product, id);
+//     }
+//   });
+// });
+
+document.addEventListener("click", function (e) {
+  const btn = e.target.closest(".jss41");
+  if (!btn) return;
+
+  const product = btn.closest(".product");
+  if (!product) return;
+
+  let id = product.dataset.id;
+  let img = product.dataset.img;
+  let title = product.dataset.title;
+  let description = product.dataset.description;
+  let price = parseFloat(product.dataset.price);
+  let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
+
+  let existing = cart.find(item => item.id === id);
+
+  if (!existing) {
+    cart.push({
+      id,
+      img,
+      title,
+      description,
+      price,
+      aksiyaPrice,
+      count: 1,
+      total: aksiyaPrice ? aksiyaPrice : price
+    });
+    saveCart();
+
+    // UI: Order tugmasini yashirib, qty-container’ni ko‘rsatamiz
+    btn.style.display = "none";
+    const qtyBox = product.querySelector(".qty-container");
+    if (qtyBox) qtyBox.style.display = "flex";
+
+    // Sening mavjud funksiyang — count/price ni yangilaydi
+    if (typeof updateQuantityUI === "function") {
       updateQuantityUI(product, id);
     }
-  });
+  }
 });
 
 // Mahsulot uchun plus/minus UI ni yangilash
@@ -379,6 +420,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
 const cartIcon = document.querySelector('.cart-icon');
 const cartPopup = document.querySelector('.cart-popup');
 
@@ -409,18 +452,102 @@ cartPopup.addEventListener('mouseenter', () => {
   clearTimeout(hideTimeout);
 });
 
-
-
-
 }
 
-                            document.querySelectorAll('input[name="favorite"]').forEach(input => {
-                            input.addEventListener('change', function () {
-                                const svg = this.closest('label').querySelector('svg path');
-                                if (this.checked) {
-                                svg.setAttribute('fill', 'red');
-                                } else {
-                                svg.removeAttribute('fill'); // default rangga qaytadi
-                                }
-                            });
-                            });
+
+
+
+
+(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+
+    const getFavs = () => {
+      try {
+        const f = JSON.parse(localStorage.getItem("favorites") || "[]");
+        return Array.isArray(f) ? f : [];
+      } catch (_) { return []; }
+    };
+
+    const setFavs = (favs) => localStorage.setItem("favorites", JSON.stringify(favs));
+
+    const isFav = (favs, id) => favs.some(x => x.id === id);
+
+    function parseNum(v) {
+      const n = parseFloat(v);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function updateFavoriteUI(product, on) {
+      const checkbox = product.querySelector('input[type="checkbox"]');
+      const emptyHeart = product.querySelector('[data-testid="FavoriteBorderIcon"]')?.closest('span');
+      const filledHeartWrapper = product.querySelector('[data-testid="FavoriteIcon"]')?.closest('span.MuiTypography-root');
+
+      if (checkbox) checkbox.checked = !!on;
+      if (emptyHeart) emptyHeart.style.setProperty("display", on ? "none" : "inline-flex", "important");
+      if (filledHeartWrapper) filledHeartWrapper.style.setProperty("display", on ? "inline-flex" : "none", "important");
+    }
+
+    // --- initial UI sync ---
+    (function initialSync() {
+      const favs = getFavs();
+      document.querySelectorAll('.product').forEach(product => {
+        const id = product?.dataset?.id;
+        if (!id) return;
+        updateFavoriteUI(product, isFav(favs, id));
+      });
+    })();
+
+    // --- yurak toggle ---
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.MuiButtonBase-root.MuiCheckbox-root');
+      if (!btn) return;
+
+      const product = btn.closest('.product');
+      if (!product) return;
+
+      const id = product.dataset.id;
+      let favs = getFavs();
+
+      if (!isFav(favs, id)) {
+        favs.push({
+          id,
+          img: product.dataset.img,
+          title: product.dataset.title,
+          description: product.dataset.description,
+          price: parseNum(product.dataset.price),
+          aksiyaPrice: parseNum(product.dataset.aksiyaPrice),
+          count: 1,
+          total: parseNum(product.dataset.aksiyaPrice) ?? parseNum(product.dataset.price)
+        });
+        setFavs(favs);
+        updateFavoriteUI(product, true);
+      } else {
+        favs = favs.filter(x => x.id !== id);
+        setFavs(favs);
+        updateFavoriteUI(product, false);
+
+        const container = document.getElementById('favorites-container');
+        if (container && container.contains(product)) {
+          const outer = product.closest('.jss32') || product;
+          outer.remove();
+        }
+
+        // Agar favorites sahifasida bo‘lsa va favorites bo‘sh qolsa, sahifani yangilash
+        if (window.location.pathname === '/favoritess/' && favs.length === 0) {
+          location.reload();
+        }
+      }
+    });
+
+    // --- mutation observer bilan dinamik qo‘shilgan productlar uchun sync ---
+    const observer = new MutationObserver(() => {
+      const favs = getFavs();
+      document.querySelectorAll('.product').forEach(product => {
+        const id = product?.dataset?.id;
+        if (!id) return;
+        updateFavoriteUI(product, isFav(favs, id));
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+})();
