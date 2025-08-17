@@ -139,7 +139,10 @@ if (window.matchMedia("(max-width: 600px)").matches) {
   // Dropdown tashqarisiga bosganda yopish
   continueBtn.addEventListener("click", () => {
     if (!tempSelectedLocation) {
-      alert("Iltimos, biror location tanlang.");
+        document.querySelector('#Toastify-error').style.setProperty('display', 'flex', 'important');
+          setTimeout(()=>{
+           document.querySelector('#Toastify-error').style.setProperty('display', 'none', 'important');
+      },2000)
       return;
     }
 
@@ -343,7 +346,10 @@ if (window.matchMedia("(max-width: 600px)").matches) {
   // Dropdown tashqarisiga bosganda yopish
   continueBtn.addEventListener("click", () => {
     if (!tempSelectedLocation) {
-      alert("Iltimos, biror location tanlang.");
+        document.querySelector('#Toastify').style.setProperty('display', 'flex', 'important');
+          setTimeout(()=>{
+           document.querySelector('#Toastify').style.setProperty('display', 'none', 'important');
+      },2000)
       return;
     }
 

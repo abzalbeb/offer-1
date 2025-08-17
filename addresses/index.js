@@ -112,7 +112,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const idx = e.currentTarget.getAttribute("data-index");
             const updated = locations.filter((_, i) => i != idx);
             sessionStorage.setItem("addresses", JSON.stringify(updated));
+            document.querySelector('#Toastify-success5').style.setProperty('display', 'flex', 'important');
+            setTimeout(()=>{
+             document.querySelector('#Toastify-success5').style.setProperty('display', 'none', 'important');
             window.location.reload();
+            },2000)
         });
     });
 });
@@ -197,7 +201,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const idx = e.currentTarget.getAttribute("data-index");
             const updated = locations.filter((_, i) => i != idx);
             sessionStorage.setItem("addresses", JSON.stringify(updated));
+            document.querySelector('#Toastify-success').style.setProperty('display', 'flex', 'important');
+            setTimeout(()=>{
+             document.querySelector('#Toastify-success').style.setProperty('display', 'none', 'important');
             window.location.reload();
+            },2000)
+            
         });
     });
 });
@@ -254,11 +263,9 @@ document.querySelector('#searchLocation').addEventListener('click', () => {
   }
 
   const maxDistance = 100; // km
-
   let farStores = [];
 
   locations.forEach(store => {
-    // Har bir store uchun eng yaqin foydalanuvchi manzilini topamiz
     let minDistance = Infinity;
     addresses.forEach(userLocation => {
       if (userLocation.lat == null || userLocation.lon == null) return;
@@ -271,10 +278,105 @@ document.querySelector('#searchLocation').addEventListener('click', () => {
     }
   });
 
+  // Toastify elementini olish
+  const toast = document.querySelector('#Toastify');
+
   if (farStores.length > 0) {
-    alert("Quyidagi do‘konlar sizdan juda uzoqda:\n" + farStores.join("\n"));
+    toast.style.setProperty('display', 'flex', 'important');
+    setTimeout(() => {
+      toast.style.setProperty('display', 'none', 'important'); 
+    }, 2000);
   } else {
-    alert(`Siz barcha do‘konlarga ${maxDistance} km ichidasiz!`);
+    // toast.innerHTML = `Siz barcha do‘konlarga ${maxDistance} km ichidasiz!`;
+    // toast.style.display = 'flex'; // shuningdek display:flex qilamiz
+    alert('salom')
   }
 });
 
+document.querySelector('.btnasdd').addEventListener('click', () => {
+  const addressStr = sessionStorage.getItem('addresses');
+  if (!addressStr) {
+    alert("Foydalanuvchi manzili topilmadi sessionStorage-da!");
+    return;
+  }
+
+  let addresses;
+  try {
+    addresses = JSON.parse(addressStr);
+  } catch (e) {
+    alert("SessionStorage-da manzil noto‘g‘ri formatda!");
+    return;
+  }
+
+  if (!Array.isArray(addresses) || addresses.length === 0) {
+    alert("Foydalanuvchi manzili topilmadi!");
+    return;
+  }
+
+  const maxDistance = 100; // km
+  let farStores = [];
+
+  locations.forEach(store => {
+    let minDistance = Infinity;
+    addresses.forEach(userLocation => {
+      if (userLocation.lat == null || userLocation.lon == null) return;
+      const distance = getDistance(userLocation.lat, userLocation.lon, store.lat, store.lng);
+      if (distance < minDistance) minDistance = distance;
+    });
+
+    if (minDistance > maxDistance) {
+      farStores.push(`${store.displayName} (${minDistance.toFixed(2)} km)`);
+    }
+  });
+
+  // Toastify elementini olish
+  const toast = document.querySelector('#Toastify-nostore');
+
+  if (farStores.length > 0) {
+    toast.style.setProperty('display', 'flex', 'important');
+    setTimeout(() => {
+      toast.style.setProperty('display', 'none', 'important'); 
+    }, 2000);
+  } else {
+    // toast.innerHTML = `Siz barcha do‘konlarga ${maxDistance} km ichidasiz!`;
+    // toast.style.display = 'flex'; // shuningdek display:flex qilamiz
+    alert('salom')
+  }
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toast = document.querySelector('#Toastify-success2');
+
+  // SessionStorage'dan success ni o'qish
+  const success = sessionStorage.getItem('success');
+
+  if (success === 'true') {
+    // Toastni ko'rsatish
+    toast.style.setProperty('display', 'flex', 'important');
+
+    // 2 sekunddan keyin toastni yashirish va success ni o'chirish
+    setTimeout(() => {
+      toast.style.setProperty('display', 'none', 'important');
+      sessionStorage.removeItem('success');
+    }, 2200);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toast = document.querySelector('#Toastify-success3');
+
+  // SessionStorage'dan success ni o'qish
+  const success = sessionStorage.getItem('success');
+
+  if (success === 'true') {
+    // Toastni ko'rsatish
+    toast.style.setProperty('display', 'flex', 'important');
+
+    // 2 sekunddan keyin toastni yashirish va success ni o'chirish
+    setTimeout(() => {
+      toast.style.setProperty('display', 'none', 'important');
+      sessionStorage.removeItem('success');
+    }, 2200);
+  }
+});

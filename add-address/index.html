@@ -1157,7 +1157,7 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="../assets/css/service-method.css">
+    <link rel="stylesheet" href="../assets/css/service-method.css">
     <link rel="stylesheet" href="../assets/css/addCart.css">
     <style>
         body {
@@ -1233,13 +1233,15 @@
                 height: 220px;
             }
         }
-        .container-iframe{
-    width: 100%;
-    height: 550px;
-}
-        .map-iframe{
-                       width: 100%;
-            height: 100%; 
+
+        .container-iframe {
+            width: 100%;
+            height: 550px;
+        }
+
+        .map-iframe {
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
@@ -1248,7 +1250,68 @@
 
 <body><noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
-        <div class="Toastify"></div>
+        <div class="Toastify" id="Toastify" style="display: none;">
+            <div class="Toastify__toast-container Toastify__toast-container--top-right" style="z-index: 999999;">
+                <div id="8" data-in="true"
+                    class="Toastify__toast Toastify__toast-theme--colored Toastify__toast--error Toastify__toast--close-on-click Toastify--animate Toastify__bounce-enter--top-right">
+                    <div role="alert" class="Toastify__toast-body">
+                        <div class="Toastify__toast-icon Toastify--animate-icon Toastify__zoom-enter"><svg
+                                viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor">
+                                <path
+                                    d="M11.983 0a12.206 12.206 0 00-8.51 3.653A11.8 11.8 0 000 12.207 11.779 11.779 0 0011.8 24h.214A12.111 12.111 0 0024 11.791 11.766 11.766 0 0011.983 0zM10.5 16.542a1.476 1.476 0 011.449-1.53h.027a1.527 1.527 0 011.523 1.47 1.475 1.475 0 01-1.449 1.53h-.027a1.529 1.529 0 01-1.523-1.47zM11 12.5v-6a1 1 0 012 0v6a1 1 0 11-2 0z">
+                                </path>
+                            </svg></div>
+                        <div>Please select a address</div>
+                    </div><button class="Toastify__close-button Toastify__close-button--colored" type="button"
+                        aria-label="close"><svg aria-hidden="true" viewBox="0 0 14 16">
+                            <path fill-rule="evenodd"
+                                d="M7.71 8.23l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75L1 11.98l3.75-3.75L1 4.48 2.48 3l3.75 3.75L9.98 3l1.48 1.48-3.75 3.75z">
+                            </path>
+                        </svg></button>
+                    <div class="Toastify__progress-bar--wrp" data-hidden="false">
+                        <div
+                            class="Toastify__progress-bar--bg Toastify__progress-bar-theme--colored Toastify__progress-bar--error">
+                        </div>
+                        <div role="progressbar" aria-hidden="false" aria-label="notification timer"
+                            class="Toastify__progress-bar Toastify__progress-bar--animated Toastify__progress-bar-theme--colored Toastify__progress-bar--error"
+                            style="animation-duration: 2000ms; animation-play-state: running;"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="Toastify" id="Toastify-error" style="display: none;">
+            <div class="Toastify__toast-container Toastify__toast-container--top-right" style="z-index: 9999999;">
+                <div id="8" data-in="true"
+                    class="Toastify__toast Toastify__toast-theme--colored Toastify__toast--error Toastify__toast--close-on-click Toastify--animate Toastify__bounce-enter--top-right">
+                    <div role="alert" class="Toastify__toast-body">
+                        <div class="Toastify__toast-icon Toastify--animate-icon Toastify__zoom-enter"><svg
+                                viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor">
+                                <path
+                                    d="M11.983 0a12.206 12.206 0 00-8.51 3.653A11.8 11.8 0 000 12.207 11.779 11.779 0 0011.8 24h.214A12.111 12.111 0 0024 11.791 11.766 11.766 0 0011.983 0zM10.5 16.542a1.476 1.476 0 011.449-1.53h.027a1.527 1.527 0 011.523 1.47 1.475 1.475 0 01-1.449 1.53h-.027a1.529 1.529 0 01-1.523-1.47zM11 12.5v-6a1 1 0 012 0v6a1 1 0 11-2 0z">
+                                </path>
+                            </svg></div>
+                        <div>Please select a address</div>
+                    </div><button class="Toastify__close-button Toastify__close-button--colored" type="button"
+                        aria-label="close"><svg aria-hidden="true" viewBox="0 0 14 16">
+                            <path fill-rule="evenodd"
+                                d="M7.71 8.23l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75L1 11.98l3.75-3.75L1 4.48 2.48 3l3.75 3.75L9.98 3l1.48 1.48-3.75 3.75z">
+                            </path>
+                        </svg></button>
+                    <div class="Toastify__progress-bar--wrp" data-hidden="false">
+                        <div
+                            class="Toastify__progress-bar--bg Toastify__progress-bar-theme--colored Toastify__progress-bar--error">
+                        </div>
+                        <div role="progressbar" aria-hidden="false" aria-label="notification timer"
+                            class="Toastify__progress-bar Toastify__progress-bar--animated Toastify__progress-bar-theme--colored Toastify__progress-bar--error"
+                            style="animation-duration: 2000ms; animation-play-state: running;"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="MuiBox-root css-9hh926">
             <section class="header" id="header-destop">
                 <div style="padding-inline: 15px;">
@@ -1309,7 +1372,7 @@
                                 </div>
                                 <div class="MuiStack-root css-16mqrq1 " aria-labelledby=":r2p"
                                     style="position: relative;">
-                                    
+
                                     <span class="MuiBadge-root css-1afh8op">
 
                                         <div class="cart-popup" style="display: none;">
@@ -1376,8 +1439,8 @@
                                     <path d="M3 18h18v-2H3zm0-5h18v-2H3zm0-7v2h18V6z"></path>
                                 </svg><span class="MuiTouchRipple-root css-w0pj6f"></span></button>
                             <div style="display: flex; justify-content: center;"><img
-                                    src="../assets/image/dominos_blue_logo.c0fd9781d3faea268710.webp"
-                                    alt="Dominos Logo" width="126" height="27" style="cursor: pointer;"></div>
+                                    src="../assets/image/dominos_blue_logo.c0fd9781d3faea268710.webp" alt="Dominos Logo"
+                                    width="126" height="27" style="cursor: pointer;"></div>
                             <div style="width: 41px;"></div>
                         </div>
                     </div>
@@ -1391,12 +1454,12 @@
                         style="background: white; border-radius: 25px; display: flex; justify-content: space-between; flex-direction: column; padding: 22px; width: 800px; height: 500px; position: relative;">
                         <div style="display: flex; align-items: flex-end; justify-content: space-between;">
                             <div style="display: flex; align-items: flex-end; gap: 8px;">
-                                <div><img
-                                        src="../assets/image/bike-blue.d8efb9be9998cea2da9972ac068a72e2.svg"
+                                <div><img src="../assets/image/bike-blue.d8efb9be9998cea2da9972ac068a72e2.svg"
                                         height="35" width="35" alt="Delivery"></div>
                                 <h2 class="text-blue fs-16 Kanit-SemiBold">Home Delivery</h2>
                             </div>
-                            <p class="text-blue Kanit-Light fs-14 hover-underline pointer" onclick="myAddressInfo()">My Addresses</p>
+                            <p class="text-blue Kanit-Light fs-14 hover-underline pointer" onclick="myAddressInfo()">My
+                                Addresses</p>
                         </div>
                         <div>
                             <div
@@ -1414,16 +1477,16 @@
                                         d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14">
                                     </path>
                                 </svg>
-                                <div class="google-map-autocomplete" >
-                                    <div class=""><input placeholder="Enter a location" value="" type="text" id="addressInput"
-                                            class="pac-target-input" autocomplete="off" >
+                                <div class="google-map-autocomplete">
+                                    <div class=""><input placeholder="Enter a location" value="" type="text"
+                                            id="addressInput" class="pac-target-input" autocomplete="off">
                                     </div>
                                 </div>
 
-                                   <div class="pac-container pac-logo hdpi"
-                        style="width: 628px; position: absolute; left: 300px; top: 270px; display: none;z-index: 1000;">
-                        
-                    </div>
+                                <div class="pac-container pac-logo hdpi"
+                                    style="width: 628px; position: absolute; left: 300px; top: 270px; display: none;z-index: 1000;">
+
+                                </div>
                             </div>
                             <div style="display: flex; justify-content: center; padding-inline: 44px;"><button
                                     class="text-white Kanit-SemiBold fs-16 btnLocation"
@@ -1432,30 +1495,43 @@
 
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
-            
-            <div class="Login_banner_Mobile" id="Login_banner_Mobile" style="background-image: url(../assets/image/backgroundRegister.16cd4e684cb959594932.png) !important;margin-top:15px;display:none">
-                <div
-                    style="display: flex; align-items: center;  height: 60px; margin-left: 20px;">
+
+            <div class="Login_banner_Mobile" id="Login_banner_Mobile"
+                style="background-image: url(../assets/image/backgroundRegister.16cd4e684cb959594932.png) !important;margin-top:15px;display:none">
+                <div style="display: flex; align-items: center;  height: 60px; margin-left: 20px;">
                     <div style=""><img src="../assets/image/bike-blue.d8efb9be9998cea2da9972ac068a72e2.svg" height="45"
                             width="50" alt="Delivery"></div>
                     <h2 class="text-blue fs-24 Kanit-SemiBold">Home Delivery</h2>
                 </div>
-                                 <div style="display:flex; width:90%;margin:auto; padding: 8px 8px 8px 18px; border-radius: 25px; background: white; gap: 12px;    box-shadow: 0 2px 4px 0 hsla(0, 0%, 68%, .488);top:0% !important;"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-d5nl9o" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="SearchSharpIcon"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg>
-                                    <div class="google-map-autocomplete"><div class=""><input placeholder="Search" value="" id="addressInputMobile" class="pac-target-input" autocomplete="off"></div></div></div>
-                                                    <div class="pac-container pac-containerMobile  pac-logo hdpi"
-                        style="width: 90%; position: absolute; left: 300px; top: 100px; display: none;z-index: 9999999;">
-                        
+                <div
+                    style="display:flex; width:90%;margin:auto; padding: 8px 8px 8px 18px; border-radius: 25px; background: white; gap: 12px;    box-shadow: 0 2px 4px 0 hsla(0, 0%, 68%, .488);top:0% !important;">
+                    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-d5nl9o" focusable="false"
+                        aria-hidden="true" viewBox="0 0 24 24" data-testid="SearchSharpIcon">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14">
+                        </path>
+                    </svg>
+                    <div class="google-map-autocomplete">
+                        <div class=""><input placeholder="Search" value="" id="addressInputMobile"
+                                class="pac-target-input" autocomplete="off"></div>
                     </div>
+                </div>
+                <div class="pac-container pac-containerMobile  pac-logo hdpi"
+                    style="width: 90%; position: absolute; left: 300px; top: 100px; display: none;z-index: 9999999;">
+
+                </div>
                 <div class="container-mobile-google-map" style="width: 100%;height:100%; margin-top:20px">
                     <div class="container-iframe" style="margin-bottom: 24px;">
                         <div class="map-iframe"></div>
                     </div>
-                    
+
                     <div class="btn-iframe-add" style="width: 87%;margin:auto; padding-bottom:20px">
-                        <button class="text-white Kanit-SemiBold btnLocationMobile fs-16" style="border-radius: 10px; background: rgb(3, 140, 200); padding: 8px 0px; width: 100%; margin-top: 0px; cursor: pointer; border: none;">Continue with Chosen Location</button>
+                        <button class="text-white Kanit-SemiBold btnLocationMobile fs-16"
+                            style="border-radius: 10px; background: rgb(3, 140, 200); padding: 8px 0px; width: 100%; margin-top: 0px; cursor: pointer; border: none;">Continue
+                            with Chosen Location</button>
                     </div>
                 </div>
 
@@ -1469,16 +1545,22 @@
                 <div class="footer-content">
                     <div class="footer-list-container">
                         <ul class="footer-list">
-                            <li><a href="../about/"><span class="span-li footer-p-style" >About Domino's</span></a></li>
-                            <li><span class="span-li footer-p-style" style="cursor: default;">Hygiene Certificate</span></li>
-                            <li><a href="../join-our-team/"><span class="span-li footer-p-style">Join Our Team</span></a></li>
+                            <li><a href="../about/"><span class="span-li footer-p-style">About Domino's</span></a></li>
+                            <li><span class="span-li footer-p-style" style="cursor: default;">Hygiene Certificate</span>
+                            </li>
+                            <li><a href="../join-our-team/"><span class="span-li footer-p-style">Join Our
+                                        Team</span></a></li>
                         </ul>
                         <ul class="footer-list">
-                            <li><a href="../terms-and-conditions/"><span class="span-li footer-p-style ">Terms and Conditions</span></a>
+                            <li><a href="../terms-and-conditions/"><span class="span-li footer-p-style ">Terms and
+                                        Conditions</span></a>
                             </li>
-                            <li><a href="../privacy-policy/"><span class="span-li footer-p-style ">Privacy Policy</span></a></li>
-                            <li><a href="../delivery-policy/"><span class="span-li footer-p-style">Delivery Policy</span></a></li>
-                            <li><a href="../return-policy/"><span class="span-li footer-p-style">Return Policy</span></a></li>
+                            <li><a href="../privacy-policy/"><span class="span-li footer-p-style ">Privacy
+                                        Policy</span></a></li>
+                            <li><a href="../delivery-policy/"><span class="span-li footer-p-style">Delivery
+                                        Policy</span></a></li>
+                            <li><a href="../return-policy/"><span class="span-li footer-p-style">Return
+                                        Policy</span></a></li>
                         </ul>
                     </div>
                     <div class="footer-icons-sec">
@@ -1488,7 +1570,8 @@
                                 width="104" height="76" loading="lazy"><img
                                 src="../assets/image/pizza_oven.3bd307ade23251814945.webp" alt="oven" width="59"
                                 height="58" loading="lazy"></div>
-                        <p class="Kanit-Light text-blue footer-p-style"  style="text-align: center; font-weight:300">© Geopizza LLC All rights reserved
+                        <p class="Kanit-Light text-blue footer-p-style" style="text-align: center; font-weight:300">©
+                            Geopizza LLC All rights reserved
                             2025 | Developed by <a href="https://www.hitech-prime.com/" target="_blank" rel="noreferrer"
                                 class="text-blue hover-underline footer-p-style"> HiTech Prime </a></p>
                     </div>
@@ -1506,9 +1589,10 @@
                         <div style="display: flex; flex-direction: column; align-items: flex-start;">
                             <div style="text-align: start;"><a href="tel:032 2 99 88 88">
                                     <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                                        <div><img src="../assets/image/phone_call_1.38932115677a1630e6d1.webp" alt="Phone"
-                                                width="20" height="20" loading="lazy"></div>
-                                        <p style="font-size: 16px; font-weight:600" class="footer-p-style">032 2 99 88 88</p>
+                                        <div><img src="../assets/image/phone_call_1.38932115677a1630e6d1.webp"
+                                                alt="Phone" width="20" height="20" loading="lazy"></div>
+                                        <p style="font-size: 16px; font-weight:600" class="footer-p-style">032 2 99 88
+                                            88</p>
                                     </div>
                                 </a>
                                 <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
@@ -1527,8 +1611,8 @@
             id="massage-mobile">
             <div style="display: flex; flex-direction: column; align-items: center;">
                 <div><a href="https://m.me/dominosgeorgia?ref=chat" target="_blank" rel="noopener noreferrer"><img
-                            src="../assets/image/messenger.bdb78ff46cdfba34c11a.png" height="40"
-                            width="40" alt="messenger" loading="lazy"></a></div>
+                            src="../assets/image/messenger.bdb78ff46cdfba34c11a.png" height="40" width="40"
+                            alt="messenger" loading="lazy"></a></div>
                 <p style="font-size: 12px; " class="footer-p-style">Contact Us</p>
             </div>
         </div>
@@ -1536,8 +1620,8 @@
             id="message-destop">
             <div style="display: flex; flex-direction: column; align-items: center;">
                 <div><a href="https://m.me/dominosgeorgia?ref=chat" target="_blank" rel="noopener noreferrer"><img
-                            src="../assets/image/messenger.bdb78ff46cdfba34c11a.png" height="60"
-                            width="60" alt="messenger" loading="lazy"></a></div>
+                            src="../assets/image/messenger.bdb78ff46cdfba34c11a.png" height="60" width="60"
+                            alt="messenger" loading="lazy"></a></div>
                 <p style="font-size: 16px; " class="footer-p-style">Contact Us</p>
             </div>
         </div>
@@ -1561,9 +1645,10 @@
                         </svg><span class="MuiTouchRipple-root css-w0pj6f"></span></button>
 
                     <div class="top_flag-icon">
-                        <div class="lang_En"><img src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png" loading="lazy" height="26"
-                                width="26" alt="flag en"></div>
-                                <div class="lang_Ge"><img src="../assets/image/britsht.png" loading="lazy" height="26"
+                        <div class="lang_En"><img
+                                src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png"
+                                loading="lazy" height="26" width="26" alt="flag en"></div>
+                        <div class="lang_Ge"><img src="../assets/image/britsht.png" loading="lazy" height="26"
                                 width="26" alt="flag ge"></div>
                         <div class="lang_Ge"><img src="../assets/image/gruziya.png" loading="lazy" height="26"
                                 width="26" alt="flag ge"></div>
@@ -1635,7 +1720,8 @@
                                             class="span-li Kanit-Extra-Light fs-16 text-blue ">Privacy Policy</span></a>
                                 </li>
                                 <li><a href="../delivery-policy/"><span
-                                            class="span-li Kanit-Extra-Light fs-16 text-blue ">Delivery Policy</span></a>
+                                            class="span-li Kanit-Extra-Light fs-16 text-blue ">Delivery
+                                            Policy</span></a>
                                 </li>
                                 <li><a href="../return-policy/"><span
                                             class="span-li Kanit-Extra-Light fs-16 text-blue">Return Policy</span></a>
