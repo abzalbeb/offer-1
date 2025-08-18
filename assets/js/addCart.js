@@ -167,7 +167,7 @@ function updateQuantityUI(product, id) {
   let minusBtn = product.querySelector(".qty-minus");
   let plusBtn = product.querySelector(".qty-plus");
   let countEl = product.querySelector(".qty-count");
-  let priceEl = product.querySelector(".product-price");
+  let priceEl = product.querySelector(".for_price");
 
   countEl.textContent = cartItem.count;
   priceEl.innerHTML = cartItem.total.toFixed(2) + "<b>₾</b>";
@@ -338,6 +338,15 @@ document.querySelectorAll(".jss41").forEach(btn => {
   btn.addEventListener("click", function () {
     let product = this.closest(".product");
 
+    // DOM dan narxlarni olish
+    let originalPrice = parseFloat(product.querySelector(".for_aksiyaPrice").textContent.trim());
+    let discountedPrice = parseFloat(product.querySelector(".for_price").textContent.trim());
+
+    // data-atributlarga yozib qo'yish
+    product.dataset.price = originalPrice.toFixed(2);       // asl narx
+    product.dataset.aksiyaPrice = discountedPrice.toFixed(2); // aksiya narx
+
+    // keyin data-* dan olish
     let id = product.dataset.id;
     let img = product.dataset.img;
     let title = product.dataset.title;
@@ -353,8 +362,8 @@ document.querySelectorAll(".jss41").forEach(btn => {
         img,
         title,
         description,
-        price,
-        aksiyaPrice,
+        price,               // asl narx
+        aksiyaPrice,         // aksiya narx
         count: 1,
         total: aksiyaPrice ? aksiyaPrice : price
       });
@@ -367,6 +376,7 @@ document.querySelectorAll(".jss41").forEach(btn => {
   });
 });
 
+
 // Mahsulot uchun plus/minus UI ni yangilash
 function updateQuantityUI(product, id) {
   let cartItem = cart.find(item => item.id === id);
@@ -375,7 +385,7 @@ function updateQuantityUI(product, id) {
   let minusBtn = product.querySelector(".qty-minus");
   let plusBtn = product.querySelector(".qty-plus");
   let countEl = product.querySelector(".qty-count");
-  let priceEl = product.querySelector(".product-price");
+  let priceEl = product.querySelector(".for_price");
 
   countEl.textContent = cartItem.count;
   priceEl.innerHTML = cartItem.total.toFixed(2) + "<b>₾</b>";
