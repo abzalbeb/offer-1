@@ -4167,15 +4167,6 @@ function addToCart() {
         localStorage.setItem("lastOrderId", lastOrderId.toString());
     }
 
-    const newOrder = {
-        ...product,
-        id: orderId,
-        quantity: count,
-        pizzas: [],
-        totalPrice: (product.aksiyaPrice * count).toFixed(2) + "₾",
-        date: new Date().toISOString()
-    };
-
     // Reset all error borders first
     document.querySelectorAll('.pizza-block').forEach(block => {
         const id = block.dataset.id;
@@ -4216,7 +4207,10 @@ function addToCart() {
         return;
     }
 
-    // Collect selected pizzas
+    // Collect selected pizzas and calculate total price
+    let additionalPrice = 0; // Pizzalar va ingredientlar uchun qo'shimcha narx
+    const pizzasArray = [];
+
     selectedPizzaBlocks.forEach(id => {
         let pizza = {
             title: '',
@@ -4244,7 +4238,10 @@ function addToCart() {
             console.log(`Using DOM data for pizza ${id}:`, pizza); // Debug
         }
 
-        // Ingredientlarni qo'shish
+        // Pizza narxini qo'shish
+        additionalPrice += pizza.price;
+
+        // Ingredientlarni qo'shish va ularning narxini hisoblash
         const selectedItems = selectedItemsMap.get(id);
         if (selectedItems && selectedItems.size > 0) {
             selectedItems.forEach(key => {
@@ -4257,14 +4254,39 @@ function addToCart() {
                     name: ingredientName,
                     price: price
                 });
+
+                // Ingredient narxini qo'shish
+                additionalPrice += price;
             });
         }
 
         console.log(`Final pizza ${id}:`, pizza); // Debug
-        newOrder.pizzas.push(pizza);
+        pizzasArray.push(pizza);
     });
 
-    console.log("Final order:", newOrder); // Debug
+    // To'liq narxni hisoblash
+    // 1+1 aksiya uchun: asosiy narx * quantity + pizzalar/ingredientlar narxi (faqat bir marta)
+    // Oddiy mahsulot uchun: (asosiy narx + qo'shimcha narx) * quantity
+    let totalPrice;
+    
+    if (product.description && product.description.includes("get second for free")) {
+        // 1+1 aksiya: asosiy narx * quantity + qo'shimcha narx (bir marta)
+        totalPrice = ((product.aksiyaPrice * count) + additionalPrice).toFixed(2);
+    } else {
+        // Oddiy mahsulot: (asosiy narx + qo'shimcha narx) * quantity
+        totalPrice = ((product.aksiyaPrice + additionalPrice) * count).toFixed(2);
+    }
+
+    const newOrder = {
+        ...product,
+        id: orderId,
+        quantity: count,
+        pizzas: pizzasArray,
+        totalPrice: totalPrice + "₾",
+        date: new Date().toISOString()
+    };
+
+    console.log("Final order with calculated total:", newOrder); // Debug
 
     // Order processing
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -4280,9 +4302,9 @@ function addToCart() {
         }
         localStorage.removeItem("edit");
         localStorage.removeItem("for_id");
-        alert(`Buyurtma yangilandi! ID: ${orderId}`);
+        alert(`Buyurtma yangilandi! ID: ${orderId}, Jami narx: ${totalPrice}₾`);
     } else {
-        alert(`${count} ta yangi mahsulot savatga qo'shildi! Buyurtma ID: ${orderId}`);
+        alert(`${count} ta yangi mahsulot savatga qo'shildi! Buyurtma ID: ${orderId}, Jami narx: ${totalPrice}₾`);
     }
 
     orders.push(newOrder);
