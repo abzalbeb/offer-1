@@ -1732,7 +1732,29 @@
 
 
         <div>
-            <div class="jss1">
+        <div class="jss1" id="no-cart-empty">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="empty_card">
+                    <div
+                        style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding-block: 20px; row-gap: 12px;">
+                        <h2 class="Kanit-SemiBold text-blue" style="font-size: 36px; text-align: center;">Empty Cart</h2>
+                        <div style="display: flex; justify-content: center;"><img
+                                src="../assets/image/empty_cart.ce51a99a8179668c0c85.png"
+                                style="filter: grayscale(100%);"></div>
+                        <div>
+                            <h3 class="Kanit-Medium" style="color: rgb(73, 73, 73); font-family: 'Kanit', sans-serif !important; font-size: 24px;">Your Cart Is<span class="Kanit-Medium text-red" style="font-size: 24px;  font-family: 'Kanit', sans-serif !important;"> Empty! </span></h3>
+                        </div>
+                        <div style="text-align: center;">
+                            <p class="Kanit-Light text-gray capitalize;" style="font-family: 'Kanit', sans-serif !important;">Must Add Items On The Cart Before You Proceed To Check Out</p>
+                        </div><button
+                            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-Regular fs-14 empty_btn css-13z6b64"
+                            tabindex="0" type="button" style="font-weight: bold;font-family: 'Kanit', sans-serif !important;color:white;border:none;text-transform: uppercase;">Back To Menu<span
+                                class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="jss1" id="cart-container-empty">
                 <div class="jss58">
                     <div class="jss59">
                         <div>
@@ -1806,6 +1828,7 @@
 
 
                 <div id="ordersContainer"></div>
+                <div id="ordersContainerCart"></div>
 
 
 
@@ -1814,13 +1837,13 @@
 
 
 
-                <div class="MuiBox-root css-1djk842"><button
+                <div class="MuiBox-root css-1djk842"><button onclick="removeCart()"
                         class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary Kanit-Medium jss8 css-1bfuqwl"
                         tabindex="0" type="button" style="border-radius: 30px; font-size: 16px;">Empty cart<span
                             class="MuiTouchRipple-root css-w0pj6f"></span></button></div><br>
 
 
-                <!-- <div class="MuiBox-root css-gzlndu">
+                <div class="MuiBox-root css-gzlndu">
                     <h1 class="IBM-SemiBold" style="font-size: 36px;font-family: 'Kanit', sans-serif !important;font-weight:500;">Goes Well Together</h1><br>
                     <div class="jss30" style="padding: 0px;">
                         <div class="jss32">
@@ -2018,7 +2041,7 @@
                 <div style="margin-top: 28px; margin-bottom: 60px;"><button
                         class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-Medium fs-24 jss8 css-np2orv"
                         tabindex="0" type="button">Next<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
-                </div> -->
+                </div>
             </div>
         </div>
 
