@@ -112,7 +112,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const idx = e.currentTarget.getAttribute("data-index");
             const updated = locations.filter((_, i) => i != idx);
             sessionStorage.setItem("addresses", JSON.stringify(updated));
+            document.querySelector('#Toastify-success5').style.setProperty('display', 'flex', 'important');
+            setTimeout(()=>{
+             document.querySelector('#Toastify-success5').style.setProperty('display', 'none', 'important');
             window.location.reload();
+            },2000)
         });
     });
 });
@@ -197,7 +201,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const idx = e.currentTarget.getAttribute("data-index");
             const updated = locations.filter((_, i) => i != idx);
             sessionStorage.setItem("addresses", JSON.stringify(updated));
+            document.querySelector('#Toastify-success').style.setProperty('display', 'flex', 'important');
+            setTimeout(()=>{
+             document.querySelector('#Toastify-success').style.setProperty('display', 'none', 'important');
             window.location.reload();
+            },2000)
+            
         });
     });
 });
@@ -208,3 +217,166 @@ function addNewAddress(){
 
 }
 
+// Do'konlar
+const locations = [
+  { name: "34 Vazha Pshavela Ave", displayName: "Delisi", lat: 41.72561097144419, lng: 44.749278935297475 },
+  { name: "72 Viktor Kupradze St", displayName: "Varketili", lat: 41.7121407, lng: 44.8778605 },
+  { name: "3 Navtlughi St (Isani Mall)", displayName: "Isani", lat: 41.68396467733614, lng: 44.84046947709175 },
+  { name: "10 Ilia Vekua St", displayName: "Gldani", lat: 41.79295152621502, lng: 44.81723196196301 },
+  { name: "78a Vazha Pshavela Ave", displayName: "Vazha", lat: 41.72390007301149, lng: 44.73179612516593 },
+  { name: "9a Ilia Chavchavadze Ave", displayName: "Vake", lat: 41.709304, lng: 44.774133 },
+  { name: "74 Merab Kostava St", displayName: "Kostava", lat: 41.722178960393414, lng: 44.77663803805155 }
+];
+
+// Haversine formulasi (km)
+function getDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat/2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon/2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+
+document.querySelector('#searchLocation').addEventListener('click', () => {
+  const addressStr = sessionStorage.getItem('addresses');
+  if (!addressStr) {
+    alert("Foydalanuvchi manzili topilmadi sessionStorage-da!");
+    return;
+  }
+
+  let addresses;
+  try {
+    addresses = JSON.parse(addressStr);
+  } catch (e) {
+    alert("SessionStorage-da manzil noto‘g‘ri formatda!");
+    return;
+  }
+
+  if (!Array.isArray(addresses) || addresses.length === 0) {
+    alert("Foydalanuvchi manzili topilmadi!");
+    return;
+  }
+
+  const maxDistance = 100; // km
+  let farStores = [];
+
+  locations.forEach(store => {
+    let minDistance = Infinity;
+    addresses.forEach(userLocation => {
+      if (userLocation.lat == null || userLocation.lon == null) return;
+      const distance = getDistance(userLocation.lat, userLocation.lon, store.lat, store.lng);
+      if (distance < minDistance) minDistance = distance;
+    });
+
+    if (minDistance > maxDistance) {
+      farStores.push(`${store.displayName} (${minDistance.toFixed(2)} km)`);
+    }
+  });
+
+  // Toastify elementini olish
+  const toast = document.querySelector('#Toastify');
+
+  if (farStores.length > 0) {
+    toast.style.setProperty('display', 'flex', 'important');
+    setTimeout(() => {
+      toast.style.setProperty('display', 'none', 'important'); 
+    }, 2000);
+  } else {
+    // toast.innerHTML = `Siz barcha do‘konlarga ${maxDistance} km ichidasiz!`;
+    // toast.style.display = 'flex'; // shuningdek display:flex qilamiz
+    alert('salom')
+  }
+});
+
+document.querySelector('.btnasdd').addEventListener('click', () => {
+  const addressStr = sessionStorage.getItem('addresses');
+  if (!addressStr) {
+    alert("Foydalanuvchi manzili topilmadi sessionStorage-da!");
+    return;
+  }
+
+  let addresses;
+  try {
+    addresses = JSON.parse(addressStr);
+  } catch (e) {
+    alert("SessionStorage-da manzil noto‘g‘ri formatda!");
+    return;
+  }
+
+  if (!Array.isArray(addresses) || addresses.length === 0) {
+    alert("Foydalanuvchi manzili topilmadi!");
+    return;
+  }
+
+  const maxDistance = 100; // km
+  let farStores = [];
+
+  locations.forEach(store => {
+    let minDistance = Infinity;
+    addresses.forEach(userLocation => {
+      if (userLocation.lat == null || userLocation.lon == null) return;
+      const distance = getDistance(userLocation.lat, userLocation.lon, store.lat, store.lng);
+      if (distance < minDistance) minDistance = distance;
+    });
+
+    if (minDistance > maxDistance) {
+      farStores.push(`${store.displayName} (${minDistance.toFixed(2)} km)`);
+    }
+  });
+
+  // Toastify elementini olish
+  const toast = document.querySelector('#Toastify-nostore');
+
+  if (farStores.length > 0) {
+    toast.style.setProperty('display', 'flex', 'important');
+    setTimeout(() => {
+      toast.style.setProperty('display', 'none', 'important'); 
+    }, 2000);
+  } else {
+    // toast.innerHTML = `Siz barcha do‘konlarga ${maxDistance} km ichidasiz!`;
+    // toast.style.display = 'flex'; // shuningdek display:flex qilamiz
+    alert('salom')
+  }
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toast = document.querySelector('#Toastify-success2');
+
+  // SessionStorage'dan success ni o'qish
+  const success = sessionStorage.getItem('success');
+
+  if (success === 'true') {
+    // Toastni ko'rsatish
+    toast.style.setProperty('display', 'flex', 'important');
+
+    // 2 sekunddan keyin toastni yashirish va success ni o'chirish
+    setTimeout(() => {
+      toast.style.setProperty('display', 'none', 'important');
+      sessionStorage.removeItem('success');
+    }, 2200);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toast = document.querySelector('#Toastify-success3');
+
+  // SessionStorage'dan success ni o'qish
+  const success = sessionStorage.getItem('success');
+
+  if (success === 'true') {
+    // Toastni ko'rsatish
+    toast.style.setProperty('display', 'flex', 'important');
+
+    // 2 sekunddan keyin toastni yashirish va success ni o'chirish
+    setTimeout(() => {
+      toast.style.setProperty('display', 'none', 'important');
+      sessionStorage.removeItem('success');
+    }, 2200);
+  }
+});

@@ -139,7 +139,10 @@ if (window.matchMedia("(max-width: 600px)").matches) {
   // Dropdown tashqarisiga bosganda yopish
   continueBtn.addEventListener("click", () => {
     if (!tempSelectedLocation) {
-      alert("Iltimos, biror location tanlang.");
+        document.querySelector('#Toastify-error').style.setProperty('display', 'flex', 'important');
+          setTimeout(()=>{
+           document.querySelector('#Toastify-error').style.setProperty('display', 'none', 'important');
+      },2000)
       return;
     }
 
@@ -343,7 +346,10 @@ if (window.matchMedia("(max-width: 600px)").matches) {
   // Dropdown tashqarisiga bosganda yopish
   continueBtn.addEventListener("click", () => {
     if (!tempSelectedLocation) {
-      alert("Iltimos, biror location tanlang.");
+        document.querySelector('#Toastify').style.setProperty('display', 'flex', 'important');
+          setTimeout(()=>{
+           document.querySelector('#Toastify').style.setProperty('display', 'none', 'important');
+      },2000)
       return;
     }
 
@@ -406,3 +412,30 @@ if (window.matchMedia("(max-width: 600px)").matches) {
     }
   });
 }
+
+function myAddressInfo() {
+  const addressStr = sessionStorage.getItem('addresses');
+
+  if (!addressStr) {
+    console.log("addresses sessionStorage-da topilmadi");
+    return;
+  }
+
+  let addresses;
+  try {
+    addresses = JSON.parse(addressStr);
+  } catch (e) {
+    console.error("addresses JSON parse qilishda xatolik:", e);
+    return;
+  }
+
+  // Agar array bo‘sh bo‘lsa, sahifaga o‘tkazmaymiz
+  if (!Array.isArray(addresses) || addresses.length === 0) {
+    console.log("addresses bo‘sh, sahifaga o‘tkazilmaydi");
+    return;
+  }
+
+  // Hammasi to‘g‘ri bo‘lsa, sahifaga yo‘naltiramiz
+  window.location.href = '../addresses';
+}
+

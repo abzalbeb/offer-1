@@ -1161,6 +1161,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/css/service-method.css">
+    <link rel="stylesheet" href="../assets/css/addCart.css">
     <style>
         body {
             margin: 0px;
@@ -1269,8 +1270,8 @@
                                 </a></div>
                         </div>
                         <div style="display: flex; justify-content: center;"><img
-                                src="../assets/image/dominos_blue_logo.c0fd9781d3faea268710.webp"
-                                alt="Dominos Logo" width="178" height="38" style="cursor: pointer;"></div>
+                                src="../assets/image/dominos_blue_logo.c0fd9781d3faea268710.webp" alt="Dominos Logo"
+                                width="178" height="38" style="cursor: pointer;"></div>
                         <div style="display: flex; align-items: center; justify-content: flex-end;">
                             <div class="header-icons"><a href="../stores/">
                                     <div><img src="../assets/image/navbarlogo1.png" alt="Dominos Stores">
@@ -1281,33 +1282,75 @@
                                         <p style="color: black;" class="p-style">Tracker</p>
                                     </div>
                                 </a>
-                                    <div class="flag-wrapper">
-                                        <div style="cursor: pointer;">
-                                            <img src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png" alt="ENG">
-                                            <p class="p-style">ENG</p>
-                                        </div>
+                                <div class="flag-wrapper">
+                                    <div style="cursor: pointer;">
+                                        <img src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png"
+                                            alt="ENG">
+                                        <p class="p-style">ENG</p>
+                                    </div>
 
-                                        <div class="tooltip-flag">
-                                            <div>
-                                                <img class="img-postion-1" src="../assets/image/britsht.png" alt="UK">
-                                                <span class="text-postion-1">UK</span>
-                                            </div>
-                                            <div>
+                                    <div class="tooltip-flag">
+                                        <div>
+                                            <img class="img-postion-1" src="../assets/image/britsht.png" alt="UK">
+                                            <span class="text-postion-1">UK</span>
+                                        </div>
+                                        <div>
                                             <img class="img-postion-2" src="../assets/image/gruziya.png" alt="GEO">
                                             <span class="text-postion-2">GEO</span>
-                                            </div>
                                         </div>
                                     </div>
-                                <div class="MuiStack-root css-16mqrq1"><span class="MuiBadge-root css-1afh8op">
-                                        <div
+                                </div>
+                                <div class="MuiStack-root css-16mqrq1 " aria-labelledby=":r2p"
+                                    style="position: relative;">
+                                    
+                                    <span class="MuiBadge-root css-1afh8op">
+
+                                        <div class="cart-popup" style="display: none;">
+                                            <div class="triangle"></div>
+                                            <div class="cart-popup-img"
+                                                style="text-align: center; margin-bottom: 10px;">
+                                                <img src="https://dominospizza.ge/static/media/empty_cart.ce51a99a8179668c0c85.png"
+                                                    alt="Empty Cart">
+                                            </div>
+                                            <div class="cart-item-map-container" style="display: none;">
+                                                <div class="item-card-container" style="display:block !important">
+                                                    <div class="img-cart-item">
+                                                        <img src="" alt="">
+                                                    </div>
+                                                    <div class="card-text-info-item">
+                                                        <p></p>
+                                                        <span></span>
+                                                    </div>
+                                                    <div class="card-price-item">
+                                                        <p class=" fs-18 text-red redflag" style="font-size: 15px;">
+                                                            <b></b>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="cart-order-container-btn">
+                                                <div class="view-btn"><button class="view-cart-btn">VIEW CART</button>
+                                                </div>
+                                                <div class="cart-total">
+                                                    <p>Total:<span class="redflag"> 0.00</span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="cart-icon"
                                             style="cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                             <img src="../assets/image/cart.png" alt="Cart" style="display: block;">
                                             <p class="kanit-Regular"
                                                 style="color: black; margin: 0px; text-align: center; white-space: nowrap; font-weight:500">
-                                                Cart</p>
-                                        </div><span
-                                            class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-1r81tyw"></span>
-                                    </span></div>
+                                                Cart
+                                            </p>
+                                        </div>
+
+                                        <span
+                                            class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-qxzn03 countCart">0</span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1701,6 +1744,8 @@
 
     <script src="../assets/js/service-method.js"></script>
     <script src="./index.js"></script>
+    <script src="../assets/js/addCart.js"></script>
+
 </body>
 
 </html>

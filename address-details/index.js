@@ -88,7 +88,9 @@ if (window.matchMedia("(max-width: 600px)").matches) {
       sessionStorage.setItem("addresses", JSON.stringify(addresses));
       sessionStorage.removeItem("selectedLocation");
       sessionStorage.removeItem("editAddress");
+      sessionStorage.setItem("success",true);
 
+      
       window.location.href = "../addresses";
     });
   }
@@ -204,6 +206,7 @@ if (window.matchMedia("(max-width: 600px)").matches) {
       }
 
       sessionStorage.setItem("addresses", JSON.stringify(addresses));
+      sessionStorage.setItem("success",true);
       sessionStorage.removeItem("selectedLocation");
       sessionStorage.removeItem("editAddress");
 
