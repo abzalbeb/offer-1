@@ -59,7 +59,7 @@
 } */
 @media (max-width:600px) {
     .store-map{
-    width: 90% !important;
+    width: 100% !important;
 }
     #mobileChooseContainer{
         display: block !important;

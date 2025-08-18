@@ -12,6 +12,7 @@
     <title>Domino's Pizza</title>
      <link href="../assets/css/main.f30fce83.css" rel="stylesheet">
       <link rel="stylesheet" href="../assets/css/terms-main.css">
+      <link rel="stylesheet" href="../assets/css/addCart.css">
         <style data-jss="" data-meta="makeStyles">
             .jss1 {
                 padding: 30px 75px 20px 75px;
@@ -1374,16 +1375,57 @@
                                             </div>
                                         </div>
                                     </div>
-                                <div class="MuiStack-root css-16mqrq1"><span class="MuiBadge-root css-1afh8op">
-                                        <div
+                                <div class="MuiStack-root css-16mqrq1 " aria-labelledby=":r2p"
+                                    style="position: relative;">
+
+                                    <span class="MuiBadge-root css-1afh8op">
+
+                                        <div class="cart-popup" style="display: none;">
+                                            <div class="triangle"></div>
+                                            <div class="cart-popup-img"
+                                                style="text-align: center; margin-bottom: 10px;">
+                                                <img src="https://dominospizza.ge/static/media/empty_cart.ce51a99a8179668c0c85.png"
+                                                    alt="Empty Cart">
+                                            </div>
+                                            <div class="cart-item-map-container" style="display: none;">
+                                                <div class="item-card-container" style="display:block !important">
+                                                    <div class="img-cart-item">
+                                                        <img src="" alt="">
+                                                    </div>
+                                                    <div class="card-text-info-item">
+                                                        <p></p>
+                                                        <span></span>
+                                                    </div>
+                                                    <div class="card-price-item">
+                                                        <p class=" fs-18 text-red redflag" style="font-size: 15px;">
+                                                            <b></b>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="cart-order-container-btn">
+                                                <div class="view-btn"><button class="view-cart-btn">VIEW CART</button>
+                                                </div>
+                                                <div class="cart-total">
+                                                    <p>Total:<span class="redflag"> 0.00</span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="cart-icon"
                                             style="cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                             <img src="../assets/image/cart.png" alt="Cart" style="display: block;">
                                             <p class="kanit-Regular"
                                                 style="color: black; margin: 0px; text-align: center; white-space: nowrap; font-weight:500">
-                                                Cart</p>
-                                        </div><span
-                                            class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-1r81tyw"></span>
-                                    </span></div>
+                                                Cart
+                                            </p>
+                                        </div>
+
+                                        <span
+                                            class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-qxzn03 countCart">0</span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1784,7 +1826,7 @@
                             d="m19.52,0C8.74,0,0,8.74,0,19.52s8.74,19.52,19.52,19.52h34.73c5.83,0,11,3.73,12.84,9.26l64.35,193.08c2.86,8.57,3.22,17.8,1.03,26.57l-5.3,21.23c-7.77,31.1,16.43,62.14,48.49,62.14h234.21c10.78,0,19.52-8.74,19.52-19.52s-8.74-19.52-19.52-19.52h-234.21c-7.6,0-12.48-6.24-10.64-13.61l4-15.96c1.39-5.56,6.39-9.47,12.13-9.47h209.2c8.4,0,15.87-5.37,18.53-13.34l52.03-156.14c4.22-12.64-5.2-25.7-18.53-25.69H127.93c-5.83,0-11-3.73-12.84-9.26l-18.49-55.47C93.94,5.37,86.47,0,78.07,0H19.52Zm136.62,370.83c-21.56,0-39.03,17.48-39.03,39.03s17.48,39.03,39.03,39.03,39.03-17.48,39.03-39.03-17.48-39.03-39.03-39.03Zm234.21,0c-21.56,0-39.03,17.48-39.03,39.03s17.48,39.03,39.03,39.03,39.03-17.48,39.03-39.03-17.48-39.03-39.03-39.03Z">
                         </path>
                     </svg><span
-                        class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-qxzn03">2</span></span>
+                        class="MuiBadge-badge MuiBadge-standard MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-qxzn03 countCartMobile">0</span></span>
             </div>
         </div>
 
@@ -1938,6 +1980,7 @@
     </div>
 
     <script src="../assets/js/terms-main.js"></script>
+    <script src="../assets/js/addCart.js"></script>
     
 </body>
 
