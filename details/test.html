@@ -2257,7 +2257,7 @@
                                             <div
                                                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-md-3 css-jtl0kq">
                                                 <div style="position: relative;">
-                                                    <div class="pizza_size_select" style="border-radius: 100%; padding: 8px;">
+                                                    <div class="pizza_size_select" data-price="18.90" data-aksiya-price="28.90" style="border-radius: 100%; padding: 8px;">
                                                         <div style="mix-blend-mode: darken;">
                                                             <div class="pointer"><img
                                                                     src="https://deykvccewcmn1.cloudfront.net/20240831205841410_chillychicken.webp"
@@ -2279,7 +2279,7 @@
                                             <div
                                                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-md-3.5 css-lwjtcj">
                                                 <div style="position: relative;">
-                                                    <div class="pizza_size_select vibor_pizza" 
+                                                    <div class="pizza_size_select vibor_pizza" data-price="30.90" data-aksiya-price="40.90"
                                                         style=" border-radius: 100%; padding: 8px;">
                                                         <div style="mix-blend-mode: darken;">
                                                             <div class="pointer"><img
@@ -2307,7 +2307,7 @@
                                             <div
                                                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-md-4 css-1udb513">
                                                 <div style="position: relative;">
-                                                    <div class="pizza_size_select" style="border-radius: 100%; padding: 8px;">
+                                                    <div class="pizza_size_select" data-price="43.90" data-aksiya-price="53.90" style="border-radius: 100%; padding: 8px;">
                                                         <div style="mix-blend-mode: darken;">
                                                             <div class="pointer"><img
                                                                     src="https://deykvccewcmn1.cloudfront.net/20240831205841410_chillychicken.webp"
@@ -2345,7 +2345,7 @@
                                                         style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 22px;">
                                                         <div
                                                             class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-5.7 MuiGrid-grid-xl-3 css-6yx547">
-                                                            <div class="for_vibor  vibor_active">
+                                                            <div class="for_vibor  vibor_active pitsa_turi" data-price="0">
                                                                 <div style="position: absolute; right: 10px;"> <svg
                                                                         class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-caiwz"
                                                                         focusable="false" aria-hidden="true"
@@ -2372,7 +2372,7 @@
                                                         </div>
                                                         <div
                                                             class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-5.7 MuiGrid-grid-xl-3 css-6yx547">
-                                                            <div class="for_vibor">
+                                                            <div class="for_vibor pitsa_turi" data-price="1.5">
                                                                 <div style="position: absolute; right: 10px;"> <svg
                                                                         class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-caiwz"
                                                                         focusable="false" aria-hidden="true"
@@ -3509,572 +3509,636 @@
 
     <script src="./script.js"></script>
 
-    <script>
-        // Global variables
-        const maxSelection = 5;
-        const selectedItemsMap = new Map();
-        let count = 1;
-        let product = JSON.parse(localStorage.getItem("selectedProduct")) || {};
-        let lastOrderId = parseInt(localStorage.getItem("lastOrderId")) || 0;
-        // localStorage.setItem("edit", "true");
+        <script>
+            // Global variables
+            const maxSelection = 5;
+            const selectedItemsMap = new Map();
+            let count = 1;
+            let product = JSON.parse(localStorage.getItem("selectedProduct")) || {};
+            let lastOrderId = parseInt(localStorage.getItem("lastOrderId")) || 0;
+            // localStorage.setItem("edit", "true");
 
-        if (localStorage.getItem("edit") == "true") {
-            for (let i = 0; i < document.querySelectorAll(".addToCart_btn").length; i++) {
-                document.querySelectorAll(".addToCart_btn")[i].innerHTML = "Update cart"
+            if (localStorage.getItem("edit") == "true") {
+                for (let i = 0; i < document.querySelectorAll(".addToCart_btn").length; i++) {
+                    document.querySelectorAll(".addToCart_btn")[i].innerHTML = "Update cart"
 
-            }
-        }
-
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function () {
-            initializePage();
-
-            // Faqat edit rejimida yoki yangi buyurtma bo'lsa yuklash
-            if (localStorage.getItem("edit") === "true") {
-                const editId = parseInt(localStorage.getItem("for_id")) || 0;
-                if (editId > 0) {
-                    loadExistingOrder(editId);
                 }
             }
-        });
 
-        function initializePage() {
-            // Display product info
-            if (product) {
-                document.getElementById("title").textContent = product.title || '';
-                document.getElementById("img").src = product.img || '';
-                document.getElementById("description").textContent = product.description || '';
-                document.getElementById("price").textContent = (parseFloat(product.price) || 0).toFixed(2) + "₾";
-                document.getElementById("aksiyaPrice").textContent = (parseFloat(product.aksiyaPrice) || 0).toFixed(2) + "₾";
-            }
+            // Initialize when page loads
+            document.addEventListener('DOMContentLoaded', function () {
+                initializePage();
 
-            // Initialize pizza blocks
-            document.querySelectorAll('.pizza-block').forEach(block => {
-                const id = block.dataset.id;
-                selectedItemsMap.set(id, new Set());
-
-                const bonusCards = block.querySelector(`#bonus_cards_${id}`);
-                const selectedCard = block.querySelector(`#selected_card_${id}`);
-                const selectChoose = block.querySelector(`#select_choose_${id}`);
-                const pizzaExtra = block.querySelector('.pizza_extra');
-
-                if (bonusCards) {
-                    bonusCards.querySelectorAll('.bonus_card').forEach(card => {
-                        card.addEventListener('click', function () {
-                            selectPizza(id, card);
-                        });
-                    });
-                }
-            });
-
-            // Initialize ingredient selection
-            document.querySelectorAll('[class^="for_vibor_"]').forEach(item => {
-                item.addEventListener('click', function () {
-                    const pizzaBlock = this.closest('.pizza-block');
-                    if (!pizzaBlock) return;
-
-                    const pizzaId = pizzaBlock.dataset.id;
-                    const selectedItems = selectedItemsMap.get(pizzaId);
-                    const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
-
-                    const title = this.dataset.title;
-                    const price = this.dataset.price;
-                    const key = title + price;
-
-                    if (selectedItems.has(key)) {
-                        removeIngredient(pizzaId, key);
-                        return;
-                    }
-
-                    if (selectedItems.size >= maxSelection) {
-                        alert(`Siz faqat ${maxSelection} ta ingredient tanlashingiz mumkin!`);
-                        return;
-                    }
-
-                    selectedItems.add(key);
-                    this.classList.add('for_active_1');
-
-                    const ingredientDiv = document.createElement('div');
-                    ingredientDiv.dataset.key = key;
-                    ingredientDiv.style.cssText = "width: 350px; display: flex; justify-content: space-between; margin-bottom: 5px;";
-
-                    ingredientDiv.innerHTML = `
-                <div style="display: flex; justify-content: space-between; flex: 1 1 0%;">
-                    <span class="fs-13 for_ingradient_title">${title}</span>
-                    <span class="fs-13 for_ingradient_price">${price}</span>
-                </div>
-                <div>
-                    <svg class="delete-icon" viewBox="0 0 24 24" style="cursor:pointer; width: 20px; height: 20px;">
-                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM8 9h8v10H8zm7.5-5-1-1h-5l-1 1H5v2h14V4z"></path>
-                    </svg>
-                </div>
-            `;
-
-                    ingredientDiv.querySelector('.delete-icon').addEventListener('click', () => {
-                        removeIngredient(pizzaId, key);
-                    });
-
-                    container.appendChild(ingredientDiv);
-                });
-            });
-
-            // Quantity controls
-            document.getElementById("plus").addEventListener("click", () => {
-                count++;
-                updateQuantity();
-            });
-
-            document.getElementById("minus").addEventListener("click", () => {
-                if (count > 1) {
-                    count--;
-                    updateQuantity();
-                }
-            });
-
-            // Add to cart button
-            document.querySelectorAll('.addToCart_btn').forEach(btn => {
-                btn.addEventListener('click', addToCart);
-            });
-        }
-
-        function loadExistingOrder(orderId) {
-            const orders = JSON.parse(localStorage.getItem('orders')) || [];
-            if (!product || !product.title) return;
-
-            // Find the order with matching ID
-            const existingOrder = orders.find(order => order.id === orderId);
-
-            if (existingOrder) {
-                // Update product info
-                product = {
-                    title: existingOrder.title,
-                    img: existingOrder.img,
-                    description: existingOrder.description,
-                    price: parseFloat(existingOrder.price),
-                    aksiyaPrice: parseFloat(existingOrder.aksiyaPrice)
-                };
-
-                // Update count
-                count = existingOrder.quantity;
-                updateQuantity();
-
-                // Load all pizzas from the order
-                existingOrder.pizzas.forEach((pizza, index) => {
-                    const block = document.querySelector(`.pizza-block[data-id="${index}"]`);
-                    if (block) {
-                        // Find the card that matches this pizza
-                        const cards = block.querySelectorAll('.bonus_card');
-                        let matchingCard = null;
-
-                        cards.forEach(card => {
-                            if (card.querySelector('h2').textContent === pizza.title) {
-                                matchingCard = card;
-                            }
-                        });
-
-                        if (matchingCard) {
-                            // Select this pizza
-                            selectPizza(index, matchingCard);
-
-                            // Load ingredients
-                            if (pizza.ingredients && pizza.ingredients.length > 0) {
-                                loadIngredients(index, pizza.ingredients);
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        function selectPizza(id, card) {
-            const bonusCards = document.querySelector(`#bonus_cards_${id}`);
-            const selectedCard = document.querySelector(`#selected_card_${id}`);
-            const selectChoose = document.querySelector(`#select_choose_${id}`);
-            const pizzaExtra = document.querySelector(`.pizza-block[data-id="${id}"] .pizza_extra`);
-
-            if (bonusCards) bonusCards.classList.remove('bonus_cards_active');
-            if (selectChoose) selectChoose.style.display = 'none';
-            if (selectedCard) selectedCard.style.display = 'flex';
-            if (pizzaExtra) pizzaExtra.style.display = 'block';
-
-            // Update selected pizza info
-            if (selectedCard) {
-                selectedCard.querySelector(`#bonus_img_${id}`).src = card.querySelector('img').src;
-                selectedCard.querySelector(`#bonus_texts_${id} h2`).textContent = card.querySelector('h2').textContent;
-                selectedCard.querySelector(`#bonus_texts_${id} p`).textContent = card.querySelector('p').textContent;
-                selectedCard.querySelector(`#selected_card_${id} .for_red_count`).textContent = card.querySelector('.for_red_count').textContent;
-            }
-
-            // Clear previous selections for this pizza only
-            selectedItemsMap.set(id, new Set());
-            const container = document.querySelector(`#ingredient_cards_${id}`);
-            if (container) container.innerHTML = '';
-
-            document.querySelectorAll(`.pizza-block[data-id="${id}"] .for_vibor_${id}.for_active_1`).forEach(el => {
-                el.classList.remove('for_active_1');
-            });
-        }
-
-        function loadIngredients(pizzaId, ingredients) {
-            if (!ingredients || !ingredients.length) return;
-
-            const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
-            if (!container) return;
-
-            container.innerHTML = '';
-            selectedItemsMap.set(pizzaId, new Set());
-
-            // Barcha ingredientlarni yuklash
-            let ingredientsHTML = '';
-
-            ingredients.forEach(ing => {
-                const key = ing.name + '+' + ing.price + '₾';
-                selectedItemsMap.get(pizzaId).add(key);
-
-                // Tegishli tugmani faollashtirish
-                document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}`).forEach(btn => {
-                    if (btn.dataset.title === ing.name && btn.dataset.price === ing.price.toString()) {
-                        btn.classList.add('for_active_1');
-                    }
-                });
-
-                // HTML qismini qo'shib borish
-                ingredientsHTML += `
-            <div data-key="${key}" style="width: 350px; display: flex; justify-content: space-between; margin-bottom: 5px;">
-                <div style="display: flex; justify-content: space-between; flex: 1 1 0%;">
-                    <span class="fs-13 for_ingradient_title">${ing.name}</span>
-                    <span class="fs-13 for_ingradient_price">+${ing.price}₾</span>
-                </div>
-                <div>
-                    <svg class="delete-icon" viewBox="0 0 24 24" style="cursor:pointer; width: 20px; height: 20px;">
-                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM8 9h8v10H8zm7.5-5-1-1h-5l-1 1H5v2h14V4z"></path>
-                    </svg>
-                </div>
-            </div>
-        `;
-            });
-
-            // Barcha ingredientlarni bir vaqtda qo'shish
-            container.innerHTML = ingredientsHTML;
-
-            // O'chirish tugmalariga hodisa qo'shish
-            container.querySelectorAll('.delete-icon').forEach(icon => {
-                const key = icon.closest('[data-key]').dataset.key;
-                icon.addEventListener('click', () => {
-                    removeIngredient(pizzaId, key);
-                });
-            });
-        }
-
-        function removeIngredient(pizzaId, key) {
-            const selectedItems = selectedItemsMap.get(pizzaId);
-            selectedItems.delete(key);
-
-            document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}`).forEach(v => {
-                if ((v.dataset.title + '+' + v.dataset.price + '₾') === key) {
-                    v.classList.remove('for_active_1');
-                }
-            });
-
-            const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
-            if (container) {
-                container.querySelector(`[data-key="${key}"]`)?.remove();
-            }
-
-            // Agar edit rejimida bo'lsa, localStorage'dan ham o'chiramiz
-            if (localStorage.getItem("edit") === "true") {
-                const editId = parseInt(localStorage.getItem("for_id")) || 0;
-                if (editId > 0) {
-                    const orders = JSON.parse(localStorage.getItem('orders')) || [];
-                    const orderIndex = orders.findIndex(order => order.id === editId);
-
-                    if (orderIndex !== -1) {
-                        // Pizza va ingredientni topamiz
-                        const pizzaIndex = parseInt(pizzaId); // pizzaId ni raqamga aylantiramiz
-                        if (orders[orderIndex].pizzas && orders[orderIndex].pizzas[pizzaIndex]) {
-                            // Ingredientni o'chiramiz
-                            const [name, priceStr] = key.split('+');
-                            const price = parseFloat(priceStr.replace('₾', ''));
-
-                            orders[orderIndex].pizzas[pizzaIndex].ingredients =
-                                orders[orderIndex].pizzas[pizzaIndex].ingredients.filter(
-                                    ing => !(ing.name === name && ing.price === price)
-                                );
-
-                            // Yangilangan buyurtmani saqlaymiz
-                            localStorage.setItem('orders', JSON.stringify(orders));
-                        }
+                // Faqat edit rejimida yoki yangi buyurtma bo'lsa yuklash
+                if (localStorage.getItem("edit") === "true") {
+                    const editId = parseInt(localStorage.getItem("for_id")) || 0;
+                    if (editId > 0) {
+                        loadExistingOrder(editId);
                     }
                 }
-            }
-        }
-        function updateQuantity() {
-            document.getElementById("count").textContent = count;
-            document.getElementById("price").textContent = (product.price * count).toFixed(2) + "₾";
-            document.getElementById("aksiyaPrice").textContent = (product.aksiyaPrice * count).toFixed(2) + "₾";
-        }
-
-        function addToCart() {
-            if (!product || !product.title) {
-                alert('Iltimos, avval asosiy mahsulotni tanlang!');
-                return;
-            }
-
-            // Generate new unique ID
-            const newOrderId = lastOrderId + 1;
-            lastOrderId = newOrderId;
-            localStorage.setItem("lastOrderId", lastOrderId.toString());
-
-            const newOrder = {
-                ...product,
-                id: newOrderId,
-                quantity: count,
-                pizzas: [],
-                totalPrice: (product.aksiyaPrice * count).toFixed(2) + "₾",
-                date: new Date().toISOString()
-            };
-
-            // Reset all error borders first
-            document.querySelectorAll('.pizza-block').forEach(block => {
-                const id = block.dataset.id;
-                const selectChoose = document.querySelector(`#select_choose_${id}`);
-                if (selectChoose) {
-                    selectChoose.style.border = 'none';
-                }
             });
 
-            // Check if both pizzas are selected
-            let selectedPizzaCount = 0;
-            document.querySelectorAll('.pizza-block').forEach(block => {
-                const id = block.dataset.id;
-                const selectedCard = block.querySelector(`#selected_card_${id}`);
-
-                if (selectedCard && selectedCard.style.display === 'flex') {
-                    selectedPizzaCount++;
+            function initializePage() {
+                // Display product info
+                if (product) {
+                    document.getElementById("title").textContent = product.title || '';
+                    document.getElementById("img").src = product.img || '';
+                    document.getElementById("description").textContent = product.description || '';
+                    document.getElementById("price").textContent = (parseFloat(product.price) || 0).toFixed(2) + "₾";
+                    document.getElementById("aksiyaPrice").textContent = (parseFloat(product.aksiyaPrice) || 0).toFixed(2) + "₾";
                 }
-            });
 
-            // If not both pizzas are selected
-            if (selectedPizzaCount < localStorage.getItem("ingredient")) {
-                // Highlight unselected pizzas
+                // Initialize pizza blocks
                 document.querySelectorAll('.pizza-block').forEach(block => {
                     const id = block.dataset.id;
-                    const selectedCard = block.querySelector(`#selected_card_${id}`);
+                    selectedItemsMap.set(id, new Set());
 
-                    if (!selectedCard || selectedCard.style.display !== 'flex') {
-                        const selectChoose = document.querySelector(`#select_choose_${id}`);
-                        if (selectChoose) {
-                            selectChoose.style.border = '1px solid red';
-                        }
+                    const bonusCards = block.querySelector(`#bonus_cards_${id}`);
+                    const selectedCard = block.querySelector(`#selected_card_${id}`);
+                    const selectChoose = block.querySelector(`#select_choose_${id}`);
+                    const pizzaExtra = block.querySelector('.pizza_extra');
+
+                    if (bonusCards) {
+                        bonusCards.querySelectorAll('.bonus_card').forEach(card => {
+                            card.addEventListener('click', function () {
+                                selectPizza(id, card);
+                            });
+                        });
                     }
                 });
 
-                return;
+                // Initialize ingredient selection
+            document.querySelectorAll('[class^="for_vibor_"]').forEach(item => {
+    item.addEventListener('click', function() {
+        const pizzaId = this.closest('.pizza-block').dataset.id;
+        const selectedItems = selectedItemsMap.get(pizzaId);
+        const price = parseFloat(this.dataset.price);
+        const key = `${this.dataset.title}_${price}`;
+
+        if (selectedItems.has(key)) {
+        // Ingredientni olib tashlash
+        product.price -= price;
+        product.aksiyaPrice -= price;
+        removeIngredient(pizzaId, key);
+        } else {
+        // Yangi ingredient qo'shish
+        if (selectedItems.size >= maxSelection) {
+            alert(`Siz faqat ${maxSelection} ta ingredient tanlashingiz mumkin!`);
+            return;
+        }
+        product.price += price;
+        product.aksiyaPrice += price;
+        selectedItems.add(key);
+        this.classList.add('for_active_1');
+        
+        // Ingredientni ko'rsatish
+        const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
+        const ingredientDiv = document.createElement('div');
+        ingredientDiv.dataset.key = key;
+        ingredientDiv.style="display:flex"
+        ingredientDiv.innerHTML = `
+            <div style="display:flex;justify-content:space-between;width:350px">
+            <span>${this.dataset.title}</span>
+            <span>+${price}₾</span>
+            </div>
+            <svg class="delete-icon" viewBox="0 0 24 24" style="cursor:pointer;width:20px;height:20px">
+            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM8 9h8v10H8zm7.5-5-1-1h-5l-1 1H5v2h14V4z"></path>
+            </svg>
+        `;
+        
+        ingredientDiv.querySelector('.delete-icon').addEventListener('click', () => {
+            product.price -= price;
+            product.aksiyaPrice -= price;
+            removeIngredient(pizzaId, key);
+        });
+        
+        container.appendChild(ingredientDiv);
+        }
+        
+        updatePriceDisplay();
+    });
+    });
+   
+   
+    function updateTotalPrice() {
+        let totalPrice = parseFloat(product.price) * count;
+        let totalAksiyaPrice = parseFloat(product.aksiyaPrice) * count;
+
+        // Add ingredient prices
+        selectedItemsMap.forEach((ingredients) => {
+            ingredients.forEach(key => {
+                const priceMatch = key.match(/\d+\.?\d*/);
+                if (priceMatch) {
+                    const price = parseFloat(priceMatch[0]);
+                    totalPrice += price;
+                    totalAksiyaPrice += price;
+                }
+            });
+        });
+
+        document.getElementById("price").textContent = totalPrice.toFixed(2) + "₾";
+        document.getElementById("aksiyaPrice").textContent = totalAksiyaPrice.toFixed(2) + "₾";
+    }
+                // Quantity controls
+                document.getElementById("plus").addEventListener("click", () => {
+                    count++;
+                    updateQuantity();
+                });
+
+                document.getElementById("minus").addEventListener("click", () => {
+                    if (count > 1) {
+                        count--;
+                        updateQuantity();
+                    }
+                });
+
+                // Add to cart button
+                document.querySelectorAll('.addToCart_btn').forEach(btn => {
+                    btn.addEventListener('click', addToCart);
+                });
             }
 
-            // Collect selected pizzas (both are selected at this point)
-            document.querySelectorAll('.pizza-block').forEach(block => {
-                const id = block.dataset.id;
-                const selectedCard = block.querySelector(`#selected_card_${id}`);
+            function loadExistingOrder(orderId) {
+                const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                if (!product || !product.title) return;
 
-                
-                    const pizza = {
-                    title: document.querySelector(`#bonus_texts_${id} h2`).textContent,
-                    price: parseFloat(document.querySelector(`#selected_card_${id} .for_red_count`).textContent.replace(/[^\d.]/g, '')),
-                    ingredients: []
-                };
-                
+                // Find the order with matching ID
+                const existingOrder = orders.find(order => order.id === orderId);
 
-                const selectedItems = selectedItemsMap.get(id) || new Set();
-                selectedItems.forEach(key => {
-                    const priceMatch = key.match(/\+\d+\.?\d*/);
-                    const price = priceMatch ? parseFloat(priceMatch[0].replace('+', '')) : 0;
-                    const title = key.replace(/\+\d+\.?\d*\s?₾?/g, '').trim();
+                if (existingOrder) {
+                    // Update product info
+                    product = {
+                        title: existingOrder.title,
+                        img: existingOrder.img,
+                        description: existingOrder.description,
+                        price: parseFloat(existingOrder.price),
+                        aksiyaPrice: parseFloat(existingOrder.aksiyaPrice)
+                    };
 
-                    pizza.ingredients.push({
-                        name: title,
-                        price: price
+                    // Update count
+                    count = existingOrder.quantity;
+                    updateQuantity();
+
+                    // Load all pizzas from the order
+                    existingOrder.pizzas.forEach((pizza, index) => {
+                        const block = document.querySelector(`.pizza-block[data-id="${index}"]`);
+                        if (block) {
+                            // Find the card that matches this pizza
+                            const cards = block.querySelectorAll('.bonus_card');
+                            let matchingCard = null;
+
+                            cards.forEach(card => {
+                                if (card.querySelector('h2').textContent === pizza.title) {
+                                    matchingCard = card;
+                                }
+                            });
+
+                            if (matchingCard) {
+                                // Select this pizza
+                                selectPizza(index, matchingCard);
+
+                                // Load ingredients
+                                if (pizza.ingredients && pizza.ingredients.length > 0) {
+                                    loadIngredients(index, pizza.ingredients);
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            function selectPizza(id, card) {
+                const bonusCards = document.querySelector(`#bonus_cards_${id}`);
+                const selectedCard = document.querySelector(`#selected_card_${id}`);
+                const selectChoose = document.querySelector(`#select_choose_${id}`);
+                const pizzaExtra = document.querySelector(`.pizza-block[data-id="${id}"] .pizza_extra`);
+
+                if (bonusCards) bonusCards.classList.remove('bonus_cards_active');
+                if (selectChoose) selectChoose.style.display = 'none';
+                if (selectedCard) selectedCard.style.display = 'flex';
+                if (pizzaExtra) pizzaExtra.style.display = 'block';
+
+                // Update selected pizza info
+                if (selectedCard) {
+                    selectedCard.querySelector(`#bonus_img_${id}`).src = card.querySelector('img').src;
+                    selectedCard.querySelector(`#bonus_texts_${id} h2`).textContent = card.querySelector('h2').textContent;
+                    selectedCard.querySelector(`#bonus_texts_${id} p`).textContent = card.querySelector('p').textContent;
+                    selectedCard.querySelector(`#selected_card_${id} .for_red_count`).textContent = card.querySelector('.for_red_count').textContent;
+                }
+
+                // Clear previous selections for this pizza only
+                selectedItemsMap.set(id, new Set());
+                const container = document.querySelector(`#ingredient_cards_${id}`);
+                if (container) container.innerHTML = '';
+
+                document.querySelectorAll(`.pizza-block[data-id="${id}"] .for_vibor_${id}.for_active_1`).forEach(el => {
+                    el.classList.remove('for_active_1');
+                });
+            }
+
+            function loadIngredients(pizzaId, ingredients) {
+                if (!ingredients || !ingredients.length) return;
+
+                const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
+                if (!container) return;
+
+                container.innerHTML = '';
+                selectedItemsMap.set(pizzaId, new Set());
+
+                // Barcha ingredientlarni yuklash
+                let ingredientsHTML = '';
+
+                ingredients.forEach(ing => {
+                    const key = ing.name + '+' + ing.price + '₾';
+                    selectedItemsMap.get(pizzaId).add(key);
+
+                    // Tegishli tugmani faollashtirish
+                    document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}`).forEach(btn => {
+                        if (btn.dataset.title === ing.name && btn.dataset.price === ing.price.toString()) {
+                            btn.classList.add('for_active_1');
+                        }
+                    });
+
+                    // HTML qismini qo'shib borish
+                    ingredientsHTML += `
+                <div data-key="${key}" style="width: 350px; display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <div style="display: flex; justify-content: space-between; flex: 1 1 0%;">
+                        <span class="fs-13 for_ingradient_title">${ing.name}</span>
+                        <span class="fs-13 for_ingradient_price">+${ing.price}₾</span>
+                    </div>
+                    <div>
+                        <svg class="delete-icon" viewBox="0 0 24 24" style="cursor:pointer; width: 20px; height: 20px;">
+                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM8 9h8v10H8zm7.5-5-1-1h-5l-1 1H5v2h14V4z"></path>
+                        </svg>
+                    </div>
+                </div>
+            `;
+                });
+
+                // Barcha ingredientlarni bir vaqtda qo'shish
+                container.innerHTML = ingredientsHTML;
+
+                // O'chirish tugmalariga hodisa qo'shish
+                container.querySelectorAll('.delete-icon').forEach(icon => {
+                    const key = icon.closest('[data-key]').dataset.key;
+                    icon.addEventListener('click', () => {
+                        removeIngredient(pizzaId, key);
+                    });
+                });
+            }
+
+            function removeIngredient(pizzaId, key) {
+                const selectedItems = selectedItemsMap.get(pizzaId);
+                selectedItems.delete(key);
+
+                document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}`).forEach(v => {
+                    if ((v.dataset.title + '+' + v.dataset.price + '₾') === key) {
+                        v.classList.remove('for_active_1');
+                    }
+                });
+
+                const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
+                if (container) {
+                    container.querySelector(`[data-key="${key}"]`)?.remove();
+                }
+
+                // Agar edit rejimida bo'lsa, localStorage'dan ham o'chiramiz
+                if (localStorage.getItem("edit") === "true") {
+                    const editId = parseInt(localStorage.getItem("for_id")) || 0;
+                    if (editId > 0) {
+                        const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                        const orderIndex = orders.findIndex(order => order.id === editId);
+
+                        if (orderIndex !== -1) {
+                            // Pizza va ingredientni topamiz
+                            const pizzaIndex = parseInt(pizzaId); // pizzaId ni raqamga aylantiramiz
+                            if (orders[orderIndex].pizzas && orders[orderIndex].pizzas[pizzaIndex]) {
+                                // Ingredientni o'chiramiz
+                                const [name, priceStr] = key.split('+');
+                                const price = parseFloat(priceStr.replace('₾', ''));
+
+                                orders[orderIndex].pizzas[pizzaIndex].ingredients =
+                                    orders[orderIndex].pizzas[pizzaIndex].ingredients.filter(
+                                        ing => !(ing.name === name && ing.price === price)
+                                    );
+
+                                // Yangilangan buyurtmani saqlaymiz
+                                localStorage.setItem('orders', JSON.stringify(orders));
+                            }
+                        }
+                    }
+                }
+            }
+
+            
+            
+            function updateQuantity() {
+                document.getElementById("count").textContent = count;
+                document.getElementById("price").textContent = (product.price * count).toFixed(2) + "₾";
+                document.getElementById("aksiyaPrice").textContent = (product.aksiyaPrice * count).toFixed(2) + "₾";
+            }
+
+            function addToCart() {
+  if (!product || !product.title) {
+    alert('Iltimos, avval asosiy mahsulotni tanlang!');
+    return;
+  }
+
+  const orders = JSON.parse(localStorage.getItem('orders')) || [];
+  const newOrderId = (parseInt(localStorage.getItem("lastOrderId")) || 0) + 1;
+
+  const newOrder = {
+    ...product,
+    id: newOrderId,
+    quantity: count,
+    pizzas: [],
+    ingredients: [],
+    totalPrice: (product.aksiyaPrice * count).toFixed(2) + "₾",
+    date: new Date().toISOString()
+  };
+
+  // === Collect pizzas ===
+  document.querySelectorAll('.pizza-block').forEach(block => {
+    const id = block.dataset.id;
+    const selectedCard = block.querySelector(`#selected_card_${id}`);
+
+    if (localStorage.getItem("ingredient") != "0") {
+      if (selectedCard && selectedCard.style.display === 'flex') {
+        const pizza = {
+          title: document.querySelector(`#bonus_texts_${id} h2`).textContent,
+          price: parseFloat(document.querySelector(`#selected_card_${id} .for_red_count`).textContent.replace(/[^\d.]/g, '')),
+          ingredients: []
+        };
+
+        const selectedItems = selectedItemsMap.get(id) || new Set();
+        selectedItems.forEach(key => {
+          const priceMatch = key.match(/\+\d+\.?\d*/);
+          const price = priceMatch ? parseFloat(priceMatch[0].replace('+', '')) : 0;
+          const title = key.replace(/\+\d+\.?\d*\s?₾?/g, '').trim();
+
+          pizza.ingredients.push({ name: title, price: price });
+        });
+
+        newOrder.pizzas.push(pizza);
+      }
+    } else {
+      const selectedItems = selectedItemsMap.get(id) || new Set();
+      selectedItems.forEach(key => {
+        const priceMatch = key.match(/\+\d+\.?\d*/);
+        const price = priceMatch ? parseFloat(priceMatch[0].replace('+', '')) : 0;
+        const title = key.replace(/\+\d+\.?\d*\s?₾?/g, '').trim();
+
+        newOrder.ingredients.push({ name: title, price: price });
+      });
+    }
+  });
+
+  // === Edit rejimi ===
+  if (localStorage.getItem("edit") === "true") {
+    const editId = parseInt(localStorage.getItem("for_id")) || 0;
+    if (editId > 0) {
+      const index = orders.findIndex(order => order.id === editId);
+      if (index !== -1) {
+        const oldOrder = orders[index];
+
+        // Pizza update
+        oldOrder.pizzas.forEach((pizza, i) => {
+          if (newOrder.pizzas[i]) {
+            // ingredient bo‘sh bo‘lmasa yangilaymiz, bo‘lmasa eski qolsin
+            pizza.ingredients = newOrder.pizzas[i].ingredients.length > 0 
+              ? newOrder.pizzas[i].ingredients 
+              : pizza.ingredients;
+            pizza.price = newOrder.pizzas[i].price || pizza.price;
+          }
+        });
+
+        // Ingredient only update
+        if (newOrder.ingredients.length > 0) oldOrder.ingredients = newOrder.ingredients;
+
+        oldOrder.quantity = newOrder.quantity || oldOrder.quantity;
+        oldOrder.totalPrice = newOrder.totalPrice || oldOrder.totalPrice;
+        oldOrder.date = newOrder.date;
+
+        orders[index] = oldOrder;
+      }
+    }
+    localStorage.removeItem("edit");
+    localStorage.removeItem("for_id");
+  } else {
+    orders.push(newOrder);
+    localStorage.setItem("lastOrderId", newOrderId);
+  }
+
+  localStorage.setItem('orders', JSON.stringify(orders));
+  updateCartDisplay();
+  alert(`${count} ta mahsulot savatga qo'shildi!`);
+  setTimeout(() => window.location.href = "cart.html", 1000);
+}
+
+            function updateCartDisplay() {
+                const cartItems = document.getElementById('cartItems');
+                if (!cartItems) return;
+
+                const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                cartItems.innerHTML = '';
+
+                if (orders.length === 0) {
+                    cartItems.innerHTML = '<p class="empty-cart">Savat bo\'sh</p>';
+                    return;
+                }
+
+                // Sort orders by date (newest first)
+                orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                orders.forEach((order) => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'cart-item';
+                    itemDiv.innerHTML = `
+                <div class="cart-item-header">
+                    <img src="${order.img}" alt="${order.title}" width="50">
+                    <div class="cart-item-info">
+                        <h3>${order.title} (x${order.quantity})</h3>
+                        <p class="item-description">${order.description}</p>
+                        <p class="item-id">Buyurtma ID: ${order.id}</p>
+                    </div>
+                    <span class="price">${order.totalPrice}</span>
+                </div>
+                ${order.pizzas.map(pizza => `
+                    <div class="pizza-variant">
+                        <h4>${pizza.title} - ${pizza.price}₾</h4>
+                        ${pizza.ingredients.length > 0 ? `
+                            <ul class="ingredients-list">
+                                ${pizza.ingredients.map(ing => `
+                                    <li>${ing.name} +${ing.price}₾</li>
+                                `).join('')}
+                            </ul>
+                        ` : ''}
+                    </div>
+                `).join('')}
+                <div class="cart-actions">
+                    <button class="edit-btn" data-id="${order.id}">Tahrirlash</button>
+                    <button class="remove-btn" data-id="${order.id}">O'chirish</button>
+                </div>
+            `;
+                    cartItems.appendChild(itemDiv);
+                });
+
+                // Add event listeners for edit and remove buttons
+                document.querySelectorAll('.edit-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        editOrder(parseInt(this.dataset.id));
                     });
                 });
 
-                newOrder.pizzas.push(pizza);
-            });
-
-            // Continue with order processing
-            const orders = JSON.parse(localStorage.getItem('orders')) || [];
-
-            if (localStorage.getItem("edit") === "true") {
-                const editId = parseInt(localStorage.getItem("for_id")) || 0;
-                if (editId > 0) {
-                    const index = orders.findIndex(order => order.id === editId);
-                    if (index !== -1) {
-                        orders.splice(index, 1);
-                    }
-                }
-                localStorage.removeItem("edit");
-                localStorage.removeItem("for_id");
-            }
-
-            orders.push(newOrder);
-            alert(`${count} ta yangi mahsulot savatga qo'shildi! Buyurtma ID: ${newOrderId}`);
-
-            localStorage.setItem('orders', JSON.stringify(orders));
-            updateCartDisplay();
-
-            setTimeout(() => {
-                window.location.href = "cart.html";
-            }, 1000);
-        }
-        
-        function updateCartDisplay() {
-            const cartItems = document.getElementById('cartItems');
-            if (!cartItems) return;
-
-            const orders = JSON.parse(localStorage.getItem('orders')) || [];
-            cartItems.innerHTML = '';
-
-            if (orders.length === 0) {
-                cartItems.innerHTML = '<p class="empty-cart">Savat bo\'sh</p>';
-                return;
-            }
-
-            // Sort orders by date (newest first)
-            orders.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-            orders.forEach((order) => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'cart-item';
-                itemDiv.innerHTML = `
-            <div class="cart-item-header">
-                <img src="${order.img}" alt="${order.title}" width="50">
-                <div class="cart-item-info">
-                    <h3>${order.title} (x${order.quantity})</h3>
-                    <p class="item-description">${order.description}</p>
-                    <p class="item-id">Buyurtma ID: ${order.id}</p>
-                </div>
-                <span class="price">${order.totalPrice}</span>
-            </div>
-            ${order.pizzas.map(pizza => `
-                <div class="pizza-variant">
-                    <h4>${pizza.title} - ${pizza.price}₾</h4>
-                    ${pizza.ingredients.length > 0 ? `
-                        <ul class="ingredients-list">
-                            ${pizza.ingredients.map(ing => `
-                                <li>${ing.name} +${ing.price}₾</li>
-                            `).join('')}
-                        </ul>
-                    ` : ''}
-                </div>
-            `).join('')}
-            <div class="cart-actions">
-                <button class="edit-btn" data-id="${order.id}">Tahrirlash</button>
-                <button class="remove-btn" data-id="${order.id}">O'chirish</button>
-            </div>
-        `;
-                cartItems.appendChild(itemDiv);
-            });
-
-            // Add event listeners for edit and remove buttons
-            document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    editOrder(parseInt(this.dataset.id));
+                document.querySelectorAll('.remove-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        removeFromCart(parseInt(this.dataset.id));
+                    });
                 });
-            });
-
-            document.querySelectorAll('.remove-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    removeFromCart(parseInt(this.dataset.id));
-                });
-            });
-        }
-
-        function editOrder(orderId) {
-            const orders = JSON.parse(localStorage.getItem('orders')) || [];
-            const orderIndex = orders.findIndex(order => order.id === orderId);
-
-            if (orderIndex !== -1) {
-                const order = orders[orderIndex];
-
-                // Set edit flag
-                localStorage.setItem('edit', 'true');
-                localStorage.setItem('for_id', orderId.toString());
-
-                // Update product in localStorage
-                product = {
-                    title: order.title,
-                    img: order.img,
-                    description: order.description,
-                    price: parseFloat(order.price),
-                    aksiyaPrice: parseFloat(order.aksiyaPrice)
-                };
-                localStorage.setItem('selectedProduct', JSON.stringify(product));
-
-                // Refresh the page to load in edit mode
-                window.location.href = "order.html"; // Buyurtma sahifasiga yo'naltirish
             }
-        }
 
-        function removeFromCart(orderId) {
-            if (confirm('Haqiqatan ham bu buyurtmani o\'chirmoqchimisiz?')) {
+            function editOrder(orderId) {
                 const orders = JSON.parse(localStorage.getItem('orders')) || [];
-                const updatedOrders = orders.filter(order => order.id !== orderId);
+                const orderIndex = orders.findIndex(order => order.id === orderId);
 
-                localStorage.setItem('orders', JSON.stringify(updatedOrders));
-                updateCartDisplay();
-                alert('Buyurtma savatdan olib tashlandi!');
+                if (orderIndex !== -1) {
+                    const order = orders[orderIndex];
+
+                    // Set edit flag
+                    localStorage.setItem('edit', 'true');
+                    localStorage.setItem('for_id', orderId.toString());
+
+                    // Update product in localStorage
+                    product = {
+                        title: order.title,
+                        img: order.img,
+                        description: order.description,
+                        price: parseFloat(order.price),
+                        aksiyaPrice: parseFloat(order.aksiyaPrice)
+                    };
+                    localStorage.setItem('selectedProduct', JSON.stringify(product));
+
+                    // Refresh the page to load in edit mode
+                    window.location.href = "order.html"; // Buyurtma sahifasiga yo'naltirish
+                }
             }
-        }
 
-        // General functions with pizza ID parameter
-        function select_choose(id) {
-            const element = document.querySelector(`#bonus_cards_${id}`);
-            if (element) element.classList.toggle('bonus_cards_active');
-        }
+            function removeFromCart(orderId) {
+                if (confirm('Haqiqatan ham bu buyurtmani o\'chirmoqchimisiz?')) {
+                    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                    const updatedOrders = orders.filter(order => order.id !== orderId);
 
-        function close_choose(id) {
-            const element = document.querySelector(`#bonus_cards_${id}`);
-            if (element) element.classList.add('bonus_cards_active');
-            document.querySelector(`#select_choose_${id}`).style.display = 'flex';
-            document.querySelector(`#selected_card_${id}`).style.display = 'none';
-            document.querySelector(`.pizza-block[data-id="${id}"] .pizza_extra`).style.display = 'none';
-        }
+                    localStorage.setItem('orders', JSON.stringify(updatedOrders));
+                    updateCartDisplay();
+                    alert('Buyurtma savatdan olib tashlandi!');
+                }
+            }
 
-        function select_in_menU(id) {
-            document.querySelector(`.pizza-block[data-id="${id}"] .close_menu`).style.display = 'flex';
-            document.querySelector(`.pizza-block[data-id="${id}"] .ingradients_menu`).style.display = 'flex';
-            document.querySelector(`.pizza-block[data-id="${id}"] .ingredient_cart`).style.display = 'block';
-        }
+            // General functions with pizza ID parameter
+            function select_choose(id) {
+                const element = document.querySelector(`#bonus_cards_${id}`);
+                if (element) element.classList.toggle('bonus_cards_active');
+            }
 
-        function close_menus(id) {
-            document.querySelector(`.pizza-block[data-id="${id}"] .close_menu`).style.display = 'none';
-            document.querySelector(`.pizza-block[data-id="${id}"] .ingradients_menu`).style.display = 'none';
-        }
+            function close_choose(id) {
+                const element = document.querySelector(`#bonus_cards_${id}`);
+                if (element) element.classList.add('bonus_cards_active');
+                document.querySelector(`#select_choose_${id}`).style.display = 'flex';
+                document.querySelector(`#selected_card_${id}`).style.display = 'none';
+                document.querySelector(`.pizza-block[data-id="${id}"] .pizza_extra`).style.display = 'none';
+            }
 
-        const vibors = document.querySelectorAll(".for_vibor");
+            function select_in_menU(id) {
+                document.querySelector(`.pizza-block[data-id="${id}"] .close_menu`).style.display = 'flex';
+                document.querySelector(`.pizza-block[data-id="${id}"] .ingradients_menu`).style.display = 'flex';
+                document.querySelector(`.pizza-block[data-id="${id}"] .ingredient_cart`).style.display = 'block';
+            }
 
-vibors.forEach(vibor => {
-  vibor.addEventListener("click", function () {
-    // Hamma divlardan vibor_active ni olib tashlash
-    vibors.forEach(v => v.classList.remove("vibor_active"));
+            function close_menus(id) {
+                document.querySelector(`.pizza-block[data-id="${id}"] .close_menu`).style.display = 'none';
+                document.querySelector(`.pizza-block[data-id="${id}"] .ingradients_menu`).style.display = 'none';
+            }
+
+        
+
+    // Narxlarni yangilash funksiyasi
+    function updatePriceDisplay() {
+    const totalPrice = (product.price || 0) * count;
+    const totalAksiyaPrice = (product.aksiyaPrice || 0) * count;
     
-    // Bosilgan divga qo‘shish
-    this.classList.add("vibor_active");
-  });
-});
+    document.getElementById("price").textContent = totalPrice.toFixed(2) + "₾";
+    document.getElementById("aksiyaPrice").textContent = totalAksiyaPrice.toFixed(2) + "₾";
+    }
 
-const pizzaSizes = document.querySelectorAll(".pizza_size_select");
+    const pizzaSizes = document.querySelectorAll(".pizza_size_select");
+    pizzaSizes.forEach(size => {
+    size.addEventListener("click", function() {
+        // Faqat bitta o'lcham tanlanishi
+        pizzaSizes.forEach(s => s.classList.remove("vibor_pizza"));
+        this.classList.add("vibor_pizza");
+        
+        // Asosiy va aksiya narxlarini yangilash
+        product.basePrice = parseFloat(this.dataset.price) || 0; // Asosiy narx
+        product.price = product.basePrice;
+        product.aksiyaPrice = parseFloat(this.dataset.aksiyaPrice) || product.basePrice;
+        
+        // Tanlangan ingredientlar narxini qo'shish
+        selectedItemsMap.forEach((ingredients, pizzaId) => {
+        ingredients.forEach(key => {
+            const price = parseFloat(key.split('_')[1]);
+            product.price += price;
+            product.aksiyaPrice += price;
+        });
+        });
+        
+        // Ekranga yangilangan narxlarni chiqarish
+        updatePriceDisplay();
+    });
+    });
 
-pizzaSizes.forEach(size => {
-  size.addEventListener("click", function () {
-    // Boshqalardan olib tashlash
-    pizzaSizes.forEach(s => s.classList.remove("vibor_pizza"));
-    
-    // Bosilganiga qo‘shish
-    this.classList.add("vibor_pizza");
-  });
-});
+    const vibors = document.querySelectorAll(".for_vibor");
 
-    </script>
+    vibors.forEach(vibor => {
+    vibor.addEventListener("click", function() {
+        // 1. Barcha aktiv elementlardan klassni olib tashlash
+        vibors.forEach(v => v.classList.remove("vibor_active"));
+
+        // 2. Bosilgan elementga klass qo'shish
+        this.classList.add("vibor_active");
+
+        // 3. data-price atributidan narxni olish
+        const priceToAdd = parseFloat(this.dataset.price) || 0;
+        const key = `${this.dataset.title}_${priceToAdd}`;
+
+        // 4. faqat bitta umumiy "pizzaId = global" qilib qo'yamiz
+        const pizzaId = "main"; 
+        if (!selectedItemsMap.has(pizzaId)) {
+        selectedItemsMap.set(pizzaId, new Set());
+        }
+        const selectedItems = selectedItemsMap.get(pizzaId);
+
+        if (!selectedItems.has(key)) {
+        // qo'shish
+        selectedItems.clear(); // faqat bitta bo‘lishi uchun
+        selectedItems.add(key);
+        product.price += priceToAdd;
+        product.aksiyaPrice += priceToAdd;
+        } else {
+        // olib tashlash
+        selectedItems.delete(key);
+        product.price -= priceToAdd;
+        product.aksiyaPrice -= priceToAdd;
+        }
+
+        // 5. Narxlarni yangilash
+        updatePriceDisplay();
+    });
+    });
+
+
+
+
+        </script>
     <script type="module" defer="defer" src="https://www.googletagmanager.com/gtag/js?id=G-909K1GHXTJ"></script>
     <script>function loadFBPixel() { try { e = window, t = document, n = "script", e.fbq || (o = e.fbq = function () { o.callMethod ? o.callMethod.apply(o, arguments) : o.queue.push(arguments) }, e._fbq || (e._fbq = o), o.push = o, o.loaded = !0, o.version = "2.0", o.queue = [], (a = t.createElement(n)).async = !0, a.src = "https://connect.facebook.net/en_US/fbevents.js", (i = t.getElementsByTagName(n)[0]).parentNode.insertBefore(a, i)), fbq("init", "275867525480309"), fbq("track", "PageView") } catch (e) { console.error("FB Pixel initialization error:", e) } var e, t, n, o, a, i } setTimeout(loadFBPixel, 5e3)</script>
     <iframe allow="join-ad-interest-group" data-tagging-id="AW-16453014359" data-load-time="1755014483838" height="0"
