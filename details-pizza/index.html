@@ -4516,10 +4516,47 @@ document.addEventListener('click', function(e) {
 
 // Sahifa yuklanganda ishga tushirish
 document.addEventListener('DOMContentLoaded', initializePage);
+
+
+
+
 </script>
 
 
+<!-- <script>
+    // details.js — boshqa fayl
 
+function checkAndLogEditOrder() {
+  const isEdit = localStorage.getItem('edit');
+
+  if (isEdit === 'true') {
+    const forId = localStorage.getItem('for_id');
+
+    if (forId) {
+      const ordersRaw = localStorage.getItem('orders');
+      const orders = ordersRaw ? JSON.parse(ordersRaw) : [];
+
+      // Muhim: IDni string qilib solishtiramiz
+      const order = orders.find(o => String(o.id) === String(forId));
+
+      if (order) {
+        console.log('Tahrirlanayotgan buyurtma:', order);
+      } else {
+        console.log('❌ Xatolik: for_id mavjud, lekin ordersda bunday IDli buyurtma topilmadi:', forId);
+        console.log('🔍 Barcha buyurtmalar:', orders);
+        console.log('📌 for_id turi:', typeof forId, '| Qiymat:', forId);
+      }
+    } else {
+      console.log('❌ for_id topilmadi.');
+    }
+  } else {
+    console.log('ℹ️ Tahrirlash rejimi o\'chgan. edit:', isEdit);
+  }
+}
+
+// Chaqirish
+checkAndLogEditOrder();
+</script> -->
 
 
 
