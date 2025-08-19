@@ -149,7 +149,6 @@
         .jss4::placeholder {
             color: #000;
             font-size: 16px;
-            font-family: Kanit-Light;
             line-height: 24;
             letter-spacing: 0.3px;
         }
@@ -175,7 +174,6 @@
         .jss5::placeholder {
             color: #000;
             font-size: 14px;
-            font-family: Kanit-Light;
             font-weight: 600;
             line-height: 24;
             letter-spacing: 0.3px;
@@ -1732,28 +1730,36 @@
 
 
         <div>
-        <div class="jss1" id="no-cart-empty">
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <div class="empty_card">
-                    <div
-                        style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding-block: 20px; row-gap: 12px;">
-                        <h2 class="Kanit-SemiBold text-blue" style="font-size: 36px; text-align: center;">Empty Cart</h2>
-                        <div style="display: flex; justify-content: center;"><img
-                                src="../assets/image/empty_cart.ce51a99a8179668c0c85.png"
-                                style="filter: grayscale(100%);"></div>
-                        <div>
-                            <h3 class="Kanit-Medium" style="color: rgb(73, 73, 73); font-family: 'Kanit', sans-serif !important; font-size: 24px;">Your Cart Is<span class="Kanit-Medium text-red" style="font-size: 24px;  font-family: 'Kanit', sans-serif !important;"> Empty! </span></h3>
+            <div class="jss1" id="no-cart-empty">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="empty_card">
+                        <div
+                            style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding-block: 20px; row-gap: 12px;">
+                            <h2 class="Kanit-SemiBold text-blue" style="font-size: 36px; text-align: center;">Empty Cart
+                            </h2>
+                            <div style="display: flex; justify-content: center;"><img
+                                    src="../assets/image/empty_cart.ce51a99a8179668c0c85.png"
+                                    style="filter: grayscale(100%);"></div>
+                            <div>
+                                <h3 class=""
+                                    style="color: rgb(73, 73, 73); font-family: 'Kanit', sans-serif !important; font-size: 24px;">
+                                    Your Cart Is<span class=" text-red"
+                                        style="font-size: 24px;  font-family: 'Kanit', sans-serif !important;"> Empty!
+                                    </span></h3>
+                            </div>
+                            <div style="text-align: center;">
+                                <p class=" text-gray capitalize;"
+                                    style="font-family: 'Kanit', sans-serif !important;">Must Add Items On The Cart
+                                    Before You Proceed To Check Out</p>
+                            </div><button
+                                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-Regular fs-14 empty_btn css-13z6b64"
+                                tabindex="0" type="button"
+                                style="font-weight: bold;font-family: 'Kanit', sans-serif !important;color:white;border:none;text-transform: uppercase;">Back
+                                To Menu<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
                         </div>
-                        <div style="text-align: center;">
-                            <p class="Kanit-Light text-gray capitalize;" style="font-family: 'Kanit', sans-serif !important;">Must Add Items On The Cart Before You Proceed To Check Out</p>
-                        </div><button
-                            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-Regular fs-14 empty_btn css-13z6b64"
-                            tabindex="0" type="button" style="font-weight: bold;font-family: 'Kanit', sans-serif !important;color:white;border:none;text-transform: uppercase;">Back To Menu<span
-                                class="MuiTouchRipple-root css-w0pj6f"></span></button>
                     </div>
                 </div>
             </div>
-        </div>
             <div class="jss1" id="cart-container-empty">
                 <div class="jss58">
                     <div class="jss59">
@@ -1774,8 +1780,11 @@
                                             d="m16.44,36.74c.9-.49,1.89-.33,2.84-.33,10.91,0,21.81-.04,32.72.03,1.99.01,3.06-.64,3.88-2.5,3.23-7.26,6.64-14.45,9.98-21.66,1.52-3.28,1.06-4.06-2.5-4.01-16.01.23-32.02.44-48.03.76-1.57.03-2.17-.47-2.43-1.9-.35-1.96-.89-3.88-1.21-5.84-.16-1-.47-1.37-1.66-1.28-2.59.19-5.18.27-7.77.03C1.02-.08,0,.21,0,1.52c0,1.17.81,1.45,1.83,1.44,1.93-.02,3.87.08,5.8-.04,1.17-.07,1.53.45,1.73,1.43,1.99,9.34,3.97,18.67,6.03,27.99.19.84-.2,1.69-.93,2.15-3.74,2.36-4.22,7.13-1.19,10.34,1.77,1.88,4.01,2.2,6.43,2.06.64-.04,1.5-.4,1.4,1-.25,3.59,1.69,5.96,4.69,5.94,2.84-.01,5.54-2.93,4.85-5.92-.24-1.05.23-1.06,1.01-1.05,5.24.02,10.48.01,15.89.01-.04.34-.05.47-.08.61-.68,3.22,1.1,5.91,4.21,6.34,2.66.36,4.99-1.7,5.21-4.61.26-3.4-1.47-5.25-4.96-5.26-5.66-.01-11.32,0-16.98,0-5.59,0-11.18.02-16.77-.02-2.07-.01-3.41-1.14-3.78-3.1-.35-1.86.43-3.2,2.06-4.08Zm14.03-17.12c1.38,1.47,2.73,2.91,4.11,4.38,3.24-3,6.46-5.99,9.72-9.02.84.92,1.68,1.82,2.53,2.74-4.15,3.85-8.28,7.67-12.44,11.53-2.21-2.36-4.42-4.71-6.64-7.09.93-.87,1.81-1.7,2.72-2.55Zm20.5,27.7c.68-.5,1.65-.51,2.34-.02.48.35.77.86.78,1.54.02,1.07-.88,1.99-1.96,1.97-1.13-.03-1.97-.75-1.93-1.97.02-.69.31-1.19.77-1.52Zm-25.09-.4c1.12.05,1.9.76,1.87,2-.02.76-.34,1.22-.82,1.53-.66.42-1.53.44-2.19.03-.53-.33-.83-.86-.8-1.67.05-1.23.79-1.95,1.95-1.9Z">
                                         </path>
                                     </g>
-                                </svg></div>
-                            <p class="Kanit-Light" style="font-weight: bold; cursor: pointer; font-family: 'Kanit', sans-serif !important;font-weight:500;">My Cart</p>
+                                </svg>
+                            </div>
+                            <p class=""
+                                style="font-weight: bold; cursor: pointer; font-family: 'Kanit', sans-serif !important;font-weight:500;">
+                                My Cart</p>
                         </div>
                         <div>
                             <div class="jss60"
@@ -1794,8 +1803,11 @@
                                             d="m132.09,0H4.71C2.12,0,0,2.12,0,4.71v171.38c0,2.59,2.12,4.71,4.71,4.71h127.38c2.59,0,4.71-2.12,4.71-4.71V4.71c0-2.59-2.12-4.71-4.71-4.71ZM38.75,143.39l-.02.1c-.13.5-.39.98-.73,1.32-3.82,3.85-7.66,7.68-11.5,11.51-.32.32-.71.64-1.18.97-.47.33-1.01.49-1.56.49s-1.1-.17-1.57-.5c-.45-.32-.79-.6-1.09-.9-1.82-1.8-3.64-3.61-5.44-5.43-.97-.99-1.25-2.22-.78-3.47.36-.96,1.28-1.72,2.34-1.95.69-.15,1.41-.01,2.01.37.47.3.86.62,1.28.96l.24.19c.93.89,1.78,1.75,2.63,2.61l.38.39,9.12-9.12c.2-.2.4-.38.61-.56,1.09-.91,2.64-1.02,3.86-.28,1.15.7,1.7,1.99,1.41,3.29Zm0-41l-.02.1c-.13.5-.39.98-.73,1.32-3.82,3.85-7.66,7.68-11.5,11.51-.32.32-.71.64-1.18.97-.47.33-1.01.49-1.56.49s-1.1-.17-1.57-.5c-.45-.32-.79-.6-1.09-.9-1.82-1.8-3.64-3.61-5.44-5.43-.97-.99-1.25-2.22-.78-3.47.36-.96,1.28-1.72,2.34-1.95.69-.15,1.41-.01,2.01.37.47.3.86.62,1.28.96l.24.19c.93.89,1.78,1.75,2.63,2.61l.38.39,9.12-9.12c.2-.2.4-.38.61-.56,1.09-.91,2.64-1.02,3.86-.28,1.15.7,1.7,1.99,1.41,3.29Zm0-41l-.02.1c-.13.5-.39.98-.73,1.32-3.82,3.85-7.66,7.68-11.5,11.51-.32.32-.71.64-1.18.97-.47.33-1.01.49-1.56.49s-1.1-.17-1.57-.5c-.45-.32-.79-.6-1.09-.9-1.82-1.8-3.64-3.61-5.44-5.43-.97-.99-1.25-2.22-.78-3.47.36-.96,1.28-1.72,2.34-1.95.69-.15,1.41-.01,2.01.37.47.3.86.62,1.28.96l.24.19c.93.89,1.78,1.75,2.63,2.61l.38.39,9.12-9.12c.2-.2.4-.38.61-.56,1.09-.91,2.64-1.02,3.86-.28,1.15.7,1.7,1.99,1.41,3.29Zm0-36l-.02.1c-.13.5-.39.98-.73,1.32-3.82,3.85-7.66,7.68-11.5,11.51-.32.32-.71.64-1.18.97-.47.33-1.01.49-1.56.49s-1.1-.17-1.57-.5c-.45-.32-.79-.6-1.09-.9-1.82-1.8-3.64-3.61-5.44-5.43-.97-.99-1.25-2.22-.78-3.47.36-.96,1.28-1.72,2.34-1.95.69-.15,1.41-.01,2.01.37.47.3.86.62,1.28.96l.24.19c.93.89,1.78,1.75,2.63,2.61l.38.39,9.12-9.12c.2-.2.4-.38.61-.56,1.09-.91,2.64-1.02,3.86-.28,1.15.7,1.7,1.99,1.41,3.29Zm76.31,128.79h-59.74c-1.96,0-3.57-1.61-3.57-3.57s1.61-3.57,3.57-3.57h59.74c1.96,0,3.57,1.61,3.57,3.57s-1.61,3.57-3.57,3.57Zm0-41h-59.74c-1.96,0-3.57-1.61-3.57-3.57s1.61-3.57,3.57-3.57h59.74c1.96,0,3.57,1.61,3.57,3.57s-1.61,3.57-3.57,3.57Zm0-41h-59.74c-1.96,0-3.57-1.61-3.57-3.57s1.61-3.57,3.57-3.57h59.74c1.96,0,3.57,1.61,3.57,3.57s-1.61,3.57-3.57,3.57Zm0-36h-59.74c-1.96,0-3.57-1.61-3.57-3.57s1.61-3.57,3.57-3.57h59.74c1.96,0,3.57,1.61,3.57,3.57s-1.61,3.57-3.57,3.57Z">
                                         </path>
                                     </g>
-                                </svg></div>
-                            <p class="Kanit-Light" style="cursor: pointer; font-weight: bold;font-family: 'Kanit', sans-serif !important;font-weight:500;">Order Details</p>
+                                </svg>
+                            </div>
+                            <p class=""
+                                style="cursor: pointer; font-weight: bold;font-family: 'Kanit', sans-serif !important;font-weight:500;">
+                                Order Details</p>
                         </div>
                         <div style="cursor: auto; text-align: center; white-space: nowrap;">
                             <div class="jss60"
@@ -1818,8 +1830,9 @@
                                             d="m132.09,0H4.71c-.19,0-.37.01-.55.03C1.75.3,0,2.49,0,4.92v168.17c0,5.59,2.12,7.71,4.71,7.71h127.38c.61,0,1.19-.13,1.72-.34-24.87-1.34-44.76-22.15-44.76-47.55,0-26.13,21.05-46.97,47.46-46.99.1,0,.19,0,.29,0V4.71c0-2.59-2.12-4.71-4.71-4.71ZM36.77,118.64h-17.46v-17.46h17.46v17.46Zm0-38h-17.46v-17.46h17.46v17.46Zm0-37h-17.46v-17.46h17.46v17.46Zm48,75h-35.46v-17.46h35.46v17.46Zm33-38H49.31v-17.46h68.46v17.46Zm0-37H49.31v-17.46h68.46v17.46Z">
                                         </path>
                                     </g>
-                                </svg></div>
-                            <p class="Kanit-Light"
+                                </svg>
+                            </div>
+                            <p class=""
                                 style="cursor: pointer; white-space: nowrap; font-weight: bold; text-transform: capitalize;font-family: 'Kanit', sans-serif !important;font-weight:500;">
                                 Order Confirmation</p>
                         </div>
@@ -1838,13 +1851,15 @@
 
 
                 <div class="MuiBox-root css-1djk842"><button onclick="removeCart()"
-                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary Kanit-Medium jss8 css-1bfuqwl"
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary  jss8 css-1bfuqwl"
                         tabindex="0" type="button" style="border-radius: 30px; font-size: 16px;">Empty cart<span
                             class="MuiTouchRipple-root css-w0pj6f"></span></button></div><br>
 
 
                 <div class="MuiBox-root css-gzlndu">
-                    <h1 class="IBM-SemiBold" style="font-size: 36px;font-family: 'Kanit', sans-serif !important;font-weight:500;">Goes Well Together</h1><br>
+                    <h1 class=""
+                        style="font-size: 36px;font-family: 'Kanit', sans-serif !important;font-weight:500;">Goes Well
+                        Together</h1><br>
                     <div class="jss30" style="padding: 0px;">
                         <div class="jss32">
                             <div class="jss34">
@@ -1876,8 +1891,8 @@
                                     </div>
                                     <div class="jss40">
                                         <div>
-                                            <p class="Kanit-Bold fs-18 text-red">8.90<b>₾</b></p>
-                                        </div><button class="jss41 Kanit-Medium" aria-label="Add to cart">Order</button>
+                                            <p class=" fs-18 text-red">8.90<b>₾</b></p>
+                                        </div><button class="jss41 " aria-label="Add to cart">Order</button>
                                     </div>
                                 </div>
                             </div>
@@ -1913,8 +1928,8 @@
                                     </div>
                                     <div class="jss40">
                                         <div>
-                                            <p class="Kanit-Bold fs-18 text-red">3.50<b>₾</b></p>
-                                        </div><button class="jss41 Kanit-Medium" aria-label="Add to cart">Order</button>
+                                            <p class=" fs-18 text-red">3.50<b>₾</b></p>
+                                        </div><button class="jss41 " aria-label="Add to cart">Order</button>
                                     </div>
                                 </div>
                             </div>
@@ -1950,8 +1965,8 @@
                                     </div>
                                     <div class="jss40">
                                         <div>
-                                            <p class="Kanit-Bold fs-18 text-red">5.30<b>₾</b></p>
-                                        </div><button class="jss41 Kanit-Medium" aria-label="Add to cart">Order</button>
+                                            <p class=" fs-18 text-red">5.30<b>₾</b></p>
+                                        </div><button class="jss41 " aria-label="Add to cart">Order</button>
                                     </div>
                                 </div>
                             </div>
@@ -1987,8 +2002,8 @@
                                     </div>
                                     <div class="jss40">
                                         <div>
-                                            <p class="Kanit-Bold fs-18 text-red">3.90<b>₾</b></p>
-                                        </div><button class="jss41 Kanit-Medium" aria-label="Add to cart">Order</button>
+                                            <p class=" fs-18 text-red">3.90<b>₾</b></p>
+                                        </div><button class="jss41 " aria-label="Add to cart">Order</button>
                                     </div>
                                 </div>
                             </div>
@@ -2001,16 +2016,26 @@
                 <div
                     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-g1zth1">
                     <div class="MuiBox-root css-j63orb">
-                        <h1 class="IBM-SemiBold text-black" style="font-size: 36px;">Checkout</h1>
+                        <h1 class=" text-black" style="font-size: 36px; font-weight: 400">Checkout</h1>
                         <div>
                             <div style="display: flex; align-items: center; width: 470px;">
-                                <p class="Kanit-Light fs-20 capitalize"
-                                    style="color: rgb(73, 73, 73); text-decoration: none;">Offer: 1+2 </p><span
-                                    class="text-red Kanit-Medium" style="margin-left: auto;">95.90₾</span>
+                                <p class=" fs-20 capitalize"
+                                    style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">Offer: 1+1 Medium Pizzas </p>
+                                <span class="text-red " style="margin-left: auto; font-weight: 500;">265.30₾</span>
+                            </div>
+                            <div style="display: flex; align-items: center; width: 470px;">
+                                <p class=" fs-20 capitalize"
+                                    style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">Offer: 1+1 Medium Pizzas </p>
+                                <span class="text-red " style="margin-left: auto; font-weight: 500;">27.90₾</span>
+                            </div>
+                            <div style="display: flex; align-items: center; width: 470px;">
+                                <p class=" fs-20 capitalize"
+                                    style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">Offer: 1+1 Large Pizzas </p>
+                                <span class="text-red " style="margin-left: auto; font-weight: 500;">41.90₾</span>
                             </div><br>
-                            <h3 class="Kanit-Light fs-24 text-black">Total: <span class="text-red">95.90₾</span></h3>
+                            <h3 class=" fs-24 text-black weight_400">Total: <span class="text-red">335.10₾</span></h3>
                             <div style="margin-top: 28px;">
-                                <h2 class="Kanit-Light fs-24 text-black">Promo Code</h2>
+                                <h2 class=" fs-24 text-black weight_400">Promo Code</h2>
                                 <div
                                     style="display: flex; flex-direction: row; gap: 28px; margin-top: 12px; margin-left: -12px;">
                                     <div style="flex: 1 1 0%;">
@@ -2025,12 +2050,11 @@
                                             </div>
                                             <fieldset aria-hidden="true"
                                                 class="MuiOutlinedInput-notchedOutline css-1h7ywr6">
-                                                <legend class="css-ihdtdm"><span
-                                                        class="notranslate">&ZeroWidthSpace;</span></legend>
+                                                <legend class="css-ihdtdm"><span class="notranslate">​</span></legend>
                                             </fieldset>
                                         </div>
                                     </div><button
-                                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary fs-24 IBM-SemiBold jss7 css-1bfuqwl"
+                                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary fs-24  jss323 css-1bfuqwl"
                                         tabindex="-1" type="button" disabled=""
                                         style="width: 150px; height: 52px;">Apply</button>
                                 </div>
@@ -2038,8 +2062,8 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-top: 28px; margin-bottom: 60px;"><button
-                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-Medium fs-24 jss8 css-np2orv"
+                <div style="margin-top: 28px; margin-bottom: 60px;"><button style="width: 100%;height: 60px;"
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth  fs-24 jss8 css-np2orv"
                         tabindex="0" type="button">Next<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
                 </div>
             </div>
@@ -2078,7 +2102,7 @@
                             width="104" height="76" loading="lazy"><img
                             src="../assets/image/pizza_oven.3bd307ade23251814945.webp" alt="oven" width="59" height="58"
                             loading="lazy"></div>
-                    <p class="Kanit-Light text-blue footer-p-style" style="text-align: center; font-weight:300">©
+                    <p class=" text-blue footer-p-style" style="text-align: center; font-weight:300">©
                         Geopizza LLC All rights reserved
                         2025 | Developed by <a href="https://www.hitech-prime.com/" target="_blank" rel="noreferrer"
                             class="text-blue hover-underline footer-p-style"> HiTech Prime </a></p>

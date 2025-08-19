@@ -85,12 +85,12 @@ function renderCartHTML(cartItems) {
                             <div>
                                 <div style="margin-bottom: 12px;">
                                     <p class="text-black IBM-Regular fs-20 capitalize" style="font-weight: bold;">${item.title || item.name || ''}</p>
-                                    <span class="Kanit-Light fs-14 text-gray capitalize">${item.description || ''}</span>
+                                    <span class=" fs-14 text-gray capitalize">${item.description || ''}</span>
                                 </div>
                                 <div></div>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0px;">
-                                <h3 class="text-red Kanit-Bold fs-24" style="text-align: end;">${item.total ? (typeof item.total === 'number' ? item.total.toFixed(2) : parseFloat(item.total).toFixed(2)) + '₾' : (item.price ? (typeof item.price === 'number' ? item.price.toFixed(2) : parseFloat(item.price).toFixed(2)) + '₾' : '')}</h3>
+                                <h3 class="text-red  fs-24" style="text-align: end;">${item.total ? (typeof item.total === 'number' ? item.total.toFixed(2) : parseFloat(item.total).toFixed(2)) + '₾' : (item.price ? (typeof item.price === 'number' ? item.price.toFixed(2) : parseFloat(item.price).toFixed(2)) + '₾' : '')}</h3>
                                 <div>
                                     <div>
                                         <div class="Kanit-Regular" style="display: inline-flex;">
@@ -136,7 +136,7 @@ function renderOrdersHTML(orders) {
                             <div>
                                 <div style="margin-bottom: 12px;">
                                     <p class="text-black IBM-Regular fs-20 capitalize" style="font-weight: bold;">${order.title || ''}</p>
-                                    <span class="Kanit-Light fs-14 text-gray capitalize">${order.description || ''}</span>
+                                    <span class=" fs-14 text-gray capitalize">${order.description || ''}</span>
                                 </div>
                                 <div>
                                     <div>
@@ -153,10 +153,10 @@ function renderOrdersHTML(orders) {
                                 </div>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
-                                <h3 class="text-grey Kanit-Bold fs-20"><s>${calculateOriginalPrice(order)}</s></h3>
+                                <h3 class="text-grey  fs-20"><s>${(order.aksiyaPrice * order.quantity).toFixed(2)}</s></h3>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0px;">
-                                <h3 class="text-red Kanit-Bold fs-24" style="text-align: end;">${order.totalPrice || ''}</h3>
+                                <h3 class="text-red  fs-24" style="text-align: end;">${(order.price * order.quantity).toFixed(2)}</h3>
                                 <div>
                                     <div>
                                         <div class="Kanit-Regular quantity-controls" style='display:inline-flex'>
@@ -171,7 +171,7 @@ function renderOrdersHTML(orders) {
                         <div class="action-buttons" style="position: absolute; top: 30px; right: 35px; cursor: pointer;">
                             <div style="display: flex; align-items: center; gap: 1rem;">
                                 <div>
-                                    <a href="/offer/details/_GE${order.id || ''}">
+                                    <a onclick="editOrder(${order.id})">
                                         <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium jss9 css-vubbuv" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="EditIcon">
                                             <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"></path>
                                         </svg>
@@ -362,3 +362,26 @@ function loadAndRenderOrders() {
     localStorage.removeItem('selectedProduct')
     window.location.reload()
 }
+
+function editOrder(orderId) {
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      const order = orders.find(o => o.id === orderId);
+      
+      if (order) {
+        // Tahrirlash rejimini yoqamiz
+        localStorage.setItem('edit', 'true');
+        // Tahrirlanayotgan buyurtma ID sini saqlaymiz
+        localStorage.setItem('for_id', orderId);
+        // Mahsulot ma'lumotlarini saqlaymiz
+        localStorage.setItem('selectedProduct', JSON.stringify({
+          title: order.title,
+          img: order.img,
+          description: order.description,
+          price: order.price,
+          aksiyaPrice: order.aksiyaPrice
+        }));
+        
+        // Bosh sahifaga yo'naltiramiz
+        window.location.href = '../details'; // Asosiy sahifa manzili
+      }
+    }
