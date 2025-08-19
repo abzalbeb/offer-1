@@ -917,3 +917,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const geDivs = document.querySelectorAll('.lang_Ge');
+
+    geDivs.forEach(div => {
+        const img = div.querySelector('img');
+        if (img && img.getAttribute('src') === '../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png') {
+            div.style.display = 'none';
+        }
+    });
+});
