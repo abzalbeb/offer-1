@@ -1761,7 +1761,7 @@
             color: rgb(0, 0, 0) !important;
         }
 
-        .for_vibor_1 {
+        .for_vibor_0 {
             position: relative;
             border: 2px solid rgb(220, 220, 220);
             border-radius: 11px;
@@ -2096,7 +2096,66 @@
 
 <body style=""><noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
-        <div class="Toastify"></div>
+             
+        <div class="Toastify"  id="Toastify-success" style="display: none;">
+            <div class="Toastify__toast-container Toastify__toast-container--top-right" style="z-index: 999999;">
+                <div id="2" data-in="true"
+                    class="Toastify__toast Toastify__toast-theme--colored Toastify__toast--success Toastify__toast--close-on-click">
+                    <div role="alert" class="Toastify__toast-body">
+                        <div class="Toastify__toast-icon Toastify--animate-icon Toastify__zoom-enter"><svg
+                                viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor">
+                                <path
+                                    d="M12 0a12 12 0 1012 12A12.014 12.014 0 0012 0zm6.927 8.2l-6.845 9.289a1.011 1.011 0 01-1.43.188l-4.888-3.908a1 1 0 111.25-1.562l4.076 3.261 6.227-8.451a1 1 0 111.61 1.183z">
+                                </path>
+                            </svg></div>
+                        <div> Product added to cart</div>
+                    </div><button class="Toastify__close-button Toastify__close-button--colored" type="button"
+                        aria-label="close"><svg aria-hidden="true" viewBox="0 0 14 16">
+                            <path fill-rule="evenodd"
+                                d="M7.71 8.23l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75L1 11.98l3.75-3.75L1 4.48 2.48 3l3.75 3.75L9.98 3l1.48 1.48-3.75 3.75z">
+                            </path>
+                        </svg></button>
+                    <div class="Toastify__progress-bar--wrp" data-hidden="false">
+                        <div
+                            class="Toastify__progress-bar--bg Toastify__progress-bar-theme--colored Toastify__progress-bar--success">
+                        </div>
+                        <div role="progressbar" aria-hidden="false" aria-label="notification timer"
+                            class="Toastify__progress-bar Toastify__progress-bar--animated Toastify__progress-bar-theme--colored Toastify__progress-bar--success"
+                            style="animation-duration: 2000ms; animation-play-state: running;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="Toastify" id="Toastify-nostore" style="display: none;">
+            <div class="Toastify__toast-container Toastify__toast-container--top-right" style="z-index: 999999;">
+                <div id="8" data-in="true"
+                    class="Toastify__toast Toastify__toast-theme--colored Toastify__toast--error Toastify__toast--close-on-click Toastify--animate Toastify__bounce-enter--top-right">
+                    <div role="alert" class="Toastify__toast-body">
+                        <div class="Toastify__toast-icon Toastify--animate-icon Toastify__zoom-enter"><svg
+                                viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor">
+                                <path
+                                    d="M11.983 0a12.206 12.206 0 00-8.51 3.653A11.8 11.8 0 000 12.207 11.779 11.779 0 0011.8 24h.214A12.111 12.111 0 0024 11.791 11.766 11.766 0 0011.983 0zM10.5 16.542a1.476 1.476 0 011.449-1.53h.027a1.527 1.527 0 011.523 1.47 1.475 1.475 0 01-1.449 1.53h-.027a1.529 1.529 0 01-1.523-1.47zM11 12.5v-6a1 1 0 012 0v6a1 1 0 11-2 0z">
+                                </path>
+                            </svg></div>
+                        <div>Only 5 toppings are allowed.</div>
+                    </div><button class="Toastify__close-button Toastify__close-button--colored" type="button"
+                        aria-label="close"><svg aria-hidden="true" viewBox="0 0 14 16">
+                            <path fill-rule="evenodd"
+                                d="M7.71 8.23l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75L1 11.98l3.75-3.75L1 4.48 2.48 3l3.75 3.75L9.98 3l1.48 1.48-3.75 3.75z">
+                            </path>
+                        </svg></button>
+                    <div class="Toastify__progress-bar--wrp" data-hidden="false">
+                        <div
+                            class="Toastify__progress-bar--bg Toastify__progress-bar-theme--colored Toastify__progress-bar--error">
+                        </div>
+                        <div role="progressbar" aria-hidden="false" aria-label="notification timer"
+                            class="Toastify__progress-bar Toastify__progress-bar--animated Toastify__progress-bar-theme--colored Toastify__progress-bar--error"
+                            style="animation-duration: 2000ms; animation-play-state: running;"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="MuiBox-root css-9hh926">
             <section class="header" id="header-destop">
                 <div style="padding-inline: 15px;">
@@ -2367,8 +2426,8 @@
                                             </div>
                                         </div>
                                     </div><button
-                                        class="addToCart_btn MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth  18px jss8 css-np2orv"
-                                        tabindex="0" type="button" style="margin-bottom: 18px;" id="addToCart2">Add to
+                                        class="addToCart_btn addToCartBtn MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth  18px jss8 css-np2orv"
+                                        tabindex="0" type="button" style="margin-bottom: 18px;" >Add to
                                         cart<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
                                 </div>
                             </div>
@@ -2399,7 +2458,7 @@
                                                             <div
                                                                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-md-3 css-jtl0kq">
                                                                 <div style="position: relative;">
-                                                                    <div class="pizza_size_select" data-id="1"
+                                                                    <div class="pizza_size_select vibor_pizza" data-id="1"
                                                                         data-size="Small Size - 18cm 4pcs"
                                                                         data-price="18.90"
                                                                         style="border-radius: 100%; padding: 8px;">
@@ -2471,7 +2530,7 @@
                                                             <div
                                                                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-md-4 css-1udb513">
                                                                 <div style="position: relative;">
-                                                                    <div class="pizza_size_select" data-id="3"
+                                                                    <div class="pizza_size_select vibor_pizza" data-id="3"
                                                                         data-size="Large Size - 33cm 8pcs"
                                                                         data-price="43.90"
                                                                         style="border-radius: 100%; padding: 8px;">
@@ -3290,7 +3349,7 @@
                                                             <div
                                                                 style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 22px;">
                                                                 <div data-title="BBQ Sauce" data-price="+2₾"
-                                                                    class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
+                                                                    class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                                     <div
                                                                         style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
                                                                         <div style="flex-grow: 0.3;"><img
@@ -3320,7 +3379,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div data-title="Ranch Sauce" data-price="+2₾"
-                                                                    class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
+                                                                    class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                                     <div
                                                                         style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
                                                                         <div style="flex-grow: 0.3;"><img
@@ -3350,7 +3409,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div data-title="Honey Mustard Sauce" data-price="+2.5₾"
-                                                                    class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
+                                                                    class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                                     <div
                                                                         style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
                                                                         <div style="flex-grow: 0.3;"><img
@@ -3380,7 +3439,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div data-title="Sweet Chilli Sauce" data-price="+2₾"
-                                                                    class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
+                                                                    class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                                     <div
                                                                         style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
                                                                         <div style="flex-grow: 0.3;"><img
@@ -3947,9 +4006,40 @@
 
     <script src="./script.js"></script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const pizzaOptions = document.querySelectorAll(".pizza_size_select");
 
-    <script>
-        const maxSelection = 5;
+    function setActive(option) {
+        pizzaOptions.forEach(opt => {
+            const svg = opt.querySelector("svg");
+            if (svg) svg.style.display = "none";  // hammasini yashiramiz
+            opt.classList.remove("active");
+        });
+
+        const svg = option.querySelector("svg");
+        if (svg) svg.style.display = "inline-block"; // faqat tanlangani ko‘rsatamiz
+        option.classList.add("active");
+    }
+
+    // --- sahifa yuklanganda o'rtadagi div (data-id=3) ni default active qilish ---
+    const defaultOption = document.querySelector('.pizza_size_select[data-id="2"]');
+    if (defaultOption) {
+        setActive(defaultOption);
+    }
+
+    // --- boshqa div bosilganda shu divni active qilish ---
+    pizzaOptions.forEach(option => {
+        option.addEventListener("click", function () {
+            setActive(this);
+        });
+    });
+});
+
+</script>
+
+<script>
+    const maxSelection = 5;
 let count = 1;
 
 // --- Product ma'lumoti ---
@@ -4160,59 +4250,16 @@ function updateIngredientsDisplay() {
     gridContainer.appendChild(br1);
     gridContainer.appendChild(br2);
     
-    // Add to cart button yaratish
+    // Add to cart button yaratish (CLASS bilan)
     const addToCartBtn = document.createElement('button');
-    addToCartBtn.className = 'MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-Medium fs-18 jss8 css-np2orv';
+    addToCartBtn.className = 'MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-Medium fs-18 jss8 css-np2orv addToCartBtn';
     addToCartBtn.setAttribute('tabindex', '0');
     addToCartBtn.setAttribute('type', 'button');
     addToCartBtn.textContent = 'Add to cart';
-    addToCartBtn.id = 'addToCart';
     
     const rippleSpan = document.createElement('span');
     rippleSpan.className = 'MuiTouchRipple-root css-w0pj6f';
     addToCartBtn.appendChild(rippleSpan);
-    
-    // Event listener qo'shish
-    addToCartBtn.addEventListener('click', () => {
-        // Dough va edge mavjud bo'lmasa default qo'shish
-        if (!selectedPizza.ingredients.some(i => i.type === "dough")) {
-            setIngredient(defaultDough);
-        }
-        if (!selectedPizza.ingredients.some(i => i.type === "edge")) {
-            setIngredient(defaultEdge);
-        }
-
-        const totalPrice = (selectedPizza.price + getIngredientsTotal()) * count;
-        const cartProduct = {
-            id: product.id,
-            img: product.img,
-            aksiyaPrice: aksiyaBasePrice,
-            date: new Date().toISOString(),
-            description: product.description,
-            title: product.title,
-            quantity: count,
-            totalPrice: totalPrice.toFixed(2) + "₾",
-            pizzas: [
-                {
-                    id: selectedPizza.id,
-                    title: selectedPizza.title,
-                    price: selectedPizza.price,
-                    ingredients: selectedPizza.ingredients
-                }
-            ]
-        };
-        
-        // Cart ga qo'shish
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.push(cartProduct);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        console.log("Cart product qo'shildi:", cartProduct);
-        console.log("Hozirgi cart:", cart);
-        
-        // Muvaffaqiyatli qo'shilganlik haqida xabar
-        alert('Mahsulot savatchaga qo\'shildi!');
-    });
     
     muiBox.appendChild(gridContainer);
     muiBox.appendChild(addToCartBtn);
@@ -4270,8 +4317,18 @@ function initializePage(){
                     setIngredient({id, title, price, img, type:"extra"});
                     console.log(`${title} qo'shildi. Extra ingredients soni: ${currentExtraCount + 1}`);
                 } else {
-                    alert(`Maksimum ${maxExtraIngredients} ta extra ingredient tanlash mumkin!`);
-                    console.log(`Limit oshdi! Hozirgi extra soni: ${currentExtraCount}`);
+                      const errorPopup = document.querySelector('#Toastify-nostore');
+
+
+                    // Toastni ko'rsatish
+                    errorPopup.style.setProperty('display', 'flex', 'important');
+
+                    // 2 sekunddan keyin toastni yashirish va success ni o'chirish
+                    setTimeout(() => {
+                    errorPopup.style.setProperty('display', 'none', 'important');
+                    }, 2200);
+
+
                 }
             }
 
@@ -4388,12 +4445,79 @@ document.getElementById("minus")?.addEventListener("click", () => {
     }
 });
 
+// --- ADD TO CART HANDLER ---
+function addToCartHandler() {
+    // Dough va edge mavjud bo'lmasa default qo'shish
+    if (!selectedPizza.ingredients.some(i => i.type === "dough")) {
+        setIngredient(defaultDough);
+    }
+    if (!selectedPizza.ingredients.some(i => i.type === "edge")) {
+        setIngredient(defaultEdge);
+    }
+
+    const totalPrice = (selectedPizza.price + getIngredientsTotal()) * count;
+    const cartProduct = {
+        id: product.id,
+        img: product.img,
+        aksiyaPrice: aksiyaBasePrice,
+        date: new Date().toISOString(),
+        description: product.description,
+        title: product.title,
+        quantity: count,
+        totalPrice: totalPrice.toFixed(2) + "₾",
+        pizzas: [
+            {
+                id: selectedPizza.id,
+                title: selectedPizza.title,
+                price: selectedPizza.price,
+                ingredients: selectedPizza.ingredients
+            }
+        ]
+    };
+    
+    // Cart ga qo'shish
+    let cart = JSON.parse(localStorage.getItem('orders')) || [];
+    cart.push(cartProduct);
+    localStorage.setItem('orders', JSON.stringify(cart));
+    
+    console.log("Cart product qo'shildi:", cartProduct);
+    console.log("Hozirgi cart:", cart);
+    
+  const toast = document.querySelector('#Toastify-success');
+
+
+    // Toastni ko'rsatish
+    toast.style.setProperty('display', 'flex', 'important');
+
+    // 2 sekunddan keyin toastni yashirish va success ni o'chirish
+    setTimeout(() => {
+      toast.style.setProperty('display', 'none', 'important');
+      window.location.href='../pizza/'
+    }, 2200);
+    
+
+
+
+    
+}
+
+// EVENT DELEGATION - barcha Add to Cart tugmalar uchun
+document.addEventListener('click', function(e) {
+    // Agar bosilgan element yoki uning parent elementi addToCartBtn classiga ega bo'lsa
+    if (e.target.classList.contains('addToCartBtn') || 
+        e.target.closest('.addToCartBtn')) {
+        
+        e.preventDefault();
+        addToCartHandler();
+    }
+});
+
 // --- ADD TO CART ---
-// Add to cart funksiyasi endi updateIngredientsDisplay ichida yaratilgan tugma orqali ishlaydi
+// Add to cart funksiyasi endi universal event delegation orqali ishlaydi
 
 // Sahifa yuklanganda ishga tushirish
 document.addEventListener('DOMContentLoaded', initializePage);
-    </script>
+</script>
 
 
 
