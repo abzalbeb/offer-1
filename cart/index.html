@@ -1546,17 +1546,13 @@
                                 </a>
                                 <div class="flag-wrapper">
                                     <div style="cursor: pointer;">
-                                        <img src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png"
+                                        <img src="../assets/image/britsht.png"
                                             alt="ENG">
                                         <p class="p-style">ENG</p>
                                     </div>
 
                                     <div class="tooltip-flag">
-                                        <div>
-                                            <img class="img-postion-1" src="../assets/image/britsht.png" alt="UK">
-                                            <span class="text-postion-1">UK</span>
-                                        </div>
-                                        <div>
+                                        <div onclick="window.location='../geo/cart'">
                                             <img class="img-postion-2" src="../assets/image/gruziya.png" alt="GEO">
                                             <span class="text-postion-2">GEO</span>
                                         </div>
@@ -1592,7 +1588,8 @@
 
                                             </div>
                                             <div class="cart-order-container-btn">
-                                                <div class="view-btn"><button class="view-cart-btn">VIEW CART</button>
+                                                <div class="view-btn"><button onclick="cartAddress()"
+                                                        class="view-cart-btn1">VIEW CART</button>
                                                 </div>
                                                 <div class="cart-total">
                                                     <p>Total:<span class="redflag"> 0.00</span></p>
@@ -1686,10 +1683,10 @@
                         </a></div>
                     <div><a href="../sandwich/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img class="navbar_for_img" src="../assets/image/sandwich_inactive.svg" width="60" height="60"
+                                <div><img class="navbar_for_img" src="../assets/image/sandwich_active.svg" width="60" height="60"
                                         alt="Sandwich" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
-                                    style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Sandwich</p>
+                                    style="font-weight: normal; font-size: 20px; color: rgb(209, 10, 10);">Sandwich</p>
                             </div>
                         </a></div>
                     <div><a href="../loadpotato/" style="text-decoration: none;">
@@ -1748,8 +1745,8 @@
                                     </span></h3>
                             </div>
                             <div style="text-align: center;">
-                                <p class=" text-gray capitalize;"
-                                    style="font-family: 'Kanit', sans-serif !important;">Must Add Items On The Cart
+                                <p class=" text-gray capitalize;" style="font-family: 'Kanit', sans-serif !important;">
+                                    Must Add Items On The Cart
                                     Before You Proceed To Check Out</p>
                             </div><button
                                 class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-Regular fs-14 empty_btn css-13z6b64"
@@ -1848,7 +1845,26 @@
 
 
 
-
+                <div class="MuiDialog-container MuiDialog-scrollPaper css-ekeie0" role="presentation" tabindex="-1"
+                    style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1);">
+                    <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm css-yv7evq"
+                        role="dialog" aria-labelledby=":r1v:">
+                        <h2 class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-dv8akh" id=":r1v:"><span
+                                class="text-black" style="font-size: 32px;">Empty cart</span></h2>
+                        <div class="MuiDialogContent-root css-16q22cy">
+                            <p
+                                class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiDialogContentText-root css-fu9j73">
+                                <span class="">Are you sure?</span></p>
+                        </div>
+                        <div style="display: flex; justify-content: center; gap: 1rem; padding: 12px;"><button
+                                class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary jss1508 css-1bfuqwl"
+                                tabindex="0" type="button" style="border-radius: 30px;" onclick="calcels()">Cancel<span
+                                    class="MuiTouchRipple-root css-w0pj6f"></span></button><button
+                                class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary jss1509 css-1bfuqwl"
+                                tabindex="0" type="button" onclick="removeAll()">Empty!<span
+                                    class="MuiTouchRipple-root css-w0pj6f"></span></button></div>
+                    </div>
+                </div>
 
                 <div class="MuiBox-root css-1djk842"><button onclick="removeCart()"
                         class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary  jss8 css-1bfuqwl"
@@ -1856,9 +1872,9 @@
                             class="MuiTouchRipple-root css-w0pj6f"></span></button></div><br>
 
 
-                <div class="MuiBox-root css-gzlndu">
-                    <h1 class=""
-                        style="font-size: 36px;font-family: 'Kanit', sans-serif !important;font-weight:500;">Goes Well
+                <div style="display: none;" class="MuiBox-root css-gzlndu">
+                    <h1 class="" style="font-size: 36px;font-family: 'Kanit', sans-serif !important;font-weight:500;">
+                        Goes Well
                         Together</h1><br>
                     <div class="jss30" style="padding: 0px;">
                         <div class="jss32">
@@ -2018,47 +2034,10 @@
                     <div class="MuiBox-root css-j63orb">
                         <h1 class=" text-black" style="font-size: 36px; font-weight: 400">Checkout</h1>
                         <div>
-                            <div style="display: flex; align-items: center; width: 470px;">
-                                <p class=" fs-20 capitalize"
-                                    style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">Offer: 1+1 Medium Pizzas </p>
-                                <span class="text-red " style="margin-left: auto; font-weight: 500;">265.30₾</span>
-                            </div>
-                            <div style="display: flex; align-items: center; width: 470px;">
-                                <p class=" fs-20 capitalize"
-                                    style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">Offer: 1+1 Medium Pizzas </p>
-                                <span class="text-red " style="margin-left: auto; font-weight: 500;">27.90₾</span>
-                            </div>
-                            <div style="display: flex; align-items: center; width: 470px;">
-                                <p class=" fs-20 capitalize"
-                                    style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">Offer: 1+1 Large Pizzas </p>
-                                <span class="text-red " style="margin-left: auto; font-weight: 500;">41.90₾</span>
-                            </div><br>
-                            <h3 class=" fs-24 text-black weight_400">Total: <span class="text-red">335.10₾</span></h3>
-                            <div style="margin-top: 28px;">
-                                <h2 class=" fs-24 text-black weight_400">Promo Code</h2>
-                                <div
-                                    style="display: flex; flex-direction: row; gap: 28px; margin-top: 12px; margin-left: -12px;">
-                                    <div style="flex: 1 1 0%;">
-                                        <div
-                                            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-adornedEnd css-12okpmy">
-                                            <input placeholder="Code 123" type="text"
-                                                class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-1vhqyqh"
-                                                value="">
-                                            <div
-                                                class="MuiInputAdornment-root MuiInputAdornment-positionEnd css-1nvf7g0">
-                                                <p class="MuiTypography-root MuiTypography-body1 css-16473jz"></p>
-                                            </div>
-                                            <fieldset aria-hidden="true"
-                                                class="MuiOutlinedInput-notchedOutline css-1h7ywr6">
-                                                <legend class="css-ihdtdm"><span class="notranslate">​</span></legend>
-                                            </fieldset>
-                                        </div>
-                                    </div><button
-                                        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary fs-24  jss323 css-1bfuqwl"
-                                        tabindex="-1" type="button" disabled=""
-                                        style="width: 150px; height: 52px;">Apply</button>
-                                </div>
-                            </div><br>
+                            <div class="cart_cards" style="">
+                                </div><br>
+                            <h3 class=" fs-24 text-black weight_400">Total: <span class="text-red subTotal" >335.10₾</span></h3>
+                            
                         </div>
                     </div>
                 </div>
@@ -2349,7 +2328,7 @@
 
     <script>
         localStorage.removeItem("for_id")
-    localStorage.removeItem("edit")
+        localStorage.removeItem("edit")
     </script>
 
     <script src="../assets/js/terms-main.js"></script>

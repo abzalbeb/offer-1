@@ -260,6 +260,13 @@ function changeQuantity(orderId, change) {
             loadAndRenderAllItems(); // Re-render
         }
     }
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// total larni yig'ish
+let subTotal = cart.reduce((sum, item) => sum + (item.total || 0), 0);
+
+document.querySelector(".subTotal").innerHTML = subTotal.toFixed(2)
 }
 
 // Function to change cart item quantity
@@ -356,6 +363,16 @@ function loadAndRenderOrders() {
 }
 
  function removeCart(){
+    document.querySelector(".css-ekeie0").style="display:flex"
+    document.querySelector("body").style="overflow: hidden"
+}
+
+ function calcels(){
+    document.querySelector(".css-ekeie0").style="display:none"
+    document.querySelector("body").style="overflow: scroll"
+}
+
+function removeAll() {
     localStorage.removeItem('cart')
     localStorage.removeItem('order')
     localStorage.removeItem('orders')
@@ -406,3 +423,38 @@ function editOrder(orderId) {
         window.location.href = '../details';
     }
 }
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+// cart subtotal
+let cartTotal = cart.reduce((sum, item) => sum + (item.total || 0), 0);
+
+// orders subtotal (price * quantity)
+let ordersTotal = orders.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 0)), 0);
+
+// umumiy total
+let grandTotal = cartTotal + ordersTotal;
+document.querySelector(".subTotal").innerHTML = grandTotal.toFixed(2) + "₾"
+
+
+let cartDiv = document.querySelector(".cart_cards");
+
+cartDiv.innerHTML += orders.map(item => {
+    return `
+         <div class="cart_card">
+                                <p class=" fs-20 capitalize"
+                                    style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${item.title}</p>
+                                <span class="text-red " style="margin-left: auto; font-weight: 500;">${item.price*item.quantity}₾</span>
+                            </div>
+    `;
+}).join("");
+
+cartDiv.innerHTML += cart.map(item => {
+    return `
+         <div class="cart_card">
+                                <p class=" fs-20 capitalize"
+                                    style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${item.title}</p>
+                                <span class="text-red " style="margin-left: auto; font-weight: 500;">${item.price*item.quantity}₾</span>
+                            </div>
+    `;
+}).join("");
