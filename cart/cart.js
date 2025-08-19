@@ -153,7 +153,7 @@ function renderOrdersHTML(orders) {
                                 </div>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
-                                <h3 class="text-grey  fs-20"><s>${(order.aksiyaPrice * order.quantity).toFixed(2)}</s></h3>
+                                <h3 class="text-grey  fs-20"><s>${(order.totalPrice)}</s></h3>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0px;">
                                 <h3 class="text-red  fs-24" style="text-align: end;">${(order.price * order.quantity).toFixed(2)}</h3>
@@ -364,24 +364,45 @@ function loadAndRenderOrders() {
 }
 
 function editOrder(orderId) {
-      const orders = JSON.parse(localStorage.getItem('orders')) || [];
-      const order = orders.find(o => o.id === orderId);
-      
-      if (order) {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const order = orders.find(o => o.id === orderId);
+    
+    if (order) {
         // Tahrirlash rejimini yoqamiz
         localStorage.setItem('edit', 'true');
         // Tahrirlanayotgan buyurtma ID sini saqlaymiz
         localStorage.setItem('for_id', orderId);
+        
         // Mahsulot ma'lumotlarini saqlaymiz
         localStorage.setItem('selectedProduct', JSON.stringify({
-          title: order.title,
-          img: order.img,
-          description: order.description,
-          price: order.price,
-          aksiyaPrice: order.aksiyaPrice
+            id: order.id,
+            title: order.title,
+            img: order.img,
+            description: order.description,
+            price: order.price,
+            aksiyaPrice: order.aksiyaPrice
         }));
         
-        // Bosh sahifaga yo'naltiramiz
-        window.location.href = '../details'; // Asosiy sahifa manzili
-      }
+        // Pizza ma'lumotlarini ham saqlaymiz (agar mavjud bo'lsa)
+        if (order.pizzas && order.pizzas.length > 0) {
+            const pizzaData = order.pizzas[0]; // Birinchi pizza
+            
+            // Pizza ma'lumotlarini details sahifasi uchun formatga keltirish
+            const editData = {
+                selectedPizza: {
+                    id: "2", // yoki boshqa default
+                    title: pizzaData.title,
+                    price: order.price, // Asosiy price
+                    ingredients: []
+                },
+                quantity: order.quantity,
+                ingredients: pizzaData.ingredients || [] // 2-struktura ingredients
+            };
+            
+            localStorage.setItem('editData', JSON.stringify(editData));
+        }
+        
+        // Details sahifaga yo'naltiramiz
+        window.location.href = '../details';
     }
+}
