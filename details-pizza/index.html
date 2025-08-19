@@ -1992,6 +1992,14 @@
     </style>
     <style data-emotion="css-global" data-s=""></style>
     <style>
+        @media (max-width:600px) {
+                    .css-1celjv4 {
+            flex-basis: 58.3333%;
+            -webkit-box-flex: 0;
+            flex-grow: 0;
+            max-width: 100% !important;
+        }
+        }
         .css-k62kit {
             overflow: hidden;
             text-overflow: ellipsis;
@@ -2198,17 +2206,13 @@
                                 </a>
                                 <div class="flag-wrapper">
                                     <div style="cursor: pointer;">
-                                        <img src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png"
+                                        <img src="../assets/image/britsht.png"
                                             alt="ENG">
                                         <p class="p-style">ENG</p>
                                     </div>
 
                                     <div class="tooltip-flag">
-                                        <div>
-                                            <img class="img-postion-1" src="../assets/image/britsht.png" alt="UK">
-                                            <span class="text-postion-1">UK</span>
-                                        </div>
-                                        <div>
+                                        <div onclick="window.location='../geo/chicken'">
                                             <img class="img-postion-2" src="../assets/image/gruziya.png" alt="GEO">
                                             <span class="text-postion-2">GEO</span>
                                         </div>
@@ -2244,7 +2248,8 @@
 
                                             </div>
                                             <div class="cart-order-container-btn">
-                                                <div class="view-btn"><button class="view-cart-btn">VIEW CART</button>
+                                                <div class="view-btn"><button onclick="cartAddress()"
+                                                        class="view-cart-btn1">VIEW CART</button>
                                                 </div>
                                                 <div class="cart-total">
                                                     <p>Total:<span class="redflag"> 0.00</span></p>
@@ -2293,11 +2298,11 @@
             </section>
 
             <div class="categories-main" style="position: sticky; top: 0px; z-index: 1300; transition: 1s;">
-                <div
+                <div class="nav_cards"
                     style="display: flex; justify-content: space-between; padding-bottom: 12px; padding-top: 12px; align-items: center; overflow: scroll; gap: 12px; white-space: nowrap; box-shadow: rgb(173, 173, 173) 0px 2px 2px 0px; padding-inline: 50px;">
                     <div><a href="../offers/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="../assets/image/Offer_in_active.svg" width="60" height="60" alt="OFFERS"
+                                <div><img class="navbar_for_img" src="../assets/image/Offer_in_active.svg" width="60" height="60" alt="OFFERS"
                                         loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">OFFERS</p>
@@ -2305,7 +2310,7 @@
                         </a></div>
                     <div><a href="../pizza/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="../assets/image/pizza_inactive.svg" width="60" height="60" alt="Pizza"
+                                <div><img class="navbar_for_img" src="../assets/image/pizza_inactive.svg" width="60" height="60" alt="Pizza"
                                         loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Pizza</p>
@@ -2314,7 +2319,7 @@
                     <div>
                         <a href="../bread/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="../assets/image/bread_inactive.svg" width="60" height="60" alt="Bread"
+                                <div><img class="navbar_for_img" src="../assets/image/bread_inactive.svg" width="60" height="60" alt="Bread"
                                         loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Bread</p>
@@ -2323,7 +2328,7 @@
                     </div>
                     <div><a href="../chicken/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="../assets/image/chicken_inactive.svg" width="60" height="60"
+                                <div><img class="navbar_for_img" src="../assets/image/chicken_inactive.svg" width="60" height="60"
                                         alt="Chicken" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Chicken</p>
@@ -2331,7 +2336,7 @@
                         </a></div>
                     <div><a href="../wrap/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="../assets/image/wrap_inactive.svg" width="60" height="60" alt="Wrap"
+                                <div><img class="navbar_for_img" src="../assets/image/wrap_inactive.svg" width="60" height="60" alt="Wrap"
                                         loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Wrap</p>
@@ -2339,7 +2344,7 @@
                         </a></div>
                     <div><a href="../sandwich/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="../assets/image/sandwich_inactive.svg" width="60" height="60"
+                                <div><img class="navbar_for_img" src="../assets/image/sandwich_inactive.svg" width="60" height="60"
                                         alt="Sandwich" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Sandwich</p>
@@ -2347,7 +2352,7 @@
                         </a></div>
                     <div><a href="../loadpotato/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="../assets/image/load_potato_inactive.svg" width="60" height="60"
+                                <div><img class="navbar_for_img" src="../assets/image/load_potato_inactive.svg" width="60" height="60"
                                         alt="Load potato" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Load potato</p>
@@ -2355,7 +2360,7 @@
                         </a></div>
                     <div><a href="../dessert/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="../assets/image/dessert_inactive.svg" width="60" height="60"
+                                <div><img class="navbar_for_img" src="../assets/image/dessert_inactive.svg" width="60" height="60"
                                         alt="Dessert" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Dessert</p>
@@ -2363,15 +2368,15 @@
                         </a></div>
                     <div><a href="../drinks/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="../assets/image/dessert_active.svg" width="60" height="60" alt="Drinks"
+                                <div><img class="navbar_for_img" src="../assets/image/drinks_inactive.svg" width="60" height="60" alt="Drinks"
                                         loading="eager"></div>
                                 <p class="category-title IBM-Regular"
-                                    style="font-weight: normal; font-size: 20px; color: rgb(209, 10, 10);">Drinks</p>
+                                    style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Drinks</p>
                             </div>
                         </a></div>
                     <div><a href="../sauce/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="../assets/image/sauce_inactive.svg" width="60" height="60" alt="Sauce"
+                                <div><img class="navbar_for_img" src="../assets/image/sauce_inactive.svg" width="60" height="60" alt="Sauce"
                                         loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Sauce</p>
@@ -3856,7 +3861,7 @@
         </div>
 
     </div>
-    <div role="presentation" class="MuiDrawer-root MuiDrawer-modal MuiModal-root MuiModal-hidden css-12snods"
+<div role="presentation" class="MuiDrawer-root MuiDrawer-modal MuiModal-root MuiModal-hidden css-12snods"
         style="overflow: hidden; z-index: 9999999;">
         <div aria-hidden="true" class="MuiBackdrop-root MuiModal-backdrop css-919eu4"
             style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1);"></div>
@@ -3873,17 +3878,17 @@
                         </svg><span class="MuiTouchRipple-root css-w0pj6f"></span></button>
 
                     <div class="top_flag-icon">
-                        <div class="lang_En"><img
-                                src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png"
-                                loading="lazy" height="26" width="26" alt="flag en"></div>
-                        <div class="lang_Ge"><img src="../assets/image/britsht.png" loading="lazy" height="26"
+                        <div class="lang_Ge"><img src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png" loading="lazy" height="26"
                                 width="26" alt="flag ge"></div>
+                        <div class="lang_Ge"><img
+                                src="../assets/image/britsht.png"
+                                loading="lazy" height="26" width="26" alt="flag ge"></div>
                         <div class="lang_Ge"><img src="../assets/image/gruziya.png" loading="lazy" height="26"
                                 width="26" alt="flag ge"></div>
                     </div>
                     <hr class="MuiDivider-root MuiDivider-fullWidth css-mf11to">
                     <div class="scrollable">
-                        <div class="user-tooltip"><a href="../order-history/">
+                        <div class="user-tooltip"><a href="/order-history">
                                 <li class="MuiListItem-root MuiListItem-gutters css-qfmzwt">
                                     <div class="MuiListItemIcon-root list_item_icon css-kj3bb2"
                                         style="padding-left: 32px; width: 20px; height: 20px; padding-right: 25px; font-size: 16px;">
@@ -3896,7 +3901,7 @@
                                         </svg>
                                     </div><span class="list_item_text">Order History</span>
                                 </li>
-                            </a><a href="../favorites/">
+                            </a><a href="/favorites">
                                 <li class="MuiListItem-root MuiListItem-gutters css-qfmzwt">
                                     <div class="MuiListItemIcon-root list_item_icon css-kj3bb2"
                                         style="padding-left: 32px; width: 20px; height: 20px; padding-right: 25px; font-size: 16px;">
@@ -3909,7 +3914,7 @@
                                         </svg>
                                     </div><span class="list_item_text">Favorites</span>
                                 </li>
-                            </a><a href="../rewards/">
+                            </a><a href="/rewards">
                                 <li class="MuiListItem-root MuiListItem-gutters css-qfmzwt">
                                     <div class="MuiListItemIcon-root list_item_icon css-kj3bb2"
                                         style="padding-left: 32px; width: 20px; height: 20px; padding-right: 25px; font-size: 16px;">
@@ -3927,13 +3932,13 @@
                         <hr class="MuiDivider-root MuiDivider-fullWidth css-mf11to">
                         <div class="list_item">
                             <ul class="list_item_ul">
-                                <li><a href="../about/"><span class="span-li Kanit-Extra-Light fs-16 text-blue">About
+                                <li><a href="/about"><span class="span-li Kanit-Extra-Light fs-16 text-blue">About
                                             Domino's</span></a></li>
-                                <li><a href="../stores/"><span
+                                <li><a href="/stores"><span
                                             class="span-li Kanit-Extra-Light fs-16 text-blue">Stores</span></a></li>
                                 <li><span class="span-li Kanit-Extra-Light fs-16 text-blue">Hygiene Certificate</span>
                                 </li>
-                                <li><a href="../join-our-team/"><span
+                                <li><a href="/join-our-team"><span
                                             class="span-li Kanit-Extra-Light fs-16 text-blue">Join Our Team</span></a>
                                 </li>
                             </ul>
@@ -3941,16 +3946,16 @@
                         <hr class="MuiDivider-root MuiDivider-fullWidth css-mf11to">
                         <div class="list_item">
                             <ul class="list_item_ul">
-                                <li><a href="../terms-and-conditions/"><span
+                                <li><a href="/terms-and-conditions"><span
                                             class="span-li Kanit-Extra-Light fs-16 text-blue">Terms and
                                             Conditions</span></a></li>
-                                <li><a href="../privacy-policy"><span
+                                <li><a href="/privacy-policy"><span
                                             class="span-li Kanit-Extra-Light fs-16 text-blue">Privacy Policy</span></a>
                                 </li>
-                                <li><a href="../delivery-policy/"><span
+                                <li><a href="/delivery-policy"><span
                                             class="span-li Kanit-Extra-Light fs-16 text-blue">Delivery Policy</span></a>
                                 </li>
-                                <li><a href="../return-policy/"><span
+                                <li><a href="/return-policy"><span
                                             class="span-li Kanit-Extra-Light fs-16 text-blue">Return Policy</span></a>
                                 </li>
                             </ul>
