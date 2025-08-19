@@ -398,9 +398,16 @@ function editOrder(orderId) {
           aksiyaPrice: order.aksiyaPrice
         }));
         
-        // Bosh sahifaga yo'naltiramiz
-        window.location.href = '../details-pizza/'; // Asosiy sahifa manzili
-      }
+    const hasPizza = order.dataType === 'pizza' ||
+                     (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
+
+    // Yo'naltiramiz
+    if (hasPizza) {
+      window.location.href = '../details-pizza/';
+    } else {
+      window.location.href = '../details/';
+    }
+            }
     }
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
