@@ -4319,7 +4319,6 @@ function initializePage(){
                 } else {
                       const errorPopup = document.querySelector('#Toastify-nostore');
 
-
                     // Toastni ko'rsatish
                     errorPopup.style.setProperty('display', 'flex', 'important');
 
@@ -4327,8 +4326,6 @@ function initializePage(){
                     setTimeout(() => {
                     errorPopup.style.setProperty('display', 'none', 'important');
                     }, 2200);
-
-
                 }
             }
 
@@ -4445,7 +4442,7 @@ document.getElementById("minus")?.addEventListener("click", () => {
     }
 });
 
-// --- ADD TO CART HANDLER ---
+// --- ADD TO CART HANDLER (YANGILANGAN VERSIYA) ---
 function addToCartHandler() {
     // Dough va edge mavjud bo'lmasa default qo'shish
     if (!selectedPizza.ingredients.some(i => i.type === "dough")) {
@@ -4455,22 +4452,30 @@ function addToCartHandler() {
         setIngredient(defaultEdge);
     }
 
+    // Ingredients arrayni 2-chi strukturaga o'xshash formatga o'zgartirish
+    const formattedIngredients = selectedPizza.ingredients.map(ingredient => ({
+        name: ingredient.title,  // title -> name ga o'zgartirish
+        price: ingredient.price
+        // id, img, type larni olib tashlaymiz chunki 2-struktura bunday ma'lumot bermaydi
+    }));
+
     const totalPrice = (selectedPizza.price + getIngredientsTotal()) * count;
+    
     const cartProduct = {
-        id: product.id,
+        id: parseInt(product.id) || product.id,
         img: product.img,
         aksiyaPrice: aksiyaBasePrice,
         date: new Date().toISOString(),
         description: product.description,
         title: product.title,
         quantity: count,
+        price: selectedPizza.price, // 2-struktura price ni ham saqlaydi
         totalPrice: totalPrice.toFixed(2) + "₾",
         pizzas: [
             {
-                id: selectedPizza.id,
                 title: selectedPizza.title,
-                price: selectedPizza.price,
-                ingredients: selectedPizza.ingredients
+                price: 0, // 2-strukturada pizza price 0 bo'ladi
+                ingredients: formattedIngredients // yangi format
             }
         ]
     };
@@ -4480,25 +4485,19 @@ function addToCartHandler() {
     cart.push(cartProduct);
     localStorage.setItem('orders', JSON.stringify(cart));
     
-    console.log("Cart product qo'shildi:", cartProduct);
+    console.log("Cart product qo'shildi (2-struktura formatida):", cartProduct);
     console.log("Hozirgi cart:", cart);
     
-  const toast = document.querySelector('#Toastify-success');
-
+    const toast = document.querySelector('#Toastify-success');
 
     // Toastni ko'rsatish
     toast.style.setProperty('display', 'flex', 'important');
 
     // 2 sekunddan keyin toastni yashirish va success ni o'chirish
     setTimeout(() => {
-      toast.style.setProperty('display', 'none', 'important');
-      window.location.href='../pizza/'
+        toast.style.setProperty('display', 'none', 'important');
+        window.location.href='../pizza/'
     }, 2200);
-    
-
-
-
-    
 }
 
 // EVENT DELEGATION - barcha Add to Cart tugmalar uchun
