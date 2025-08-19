@@ -489,7 +489,7 @@ h1, h2, h3, h4, h5, h6, p {
     background: #fff;
     border-radius: 8px;
     width: 80px;
-    height: 75px;
+    /* height: 75px; */
     display: flex;           /* Yonma-yon joylash */
     align-items: center;     /* Vertikal markazlash */
     gap: 6px;                /* Oraliq */
@@ -520,6 +520,7 @@ h1, h2, h3, h4, h5, h6, p {
     .img-postion-2{
     position: relative;
     right: 15px;
+    top: 10px;
   }
   .text-postion-1{
     position: relative;
@@ -527,7 +528,7 @@ h1, h2, h3, h4, h5, h6, p {
   }
     .text-postion-2{
     position: relative;
-    top: -30px !important;
+    top: -18px !important;
   }
   .tooltip-flag span{
     position: relative;

@@ -368,6 +368,8 @@ items.forEach(el => {
         ${loc.img ? `<img src="${loc.img}" style="width:100px;height:auto;">` : ""}
       `)
       .openOn(map);
+      localStorage.setItem("address", storeName)
+      
   });
 });
 

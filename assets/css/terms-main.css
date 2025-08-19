@@ -15,6 +15,7 @@ svg:not(:root) {
     overflow-clip-margin: content-box;
     overflow: hidden;
 }
+
 .css-148fdm8 {
     display: inline-flex;
     -webkit-box-align: center;
@@ -403,6 +404,35 @@ h1, h2, h3, h4, h5, h6, p {
     .jss578 {
         height: 100dvh;
     }
+
+    .navbar_for_img{
+        width: 45px;
+        height: 45px;
+    }
+
+    .category-title{
+        font-size: 16px !important;
+    }
+
+    .nav_cards{
+        padding-inline: 20px !important;
+    }
+
+    .qty-plus{
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .qty-minus{
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .qty-count{
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 20px !important;
+    }
 }
 .jss578 {
     gap: 24px;
@@ -503,7 +533,7 @@ h1, h2, h3, h4, h5, h6, p {
     background: #fff;
     border-radius: 8px;
     width: 80px;
-    height: 75px;
+    /* height: 75px; */
     display: flex;           /* Yonma-yon joylash */
     align-items: center;     /* Vertikal markazlash */
     gap: 6px;                /* Oraliq */
@@ -534,6 +564,7 @@ h1, h2, h3, h4, h5, h6, p {
     .img-postion-2{
     position: relative;
     right: 15px;
+    top: 10px;
   }
   .text-postion-1{
     position: relative;
@@ -541,7 +572,7 @@ h1, h2, h3, h4, h5, h6, p {
   }
     .text-postion-2{
     position: relative;
-    top: -30px !important;
+    top: -18px !important;
   }
   .tooltip-flag span{
     position: relative;

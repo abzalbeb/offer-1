@@ -76,3 +76,9 @@ function menuClose() {
     }, 0);
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem("address")) {
+      document.querySelector(".select_address").innerHTML=localStorage.getItem("address")
+    }
+  })

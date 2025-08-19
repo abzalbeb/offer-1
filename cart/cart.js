@@ -26,7 +26,7 @@ function renderIngredients(ingredients) {
     
     return ingredients.map(ingredient => `
         <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px; width: 100%">
                 <div style="display: flex; align-items: center;">
                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-zwpvpp" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="AddIcon">
                         <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
@@ -45,7 +45,7 @@ function renderPizzas(pizzas) {
     
     return pizzas.map((pizza, index) => `
         <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px; margin-top: 15px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px; width: 100%; margin-top: 15px;">
                 <div style="display: flex; align-items: center;">
                     <span class="fs-16 text-black" style="text-decoration: none;">Product ${index + 1} : ${pizza.title || ''}</span>
                 </div>
@@ -84,7 +84,7 @@ function renderCartHTML(cartItems) {
                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 MuiGrid-grid-md-9.8 MuiGrid-grid-lg-10.5 css-1br1bhk">
                             <div>
                                 <div style="margin-bottom: 12px;">
-                                    <p class="text-black IBM-Regular fs-20 capitalize" style="font-weight: bold;">${item.title || item.name || ''}</p>
+                                    <p class="text-black IBM-Regular fs-20 capitalize tovar_title" style="font-weight: bold;">${item.title || item.name || ''}</p>
                                     <span class=" fs-14 text-gray capitalize">${item.description || ''}</span>
                                 </div>
                                 <div></div>
@@ -135,16 +135,16 @@ function renderOrdersHTML(orders) {
                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 MuiGrid-grid-md-9.8 MuiGrid-grid-lg-10.5 css-1br1bhk">
                             <div>
                                 <div style="margin-bottom: 12px;">
-                                    <p class="text-black IBM-Regular fs-20 capitalize" style="font-weight: bold;">${order.title || ''}</p>
+                                    <p class="text-black IBM-Regular fs-20 capitalize tovar_title" style="font-weight: bold;">${order.title || ''}</p>
                                     <span class=" fs-14 text-gray capitalize">${order.description || ''}</span>
                                 </div>
                                 <div>
                                     <div>
-                                        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px; width: 100%">
                                             <div style="display: flex; align-items: center;">
-                                                <span class="fs-14" style="color: black; font-weight: 900; font-style: italic;">Promotion: ${order.title || ''}</span>
+                                                <span class="fs-14" style="color: black; font-weight: 600; font-style: italic;">Promotion: ${order.title || ''}</span>
                                             </div>
-                                            <p class="fs-14" style="color: black; font-weight: 900; font-style: italic;">starting from ${order.price ? order.price.toFixed(2) + '₾' : ''}</p>
+                                            <p class="fs-14 title_prices" style="color: black; font-weight: 600; font-style: italic;">starting from ${order.price ? order.price.toFixed(2) + '₾' : ''}</p>
                                         </div>
                                         <div>
                                             ${renderPizzas(order.pizzas)}
