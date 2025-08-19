@@ -77,7 +77,7 @@ function renderCartHTML(cartItems) {
                 <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-fgqxdv">
                     <div class="MuiGrid-root MuiGrid-container css-1d3bbye">
                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-3.5 MuiGrid-grid-md-2.2 MuiGrid-grid-lg-1.5 css-2g1k7u">
-                            <div>
+                            <div class="for_cart_img">
                                 <img src="${item.img || item.image || 'https://dominosge.s3.eu-central-1.amazonaws.com/Cheese_Bread_Bacon_&amp;_Jalapeno.webp'}" alt="${item.title || item.name || ''}" style="width: 156px; height: 68px; object-fit: contain;">
                             </div>
                         </div>
@@ -128,7 +128,7 @@ function renderOrdersHTML(orders) {
                 <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-fgqxdv">
                     <div class="MuiGrid-root MuiGrid-container css-1d3bbye">
                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-3.5 MuiGrid-grid-md-2.2 MuiGrid-grid-lg-1.5 css-2g1k7u">
-                            <div>
+                            <div class="for_cart_img">
                                 <img src="${order.img || ''}" alt="${order.title || ''}" style="width: 156px; height: 68px; object-fit: contain;">
                             </div>
                         </div>

@@ -82,6 +82,31 @@
         max-width: 66.6667%;
     }
 }
+
+@media(max-width: 600px){
+    .css-1d3bbye{
+        display: flex;
+    }
+
+    .css-fgqxdv{
+        padding: 30px;
+    }
+
+    .for_cart_img{
+        width: 100px;
+    height: 68px;
+    overflow: hidden;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    }
+
+    .for_cart_img img{
+        width: 100% !important;
+        height: auto !important;
+    }
+}
+
 .capitalize {
     text-transform: capitalize;
 }

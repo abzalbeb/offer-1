@@ -1598,10 +1598,6 @@
             padding-right: 0 !important;
         }
 
-        .jss47 {
-            padding-right: 20px;
-        }
-
         .bonus_texts {
             margin-left: 40px;
         }
@@ -2073,12 +2069,81 @@
             padding: 20px 10px 20px 10px !important;
             margin-bottom: 60px !important;
         }
+        .bonus_card img{
+            width: 90px;
+        height: 80px;
+        margin-left: 8px;
+        padding-top: 5px;
+        padding-block: 10px;
+        padding-bottom: 5px;
+        object-fit: contain;
+        }
+
+        .ingre_modal{
+            padding: 5px 15px 30px 15px !important;
+        }
+
+        .for_calculators{
+            margin-top: 5px;
+            justify-content: space-between !important;
+        }
+
+        #plus{
+            width: 30px !important;
+    height: 30px !important;
+        }
+
+        #minus{
+            width: 30px !important;
+    height: 30px !important;
+        }
+
+        #count{
+            width: 30px !important;
+    height: 30px !important;
+    font-size: 20px !important;
+        }
+
+        #price{
+            font-size: 24px !important;
+        }
+
+        .css-isbt42>.MuiGrid-item {
+    padding-top: 5px;
+}
+
+        .bonus_card{
+            position: relative;
+            padding-left: 0;
+            padding-right: 8px !important;
+        }
+
+        .bonus_texts{
+            margin-left: 8px;
+        }
+
+        .bonus_texts h2 {
+            font-size: 16px;
+        padding-top: 5px;
+}
+
+.for_red_count{
+    position: absolute;
+    right: 20px;
+        top: 3px;
+        font-size: 16px;
+}
+
+.bonus_texts p {
+    line-height: 14px;
+    font-size: 12px;
+}
     }
 
     @media (max-width: 599px) {
         .jss1 {
-            padding: 25px !important;
-            margin-bottom: 50px !important;
+                    padding: 20px 10px 20px 10px;
+        margin-bottom: 60px;
         }
     }
 
@@ -2118,7 +2183,7 @@
                                     </div>
                                 </a></div>
                         </div>
-                        <div style="display: flex; justify-content: center;"><img
+                        <div onclick="window.location='../'" style="display: flex; justify-content: center;"><img
                                 src="../assets/image/dominos_blue_logo.c0fd9781d3faea268710.webp" alt="Dominos Logo"
                                 width="178" height="38" style="cursor: pointer;"></div>
                         <div style="display: flex; align-items: center; justify-content: flex-end;">
@@ -2298,10 +2363,10 @@
                         </a></div>
                     <div><a href="../drinks/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img src="../assets/image/dessert_active.svg" width="60" height="60" alt="Drinks"
+                                <div><img src="../assets/image/drinks_inactive.svg" width="60" height="60" alt="Drinks"
                                         loading="eager"></div>
                                 <p class="category-title IBM-Regular"
-                                    style="font-weight: normal; font-size: 20px; color: rgb(209, 10, 10);">Drinks</p>
+                                    style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Drinks</p>
                             </div>
                         </a></div>
                     <div><a href="../sauce/" style="text-decoration: none;">
@@ -2338,7 +2403,7 @@
                                             Sauce
                                             (Cheddar or Yogurt)</p>
                                     </div>
-                                    <div
+                                    <div class="for_calculators"
                                         style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 12px;">
                                         <div>
                                             <div class="" style="display: inline-flex;">
@@ -3892,7 +3957,7 @@ function initializePage() {
 
             const ingredientDiv = document.createElement('div');
             ingredientDiv.dataset.key = key;
-            ingredientDiv.style.cssText = "width: 350px; display: flex; justify-content: space-between; margin-bottom: 5px;";
+            ingredientDiv.style.cssText = "max-width: 350px; width: 100%; display: flex; justify-content: space-between; margin-bottom: 5px;";
 
             ingredientDiv.innerHTML = `
                 <div style="display: flex; justify-content: space-between; flex: 1 1 0%;">
@@ -4088,7 +4153,7 @@ function loadPizzaIngredients(pizzaId, ingredients) {
         // Ingredient div yaratish
         const ingredientDiv = document.createElement('div');
         ingredientDiv.dataset.key = key;
-        ingredientDiv.style.cssText = "width: 350px; display: flex; justify-content: space-between; margin-bottom: 5px;";
+        ingredientDiv.style.cssText = "max-width: 350px; width:100%; display: flex; justify-content: space-between; margin-bottom: 5px;";
 
         ingredientDiv.innerHTML = `
             <div style="display: flex; justify-content: space-between; flex: 1 1 0%;">

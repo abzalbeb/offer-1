@@ -56,7 +56,7 @@ if (order == "medium_pizza") {
                                     </div>
                                 </div>
                                 <div class="ingredient_cart">
-                                <div style="padding: 5px 0px 30px 20px;font-weight: 300;" id="ingredient_cards_0">
+                                <div class="ingre_modal" style="padding: 5px 0px 30px 20px;font-weight: 300;" id="ingredient_cards_0">
                                     </div>
                                 </div><div class="ingradients_menu">
                                 <div style="padding-bottom: 20px;" class="MuiBox-root css-0">
@@ -1157,7 +1157,7 @@ if (order == "medium_pizza") {
                                     </div>
                                 </div>
                                 <div class="ingredient_cart">
-                                <div style="padding: 5px 0px 30px 20px;font-weight: 300;" id="ingredient_cards_1">
+                                <div class="ingre_modal" style="padding: 5px 0px 30px 20px;font-weight: 300;" id="ingredient_cards_1">
                                     </div>
                                 </div><div class="ingradients_menu">
                                 <div style="padding-bottom: 20px;" class="MuiBox-root css-0">
@@ -2463,7 +2463,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                     </div>
                                 </div>
                                 <div class="ingredient_cart">
-                                <div style="padding: 5px 0px 30px 20px;font-weight: 300;" id="ingredient_cards_0">
+                                <div class="ingre_modal" style="padding: 5px 0px 30px 20px;font-weight: 300;" id="ingredient_cards_0">
                                     </div>
                                 </div><div class="ingradients_menu">
                                 <div style="padding-bottom: 20px;" class="MuiBox-root css-0">
@@ -3564,7 +3564,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                     </div>
                                 </div>
                                 <div class="ingredient_cart">
-                                <div style="padding: 5px 0px 30px 20px;font-weight: 300;" id="ingredient_cards_1">
+                                <div class="ingre_modal" style="padding: 5px 0px 30px 20px;font-weight: 300;" id="ingredient_cards_1">
                                     </div>
                                 </div><div class="ingradients_menu">
                                 <div style="padding-bottom: 20px;" class="MuiBox-root css-0">
