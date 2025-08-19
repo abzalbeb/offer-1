@@ -3952,7 +3952,7 @@ function initializePage() {
             }
 
             if (selectedItems.size >= maxSelection) {
-                alert(`Siz faqat ${maxSelection} ta ingredient tanlashingiz mumkin!`);
+                // alert(`Siz faqat ${maxSelection} ta ingredient tanlashingiz mumkin!`);
                 return;
             }
 
@@ -4220,7 +4220,7 @@ function addToCart() {
     console.log("selectedItemsMap:", selectedItemsMap); // Debug
 
     if (!product || !product.title) {
-        alert('Iltimos, avval asosiy mahsulotni tanlang!');
+        // alert('Iltimos, avval asosiy mahsulotni tanlang!');
         return;
     }
 
@@ -4272,7 +4272,7 @@ function addToCart() {
                 }
             }
         });
-        alert(`Iltimos, ${requiredPizzaCount} ta pizza tanlang!`);
+        // alert(`Iltimos, ${requiredPizzaCount} ta pizza tanlang!`);
         return;
     }
 
@@ -4371,9 +4371,9 @@ function addToCart() {
         }
         localStorage.removeItem("edit");
         localStorage.removeItem("for_id");
-        alert(`Buyurtma yangilandi! ID: ${orderId}, Jami narx: ${totalPrice}₾`);
+        // alert(`Buyurtma yangilandi! ID: ${orderId}, Jami narx: ${totalPrice}₾`);
     } else {
-        alert(`${count} ta yangi mahsulot savatga qo'shildi! Buyurtma ID: ${orderId}, Jami narx: ${totalPrice}₾`);
+        // alert(`${count} ta yangi mahsulot savatga qo'shildi! Buyurtma ID: ${orderId}, Jami narx: ${totalPrice}₾`);
     }
 
     orders.push(newOrder);
@@ -4385,7 +4385,7 @@ function addToCart() {
     selectedItemsMap.clear();
 
     setTimeout(() => {
-        window.location.href = "cart.html";
+        window.location.href = "../cart";
     }, 1000);
 }
 
@@ -4482,7 +4482,7 @@ function removeFromCart(orderId) {
 
         localStorage.setItem('orders', JSON.stringify(updatedOrders));
         updateCartDisplay();
-        alert('Buyurtma savatdan olib tashlandi!');
+        // alert('Buyurtma savatdan olib tashlandi!');
     }
 }
 
