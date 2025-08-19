@@ -707,7 +707,7 @@
         @media (max-width:599.95px) {
             .jss34 {
                 display: flex;
-                padding: 10px 10px;
+                padding: 10px 10px !important;
             }
         }
 
@@ -1405,6 +1405,10 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
 
     <style>
+        
+        .slick-track{
+            display: flex !important; 
+        }
         .jss54 {
             width: 277px !important;
             height: 325px !important;
@@ -4650,7 +4654,7 @@
                                 loading="lazy" height="26" width="26" alt="flag ge"></div>
                         <div class="lang_Ge"><img src="../assets/image/britsht.png" loading="lazy" height="26"
                                 width="26" alt="flag ge"></div>
-                        <div class="lang_Ge"><img src="../assets/image/gruziya.png" loading="lazy" height="26"
+                        <div onclick="window.location='../geo'" class="lang_Ge"><img src="../assets/image/gruziya.png" loading="lazy" height="26"
                                 width="26" alt="flag ge"></div>
                     </div>
                     <hr class="MuiDivider-root MuiDivider-fullWidth css-mf11to">
