@@ -2538,7 +2538,7 @@
                                                                         <p class="fs-13 text-gray">Small Size - 18cm
                                                                             4pcs</p>
                                                                         <span style="font-weight: 500;"
-                                                                            class="fs-15 text-red">18.90₾</span>
+                                                                            class="fs-15 text-red small_price">18.90₾</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -2609,8 +2609,8 @@
                                                                     <div style="text-align: center; margin-top: 12px;">
                                                                         <p class="fs-13 text-gray">Large Size - 33cm
                                                                             8pcs</p>
-                                                                        <span style="font-weight: 500;"
-                                                                            class="fs-15 text-red">43.90₾</span>
+                                                                        <span  style="font-weight: 500;"
+                                                                            class="fs-15 text-red large_price">43.90₾</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -4113,7 +4113,7 @@ imgDivs.forEach(div => {
         const defaultPizza = {
             id: "2",
             title: "Medium Size - 26cm 6pcs",
-            price: 30.90,
+            price: parseFloat(product.price),
             ingredients: []
         };
         let selectedPizza = JSON.parse(JSON.stringify(defaultPizza));
@@ -4581,6 +4581,23 @@ imgDivs.forEach(div => {
         document.addEventListener('DOMContentLoaded', initializePage);
 
 
+let small_price = document.querySelector(".small_price");
+
+if (small_price && product.price) {
+    small_price.textContent = (product.price*1-11).toFixed(2) + " ₾";
+}
+
+let totalPricePizaa = document.querySelector(".totalPricePizaa");
+
+if (totalPricePizaa && product.price) {
+    totalPricePizaa.textContent = (product.price).toFixed(2) + " ₾";
+}
+
+let totalPriceDiv = document.querySelector(".large_price");
+
+if (totalPriceDiv && product.price) {
+    totalPriceDiv.textContent = (product.price*1+12).toFixed(2) + " ₾";
+}
 
 
     </script>
