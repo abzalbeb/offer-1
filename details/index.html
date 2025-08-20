@@ -3875,6 +3875,7 @@
 
     <script src="./script.js"></script>
 
+
     <script>
         // Global variables
 const maxSelection = 5;
@@ -3890,17 +3891,102 @@ if (localStorage.getItem("edit") == "true") {
     }
 }
 
+// Real-time narx hisoblash funksiyasi
+function calculateTotalPrice() {
+    if (!product || !product.price || !product.aksiyaPrice) {
+        return;
+    }
+
+    // Pizzalar va ingredientlarning umumiy qo'shimcha narxi
+    let additionalPrice = 0;
+    
+    // Har bir pizza blokini tekshirish
+    document.querySelectorAll('.pizza-block').forEach(block => {
+        const id = block.dataset.id;
+        const selectedCard = block.querySelector(`#selected_card_${id}`);
+        
+        // Agar pizza tanlangan bo'lsa
+        if (selectedCard && selectedCard.style.display === 'flex') {
+            // Pizza narxini qo'shish
+            if (pizzaSelectionData.has(id)) {
+                const pizzaData = pizzaSelectionData.get(id);
+                additionalPrice += pizzaData.price || 0;
+            } else {
+                // DOM'dan pizza narxini olish
+                const priceElement = selectedCard.querySelector('.for_red_count');
+                if (priceElement) {
+                    const priceText = priceElement.textContent;
+                    const price = parseFloat(priceText.replace(/[^\d.]/g, '')) || 0;
+                    additionalPrice += price;
+                }
+            }
+            
+            // Ingredientlar narxini qo'shish
+            const selectedItems = selectedItemsMap.get(id);
+            if (selectedItems && selectedItems.size > 0) {
+                selectedItems.forEach(key => {
+                    const parts = key.split('+');
+                    if (parts.length > 1) {
+                        const priceStr = parts.slice(1).join('+');
+                        const price = parseFloat(priceStr.replace(/[^\d.]/g, '')) || 0;
+                        additionalPrice += price;
+                    }
+                });
+            }
+        }
+    });
+
+    // Umumiy narxni hisoblash
+    let totalPrice;
+    let basePrice = product.aksiyaPrice || product.price;
+    
+    if (product.description && product.description.includes("get second for free")) {
+        // 1+1 aksiya: asosiy narx * miqdor + qo'shimcha narx (faqat bir marta)
+        totalPrice = (basePrice * count) + additionalPrice;
+    } else {
+        // Oddiy mahsulot: (asosiy narx + qo'shimcha narx) * miqdor
+        totalPrice = (basePrice + additionalPrice) * count;
+    }
+
+    // Narxlarni yangilash
+    const priceElement = document.getElementById("price");
+    const aksiyaPriceElement = document.getElementById("aksiyaPrice");
+    
+    if (priceElement) {
+        priceElement.textContent = totalPrice.toFixed(2) + "₾";
+    }
+    
+    if (aksiyaPriceElement) {
+        aksiyaPriceElement.textContent = totalPrice.toFixed(2) + "₾";
+    }
+    
+    console.log("Price updated:", {
+        basePrice: basePrice,
+        additionalPrice: additionalPrice,
+        count: count,
+        totalPrice: totalPrice
+    });
+}
+
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function () {
     initializePage();
+    
+    // Dastlabki narxni hisoblash
+    setTimeout(() => {
+        calculateTotalPrice();
+    }, 100);
 
     // Edit rejimida mavjud buyurtmani yuklash
     if (localStorage.getItem("edit") === "true") {
         const editId = parseInt(localStorage.getItem("for_id")) || 0;
         if (editId > 0) {
-            // Biroz kechikish bilan yuklash - DOM tayyor bo'lishi uchun
             setTimeout(() => {
                 loadExistingOrder(editId);
+                // Edit yuklangandan keyin narxni hisoblash
+                setTimeout(() => {
+                    calculateTotalPrice();
+                }, 500);
             }, 200);
         }
     }
@@ -3932,7 +4018,7 @@ function initializePage() {
         }
     });
 
-    // Initialize ingredient selection
+    // Initialize ingredient selection - YANGILANGAN VERSIYA
     document.querySelectorAll('[class^="for_vibor_"]').forEach(item => {
         item.addEventListener('click', function () {
             const pizzaBlock = this.closest('.pizza-block');
@@ -3946,19 +4032,25 @@ function initializePage() {
             const price = this.dataset.price;
             const key = title + '+' + price + '₾';
 
+            // Ingredient allaqachon tanlanganligini tekshirish
             if (selectedItems.has(key)) {
+                console.log(`Ingredient already selected: ${key}. Removing...`);
                 removeIngredient(pizzaId, key);
                 return;
             }
 
+            // Maksimal tanlash limitini tekshirish
             if (selectedItems.size >= maxSelection) {
-                // alert(`Siz faqat ${maxSelection} ta ingredient tanlashingiz mumkin!`);
+                console.log(`Maximum selection limit reached: ${maxSelection}`);
                 return;
             }
 
+            // Yangi ingredient qo'shish
+            console.log(`Adding new ingredient: ${key}`);
             selectedItems.add(key);
             this.classList.add('for_active_1');
 
+            // DOM'ga ingredient div qo'shish
             const ingredientDiv = document.createElement('div');
             ingredientDiv.dataset.key = key;
             ingredientDiv.style.cssText = "max-width: 350px; width: 100%; display: flex; justify-content: space-between; margin-bottom: 5px;";
@@ -3966,7 +4058,7 @@ function initializePage() {
             ingredientDiv.innerHTML = `
                 <div style="display: flex; justify-content: space-between; flex: 1 1 0%;">
                     <span class="fs-13 for_ingradient_title">${title}</span>
-                    <span class="fs-13 for_ingradient_price">${price}</span>
+                    <span class="fs-13 for_ingradient_price">+${price}₾</span>
                 </div>
                 <div>
                     <svg class="delete-icon" viewBox="0 0 24 24" style="cursor:pointer; width: 20px; height: 20px;">
@@ -3975,11 +4067,15 @@ function initializePage() {
                 </div>
             `;
 
+            // Delete tugmasi uchun event listener
             ingredientDiv.querySelector('.delete-icon').addEventListener('click', () => {
                 removeIngredient(pizzaId, key);
             });
 
             container.appendChild(ingredientDiv);
+            
+            // Narxni yangilash
+            calculateTotalPrice();
         });
     });
 
@@ -4002,18 +4098,45 @@ function initializePage() {
     });
 }
 
+// YANGILANGAN updateQuantity funksiyasi
+function updateQuantity() {
+    document.getElementById("count").textContent = count;
+    
+    // Real-time narx hisoblash
+    calculateTotalPrice();
+}
+
+document.addEventListener("click", (e) => {
+  const card = e.target.closest(".for_vibor_2");
+  if (!card) return;
+
+  const svg = card.querySelector("svg");
+
+  if (card.classList.contains("for_active_2")) {
+    // Agar active bo'lsa -> o'chiramiz va oq border qilamiz, svg ni yashiramiz
+    card.classList.remove("for_active_2");
+    card.style.border = "2px solid rgb(220, 220, 220)";
+    if (svg) svg.style.display = "none";
+  } else {
+    // Agar active bo'lmasa -> qo'shamiz va standart css holatiga qaytaramiz
+    card.classList.add("for_active_2");
+    card.style.border = ""; // css fayldagi border ishlaydi
+    if (svg) svg.style.display = "";
+  }
+});
+
 function loadExistingOrder(orderId) {
-    console.log("Loading existing order:", orderId); // Debug
+    console.log("Loading existing order:", orderId);
 
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     const existingOrder = orders.find(order => order.id === orderId);
 
     if (!existingOrder) {
-        console.log("Order not found"); // Debug
+        console.log("Order not found");
         return;
     }
 
-    console.log("Found order:", existingOrder); // Debug
+    console.log("Found order:", existingOrder);
 
     // Update product info
     product = {
@@ -4031,7 +4154,7 @@ function loadExistingOrder(orderId) {
     // Load pizzas
     if (existingOrder.pizzas && existingOrder.pizzas.length > 0) {
         existingOrder.pizzas.forEach((pizza, index) => {
-            console.log(`Loading pizza ${index}:`, pizza); // Debug
+            console.log(`Loading pizza ${index}:`, pizza);
             
             // Pizza ma'lumotlarini saqlash
             pizzaSelectionData.set(index.toString(), {
@@ -4055,7 +4178,7 @@ function loadExistingOrder(orderId) {
                 });
 
                 if (matchingCard) {
-                    console.log(`Selecting pizza card for ${pizza.title}`); // Debug
+                    console.log(`Selecting pizza card for ${pizza.title}`);
                     selectPizza(index.toString(), matchingCard);
 
                     // Ingredientlarni yuklash
@@ -4070,8 +4193,9 @@ function loadExistingOrder(orderId) {
     }
 }
 
+// YANGILANGAN selectPizza funksiyasi
 function selectPizza(id, card) {
-    console.log(`Selecting pizza for ID: ${id}`); // Debug
+    console.log(`Selecting pizza for ID: ${id}`);
 
     const bonusCards = document.querySelector(`#bonus_cards_${id}`);
     const selectedCard = document.querySelector(`#selected_card_${id}`);
@@ -4095,15 +4219,13 @@ function selectPizza(id, card) {
         selectedCard.querySelector(`#bonus_texts_${id} p`).textContent = description;
         selectedCard.querySelector(`#selected_card_${id} .for_red_count`).textContent = priceText;
 
-        // Pizza ma'lumotlarini saqlash (faqat yangi tanlovda)
-        if (!pizzaSelectionData.has(id)) {
-            const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
-            pizzaSelectionData.set(id, {
-                title: title,
-                price: price,
-                originalIngredients: []
-            });
-        }
+        // Pizza ma'lumotlarini saqlash
+        const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
+        pizzaSelectionData.set(id, {
+            title: title,
+            price: price,
+            originalIngredients: []
+        });
     }
 
     // Edit rejimida bo'lmasa, avvalgi tanlovlarni tozalash
@@ -4116,16 +4238,19 @@ function selectPizza(id, card) {
             el.classList.remove('for_active_1');
         });
     }
+    
+    // Narxni yangilash
+    calculateTotalPrice();
 }
 
 function loadPizzaIngredients(pizzaId, ingredients) {
-    console.log(`Loading ingredients for pizza ${pizzaId}:`, ingredients); // Debug
+    console.log(`Loading ingredients for pizza ${pizzaId}:`, ingredients);
 
     if (!ingredients || !ingredients.length) return;
 
     const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
     if (!container) {
-        console.log(`Container not found for pizza ${pizzaId}`); // Debug
+        console.log(`Container not found for pizza ${pizzaId}`);
         return;
     }
 
@@ -4143,14 +4268,14 @@ function loadPizzaIngredients(pizzaId, ingredients) {
         const key = cleanName + '+' + ing.price + '₾';
         selectedItemsMap.get(pizzaId).add(key);
 
-        console.log(`Adding ingredient: ${cleanName}, key: ${key}`); // Debug
+        console.log(`Adding ingredient: ${cleanName}, key: ${key}`);
 
         // Tegishli tugmani faollashtirish
         const buttons = document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}`);
         buttons.forEach(btn => {
             if (btn.dataset.title === cleanName && parseFloat(btn.dataset.price) === ing.price) {
                 btn.classList.add('for_active_1');
-                console.log(`Activated button for: ${cleanName}`); // Debug
+                console.log(`Activated button for: ${cleanName}`);
             }
         });
 
@@ -4177,10 +4302,14 @@ function loadPizzaIngredients(pizzaId, ingredients) {
 
         container.appendChild(ingredientDiv);
     });
+    
+    // Ingredientlar yuklangandan keyin narxni yangilash
+    calculateTotalPrice();
 }
 
+// YANGILANGAN removeIngredient funksiyasi
 function removeIngredient(pizzaId, key) {
-    console.log(`Removing ingredient: ${key} from pizza ${pizzaId}`); // Debug
+    console.log(`Removing ingredient: ${key} from pizza ${pizzaId}`);
 
     const selectedItems = selectedItemsMap.get(pizzaId);
     if (selectedItems) {
@@ -4190,37 +4319,53 @@ function removeIngredient(pizzaId, key) {
     // Tugmani deaktivatsiya qilish
     const parts = key.split('+');
     const ingredientName = parts[0];
-    const price = parseFloat(parts[1].replace('₾', ''));
+    const priceStr = parts.slice(1).join('+');
+    const price = parseFloat(priceStr.replace('₾', ''));
 
+    // Tegishli tugmani topish va deaktivatsiya qilish
     document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}`).forEach(v => {
-        if (v.dataset.title === ingredientName && parseFloat(v.dataset.price) === price) {
+        const btnTitle = v.dataset.title;
+        const btnPrice = parseFloat(v.dataset.price);
+        
+        if (btnTitle === ingredientName && btnPrice === price) {
             v.classList.remove('for_active_1');
+            console.log(`Deactivated button for: ${ingredientName}`);
         }
     });
 
-    // DOM'dan o'chirish
+    // DOM'dan ingredient div'ini o'chirish
     const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
     if (container) {
         const elementToRemove = container.querySelector(`[data-key="${key}"]`);
         if (elementToRemove) {
             elementToRemove.remove();
+            console.log(`Removed ingredient div: ${key}`);
         }
     }
+    
+    // Narxni yangilash
+    calculateTotalPrice();
 }
 
-function updateQuantity() {
-    document.getElementById("count").textContent = count;
-    document.getElementById("price").textContent = (product.price * count).toFixed(2) + "₾";
-    document.getElementById("aksiyaPrice").textContent = (product.aksiyaPrice * count).toFixed(2) + "₾";
+// Qo'shimcha: Debug uchun ingredient holatini tekshirish funksiyasi
+function checkIngredientState(pizzaId) {
+    const selectedItems = selectedItemsMap.get(pizzaId);
+    console.log(`Pizza ${pizzaId} selected ingredients:`, Array.from(selectedItems || []));
+    
+    const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
+    const domElements = container ? container.querySelectorAll('[data-key]').length : 0;
+    console.log(`DOM elements count: ${domElements}`);
+    
+    const activeButtons = document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}.for_active_1`).length;
+    console.log(`Active buttons count: ${activeButtons}`);
 }
 
 function addToCart() {
-    console.log("AddToCart called"); // Debug
-    console.log("pizzaSelectionData:", pizzaSelectionData); // Debug
-    console.log("selectedItemsMap:", selectedItemsMap); // Debug
+    console.log("AddToCart called");
+    console.log("pizzaSelectionData:", pizzaSelectionData);
+    console.log("selectedItemsMap:", selectedItemsMap);
 
     if (!product || !product.title) {
-        // alert('Iltimos, avval asosiy mahsulotni tanlang!');
         return;
     }
 
@@ -4272,12 +4417,11 @@ function addToCart() {
                 }
             }
         });
-        // alert(`Iltimos, ${requiredPizzaCount} ta pizza tanlang!`);
         return;
     }
 
     // Collect selected pizzas and calculate total price
-    let additionalPrice = 0; // Pizzalar va ingredientlar uchun qo'shimcha narx
+    let additionalPrice = 0;
     const pizzasArray = [];
 
     selectedPizzaBlocks.forEach(id => {
@@ -4289,13 +4433,11 @@ function addToCart() {
 
         // Pizza ma'lumotlarini olish
         if (pizzaSelectionData.has(id)) {
-            // Saqlangan ma'lumotlardan foydalanish
             const savedData = pizzaSelectionData.get(id);
             pizza.title = savedData.title;
             pizza.price = savedData.price;
-            console.log(`Using saved data for pizza ${id}:`, savedData); // Debug
+            console.log(`Using saved data for pizza ${id}:`, savedData);
         } else {
-            // DOM'dan olish
             const titleElement = document.querySelector(`#bonus_texts_${id} h2`);
             const priceElement = document.querySelector(`#selected_card_${id} .for_red_count`);
             
@@ -4304,7 +4446,7 @@ function addToCart() {
                 const priceText = priceElement.textContent;
                 pizza.price = parseFloat(priceText.replace(/[^\d.]/g, '')) || 0;
             }
-            console.log(`Using DOM data for pizza ${id}:`, pizza); // Debug
+            console.log(`Using DOM data for pizza ${id}:`, pizza);
         }
 
         // Pizza narxini qo'shish
@@ -4316,7 +4458,7 @@ function addToCart() {
             selectedItems.forEach(key => {
                 const parts = key.split('+');
                 const ingredientName = parts[0];
-                const priceStr = parts.slice(1).join('+'); // "+3₾" format
+                const priceStr = parts.slice(1).join('+');
                 const price = parseFloat(priceStr.replace(/[^\d.]/g, '')) || 0;
 
                 pizza.ingredients.push({
@@ -4324,22 +4466,19 @@ function addToCart() {
                     price: price
                 });
 
-                // Ingredient narxini qo'shish
                 additionalPrice += price;
             });
         }
 
-        console.log(`Final pizza ${id}:`, pizza); // Debug
+        console.log(`Final pizza ${id}:`, pizza);
         pizzasArray.push(pizza);
     });
 
     // To'liq narxni hisoblash
-    // 1+1 aksiya uchun: asosiy narx * quantity + pizzalar/ingredientlar narxi (faqat bir marta)
-    // Oddiy mahsulot uchun: (asosiy narx + qo'shimcha narx) * quantity
     let totalPrice;
     
     if (product.description && product.description.includes("get second for free")) {
-        // 1+1 aksiya: asosiy narx * quantity + qo'shimcha narx (bir marta)
+        // 1+1 aksiya: asosiy narx * quantity + pizzalar/ingredientlar narxi (faqat bir marta)
         totalPrice = ((product.aksiyaPrice * count) + additionalPrice).toFixed(2);
     } else {
         // Oddiy mahsulot: (asosiy narx + qo'shimcha narx) * quantity
@@ -4355,7 +4494,7 @@ function addToCart() {
         date: new Date().toISOString()
     };
 
-    console.log("Final order with calculated total:", newOrder); // Debug
+    console.log("Final order with calculated total:", newOrder);
 
     // Order processing
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -4363,7 +4502,6 @@ function addToCart() {
     if (localStorage.getItem("edit") === "true") {
         const editId = parseInt(localStorage.getItem("for_id")) || 0;
         if (editId > 0) {
-            // Eski buyurtmani o'chirish
             const index = orders.findIndex(order => order.id === editId);
             if (index !== -1) {
                 orders.splice(index, 1);
@@ -4371,9 +4509,6 @@ function addToCart() {
         }
         localStorage.removeItem("edit");
         localStorage.removeItem("for_id");
-        // alert(`Buyurtma yangilandi! ID: ${orderId}, Jami narx: ${totalPrice}₾`);
-    } else {
-        // alert(`${count} ta yangi mahsulot savatga qo'shildi! Buyurtma ID: ${orderId}, Jami narx: ${totalPrice}₾`);
     }
 
     orders.push(newOrder);
@@ -4451,7 +4586,7 @@ function updateCartDisplay() {
 }
 
 function editOrder(orderId) {
-    console.log("Editing order:", orderId); // Debug
+    console.log("Editing order:", orderId);
     
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     const orderIndex = orders.findIndex(order => order.id === orderId);
@@ -4482,7 +4617,6 @@ function removeFromCart(orderId) {
 
         localStorage.setItem('orders', JSON.stringify(updatedOrders));
         updateCartDisplay();
-        // alert('Buyurtma savatdan olib tashlandi!');
     }
 }
 
@@ -4492,6 +4626,7 @@ function select_choose(id) {
     if (element) element.classList.toggle('bonus_cards_active');
 }
 
+// YANGILANGAN close_choose funksiyasi
 function close_choose(id) {
     const element = document.querySelector(`#bonus_cards_${id}`);
     if (element) element.classList.add('bonus_cards_active');
@@ -4502,6 +4637,9 @@ function close_choose(id) {
     // Ma'lumotlarni tozalash
     pizzaSelectionData.delete(id);
     selectedItemsMap.set(id, new Set());
+    
+    // Narxni yangilash
+    calculateTotalPrice();
 }
 
 function select_in_menU(id) {
