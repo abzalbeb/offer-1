@@ -397,7 +397,8 @@ function editOrder(orderId) {
             img_1: order.img_1,
             description: order.description,
             price: order.price,
-            aksiyaPrice: order.aksiyaPrice
+            aksiyaPrice: order.aksiyaPrice,
+            ingredients:order.ingredients
         };
         
         localStorage.setItem('selectedProduct', JSON.stringify(productData));
