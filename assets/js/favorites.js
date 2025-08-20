@@ -18,15 +18,15 @@ favorites
   .filter(item => item.type === 'pizza')
   .forEach(item => {
     const productHTML = `
-      <div class="jss32 product">
-        <div class="jss34" 
+      <div class="jss32 ">
+        <div class="jss34 product" 
              data-id="${item.id}"
              data-img="${item.img}"
              data-title="${item.title}"
              data-description="${item.description}"
-             data-price="${item.price}"
+             data-price=""
              data-type="${item.type || ''}"
-             data-aksiya-price="${item.aksiyaPrice || ''}">
+             data-aksiya-price="">
           <div class="jss35">
             <label class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h">
               <span class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-7avhyl" 
@@ -64,7 +64,8 @@ favorites
             </div>
             <div class="jss40">
               <div>
-                <p class="fs-18 text-red">${item.price}0<b>₾</b></p>
+                <p class="fs-18 text-red "><span class="for_price"></span> </p>
+                                 <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">${item.price}</span> ₾</p>
               </div>
               <button class="jss411"  aria-label="Add to cart">Order</button>
               <!-- PIZZA uchun qty-container QO'SHMAYMIZ -->

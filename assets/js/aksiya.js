@@ -1,27 +1,30 @@
-for (let i = 0; i < document.querySelectorAll(".product-price").length; i++) {
-            document.querySelectorAll(".product-price")[i].style="color: rgb(0, 0, 0);font-size: 12px;font-weight: 500;text-decoration: line-through;"
-            
-        }
+document.addEventListener('DOMContentLoaded', function () {
+  // eski narxlarni chizish
+  document.querySelectorAll(".product-price").forEach(el => {
+    el.style = "color: rgb(0,0,0); font-size: 12px; font-weight: 500; text-decoration: line-through;";
+  });
 
+  // aksiya foizi (masalan localStorage: for_aksiya = 65 -> 65%)
+  const discount = Number(localStorage.getItem("for_aksiya")) || 100;
+  const k = discount / 100;
 
-// mahsulot elementini olish
-let productEl = document.querySelector(".product");
+  // Agar bitta product bo'lsa:
+  const productEl = document.querySelector(".product");
+  if (productEl) {
+    const price = Number(productEl.dataset.price || 0);
+    const aksiyaPrice = (price * k).toFixed(2);
+    // kerak bo'lsa shu yerda aksiya narxini yozib qo'yasiz
+  }
 
-// oddiy narx
-let price = Number(productEl.dataset.price);
+  // Agar bir nechta narxlarni yangilamoqchi bo'lsangiz:
+  const aksiyaPrices = document.querySelectorAll(".for_aksiyaPrice");
+  const forPrices = document.querySelectorAll(".for_price");
 
-// localStorage ichidagi aksiya foizi (masalan: 35 => discount = 65%)
-let discount = Number(localStorage.getItem("for_aksiya")); // 65
-
-// aksiya narxi hisoblash
-let aksiyaPrice = (price * (discount / 100)).toFixed(2);
-
-// product object tuzish
-let aksiyaPrices = document.querySelectorAll(".for_aksiyaPrice");
-let forPrices = document.querySelectorAll(".for_price");
-
-aksiyaPrices.forEach((el, index) => {
-    let originalPrice = Number(el.textContent.trim()); // narxni son qilish
-    let newPrice = (originalPrice * (discount / 100)).toFixed(2);
-    forPrices[index].textContent = newPrice+"₾";
+  aksiyaPrices.forEach((el, i) => {
+    const originalPrice = parseFloat(el.textContent.replace(/[^\d.]/g, "")) || 0; // "12.50₾" -> 12.50
+    const newPrice = (originalPrice * k).toFixed(2);
+    if (forPrices[i]) {
+      forPrices[i].textContent = newPrice + "₾";
+    }
+  });
 });
