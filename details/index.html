@@ -3937,28 +3937,38 @@ function calculateTotalPrice() {
     });
 
     // Umumiy narxni hisoblash
-    let totalPrice;
-    let basePrice = product.aksiyaPrice || product.price;
-    
-    if (product.description && product.description.includes("get second for free")) {
-        // 1+1 aksiya: asosiy narx * miqdor + qo'shimcha narx (faqat bir marta)
-        totalPrice = (basePrice * count) + additionalPrice;
-    } else {
-        // Oddiy mahsulot: (asosiy narx + qo'shimcha narx) * miqdor
-        totalPrice = (basePrice + additionalPrice) * count;
-    }
+let totalPrice;
 
-    // Narxlarni yangilash
-    const priceElement = document.getElementById("price");
-    const aksiyaPriceElement = document.getElementById("aksiyaPrice");
-    
-    if (priceElement) {
-        priceElement.textContent = totalPrice.toFixed(2) + "₾";
-    }
-    
-    if (aksiyaPriceElement) {
-        aksiyaPriceElement.textContent = totalPrice.toFixed(2) + "₾";
-    }
+// Asosiy narxni to'g'ri tanlash:
+// - Agar "get second for free" bo'lsa => aksiya narxi ishlatiladi
+// - Aks holda => oddiy narx ishlatiladi
+let basePrice;
+if (product.description && product.description.includes("get second for free")) {
+    basePrice = product.aksiyaPrice || product.price;
+} else {
+    basePrice = product.price || product.aksiyaPrice;
+}
+
+if (product.description && product.description.includes("get second for free")) {
+    // 1+1 aksiya: asosiy narx * miqdor + qo'shimcha narx (faqat bir marta)
+    totalPrice = (basePrice * count) + additionalPrice;
+} else {
+    // Oddiy mahsulot: (asosiy narx + qo'shimcha narx) * miqdor
+    totalPrice = (basePrice + additionalPrice) * count;
+}
+
+// Narxlarni yangilash
+const priceElement = document.getElementById("price");
+const aksiyaPriceElement = document.getElementById("aksiyaPrice");
+
+if (priceElement) {
+    priceElement.textContent = totalPrice.toFixed(2) + "₾";
+}
+
+if (aksiyaPriceElement) {
+    aksiyaPriceElement.textContent = totalPrice.toFixed(2) + "₾";
+}
+
     
     console.log("Price updated:", {
         basePrice: basePrice,
