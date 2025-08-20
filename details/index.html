@@ -3938,16 +3938,7 @@ function calculateTotalPrice() {
 
     // Umumiy narxni hisoblash
 let totalPrice;
-
-// Asosiy narxni to'g'ri tanlash:
-// - Agar "get second for free" bo'lsa => aksiya narxi ishlatiladi
-// - Aks holda => oddiy narx ishlatiladi
-let basePrice;
-if (product.description && product.description.includes("get second for free")) {
-    basePrice = product.aksiyaPrice || product.price;
-} else {
-    basePrice = product.price || product.aksiyaPrice;
-}
+let basePrice = product.price || product.aksiyaPrice;  // DOIMO oddiy narxni birinchi tanla
 
 if (product.description && product.description.includes("get second for free")) {
     // 1+1 aksiya: asosiy narx * miqdor + qo'shimcha narx (faqat bir marta)
@@ -3965,8 +3956,9 @@ if (priceElement) {
     priceElement.textContent = totalPrice.toFixed(2) + "₾";
 }
 
-if (aksiyaPriceElement) {
-    aksiyaPriceElement.textContent = totalPrice.toFixed(2) + "₾";
+if (aksiyaPriceElement && product.aksiyaPrice) {
+    // faqat aksiya narxi bo'lsa ko'rsatamiz
+    aksiyaPriceElement.textContent = (product.aksiyaPrice * count + additionalPrice).toFixed(2) + "₾";
 }
 
     
