@@ -585,7 +585,6 @@ document.querySelectorAll(".jss41").forEach(btn => {
     // keyin data-* dan olish
     let id = product.dataset.id;
     let img = product.dataset.img;
-    let img_1 = product.dataset.img_1;
     let title = product.dataset.title;
     let description = product.dataset.description;
     let price = parseFloat(product.dataset.price);
@@ -807,8 +806,7 @@ window.addEventListener('storage', function(e) {
           price: parseNum(product.dataset.price),
           aksiyaPrice: parseNum(product.dataset.aksiyaPrice),
           count: 1,
-          total: parseNum(product.dataset.aksiyaPrice) ?? parseNum(product.dataset.price),
-          type: product.dataset.type ?? null // agar data-type yo'q bo'lsa null bo'ladi
+          total: parseNum(product.dataset.aksiyaPrice) ?? parseNum(product.dataset.price)
         });
         setFavs(favs);
         updateFavoriteUI(product, true);
@@ -857,7 +855,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".view-cart-btn").forEach(btn => {
+  document.querySelectorAll(".view-cart-btn1").forEach(btn => {
     btn.addEventListener("click", () => {
       window.location.href = "../cart/";
     });
