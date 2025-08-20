@@ -807,7 +807,8 @@ window.addEventListener('storage', function(e) {
           price: parseNum(product.dataset.price),
           aksiyaPrice: parseNum(product.dataset.aksiyaPrice),
           count: 1,
-          total: parseNum(product.dataset.aksiyaPrice) ?? parseNum(product.dataset.price)
+          total: parseNum(product.dataset.aksiyaPrice) ?? parseNum(product.dataset.price),
+          type: product.dataset.type ?? null // agar data-type yo'q bo'lsa null bo'ladi
         });
         setFavs(favs);
         updateFavoriteUI(product, true);
