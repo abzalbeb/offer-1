@@ -381,34 +381,50 @@ function removeAll() {
 }
 
 function editOrder(orderId) {
-      const orders = JSON.parse(localStorage.getItem('orders')) || [];
-      const order = orders.find(o => o.id === orderId);
-      
-      if (order) {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const order = orders.find(o => o.id === orderId);
+    
+    if (order) {
         // Tahrirlash rejimini yoqamiz
         localStorage.setItem('edit', 'true');
-        // Tahrirlanayotgan buyurtma ID sini saqlaymiz
         localStorage.setItem('for_id', orderId);
-        // Mahsulot ma'lumotlarini saqlaymiz
-        localStorage.setItem('selectedProduct', JSON.stringify({
-          title: order.title,
-          img: order.img,
-          description: order.description,
-          price: order.price,
-          aksiyaPrice: order.aksiyaPrice
-        }));
         
-    const hasPizza = order.dataType === 'pizza' ||
-                     (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
-
-    // Yo'naltiramiz
-    if (hasPizza) {
-      window.location.href = '../details-pizza/';
-    } else {
-      window.location.href = '../details/';
-    }
+        // Mahsulot ma'lumotlarini saqlaymiz
+        const productData = {
+            id: order.id,
+            title: order.title,
+            img: order.img,
+            img_1: order.img_1,
+            description: order.description,
+            price: order.price,
+            aksiyaPrice: order.aksiyaPrice
+        };
+        
+        localStorage.setItem('selectedProduct', JSON.stringify(productData));
+        
+        // Pizza uchun qo'shimcha ma'lumotlarni saqlaymiz
+        if (order.dataType === 'pizza' && order.pizzas) {
+            // Pizza size ma'lumotini alohida saqlash
+            const pizzaSize = order.pizzas[0] ? order.pizzas[0].title : null;
+            if (pizzaSize) {
+                localStorage.setItem('selectedPizzaSize', pizzaSize);
+                console.log('Pizza size saqlandi:', pizzaSize);
             }
+            
+            // Butun order obyektini ham saqlaymiz
+            localStorage.setItem('editOrderData', JSON.stringify(order));
+        }
+        
+        const hasPizza = order.dataType === 'pizza' ||
+                        (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
+
+        if (hasPizza) {
+            window.location.href = '../details-pizza/';
+        } else {
+            window.location.href = '../details/';
+        }
     }
+}
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
