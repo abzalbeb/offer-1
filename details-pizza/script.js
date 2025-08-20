@@ -564,6 +564,7 @@ const defaultStandardIngredients44 = [
             const cartProduct = {
                 id: parseInt(product.id) || product.id,
                 img: product.img,
+                img_1: product.img_1,
                 aksiyaPrice: aksiyaBasePrice,
                 date: new Date().toISOString(),
                 description: product.description,
@@ -572,6 +573,7 @@ const defaultStandardIngredients44 = [
                 price: selectedPizza.price, // 2-struktura price ni ham saqlaydi
                 totalPrice: totalPrice.toFixed(2) + "₾",
                 dataType: 'pizza',
+                ingredients: product.Ingredients || product.ingredients,
                 pizzas: [
                     {
                         title: selectedPizza.title,
