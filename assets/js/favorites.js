@@ -22,11 +22,12 @@ favorites
         <div class="jss34 product" 
              data-id="${item.id}"
              data-img="${item.img}"
+             data-img_1="${item.img_1}"
              data-title="${item.title}"
              data-description="${item.description}"
-             data-price=""
+             data-price="${item.price}"
              data-type="${item.type || ''}"
-             data-aksiya-price="">
+             data-aksiya-price="${item.aksiyaPrice || ''}">
           <div class="jss35">
             <label class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h">
               <span class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-7avhyl" 
@@ -67,7 +68,7 @@ favorites
                 <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">${item.price}</span> ₾</p>
               </div>
-              <button class="jss411"  aria-label="Add to cart">Order</button>
+              <button class="jss411" aria-label="Add to cart">Order</button>
               <!-- PIZZA uchun qty-container QO'SHMAYMIZ -->
             </div>
           </div>
@@ -210,6 +211,41 @@ favorites
         if (typeof updateCartPopup === "function") updateCartPopup();
       };
     }
+
+    // === jss411 tugmalariga delegation (Pizza uchun selectedProduct saqlash) ===
+    document.addEventListener("click", function (e) {
+      const btn = e.target.closest(".jss411");
+      if (!btn) return;
+      const product = btn.closest(".product");
+      if (!product) return;
+
+      const id = product.dataset.id;
+      const img = product.dataset.img;
+      const img_1 = product.dataset.img_1;
+      const title = product.dataset.title;
+      const description = product.dataset.description;
+      const price = parseFloat(product.dataset.price);
+      const aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || price;
+      const type = product.dataset.type;
+
+      // selectedProduct obyektini yaratamiz
+      const selectedProduct = {
+        id: id,
+        title: title,
+        description: description,
+        img: img,
+        img_1: img_1,
+        price: price,
+        aksiyaPrice: aksiyaPrice,
+        type: type
+      };
+
+      // localStorage ga selectedProduct nomida saqlaymiz
+      localStorage.setItem("selectedProduct", JSON.stringify(selectedProduct));
+      window.location.href='../details-pizza/'
+      
+      console.log("Selected product saved:", selectedProduct);
+    });
 
     // === Order tugmalariga delegation ===
     document.addEventListener("click", function (e) {

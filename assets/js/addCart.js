@@ -799,15 +799,18 @@ window.addEventListener('storage', function(e) {
 
       if (!isFav(favs, id)) {
         favs.push({
-          id,
-          img: product.dataset.img,
-          title: product.dataset.title,
-          description: product.dataset.description,
-          price: parseNum(product.dataset.price),
-          aksiyaPrice: parseNum(product.dataset.aksiyaPrice),
-          count: 1,
-          total: parseNum(product.dataset.aksiyaPrice) ?? parseNum(product.dataset.price)
+        id,
+        img: product.dataset.img,
+        img_1: product.dataset.img_1 || '',
+        title: product.dataset.title,
+        description: product.dataset.description,
+        price: parseNum(product.dataset.price),
+        aksiyaPrice: parseNum(product.dataset.aksiyaPrice),
+        type: product.dataset.type || 0, // <-- qo‘shildi
+        count: 1,
+        total: parseNum(product.dataset.aksiyaPrice) ?? parseNum(product.dataset.price)
         });
+
         setFavs(favs);
         updateFavoriteUI(product, true);
       } else {
