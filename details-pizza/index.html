@@ -547,6 +547,18 @@
             text-transform: capitalize;
         }
 
+        .css-1lz7e0 {
+    user-select: none;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentcolor;
+    flex-shrink: 0;
+    color: rgb(63, 217, 50);
+    font-size: 20px;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
         .jss12:hover {
             color: #000000;
             background: #fff;
@@ -1076,16 +1088,17 @@
             }
         }
 
-        .jss47 {
-            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
-            border-radius: 35px;
-            background-color: #ffffff;
-        }
 
 
         @media (max-width:599.95px) {
             .jss47 {
                 border-radius: 15px;
+                padding-right: 0 !important;
+                padding-top: 00px;
+            }
+
+            .pizza_extra{
+                padding: 0 !important;
             }
         }
 
@@ -1929,6 +1942,7 @@
             margin-left: -24px;
             -webkit-box-align: baseline;
             align-items: baseline;
+            justify-content: space-between;
         }
 
         .css-nf8507>.MuiGrid-item {
@@ -1993,13 +2007,14 @@
     <style data-emotion="css-global" data-s=""></style>
     <style>
         @media (max-width:600px) {
-                    .css-1celjv4 {
-            flex-basis: 58.3333%;
-            -webkit-box-flex: 0;
-            flex-grow: 0;
-            max-width: 100% !important;
+            .css-1celjv4 {
+                flex-basis: 58.3333%;
+                -webkit-box-flex: 0;
+                flex-grow: 0;
+                max-width: 100% !important;
+            }
         }
-        }
+
         .css-k62kit {
             overflow: hidden;
             text-overflow: ellipsis;
@@ -2084,28 +2099,55 @@
             }
         }
 
-        @media (max-width: 599px) {
-            .jss1 {
-                padding: 25px !important;
-                margin-bottom: 50px !important;
-            }
-        }
+        @media (max-width: 600px) {
+    .for_calculators {
+        margin-top: 5px;
+        justify-content: space-between !important;
+    }
+
+    #plus {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    #minus {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+        #count {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 20px !important;
+    }
+}
 
         .active-link {
             color: #e80045 !important;
         }
 
         .for_active_0 {
-            border: 2px solid #4CAF50;
-            background-color: #f0f8f0;
+                border: 2px solid rgb(0, 119, 205);
         }
+
+        .for_active_0 svg {
+    user-select: none;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentcolor;
+    flex-shrink: 0;
+    color: rgb(0, 119, 205);
+    font-size: 20px;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
     </style>
 </head>
 
 <body style=""><noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
-             
-        <div class="Toastify"  id="Toastify-success" style="display: none;">
+
+        <div class="Toastify" id="Toastify-success" style="display: none;">
             <div class="Toastify__toast-container Toastify__toast-container--top-right" style="z-index: 999999;">
                 <div id="2" data-in="true"
                     class="Toastify__toast Toastify__toast-theme--colored Toastify__toast--success Toastify__toast--close-on-click">
@@ -2134,7 +2176,7 @@
                 </div>
             </div>
         </div>
-            <div class="Toastify" id="Toastify-nostore" style="display: none;">
+        <div class="Toastify" id="Toastify-nostore" style="display: none;">
             <div class="Toastify__toast-container Toastify__toast-container--top-right" style="z-index: 999999;">
                 <div id="8" data-in="true"
                     class="Toastify__toast Toastify__toast-theme--colored Toastify__toast--error Toastify__toast--close-on-click Toastify--animate Toastify__bounce-enter--top-right">
@@ -2206,13 +2248,12 @@
                                 </a>
                                 <div class="flag-wrapper">
                                     <div style="cursor: pointer;">
-                                        <img src="../assets/image/britsht.png"
-                                            alt="ENG">
+                                        <img src="../assets/image/britsht.png" alt="ENG">
                                         <p class="p-style">ENG</p>
                                     </div>
 
                                     <div class="tooltip-flag">
-                                        <div onclick="window.location='../geo/chicken'">
+                                        <div onclick="window.location='../geo/details-pizza'">
                                             <img class="img-postion-2" src="../assets/image/gruziya.png" alt="GEO">
                                             <span class="text-postion-2">GEO</span>
                                         </div>
@@ -2302,16 +2343,16 @@
                     style="display: flex; justify-content: space-between; padding-bottom: 12px; padding-top: 12px; align-items: center; overflow: scroll; gap: 12px; white-space: nowrap; box-shadow: rgb(173, 173, 173) 0px 2px 2px 0px; padding-inline: 50px;">
                     <div><a href="../offers/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img class="navbar_for_img" src="../assets/image/Offer_in_active.svg" width="60" height="60" alt="OFFERS"
-                                        loading="eager"></div>
+                                <div><img class="navbar_for_img" src="../assets/image/Offer_in_active.svg" width="60"
+                                        height="60" alt="OFFERS" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">OFFERS</p>
                             </div>
                         </a></div>
                     <div><a href="../pizza/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img class="navbar_for_img" src="../assets/image/pizza_inactive.svg" width="60" height="60" alt="Pizza"
-                                        loading="eager"></div>
+                                <div><img class="navbar_for_img" src="../assets/image/pizza_inactive.svg" width="60"
+                                        height="60" alt="Pizza" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Pizza</p>
                             </div>
@@ -2319,8 +2360,8 @@
                     <div>
                         <a href="../bread/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img class="navbar_for_img" src="../assets/image/bread_inactive.svg" width="60" height="60" alt="Bread"
-                                        loading="eager"></div>
+                                <div><img class="navbar_for_img" src="../assets/image/bread_inactive.svg" width="60"
+                                        height="60" alt="Bread" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Bread</p>
                             </div>
@@ -2328,56 +2369,56 @@
                     </div>
                     <div><a href="../chicken/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img class="navbar_for_img" src="../assets/image/chicken_inactive.svg" width="60" height="60"
-                                        alt="Chicken" loading="eager"></div>
+                                <div><img class="navbar_for_img" src="../assets/image/chicken_inactive.svg" width="60"
+                                        height="60" alt="Chicken" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Chicken</p>
                             </div>
                         </a></div>
                     <div><a href="../wrap/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img class="navbar_for_img" src="../assets/image/wrap_inactive.svg" width="60" height="60" alt="Wrap"
-                                        loading="eager"></div>
+                                <div><img class="navbar_for_img" src="../assets/image/wrap_inactive.svg" width="60"
+                                        height="60" alt="Wrap" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Wrap</p>
                             </div>
                         </a></div>
                     <div><a href="../sandwich/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img class="navbar_for_img" src="../assets/image/sandwich_inactive.svg" width="60" height="60"
-                                        alt="Sandwich" loading="eager"></div>
+                                <div><img class="navbar_for_img" src="../assets/image/sandwich_inactive.svg" width="60"
+                                        height="60" alt="Sandwich" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Sandwich</p>
                             </div>
                         </a></div>
                     <div><a href="../loadpotato/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img class="navbar_for_img" src="../assets/image/load_potato_inactive.svg" width="60" height="60"
-                                        alt="Load potato" loading="eager"></div>
+                                <div><img class="navbar_for_img" src="../assets/image/load_potato_inactive.svg"
+                                        width="60" height="60" alt="Load potato" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Load potato</p>
                             </div>
                         </a></div>
                     <div><a href="../dessert/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img class="navbar_for_img" src="../assets/image/dessert_inactive.svg" width="60" height="60"
-                                        alt="Dessert" loading="eager"></div>
+                                <div><img class="navbar_for_img" src="../assets/image/dessert_inactive.svg" width="60"
+                                        height="60" alt="Dessert" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Dessert</p>
                             </div>
                         </a></div>
                     <div><a href="../drinks/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img class="navbar_for_img" src="../assets/image/drinks_inactive.svg" width="60" height="60" alt="Drinks"
-                                        loading="eager"></div>
+                                <div><img class="navbar_for_img" src="../assets/image/drinks_inactive.svg" width="60"
+                                        height="60" alt="Drinks" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Drinks</p>
                             </div>
                         </a></div>
                     <div><a href="../sauce/" style="text-decoration: none;">
                             <div style="display: flex; flex-direction: column; align-items: center;">
-                                <div><img class="navbar_for_img" src="../assets/image/sauce_inactive.svg" width="60" height="60" alt="Sauce"
-                                        loading="eager"></div>
+                                <div><img class="navbar_for_img" src="../assets/image/sauce_inactive.svg" width="60"
+                                        height="60" alt="Sauce" loading="eager"></div>
                                 <p class="category-title IBM-Regular"
                                     style="font-weight: normal; font-size: 20px; color: rgb(0, 0, 0);">Sauce</p>
                             </div>
@@ -2393,9 +2434,15 @@
                         class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-1s8ltjh">
                         <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-isbt42">
                             <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-rpybyc">
-                                <div style="position: relative;"><img id="img"
-                                        src="https://dominosge.s3.eu-central-1.amazonaws.com/20250319102208652_483387853_1815969655613230_7490774769414293800_n.webp"
-                                        alt="offer" width="100%" height="100%" style="object-fit: contain;"></div>
+                                <div style="position: relative;"><img
+                                        src="../assets/image/pizza_bg.78f4d64b434876957e12.png" alt="pizza-bg"
+                                        width="100%" height="100%">
+                                    <div
+                                        style="position: absolute; top: 50%; left: 50%; transform: translate(-52%, -51%);">
+                                        <img id="img" src=""
+                                            alt="pizza-global" width="100%" height="100%" style="object-fit: cover;">
+                                    </div>
+                                </div>
                             </div>
                             <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-38j4dl">
                                 <div
@@ -2408,7 +2455,7 @@
                                             Sauce
                                             (Cheddar or Yogurt)</p>
                                     </div>
-                                    <div
+                                    <div class="for_calculators"
                                         style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 12px;">
                                         <div>
                                             <div class="" style="display: inline-flex;">
@@ -2432,7 +2479,7 @@
                                         </div>
                                     </div><button
                                         class="addToCart_btn addToCartBtn MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth  18px jss8 css-np2orv"
-                                        tabindex="0" type="button" style="margin-bottom: 18px;" >Add to
+                                        tabindex="0" type="button" style="margin-bottom: 18px;">Add to
                                         cart<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
                                 </div>
                             </div>
@@ -2463,12 +2510,12 @@
                                                             <div
                                                                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-md-3 css-jtl0kq">
                                                                 <div style="position: relative;">
-                                                                    <div class="pizza_size_select vibor_pizza" data-id="1"
-                                                                        data-size="Small Size - 18cm 4pcs"
+                                                                    <div class="pizza_size_select vibor_pizza"
+                                                                        data-id="1" data-size="Small Size - 18cm 4pcs"
                                                                         data-price="18.90"
                                                                         style="border-radius: 100%; padding: 8px;">
                                                                         <div style="mix-blend-mode: darken;">
-                                                                            <div class="pointer">
+                                                                            <div class="for_size_img pointer" >
                                                                                 <img src="https://deykvccewcmn1.cloudfront.net/20240831205841410_chillychicken.webp"
                                                                                     alt="Pizza Global" width="100%"
                                                                                     height="100%" loading="lazy"
@@ -2504,7 +2551,7 @@
                                                                         data-price="30.90"
                                                                         style="border-radius: 100%; padding: 8px;">
                                                                         <div style="mix-blend-mode: darken;">
-                                                                            <div class="pointer">
+                                                                            <div class="for_size_img pointer" >
                                                                                 <img src="https://deykvccewcmn1.cloudfront.net/20240831205841410_chillychicken.webp"
                                                                                     alt="Pizza Global" width="100%"
                                                                                     height="100%" loading="lazy"
@@ -2535,12 +2582,12 @@
                                                             <div
                                                                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-md-4 css-1udb513">
                                                                 <div style="position: relative;">
-                                                                    <div class="pizza_size_select vibor_pizza" data-id="3"
-                                                                        data-size="Large Size - 33cm 8pcs"
+                                                                    <div class="pizza_size_select vibor_pizza"
+                                                                        data-id="3" data-size="Large Size - 33cm 8pcs"
                                                                         data-price="43.90"
                                                                         style="border-radius: 100%; padding: 8px;">
                                                                         <div style="mix-blend-mode: darken;">
-                                                                            <div class="pointer">
+                                                                            <div class="for_size_img pointer">
                                                                                 <img src="https://deykvccewcmn1.cloudfront.net/20240831205841410_chillychicken.webp"
                                                                                     alt="Pizza Global" width="100%"
                                                                                     height="100%" loading="lazy"
@@ -2599,7 +2646,8 @@
                                                                                 <path
                                                                                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z">
                                                                                 </path>
-                                                                            </svg></div>
+                                                                            </svg>
+                                                                        </div>
                                                                         <div
                                                                             style="display: flex; justify-content: center; padding-block: 12px; align-items: center;">
                                                                             <div><img
@@ -2629,7 +2677,8 @@
                                                                                 <path
                                                                                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z">
                                                                                 </path>
-                                                                            </svg></div>
+                                                                            </svg>
+                                                                        </div>
                                                                         <div
                                                                             style="display: flex; justify-content: center; padding-block: 12px; align-items: center;">
                                                                             <div><img
@@ -2673,7 +2722,8 @@
                                                                                 <path
                                                                                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z">
                                                                                 </path>
-                                                                            </svg></div>
+                                                                            </svg>
+                                                                        </div>
                                                                         <div
                                                                             style="display: flex; justify-content: center; padding-block: 12px;">
                                                                             <div><img
@@ -2856,7 +2906,8 @@
                                                                             <path
                                                                                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z">
                                                                             </path>
-                                                                        </svg></div>
+                                                                        </svg>
+                                                                    </div>
                                                                 </div>
                                                                 <div data-title="Green Pepper" data-price="+2.5₾"
                                                                     class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
@@ -3725,7 +3776,7 @@
                                 </div>
                             </div>
                         </div><br><br><button
-                            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-Medium fs-18 jss8 css-np2orv"
+                            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth  fs-18 jss8 css-np2orv"
                             tabindex="0" type="button">Add to cart<span
                                 class="MuiTouchRipple-root css-w0pj6f"></span></button>
                     </div>
@@ -3763,7 +3814,7 @@
                                 width="104" height="76" loading="lazy"><img
                                 src="../assets/image/pizza_oven.3bd307ade23251814945.webp" alt="oven" width="59"
                                 height="58" loading="lazy"></div>
-                        <p class="Kanit-Light text-blue footer-p-style" style="text-align: center; font-weight:300">©
+                        <p class=" text-blue footer-p-style" style="text-align: center; font-weight:300">©
                             Geopizza LLC All rights reserved
                             2025 | Developed by <a href="https://www.hitech-prime.com/" target="_blank" rel="noreferrer"
                                 class="text-blue hover-underline footer-p-style"> HiTech Prime </a></p>
@@ -3861,7 +3912,7 @@
         </div>
 
     </div>
-<div role="presentation" class="MuiDrawer-root MuiDrawer-modal MuiModal-root MuiModal-hidden css-12snods"
+    <div role="presentation" class="MuiDrawer-root MuiDrawer-modal MuiModal-root MuiModal-hidden css-12snods"
         style="overflow: hidden; z-index: 9999999;">
         <div aria-hidden="true" class="MuiBackdrop-root MuiModal-backdrop css-919eu4"
             style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1);"></div>
@@ -3878,12 +3929,12 @@
                         </svg><span class="MuiTouchRipple-root css-w0pj6f"></span></button>
 
                     <div class="top_flag-icon">
-                        <div class="lang_Ge"><img src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png" loading="lazy" height="26"
-                                width="26" alt="flag ge"></div>
                         <div class="lang_Ge"><img
-                                src="../assets/image/britsht.png"
+                                src="../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png"
                                 loading="lazy" height="26" width="26" alt="flag ge"></div>
-                        <div class="lang_Ge"><img src="../assets/image/gruziya.png" loading="lazy" height="26"
+                        <div class="lang_Ge"><img src="../assets/image/britsht.png" loading="lazy" height="26"
+                                width="26" alt="flag ge"></div>
+                        <div onclick="window.location='../geo/details-pizza'" class="lang_Ge"><img src="../assets/image/gruziya.png" loading="lazy" height="26"
                                 width="26" alt="flag ge"></div>
                     </div>
                     <hr class="MuiDivider-root MuiDivider-fullWidth css-mf11to">
@@ -4011,525 +4062,531 @@
 
     <script src="./script.js"></script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const pizzaOptions = document.querySelectorAll(".pizza_size_select");
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const pizzaOptions = document.querySelectorAll(".pizza_size_select");
 
-    function setActive(option) {
-        pizzaOptions.forEach(opt => {
-            const svg = opt.querySelector("svg");
-            if (svg) svg.style.display = "none";  // hammasini yashiramiz
-            opt.classList.remove("active");
+            function setActive(option) {
+                pizzaOptions.forEach(opt => {
+                    const svg = opt.querySelector("svg");
+                    if (svg) svg.style.display = "none";  // hammasini yashiramiz
+                    opt.classList.remove("active");
+                });
+
+                const svg = option.querySelector("svg");
+                if (svg) svg.style.display = "inline-block"; // faqat tanlangani ko‘rsatamiz
+                option.classList.add("active");
+            }
+
+            // --- sahifa yuklanganda o'rtadagi div (data-id=3) ni default active qilish ---
+            const defaultOption = document.querySelector('.pizza_size_select[data-id="2"]');
+            if (defaultOption) {
+                setActive(defaultOption);
+            }
+
+            // --- boshqa div bosilganda shu divni active qilish ---
+            pizzaOptions.forEach(option => {
+                option.addEventListener("click", function () {
+                    setActive(this);
+                });
+            });
         });
 
-        const svg = option.querySelector("svg");
-        if (svg) svg.style.display = "inline-block"; // faqat tanlangani ko‘rsatamiz
-        option.classList.add("active");
-    }
+    </script>
 
-    // --- sahifa yuklanganda o'rtadagi div (data-id=3) ni default active qilish ---
-    const defaultOption = document.querySelector('.pizza_size_select[data-id="2"]');
-    if (defaultOption) {
-        setActive(defaultOption);
-    }
+    <script>
+        const maxSelection = 5;
+        let count = 1;
 
-    // --- boshqa div bosilganda shu divni active qilish ---
-    pizzaOptions.forEach(option => {
-        option.addEventListener("click", function () {
-            setActive(this);
-        });
-    });
+        // --- Product ma'lumoti ---
+        let product = JSON.parse(localStorage.getItem("selectedProduct")) || {};
+        let basePrice = parseFloat(product.price) || 0;
+        let aksiyaBasePrice = parseFloat(product.aksiyaPrice) || 0;
+
+        let imgDivs = document.querySelectorAll(".for_size_img");
+
+imgDivs.forEach(div => {
+    div.innerHTML = `<img src="${product.img_1}" alt="product" style="width: 100%; object-fit: fill; border: 2px dashed rgb(0, 120, 173); border-radius: 100%; padding: 2px;">`;
 });
 
-</script>
+        // --- Default pizza ---
+        const defaultPizza = {
+            id: "2",
+            title: "Medium Size - 26cm 6pcs",
+            price: 30.90,
+            ingredients: []
+        };
+        let selectedPizza = JSON.parse(JSON.stringify(defaultPizza));
 
-<script>
-    const maxSelection = 5;
-let count = 1;
+        // --- Default ingredients ---
+        const defaultDough = { id: "1001", title: "Italian Thin", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/thin-dough.webp", type: "dough" };
+        const defaultEdge = { id: "edge-default", title: "Classic Edge", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Classic.webp", type: "edge" };
 
-// --- Product ma'lumoti ---
-let product = JSON.parse(localStorage.getItem("selectedProduct")) || {};
-let basePrice = parseFloat(product.price) || 0;
-let aksiyaBasePrice = parseFloat(product.aksiyaPrice) || 0;
+        // Default standard ingredients (data-id lardan olingan)
+        const defaultStandardIngredients = [
+            { id: "201", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+            { id: "202", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+            { id: "203", title: "Pepperoni", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Pepperoni_t.png", type: "standard" }
+        ];
 
-// --- Default pizza ---
-const defaultPizza = {
-    id: "2",
-    title: "Medium Size - 26cm 6pcs",
-    price: 30.90,
-    ingredients: []
-};
-let selectedPizza = JSON.parse(JSON.stringify(defaultPizza));
-
-// --- Default ingredients ---
-const defaultDough = {id:"1001", title:"Italian Thin", price:0, img:"https://dominosge.s3.eu-central-1.amazonaws.com/thin-dough.webp", type:"dough"};
-const defaultEdge = {id:"edge-default", title:"Classic Edge", price:0, img:"https://dominosge.s3.eu-central-1.amazonaws.com/Classic.webp", type:"edge"};
-
-// Default standard ingredients (data-id lardan olingan)
-const defaultStandardIngredients = [
-    {id:"201", title:"Mozzarella", price:0, img:"https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type:"standard"},
-    {id:"202", title:"Pizza Sauce", price:0, img:"https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type:"standard"},
-    {id:"203", title:"Pepperoni", price:0, img:"https://dominosge.s3.eu-central-1.amazonaws.com/Pepperoni_t.png", type:"standard"}
-];
-
-// --- Helper functions ---
-function setIngredient(item) {
-    if (item.type === 'extra') {
-        // Extra ingredients uchun - duplikat tekshirish
-        const existingIndex = selectedPizza.ingredients.findIndex(i => i.id === item.id && i.type === 'extra');
-        if (existingIndex === -1) {
-            selectedPizza.ingredients.push(item);
-        }
-    } else {
-        // Dough, edge, standard uchun - o'sha tipdagi ingredientni almashtirish
-        selectedPizza.ingredients = selectedPizza.ingredients.filter(i => !(i.type === item.type && (item.type !== 'standard' || i.id === item.id)));
-        selectedPizza.ingredients.push(item);
-    }
-}
-
-function removeIngredientById(id) {
-    selectedPizza.ingredients = selectedPizza.ingredients.filter(i => i.id !== id);
-}
-
-function getIngredientsTotal() {
-    return selectedPizza.ingredients.reduce((sum, i) => sum + (parseFloat(i.price)||0), 0);
-}
-
-function updateTotalPrice() {
-    const ingredientsTotal = getIngredientsTotal();
-    const total = (selectedPizza.price + ingredientsTotal) * count;
-    const totalAksiya = aksiyaBasePrice * count;
-    const priceEl = document.querySelector("#price");
-    const aksiyaEl = document.querySelector("#aksiyaPrice");
-    if(priceEl) priceEl.textContent = total.toFixed(2) + "₾";
-    if(aksiyaEl) aksiyaEl.textContent = totalAksiya.toFixed(2) + "₾";
-    
-    // HTML display ni ham yangilash
-    updateIngredientsDisplay();
-}
-
-function generateExtraIngredientId(title) {
-    // Title asosida unique ID yaratish
-    return "extra_" + title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-}
-
-function updateDoughSelection() {
-    // Barcha dough elementlaridan active classni olib tashlash
-    document.querySelectorAll(".for_vibor").forEach(el => {
-        el.classList.remove("vibor_active");
-    });
-    
-    // Tanlangan dough ni topish va active qilish
-    const selectedDoughId = selectedPizza.ingredients.find(i => i.type === "dough")?.id;
-    if(selectedDoughId) {
-        const selectedEl = document.querySelector(`.for_vibor[data-id="${selectedDoughId}"]`);
-        if(selectedEl) selectedEl.classList.add("vibor_active");
-    }
-}
-
-// Tanlangan ingredientlarni HTML da ko'rsatish funksiyasi
-function updateIngredientsDisplay() {
-    let displayContainer = document.querySelector('.container-map-info-price');
-    
-    // Agar container mavjud bo'lmasa, yaratish
-    if (!displayContainer) {
-        displayContainer = document.createElement('div');
-        displayContainer.className = 'container-map-info-price';
-        
-        // Container ni qo'shish uchun mos joy topish (addToCart tugmasidan oldin)
-        const addToCartBtn = document.querySelector('#addToCart');
-        if (addToCartBtn) {
-            addToCartBtn.parentNode.insertBefore(displayContainer, addToCartBtn);
-        } else {
-            document.body.appendChild(displayContainer);
-        }
-    }
-    
-    // Contentenrni tozalash
-    displayContainer.innerHTML = '';
-    
-    if (selectedPizza.ingredients.length === 0) return;
-    
-    // MuiBox-root yaratish
-    const muiBox = document.createElement('div');
-    muiBox.className = 'MuiBox-root css-1hnm6b6';
-    
-    // Grid container yaratish
-    const gridContainer = document.createElement('div');
-    gridContainer.className = 'MuiGrid-root MuiGrid-container css-1d3bbye';
-    
-    const gridItem = document.createElement('div');
-    gridItem.className = 'MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-9 MuiGrid-grid-md-7 MuiGrid-grid-lg-7 css-1celjv4';
-    
-    const card = document.createElement('div');
-    card.className = 'MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-1eh9dqr';
-    
-    // Pizza asosiy ma'lumotlarini ko'rsatish
-    const dough = selectedPizza.ingredients.find(i => i.type === 'dough')?.title || 'Italian Thin';
-    const edge = selectedPizza.ingredients.find(i => i.type === 'edge')?.title || 'Classic Edge';
-    const standardIngredients = selectedPizza.ingredients.filter(i => i.type === 'standard').map(i => i.title);
-    
-    const mainInfoDiv = document.createElement('div');
-    mainInfoDiv.style.cssText = 'display: flex; justify-content: space-between;';
-    
-    const mainInfoText = document.createElement('span');
-    mainInfoText.className = 'fs-13 Kanit-Light capatilize';
-    mainInfoText.style.color = 'rgb(73, 73, 73)';
-    mainInfoText.textContent = `${selectedPizza.title}: ${standardIngredients.join(', ')}, ${dough}, ${edge}`;
-    
-    const mainPrice = document.createElement('span');
-    mainPrice.className = 'fs-13 Kanit-Light';
-    mainPrice.style.color = 'rgb(73, 73, 73)';
-    mainPrice.textContent = `${selectedPizza.price.toFixed(2)}₾`;
-    
-    mainInfoDiv.appendChild(mainInfoText);
-    mainInfoDiv.appendChild(mainPrice);
-    card.appendChild(mainInfoDiv);
-    
-    // Extra ingredientlarni ko'rsatish
-    const extraIngredients = selectedPizza.ingredients.filter(i => i.type === 'extra');
-    
-    extraIngredients.forEach(ingredient => {
-        const extraDiv = document.createElement('div');
-        extraDiv.style.cssText = 'display: flex; justify-content: space-between; color: rgb(73, 73, 73);';
-        
-        const extraText = document.createElement('span');
-        extraText.className = 'fs-13 Kanit-Light';
-        extraText.textContent = `Extra Ingredients: ${ingredient.title}`;
-        
-        const extraPriceDiv = document.createElement('span');
-        extraPriceDiv.className = 'fs-13 Kanit-Light';
-        extraPriceDiv.style.textWrap = 'nowrap';
-        
-        // Plus icon qo'shish
-        const plusIcon = document.createElement('svg');
-        plusIcon.className = 'MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lz7e0';
-        plusIcon.setAttribute('focusable', 'false');
-        plusIcon.setAttribute('aria-hidden', 'true');
-        plusIcon.setAttribute('viewBox', '0 0 24 24');
-        plusIcon.setAttribute('data-testid', 'AddIcon');
-        plusIcon.innerHTML = '<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>';
-        
-        extraPriceDiv.appendChild(plusIcon);
-        extraPriceDiv.appendChild(document.createTextNode(` ${ingredient.price.toFixed(2)}₾`));
-        
-        extraDiv.appendChild(extraText);
-        extraDiv.appendChild(extraPriceDiv);
-        card.appendChild(extraDiv);
-    });
-    
-    // Br qo'shish
-    const br = document.createElement('br');
-    card.appendChild(br);
-    
-    // Total price qo'shish
-    const totalDiv = document.createElement('div');
-    totalDiv.style.cssText = 'display: flex; justify-content: space-between; align-items: center; gap: 6px;';
-    
-    const totalLabel = document.createElement('p');
-    totalLabel.className = 'fs-24 Kanit-Light';
-    totalLabel.style.color = 'rgb(73, 73, 73)';
-    totalLabel.textContent = 'Total Price:';
-    
-    const totalPriceDiv = document.createElement('div');
-    const totalPrice = (selectedPizza.price + getIngredientsTotal()) * count;
-    
-    const totalPriceSpan = document.createElement('span');
-    totalPriceSpan.className = 'Kanit-Bold text-red';
-    totalPriceSpan.style.fontSize = '30px';
-    totalPriceSpan.textContent = `${totalPrice.toFixed(2)}₾`;
-    
-    totalPriceDiv.appendChild(totalPriceSpan);
-    totalPriceDiv.appendChild(document.createTextNode('   '));
-    
-    totalDiv.appendChild(totalLabel);
-    totalDiv.appendChild(totalPriceDiv);
-    card.appendChild(totalDiv);
-    
-    gridItem.appendChild(card);
-    gridContainer.appendChild(gridItem);
-    
-    // Br qo'shish
-    const br1 = document.createElement('br');
-    const br2 = document.createElement('br');
-    gridContainer.appendChild(br1);
-    gridContainer.appendChild(br2);
-    
-    // Add to cart button yaratish (CLASS bilan)
-    const addToCartBtn = document.createElement('button');
-    addToCartBtn.className = 'MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-Medium fs-18 jss8 css-np2orv addToCartBtn';
-    addToCartBtn.setAttribute('tabindex', '0');
-    addToCartBtn.setAttribute('type', 'button');
-    addToCartBtn.textContent = 'Add to cart';
-    
-    const rippleSpan = document.createElement('span');
-    rippleSpan.className = 'MuiTouchRipple-root css-w0pj6f';
-    addToCartBtn.appendChild(rippleSpan);
-    
-    muiBox.appendChild(gridContainer);
-    muiBox.appendChild(addToCartBtn);
-    displayContainer.appendChild(muiBox);
-}
-
-// Maksimum extra ingredients soni
-const maxExtraIngredients = 5;
-
-// --- Initialize Page ---
-function initializePage(){
-    // UI elementlarni to'ldirish
-    if(Object.keys(product).length){
-        const t=document.getElementById("title"), i=document.getElementById("img"), d=document.getElementById("description"),
-              p=document.getElementById("price"), ap=document.getElementById("aksiyaPrice");
-        if(t) t.textContent=product.title||'';
-        if(i) i.src=product.img||'';
-        if(d) d.textContent=product.description||'';
-        if(p) p.textContent=(basePrice||selectedPizza.price).toFixed(2)+"₾";
-        if(ap) ap.textContent=aksiyaBasePrice.toFixed(2)+"₾";
-    }
-
-    // 1) Default dough va edge qo'shish
-    setIngredient(defaultDough);
-    setIngredient(defaultEdge);
-    updateDoughSelection();
-
-    // 2) Default standard ingredients qo'shish
-    defaultStandardIngredients.forEach(item => setIngredient(item));
-
-    // 3) Extra ingredients event listeners (for_vibor_0)
-    const extraItems = document.querySelectorAll(".for_vibor_0");
-    
-    extraItems.forEach(el => {
-        el.addEventListener("click", () => {
-            const title = el.dataset.title;
-            const id = generateExtraIngredientId(title);
-            const priceStr = el.dataset.price || "+0₾";
-            const price = parseFloat(priceStr.replace(/[^\d.]/g, '')) || 0;
-            const img = el.querySelector('img')?.src || '';
-
-            const isActive = el.classList.contains("for_active_0");
-            
-            if (isActive) {
-                // Agar active bo'lsa, olib tashlash
-                el.classList.remove("for_active_0");
-                removeIngredientById(id);
-                console.log(`${title} olib tashlandi`);
+        // --- Helper functions ---
+        function setIngredient(item) {
+            if (item.type === 'extra') {
+                // Extra ingredients uchun - duplikat tekshirish
+                const existingIndex = selectedPizza.ingredients.findIndex(i => i.id === item.id && i.type === 'extra');
+                if (existingIndex === -1) {
+                    selectedPizza.ingredients.push(item);
+                }
             } else {
-                // Agar active bo'lmasa, maksimum limit tekshirish
-                const currentExtraCount = selectedPizza.ingredients.filter(i => i.type === "extra").length;
-                
-                if (currentExtraCount < maxExtraIngredients) {
-                    el.classList.add("for_active_0");
-                    setIngredient({id, title, price, img, type:"extra"});
-                    console.log(`${title} qo'shildi. Extra ingredients soni: ${currentExtraCount + 1}`);
+                // Dough, edge, standard uchun - o'sha tipdagi ingredientni almashtirish
+                selectedPizza.ingredients = selectedPizza.ingredients.filter(i => !(i.type === item.type && (item.type !== 'standard' || i.id === item.id)));
+                selectedPizza.ingredients.push(item);
+            }
+        }
+
+        function removeIngredientById(id) {
+            selectedPizza.ingredients = selectedPizza.ingredients.filter(i => i.id !== id);
+        }
+
+        function getIngredientsTotal() {
+            return selectedPizza.ingredients.reduce((sum, i) => sum + (parseFloat(i.price) || 0), 0);
+        }
+
+        function updateTotalPrice() {
+            const ingredientsTotal = getIngredientsTotal();
+            const total = (selectedPizza.price + ingredientsTotal) * count;
+            const totalAksiya = aksiyaBasePrice * count;
+            const priceEl = document.querySelector("#price");
+            const aksiyaEl = document.querySelector("#aksiyaPrice");
+            if (priceEl) priceEl.textContent = total.toFixed(2) + "₾";
+            if (aksiyaEl) aksiyaEl.textContent = totalAksiya.toFixed(2) + "₾";
+
+            // HTML display ni ham yangilash
+            updateIngredientsDisplay();
+        }
+
+        function generateExtraIngredientId(title) {
+            // Title asosida unique ID yaratish
+            return "extra_" + title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+        }
+
+        function updateDoughSelection() {
+            // Barcha dough elementlaridan active classni olib tashlash
+            document.querySelectorAll(".for_vibor").forEach(el => {
+                el.classList.remove("vibor_active");
+            });
+
+            // Tanlangan dough ni topish va active qilish
+            const selectedDoughId = selectedPizza.ingredients.find(i => i.type === "dough")?.id;
+            if (selectedDoughId) {
+                const selectedEl = document.querySelector(`.for_vibor[data-id="${selectedDoughId}"]`);
+                if (selectedEl) selectedEl.classList.add("vibor_active");
+            }
+        }
+
+        // Tanlangan ingredientlarni HTML da ko'rsatish funksiyasi
+        function updateIngredientsDisplay() {
+            let displayContainer = document.querySelector('.container-map-info-price');
+
+            // Agar container mavjud bo'lmasa, yaratish
+            if (!displayContainer) {
+                displayContainer = document.createElement('div');
+                displayContainer.className = 'container-map-info-price';
+
+                // Container ni qo'shish uchun mos joy topish (addToCart tugmasidan oldin)
+                const addToCartBtn = document.querySelector('#addToCart');
+                if (addToCartBtn) {
+                    addToCartBtn.parentNode.insertBefore(displayContainer, addToCartBtn);
                 } else {
-                      const errorPopup = document.querySelector('#Toastify-nostore');
-
-                    // Toastni ko'rsatish
-                    errorPopup.style.setProperty('display', 'flex', 'important');
-
-                    // 2 sekunddan keyin toastni yashirish va success ni o'chirish
-                    setTimeout(() => {
-                    errorPopup.style.setProperty('display', 'none', 'important');
-                    }, 2200);
+                    document.body.appendChild(displayContainer);
                 }
             }
 
-            console.log('Hozirgi ingredients:', selectedPizza.ingredients);
-            updateTotalPrice();
-        });
-    });
+            // Contentenrni tozalash
+            displayContainer.innerHTML = '';
 
-    // 4) Standard ingredients event listeners
-    const standardItems = document.querySelectorAll(".for_vibor_2");
-    
-    standardItems.forEach(el => {
-        el.addEventListener("click", () => {
-            const id = el.dataset.id;
-            const title = el.dataset.title;
-            const price = parseFloat(el.dataset.price) || 0;
-            const img = el.dataset.img;
+            if (selectedPizza.ingredients.length === 0) return;
 
-            const isActive = el.classList.contains("for_active_2");
+            // MuiBox-root yaratish
+            const muiBox = document.createElement('div');
+            muiBox.className = 'MuiBox-root css-1hnm6b6';
 
-            if (isActive) {
-                // Agar active bo'lsa, olib tashlash
-                el.classList.remove("for_active_2");
-                removeIngredientById(id);
-            } else {
-                // Agar active bo'lmasa, qo'shish
-                el.classList.add("for_active_2");
-                setIngredient({id, title, price, img, type:"standard"});
-            }
+            // Grid container yaratish
+            const gridContainer = document.createElement('div');
+            gridContainer.className = 'MuiGrid-root MuiGrid-container css-1d3bbye';
 
-            // Faqat clicked bo'lgan element bilan ishlash
-            const allDefaultIds = defaultStandardIngredients.map(item => item.id);
-            const activeElements = Array.from(standardItems).filter(div => div.classList.contains("for_active_2"));
-            const activeIds = activeElements.map(div => div.dataset.id);
-            
-            // Agar hech qaysi default ingredient tanlanmagan bo'lsa, ularni qayta qo'shish
-            const hasAnyDefault = allDefaultIds.some(defId => activeIds.includes(defId));
-            
-            if (!hasAnyDefault) {
-                // Hech qaysi default ingredient yo'q, ularni qayta active qilish
-                defaultStandardIngredients.forEach(defItem => {
-                    const defElement = document.querySelector(`.for_vibor_2[data-id="${defItem.id}"]`);
-                    if (defElement && !defElement.classList.contains("for_active_2")) {
-                        defElement.classList.add("for_active_2");
-                        setIngredient(defItem);
-                    }
-                });
-            }
+            const gridItem = document.createElement('div');
+            gridItem.className = 'MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-9 MuiGrid-grid-md-7 MuiGrid-grid-lg-7 css-1celjv4';
 
-            updateTotalPrice();
-        });
-    });
+            const card = document.createElement('div');
+            card.className = 'MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-1eh9dqr';
 
-    // 5) Dough tanlash
-    document.querySelectorAll(".for_vibor").forEach(el => {
-        el.addEventListener("click", () => {
-            const newDough = {
-                id: el.dataset.id,
-                title: el.dataset.title,
-                price: parseFloat(el.dataset.price) || 0,
-                img: el.dataset.img,
-                type: "dough"
-            };
-            
-            setIngredient(newDough);
-            updateDoughSelection();
-            updateTotalPrice();
-        });
-    });
+            // Pizza asosiy ma'lumotlarini ko'rsatish
+            const dough = selectedPizza.ingredients.find(i => i.type === 'dough')?.title || 'Italian Thin';
+            const edge = selectedPizza.ingredients.find(i => i.type === 'edge')?.title || 'Classic Edge';
+            const standardIngredients = selectedPizza.ingredients.filter(i => i.type === 'standard').map(i => i.title);
 
-    // 6) Edge tanlash
-    document.querySelectorAll(".for_vibor_edge").forEach(el => {
-        el.addEventListener("click", () => {
-            setIngredient({
-                id: el.dataset.id,
-                title: el.dataset.title,
-                price: parseFloat(el.dataset.price) || 0,
-                img: el.dataset.img,
-                type: "edge"
+            const mainInfoDiv = document.createElement('div');
+            mainInfoDiv.style.cssText = 'display: flex; justify-content: space-between;';
+
+            const mainInfoText = document.createElement('span');
+            mainInfoText.className = 'fs-13  capatilize';
+            mainInfoText.style.color = 'rgb(73, 73, 73)';
+            mainInfoText.textContent = `${selectedPizza.title}: ${standardIngredients.join(', ')}, ${dough}, ${edge}`;
+
+            const mainPrice = document.createElement('span');
+            mainPrice.className = 'fs-13 ';
+            mainPrice.style.color = 'rgb(73, 73, 73)';
+            mainPrice.textContent = `${selectedPizza.price.toFixed(2)}₾`;
+
+            mainInfoDiv.appendChild(mainInfoText);
+            mainInfoDiv.appendChild(mainPrice);
+            card.appendChild(mainInfoDiv);
+
+            // Extra ingredientlarni ko'rsatish
+            const extraIngredients = selectedPizza.ingredients.filter(i => i.type === 'extra');
+
+            extraIngredients.forEach(ingredient => {
+                const extraDiv = document.createElement('div');
+                extraDiv.style.cssText = 'display: flex; justify-content: space-between; color: rgb(73, 73, 73);';
+
+                const extraText = document.createElement('span');
+                extraText.className = 'fs-13 ';
+                extraText.textContent = `Extra Ingredients: ${ingredient.title}`;
+
+                const extraPriceDiv = document.createElement('span');
+                extraPriceDiv.className = 'fs-13 ';
+                extraPriceDiv.style.textWrap = 'nowrap';
+
+                // Plus icon qo'shish
+                const plusIcon = document.createElement('svg');
+                plusIcon.className = 'MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1lz7e0';
+                plusIcon.setAttribute('focusable', 'false');
+                plusIcon.setAttribute('aria-hidden', 'true');
+                plusIcon.setAttribute('viewBox', '0 0 24 24');
+                plusIcon.setAttribute('data-testid', 'AddIcon');
+                plusIcon.innerHTML = '<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z">+</path>';
+
+                extraPriceDiv.appendChild(plusIcon);
+                extraPriceDiv.appendChild(document.createTextNode(` ${ingredient.price.toFixed(2)}₾`));
+
+                extraDiv.appendChild(extraText);
+                extraDiv.appendChild(extraPriceDiv);
+                card.appendChild(extraDiv);
             });
-            updateTotalPrice();
-        });
-    });
 
-    // 7) Pizza size tanlash
-    document.querySelectorAll(".pizza_size_select").forEach(el => {
-        el.addEventListener("click", function() {
-            document.querySelectorAll(".pizza_size_select").forEach(p => p.classList.remove("active"));
-            this.classList.add("active");
-            selectedPizza.id = this.dataset.id || selectedPizza.id;
-            selectedPizza.title = this.dataset.size || selectedPizza.title;
-            selectedPizza.price = parseFloat(this.dataset.price || selectedPizza.price);
-            updateTotalPrice();
-        });
-    });
+            // Br qo'shish
+            const br = document.createElement('br');
+            card.appendChild(br);
 
-    updateTotalPrice();
-}
+            // Total price qo'shish
+            const totalDiv = document.createElement('div');
+            totalDiv.style.cssText = 'display: flex; justify-content: space-between; align-items: center; gap: 6px;';
 
-// --- PLUS/MINUS tugmalari ---
-document.getElementById("plus")?.addEventListener("click", () => {
-    if (count < maxSelection) {
-        count++;
-        document.getElementById("count").textContent = count;
-        updateTotalPrice();
-    }
-});
+            const totalLabel = document.createElement('p');
+            totalLabel.className = 'fs-24 ';
+            totalLabel.style.color = 'rgb(73, 73, 73)';
+            totalLabel.textContent = 'Total Price:';
 
-document.getElementById("minus")?.addEventListener("click", () => {
-    if (count > 1) {
-        count--;
-        document.getElementById("count").textContent = count;
-        updateTotalPrice();
-    }
-});
+            const totalPriceDiv = document.createElement('div');
+            const totalPrice = (selectedPizza.price + getIngredientsTotal()) * count;
 
-// --- ADD TO CART HANDLER (YANGILANGAN VERSIYA) ---
-function addToCartHandler() {
-    // Dough va edge mavjud bo'lmasa default qo'shish
-    if (!selectedPizza.ingredients.some(i => i.type === "dough")) {
-        setIngredient(defaultDough);
-    }
-    if (!selectedPizza.ingredients.some(i => i.type === "edge")) {
-        setIngredient(defaultEdge);
-    }
+            const totalPriceSpan = document.createElement('span');
+            totalPriceSpan.className = ' text-red';
+            totalPriceSpan.style.fontSize = '30px';
+            totalPriceSpan.textContent = `${totalPrice.toFixed(2)}₾`;
 
-    // Ingredients arrayni 2-chi strukturaga o'xshash formatga o'zgartirish
-    const formattedIngredients = selectedPizza.ingredients.map(ingredient => ({
-        name: ingredient.title,  // title -> name ga o'zgartirish
-        price: ingredient.price
-        // id, img, type larni olib tashlaymiz chunki 2-struktura bunday ma'lumot bermaydi
-    }));
+            totalPriceDiv.appendChild(totalPriceSpan);
+            totalPriceDiv.appendChild(document.createTextNode('   '));
 
-    const totalPrice = (selectedPizza.price + getIngredientsTotal()) * count;
-    
-    const cartProduct = {
-        id: parseInt(product.id) || product.id,
-        img: product.img,
-        aksiyaPrice: aksiyaBasePrice,
-        date: new Date().toISOString(),
-        description: product.description,
-        title: product.title,
-        quantity: count,
-        price: selectedPizza.price, // 2-struktura price ni ham saqlaydi
-        totalPrice: totalPrice.toFixed(2) + "₾",
-        dataType:'pizza',
-        pizzas: [
-            {
-                title: selectedPizza.title,
-                price: 0, // 2-strukturada pizza price 0 bo'ladi
-                ingredients: formattedIngredients // yangi format
+            totalDiv.appendChild(totalLabel);
+            totalDiv.appendChild(totalPriceDiv);
+            card.appendChild(totalDiv);
+
+            gridItem.appendChild(card);
+            gridContainer.appendChild(gridItem);
+
+            // Br qo'shish
+            const br1 = document.createElement('br');
+            const br2 = document.createElement('br');
+            gridContainer.appendChild(br1);
+            gridContainer.appendChild(br2);
+
+            // Add to cart button yaratish (CLASS bilan)
+            const addToCartBtn = document.createElement('button');
+            addToCartBtn.className = 'MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth  fs-18 jss8 css-np2orv addToCartBtn';
+            addToCartBtn.setAttribute('tabindex', '0');
+            addToCartBtn.setAttribute('type', 'button');
+            addToCartBtn.textContent = 'Add to cart';
+
+            const rippleSpan = document.createElement('span');
+            rippleSpan.className = 'MuiTouchRipple-root css-w0pj6f';
+            addToCartBtn.appendChild(rippleSpan);
+
+            muiBox.appendChild(gridContainer);
+            muiBox.appendChild(addToCartBtn);
+            displayContainer.appendChild(muiBox);
+        }
+
+        // Maksimum extra ingredients soni
+        const maxExtraIngredients = 5;
+
+        // --- Initialize Page ---
+        function initializePage() {
+            // UI elementlarni to'ldirish
+            if (Object.keys(product).length) {
+                const t = document.getElementById("title"), i = document.getElementById("img"), d = document.getElementById("description"),
+                    p = document.getElementById("price"), ap = document.getElementById("aksiyaPrice");
+                if (t) t.textContent = product.title || '';
+                if (i) i.src = product.img_1 || '';
+                if (d) d.textContent = product.description || '';
+                if (p) p.textContent = (basePrice || selectedPizza.price).toFixed(2) + "₾";
+                if (ap) ap.textContent = aksiyaBasePrice.toFixed(2) + "₾";
             }
-        ]
-    };
-    
-    // Cart ga qo'shish
-    let cart = JSON.parse(localStorage.getItem('orders')) || [];
-    cart.push(cartProduct);
-    localStorage.setItem('orders', JSON.stringify(cart));
-    
-    console.log("Cart product qo'shildi (2-struktura formatida):", cartProduct);
-    console.log("Hozirgi cart:", cart);
-    
-    const toast = document.querySelector('#Toastify-success');
 
-    // Toastni ko'rsatish
-    toast.style.setProperty('display', 'flex', 'important');
+            // 1) Default dough va edge qo'shish
+            setIngredient(defaultDough);
+            setIngredient(defaultEdge);
+            updateDoughSelection();
 
-    // 2 sekunddan keyin toastni yashirish va success ni o'chirish
-    setTimeout(() => {
-        toast.style.setProperty('display', 'none', 'important');
-        window.location.href='../pizza/'
-    }, 2200);
-}
+            // 2) Default standard ingredients qo'shish
+            defaultStandardIngredients.forEach(item => setIngredient(item));
 
-// EVENT DELEGATION - barcha Add to Cart tugmalar uchun
-document.addEventListener('click', function(e) {
-    // Agar bosilgan element yoki uning parent elementi addToCartBtn classiga ega bo'lsa
-    if (e.target.classList.contains('addToCartBtn') || 
-        e.target.closest('.addToCartBtn')) {
-        
-        e.preventDefault();
-        addToCartHandler();
-    }
-});
+            // 3) Extra ingredients event listeners (for_vibor_0)
+            const extraItems = document.querySelectorAll(".for_vibor_0");
 
-// --- ADD TO CART ---
-// Add to cart funksiyasi endi universal event delegation orqali ishlaydi
+            extraItems.forEach(el => {
+                el.addEventListener("click", () => {
+                    const title = el.dataset.title;
+                    const id = generateExtraIngredientId(title);
+                    const priceStr = el.dataset.price || "+0₾";
+                    const price = parseFloat(priceStr.replace(/[^\d.]/g, '')) || 0;
+                    const img = el.querySelector('img')?.src || '';
 
-// Sahifa yuklanganda ishga tushirish
-document.addEventListener('DOMContentLoaded', initializePage);
+                    const isActive = el.classList.contains("for_active_0");
+
+                    if (isActive) {
+                        // Agar active bo'lsa, olib tashlash
+                        el.classList.remove("for_active_0");
+                        removeIngredientById(id);
+                        console.log(`${title} olib tashlandi`);
+                    } else {
+                        // Agar active bo'lmasa, maksimum limit tekshirish
+                        const currentExtraCount = selectedPizza.ingredients.filter(i => i.type === "extra").length;
+
+                        if (currentExtraCount < maxExtraIngredients) {
+                            el.classList.add("for_active_0");
+                            setIngredient({ id, title, price, img, type: "extra" });
+                            console.log(`${title} qo'shildi. Extra ingredients soni: ${currentExtraCount + 1}`);
+                        } else {
+                            const errorPopup = document.querySelector('#Toastify-nostore');
+
+                            // Toastni ko'rsatish
+                            errorPopup.style.setProperty('display', 'flex', 'important');
+
+                            // 2 sekunddan keyin toastni yashirish va success ni o'chirish
+                            setTimeout(() => {
+                                errorPopup.style.setProperty('display', 'none', 'important');
+                            }, 2200);
+                        }
+                    }
+
+                    console.log('Hozirgi ingredients:', selectedPizza.ingredients);
+                    updateTotalPrice();
+                });
+            });
+
+            // 4) Standard ingredients event listeners
+            const standardItems = document.querySelectorAll(".for_vibor_2");
+
+            standardItems.forEach(el => {
+                el.addEventListener("click", () => {
+                    const id = el.dataset.id;
+                    const title = el.dataset.title;
+                    const price = parseFloat(el.dataset.price) || 0;
+                    const img = el.dataset.img;
+
+                    const isActive = el.classList.contains("for_active_2");
+
+                    if (isActive) {
+                        // Agar active bo'lsa, olib tashlash
+                        el.classList.remove("for_active_2");
+                        removeIngredientById(id);
+                    } else {
+                        // Agar active bo'lmasa, qo'shish
+                        el.classList.add("for_active_2");
+                        setIngredient({ id, title, price, img, type: "standard" });
+                    }
+
+                    // Faqat clicked bo'lgan element bilan ishlash
+                    const allDefaultIds = defaultStandardIngredients.map(item => item.id);
+                    const activeElements = Array.from(standardItems).filter(div => div.classList.contains("for_active_2"));
+                    const activeIds = activeElements.map(div => div.dataset.id);
+
+                    // Agar hech qaysi default ingredient tanlanmagan bo'lsa, ularni qayta qo'shish
+                    const hasAnyDefault = allDefaultIds.some(defId => activeIds.includes(defId));
+
+                    if (!hasAnyDefault) {
+                        // Hech qaysi default ingredient yo'q, ularni qayta active qilish
+                        defaultStandardIngredients.forEach(defItem => {
+                            const defElement = document.querySelector(`.for_vibor_2[data-id="${defItem.id}"]`);
+                            if (defElement && !defElement.classList.contains("for_active_2")) {
+                                defElement.classList.add("for_active_2");
+                                setIngredient(defItem);
+                            }
+                        });
+                    }
+
+                    updateTotalPrice();
+                });
+            });
+
+            // 5) Dough tanlash
+            document.querySelectorAll(".for_vibor").forEach(el => {
+                el.addEventListener("click", () => {
+                    const newDough = {
+                        id: el.dataset.id,
+                        title: el.dataset.title,
+                        price: parseFloat(el.dataset.price) || 0,
+                        img: el.dataset.img,
+                        type: "dough"
+                    };
+
+                    setIngredient(newDough);
+                    updateDoughSelection();
+                    updateTotalPrice();
+                });
+            });
+
+            // 6) Edge tanlash
+            document.querySelectorAll(".for_vibor_edge").forEach(el => {
+                el.addEventListener("click", () => {
+                    setIngredient({
+                        id: el.dataset.id,
+                        title: el.dataset.title,
+                        price: parseFloat(el.dataset.price) || 0,
+                        img: el.dataset.img,
+                        type: "edge"
+                    });
+                    updateTotalPrice();
+                });
+            });
+
+            // 7) Pizza size tanlash
+            document.querySelectorAll(".pizza_size_select").forEach(el => {
+                el.addEventListener("click", function () {
+                    document.querySelectorAll(".pizza_size_select").forEach(p => p.classList.remove("active"));
+                    this.classList.add("active");
+                    selectedPizza.id = this.dataset.id || selectedPizza.id;
+                    selectedPizza.title = this.dataset.size || selectedPizza.title;
+                    selectedPizza.price = parseFloat(this.dataset.price || selectedPizza.price);
+                    updateTotalPrice();
+                });
+            });
+
+            updateTotalPrice();
+        }
+
+        // --- PLUS/MINUS tugmalari ---
+        document.getElementById("plus")?.addEventListener("click", () => {
+            if (count < maxSelection) {
+                count++;
+                document.getElementById("count").textContent = count;
+                updateTotalPrice();
+            }
+        });
+
+        document.getElementById("minus")?.addEventListener("click", () => {
+            if (count > 1) {
+                count--;
+                document.getElementById("count").textContent = count;
+                updateTotalPrice();
+            }
+        });
+
+        // --- ADD TO CART HANDLER (YANGILANGAN VERSIYA) ---
+        function addToCartHandler() {
+            // Dough va edge mavjud bo'lmasa default qo'shish
+            if (!selectedPizza.ingredients.some(i => i.type === "dough")) {
+                setIngredient(defaultDough);
+            }
+            if (!selectedPizza.ingredients.some(i => i.type === "edge")) {
+                setIngredient(defaultEdge);
+            }
+
+            // Ingredients arrayni 2-chi strukturaga o'xshash formatga o'zgartirish
+            const formattedIngredients = selectedPizza.ingredients.map(ingredient => ({
+                name: ingredient.title,  // title -> name ga o'zgartirish
+                price: ingredient.price
+                // id, img, type larni olib tashlaymiz chunki 2-struktura bunday ma'lumot bermaydi
+            }));
+
+            const totalPrice = (selectedPizza.price + getIngredientsTotal()) * count;
+
+            const cartProduct = {
+                id: parseInt(product.id) || product.id,
+                img: product.img,
+                aksiyaPrice: aksiyaBasePrice,
+                date: new Date().toISOString(),
+                description: product.description,
+                title: product.title,
+                quantity: count,
+                price: selectedPizza.price, // 2-struktura price ni ham saqlaydi
+                totalPrice: totalPrice.toFixed(2) + "₾",
+                dataType: 'pizza',
+                pizzas: [
+                    {
+                        title: selectedPizza.title,
+                        price: 0, // 2-strukturada pizza price 0 bo'ladi
+                        ingredients: formattedIngredients // yangi format
+                    }
+                ]
+            };
+
+            // Cart ga qo'shish
+            let cart = JSON.parse(localStorage.getItem('orders')) || [];
+            cart.push(cartProduct);
+            localStorage.setItem('orders', JSON.stringify(cart));
+
+            console.log("Cart product qo'shildi (2-struktura formatida):", cartProduct);
+            console.log("Hozirgi cart:", cart);
+
+            const toast = document.querySelector('#Toastify-success');
+
+            // Toastni ko'rsatish
+            toast.style.setProperty('display', 'flex', 'important');
+
+            // 2 sekunddan keyin toastni yashirish va success ni o'chirish
+            setTimeout(() => {
+                toast.style.setProperty('display', 'none', 'important');
+                window.location.href = '../pizza/'
+            }, 2200);
+        }
+
+        // EVENT DELEGATION - barcha Add to Cart tugmalar uchun
+        document.addEventListener('click', function (e) {
+            // Agar bosilgan element yoki uning parent elementi addToCartBtn classiga ega bo'lsa
+            if (e.target.classList.contains('addToCartBtn') ||
+                e.target.closest('.addToCartBtn')) {
+
+                e.preventDefault();
+                addToCartHandler();
+            }
+        });
+
+        // --- ADD TO CART ---
+        // Add to cart funksiyasi endi universal event delegation orqali ishlaydi
+
+        // Sahifa yuklanganda ishga tushirish
+        document.addEventListener('DOMContentLoaded', initializePage);
 
 
 
 
-</script>
+    </script>
 
 
-<!-- <script>
+    <!-- <script>
     // details.js — boshqa fayl
 
 function checkAndLogEditOrder() {

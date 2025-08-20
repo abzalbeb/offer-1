@@ -585,6 +585,7 @@ document.querySelectorAll(".jss41").forEach(btn => {
     // keyin data-* dan olish
     let id = product.dataset.id;
     let img = product.dataset.img;
+    let img_1 = product.dataset.img_1;
     let title = product.dataset.title;
     let description = product.dataset.description;
     let price = parseFloat(product.dataset.price);

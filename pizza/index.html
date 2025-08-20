@@ -1748,7 +1748,11 @@
             </div>
             <div class="jss1">
                 <div id="favorite" class="jss30 product_grid" style="padding-bottom: 20px;">
-                    <div class="jss32 product" id="favorite" style="cursor: pointer;">
+                    <div class="jss32 product card_product" data-id="151"
+                                data-img="https://deykvccewcmn1.cloudfront.net/pepperoni_global.webp"
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/Pepperoni.webp"
+                                data-title="Pepperoni" data-description="Pizza Sauce, Mozzarella, Pepperoni"
+                                data-price="27.90" data-aksiya-price="" data-type="pizza" id="favorite" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -1782,7 +1786,7 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">27.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Pepperoni');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411 ">Order</button></div>
                                 </div>
                             </div>
@@ -1791,7 +1795,13 @@
                                 src="data:image/png;base64,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"
                                 alt="tovar" width="70px" height="70"></div>
                     </div>
-                    <div class="jss32 product" id="favorite" style="cursor: pointer;">
+                    <div 
+                    data-id="400"
+                                data-img="https://deykvccewcmn1.cloudfront.net/margherita_global.webp"
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/margherita_mobile_detail.webp"
+                                data-title="Margherita" data-description="Pizza Sauce, Mozzarella, Tomato"
+                                data-price="27.90" data-aksiya-price="" data-type="pizza" id="favorite"
+                    class="jss32 product card_product" id="favorite" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -1825,14 +1835,18 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">27.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Margherita');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411 ">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="favorite" style="cursor: pointer;">
+                    <div class="jss32 product card_product" data-id="401"
+                                data-img="https://deykvccewcmn1.cloudfront.net/mushroom_&_ham_global.webp"
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/mushroom_and_ham_mobile_detail.webp"
+                                data-title="Ham & Mushroom" data-description="Pizza Sauce, Mozzarella, Ham, Mushrooms"
+                                data-price="27.90" data-aksiya-price="" data-type="pizza" id="favorite" id="favorite" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -1866,14 +1880,18 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">27.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Ham Mushroom');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="favorite" style="cursor: pointer;">
+                    <div data-id="402"
+                                data-img="https://deykvccewcmn1.cloudfront.net/mexican_global.webp"
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/mexican_mobile_detail.webp"
+                                data-title="Mexican" data-description="Pizza Sauce, Mozzarella, Pepperoni, Jalapeno, Green Peppers, Black Olives, Onions"
+                                data-price="27.90" data-aksiya-price="" data-type="pizza" class="jss32 product card_product" id="favorite" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -1906,14 +1924,18 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">27.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Mexican');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="favorite" style="cursor: pointer;">
+                    <div data-id="403"
+                                data-img="https://deykvccewcmn1.cloudfront.net/greek_global.webp"
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/greek_mobile_detail.webp"
+                                data-title="Greek" data-description="Pizza Sauce, Mozzarella, Green Pepper, Black Olives, Feta, Tomato"
+                                data-price="27.90" data-aksiya-price="" data-type="pizza" class="jss32 product card_product" id="favorite" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -1946,14 +1968,18 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">27.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Greek');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="favorite" style="cursor: pointer;">
+                    <div data-id="404"
+                                data-img="https://deykvccewcmn1.cloudfront.net/deluxe_global.webp"
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/delux_mobile_detail.webp"
+                                data-title="Delux" data-description="Pizza Sauce, Mozzarella, Mushroom, Pepperoni, Ham, Onion, Green Pepper"
+                                data-price="27.90" data-aksiya-price="" data-type="pizza" class="jss32 product card_product" id="favorite" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -1986,14 +2012,18 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">27.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Delux');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="favorite" style="cursor: pointer;">
+                    <div data-id="405"
+                                data-img="https://deykvccewcmn1.cloudfront.net/calipso_global.webp"
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/calipso.webp"
+                                data-title="Calypso" data-description="Pizza Sauce, Mozzarella, Tuna, Onion, Corn, Tomato"
+                                data-price="27.90" data-aksiya-price="" data-type="pizza" class="jss32 product card_product" id="favorite" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2026,7 +2056,7 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">27.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Calypso');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
@@ -2035,7 +2065,12 @@
                     </div>
                 </div>
                 <div id="special" class="jss30 product_grid" style="padding-bottom: 20px;">
-                    <div class="jss32 product" id="special" style="cursor: pointer;">
+                    <div  data-id="502"
+                                data-img="https://deykvccewcmn1.cloudfront.net/american_global.webp" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/American.webp" 
+                                data-title="American"
+                                data-description="Pizza sauce, Mozzarella, Pepperoni, Bacon, Mushrooms"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" class="jss32 product card_product" id="special" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2069,14 +2104,19 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">30.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','American');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="special" style="cursor: pointer;">
+                    <div data-id="407"
+                                data-img="https://deykvccewcmn1.cloudfront.net/grilled_chicken.webp" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/grilled_chicken_mobile_detail.webp" 
+                                data-title="Grilled Chicken"
+                                data-description="Pizza Sauce, Chicken, Mozzarella, Mushroom, Green, Pepper, Corn"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" class="jss32 product card_product" id="special" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2110,14 +2150,19 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">30.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Grilled Chicken');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="special" style="cursor: pointer;">
+                    <div data-id="408"
+                                data-img="https://deykvccewcmn1.cloudfront.net/chicken_BBQ.webp" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/chicken_bbq_mbile_detail.webp" 
+                                data-title="Chicken BBQ"
+                                data-description="Pizza Sauce, Mozzarella, Green Pepper, Chicken, Onion, BBQ Sauce"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" class="jss32 product card_product" id="special" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2151,14 +2196,19 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">30.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Chicken BBQ');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="special" style="cursor: pointer;">
+                    <div class="jss32 product card_product" data-id="300"
+                                data-img="https://deykvccewcmn1.cloudfront.net/veggie_global.webp" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/Veggie.webp" 
+                                data-title="Veggie"
+                                data-description="Pizza Sauce, Onion, Green Pepper, Mozzarella, Black Olives, Mushroom, Corn"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" id="special" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2191,14 +2241,19 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">30.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Veggie');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="special" style="cursor: pointer;">
+                    <div data-id="409"
+                                data-img="https://deykvccewcmn1.cloudfront.net/mix_global.webp" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/mix_detail_mobile.webp" 
+                                data-title="Mix"
+                                data-description="Pizza Sauce, Mozzarella, Ham, Bacon, Green Peppers, Onion"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" class="jss32 product card_product" id="special" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2231,14 +2286,19 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">30.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Mix');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="special" style="cursor: pointer;">
+                    <div class="jss32 product card_product" data-id="500"
+                                data-img="https://deykvccewcmn1.cloudfront.net/4meat_global.webp" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/4Meat.webp" 
+                                data-title="4 Meat"
+                                data-description="Pizza sauce, Mozzarella, Pepperoni, Bacon, Ham, Beef Sausage"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" id="special" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2271,14 +2331,19 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">30.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','4 Meat');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="special" style="cursor: pointer;">
+                    <div data-id="410"
+                                data-img="https://deykvccewcmn1.cloudfront.net/extravaganza_global.webp" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/extravaganza_mobile_detail.webp" 
+                                data-title="Extravaganza"
+                                data-description="Pizza Sauce, Onion, Mozzarella, Beef Sausage, Pepperoni, Black Olives, Gr. Pepper, Mushroom, Ham, Corn"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" class="jss32 product card_product" id="special" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2313,14 +2378,19 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">30.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Extravaganza');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="special" style="cursor: pointer;">
+                    <div class="jss32 product card_product" data-id="501"
+                                data-img="https://deykvccewcmn1.cloudfront.net/20250620091628501_chilli.webp" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/20240831205841410_chillychicken.webp" 
+                                data-title="Sweet Chilli Chicken"
+                                data-description="Pizza Sauce, Mozzarella, Chicken, Green Pepper, Onion, Sweet Chilli Sauce"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" id="special" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2354,7 +2424,7 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">30.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Sweet Chilli chicken');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
@@ -2363,7 +2433,12 @@
                                 src="data:image/png;base64,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"
                                 alt="New" height="70" width="70px"></div>
                     </div>
-                    <div class="jss32 product" id="special" style="cursor: pointer;">
+                    <div class="jss32 product card_product" data-id="155"
+                                data-img="https://deykvccewcmn1.cloudfront.net/20240831212119268_HoneyMusterChicken.webp"
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/20240831212139673_honeymusterchicken.webp"
+                                data-title="Honey Mustard Chicken"
+                                data-description="Pizza Sauce, Mozzarella, Chicken, Mushroom, Honey Mustard Sauce"
+                                data-price="31.90" data-aksiya-price="" data-type="pizza" id="special" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2397,7 +2472,7 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">30.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Honey Mustard Chicken');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
@@ -2408,7 +2483,12 @@
                     </div>
                 </div>
                 <div id="premium" class="jss30 product_grid" style="padding-bottom: 20px;">
-                    <div class="jss32 product" id="premium" style="cursor: pointer;">
+                    <div class="jss32 product card_product" data-id="153"
+                                data-img="https://deykvccewcmn1.cloudfront.net/4cheese_global.webp"
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/4Cheese.webp"
+                                data-title="4 Cheese"
+                                data-description="Pizza Sauce, Mozzarella, Feta, Cheddar, Gorgonzola" data-price="31.90"
+                                data-aksiya-price="" data-type="pizza" id="premium" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2442,7 +2522,7 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">31.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','4 Cheese');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
@@ -2451,7 +2531,12 @@
                                 src="data:image/png;base64,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"
                                 alt="tovar" width="70px" height="70"></div>
                     </div>
-                    <div class="jss32 product" id="premium" style="cursor: pointer;">
+                    <div class="jss32 product card_product" data-id="154"
+                                data-img="https://deykvccewcmn1.cloudfront.net/double_pepperoni_global.webp"
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/Double Pepperoni.webp"
+                                data-title="Double Pepperoni"
+                                data-description="Pizza Sauce, Mozzarella, Double Pepperon" data-price="31.90"
+                                data-aksiya-price="" data-type="pizza" id="premium" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2485,7 +2570,7 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">31.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Double Pepperoni');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
@@ -2494,7 +2579,13 @@
                                 src="data:image/png;base64,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"
                                 alt="tovar" width="70px" height="70"></div>
                     </div>
-                    <div class="jss32 product" id="premium" style="cursor: pointer;">
+                    <div data-id="413"
+                                
+                                data-img="https://deykvccewcmn1.cloudfront.net/domino_s_pizza_Global.webp" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/dominos pizza.webp" 
+                                data-title="Domino's Pizza"
+                                data-description="Pizza Sauce, Chicken, Mozzarella, Mushroom, Bacon, Green Pepper, Tomato, Pepperoni, Onion"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" class="jss32 product card_product" id="premium" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2529,14 +2620,19 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">31.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Dominos Pizza');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
-                    <div class="jss32 product" id="premium" style="cursor: pointer;">
+                    <div data-id="412"
+                    data-img="https://deykvccewcmn1.cloudfront.net/bacon_&_ranch_sauce_global.webp" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/chicken ranch.webp"  
+                                data-title="Bacon & Chicken Ranch"
+                                data-description="Pizza Sauce, Mozzarella, Chicken, Tomato, Bacon, Ranch Sauce"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" class="jss32 product card_product" id="premium" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -2570,7 +2666,7 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">31.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Bacon Chicken Ranch');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
@@ -2578,7 +2674,12 @@
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
                 </div>
-                <div id="half_half" class="jss30 product_grid" style="padding-bottom: 20px;">
+                <div id="half_half" data-id="414"
+                    data-img="https://deykvccewcmn1.cloudfront.net/halfnhalf_global1.webp" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/halfnhalf_detail1.webp"  
+                                data-title="Half & Half"
+                                data-description="Can't choose? Then enjoy two flavors from the menu…"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" class="jss30 product_grid card_product" style="padding-bottom: 20px;">
                     <div class="jss32 product" id="half_half" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
@@ -2613,7 +2714,7 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">29.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Half Half');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
@@ -2621,7 +2722,12 @@
                         <div class="popular_img" style="position: absolute; top: 10px; left: 10px; display: block;"></div>
                     </div>
                 </div>
-                <div id="makeyourown" class="jss30 product_grid" style="padding-bottom: 20px;">
+                <div id="makeyourown" data-id="415"
+                    data-img="https://deykvccewcmn1.cloudfront.net/make_your_own_global.png" 
+                                data-img_1="https://deykvccewcmn1.cloudfront.net/350x350_720_M.webp"  
+                                data-title="Make Your Own Pizza"
+                                data-description="Can't Choose? Then make your own pizza!"
+                                data-price="30.90" data-aksiya-price="" data-type="pizza" class="jss30 product_grid card_product" style="padding-bottom: 20px;">
                     <div class="jss32 product" id="makeyourown" style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
@@ -2656,7 +2762,7 @@
                                         <p class="fs-18 text-red "><span class="for_price"></span> </p>
                                  <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">27.90</span> ₾</p>
                                     </div>
-                                    <div style="margin-left: auto;"><button aria-label="Add to cart"
+                                    <div style="margin-left: auto;"><button onclick="localStorage.setItem('order','Make Your Own Pizza');localStorage.setItem('ingredient', 0);" aria-label="Add to cart"
                                             class="jss411">Order</button></div>
                                 </div>
                             </div>
@@ -3008,15 +3114,44 @@ document.getElementById("Premium").addEventListener("click", function() {
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    const buttons = document.querySelectorAll('.jss411');
+ function cartAddress() {
+            window.location.href = './cart/'
+        }
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            alert('Временно не работает');
+        document.querySelectorAll(".jss1 button").forEach(btn => {
+            btn.addEventListener("click", function () {
+                let product = this.closest(".card_product");
+
+                // DOM’dan narxlarni olish
+                let originalPrice = parseFloat(product.querySelector(".for_price").textContent.trim());
+                let discountedPrice = parseFloat(product.querySelector(".for_aksiyaPrice").textContent.trim());
+
+                // data-atributlarga yozib qo‘yish
+                product.dataset.price = originalPrice.toFixed(2);        // asl narx
+                product.dataset.aksiyaPrice = discountedPrice.toFixed(2); // aksiya narx
+
+                // Mahsulot ma'lumotlarini olish
+                let productData = {
+                    id: product.dataset.id,
+                    img: product.dataset.img,
+                    img_1: product.dataset.img_1,
+                    title: product.dataset.title,
+                    description: product.dataset.description,
+                    price: parseFloat(product.dataset.price),
+                    aksiyaPrice: parseFloat(product.dataset.aksiyaPrice) || null
+                };
+
+                // Tanlangan mahsulotni LocalStorage’ga vaqtincha saqlash
+                localStorage.setItem("selectedProduct", JSON.stringify(productData));
+
+                // Agar mahsulot pizza bo'lsa - pizza sahifasiga yo'naltirish
+                if (product.dataset.type && product.dataset.type === 'pizza') {
+                    window.location.href = "../details-pizza/";
+                } else {
+                    window.location.href = "../details";
+                }
+            });
         });
-    });
-});
     </script>
 
 <script src="../assets/js/terms-main.js"></script>

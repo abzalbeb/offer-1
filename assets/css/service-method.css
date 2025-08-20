@@ -69,19 +69,6 @@ svg:not(:root) {
     visibility: hidden;
     z-index: 1200;
 }
-.css-919eu4 {
-    position: fixed;
-    display: flex
-;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    inset: 0px;
-    background-color: rgba(0, 0, 0, 0.5);
-    -webkit-tap-highlight-color: transparent;
-    z-index: -1;
-}
 .css-15xvzt3 {
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
@@ -142,6 +129,15 @@ svg:not(:root) {
     width: 100%;
     box-sizing: border-box;
     text-align: left !important;
+}
+
+
+.user-tooltip a:nth-child(1){
+    display: none;
+}
+
+.user-tooltip a:nth-child(3){
+    display: none;
 }
 
 .css-kj3bb2 {
@@ -615,3 +611,15 @@ h1, h2, h3, h4, h5, h6, p {
         display: none !important;
      }
      }
+.css-919eu4 {
+    position: fixed;
+    display: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    inset: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+    z-index: -1;
+}
