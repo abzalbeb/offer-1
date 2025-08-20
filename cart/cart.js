@@ -266,7 +266,7 @@ function changeQuantity(orderId, change) {
 // total larni yig'ish
 let subTotal = cart.reduce((sum, item) => sum + (item.total || 0), 0);
 
-document.querySelector(".subTotal").innerHTML = subTotal.toFixed(2)
+document.querySelector(".subTotal").innerHTML = "subTotal.toFixed(2)"
 }
 
 // Function to change cart item quantity
@@ -439,6 +439,11 @@ let ordersTotal = orders.reduce((sum, item) => sum + ((item.price || 0) * (item.
 // umumiy total
 let grandTotal = cartTotal + ordersTotal;
 document.querySelector(".subTotal").innerHTML = grandTotal.toFixed(2) + "₾"
+
+function payment_page() {
+            sessionStorage.setItem("dataprice", grandTotal.toFixed(2) + "₾")
+            window.location="../oplata"
+        }
 
 
 let cartDiv = document.querySelector(".cart_cards");
