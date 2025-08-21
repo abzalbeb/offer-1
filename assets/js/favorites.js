@@ -27,6 +27,7 @@ favorites
              data-description="${item.description}"
              data-price="${item.price}"
              data-type="${item.type || ''}"
+             data-ingredients="${item.Ingredients || ''}"
              data-aksiya-price="${item.aksiyaPrice || ''}">
           <div class="jss35">
             <label class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h">
@@ -92,6 +93,7 @@ favorites
              data-description="${item.description}"
              data-price="${item.price}"
              data-type="${item.type || ''}"
+             data-ingredients="${item.Ingredients || ''}"
              data-aksiya-price="">
           <div class="jss35">
             <label class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h">
@@ -230,6 +232,7 @@ favorites
       const title = product.dataset.title;
       const description = product.dataset.description;
       const price = parseFloat(product.dataset.price);
+      const ingredients = product.dataset.ingredients || ''; // BU QATORNI TUZATDIM
       const aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || price;
       const type = product.dataset.type;
 
@@ -242,7 +245,8 @@ favorites
         img_1: img_1,
         price: price,
         aksiyaPrice: aksiyaPrice,
-        type: type
+        type: type,
+        Ingredients: ingredients // BU HAM TUZATLANDI
       };
 
       // localStorage ga selectedProduct nomida saqlaymiz
@@ -324,4 +328,3 @@ favorites
     } catch (_) {}
   });
 })();
-

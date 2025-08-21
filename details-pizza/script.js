@@ -110,7 +110,7 @@ const defaultStandardIngredients666 = [
   { id: "667", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
   { id: "668", title: "Tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "standard" },
   { id: "669", title: "Feta", price: 0, img: "https://deykvccewcmn1.cloudfront.net/feta.webp", type: "standard" },
-  { id: "669", title: "Black Olive", price: 0, img: "https://deykvccewcmn1.cloudfront.net/black%20olives.png", type: "standard" },
+  { id: "670", title: "Black Olive", price: 0, img: "https://deykvccewcmn1.cloudfront.net/black%20olives.png", type: "standard" },
   { id: "671", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" }
 ];
 
@@ -484,7 +484,7 @@ const maxExtraIngredients = 5;
 
 
 // Edit holatini tekshirish va ma'lumotlarni qayta tiklash funksiyasi
-// Edit holatini tekshirish va ma'lumotlarni qayta tiklash funksiyasi
+// Edit holatini tekshirish va ma'lumotlarni qayta tiklash funksiyasi (TUZATILGAN)
 function restoreEditData() {
     const isEditMode = localStorage.getItem('edit') === 'true';
     const editOrderData = JSON.parse(localStorage.getItem('editOrderData')) || null;
@@ -494,6 +494,14 @@ function restoreEditData() {
     }
     
     console.log('Edit rejimi faol. Ma\'lumotlarni tiklamoqda...', editOrderData);
+    
+    // AVVAL BARCHA CLASS LARNI TO'LIQ TOZALASH
+    document.querySelectorAll(".for_active_0, .for_active_2, .vibor_active").forEach(el => {
+        el.classList.remove("for_active_0", "for_active_2", "vibor_active");
+    });
+    
+    // Selected pizza ingredients ni to'liq tozalash
+    selectedPizza.ingredients = [];
     
     // 1. Count ni qayta tiklash
     if (editOrderData.quantity) {
@@ -510,20 +518,23 @@ function restoreEditData() {
         const savedPizzaSize = editOrderData.pizzas[0].title;
         console.log('Saqlangan pizza size:', savedPizzaSize);
 
+        // Barcha pizza size lardan active ni olib tashlash
         document.querySelectorAll(".pizza_size_select").forEach(el => {
-            // Avval hamma class va svg ni tozalaymiz
             el.classList.remove("active");
             const svgIcon = el.querySelector("svg");
             if (svgIcon) svgIcon.style.display = "none";
+        });
 
+        // To'g'ri pizza size ni topish va active qilish
+        document.querySelectorAll(".pizza_size_select").forEach(el => {
             const elSize = el.dataset.size || el.textContent.trim();
             if (
                 elSize === savedPizzaSize ||
                 elSize.includes(savedPizzaSize) ||
                 savedPizzaSize.includes(elSize)
             ) {
-                // Active holat
                 el.classList.add("active");
+                const svgIcon = el.querySelector("svg");
                 if (svgIcon) svgIcon.style.display = "inline-block";
 
                 selectedPizza.id = el.dataset.id || selectedPizza.id;
@@ -535,31 +546,23 @@ function restoreEditData() {
         });
     }
     
-    // 3. Ingredients ni qayta tiklash
+    // 3. Default dough va edge ni DOIM qo'shish
+    setIngredient(defaultDough);
+    setIngredient(defaultEdge);
+    updateDoughSelection();
+    
+    // 4. Ingredients ni qayta tiklash
     if (editOrderData.pizzas && editOrderData.pizzas[0] && editOrderData.pizzas[0].ingredients) {
         const savedIngredients = editOrderData.pizzas[0].ingredients;
         console.log('Saqlangan ingredients:', savedIngredients);
         
-        // Avval barcha active classlarni olib tashlash
-        document.querySelectorAll(".for_active_0, .for_active_2").forEach(el => {
-            el.classList.remove("for_active_0", "for_active_2");
-        });
-        
-        // Selected pizza ingredients ni tozalash
-        selectedPizza.ingredients = [];
-        
-        // Default dough va edge qayta qo'shish
-        setIngredient(defaultDough);
-        setIngredient(defaultEdge);
-        updateDoughSelection();
-        
-        // YANGI: editOrderData.ingredients raqami bo'yicha default ingredients ni aniqlash
+        // editOrderData.ingredients raqami bo'yicha default ingredients ni aniqlash
         const ingredientsNumber = editOrderData.ingredients;
         console.log('Edit order ingredients raqami:', ingredientsNumber);
         
         let defaultIngredientsForThisProduct = [];
         
-        // editOrderData.ingredients raqamiga qarab to'g'ri default ingredients tanlash
+        // Ingredients raqamiga qarab to'g'ri default ingredients tanlash
         if (ingredientsNumber === "6" || ingredientsNumber === 6) {
             defaultIngredientsForThisProduct = defaultStandardIngredients6;
         } else if (ingredientsNumber === "3" || ingredientsNumber === 3) {
@@ -599,76 +602,71 @@ function restoreEditData() {
         
         console.log('Bu mahsulot uchun default ingredients:', defaultIngredientsForThisProduct);
         
-        // Standard ingredients va extra ingredients ni ajratish
-        const standardIngredientsToAdd = [];
-        const extraIngredientsToAdd = [];
+        // Saqlangan ingredients larni nom bo'yicha guruhlash
+        const savedStandardIngredients = [];
+        const savedExtraIngredients = [];
         
         savedIngredients.forEach(savedItem => {
-            console.log('Tekshirilayotgan ingredient:', savedItem);
+            const ingredientName = savedItem.name.toLowerCase().trim();
             
-            // Default ingredients ro'yxatida bor-yo'qligini tekshirish
+            // Default standard ingredients ichida bor-yo'qligini tekshirish
             const isDefaultStandard = defaultIngredientsForThisProduct.some(defItem => 
-                defItem.title.toLowerCase().trim() === savedItem.name.toLowerCase().trim()
+                defItem.title.toLowerCase().trim() === ingredientName
             );
             
-            const isDefaultDough = defaultDough.title.toLowerCase().trim() === savedItem.name.toLowerCase().trim();
-            const isDefaultEdge = defaultEdge.title.toLowerCase().trim() === savedItem.name.toLowerCase().trim();
+            const isDefaultDough = defaultDough.title.toLowerCase().trim() === ingredientName;
+            const isDefaultEdge = defaultEdge.title.toLowerCase().trim() === ingredientName;
             
-            // Agar default ingredient bo'lmasa va dough/edge ham bo'lmasa, demak bu extra ingredient
-            if (!isDefaultStandard && !isDefaultDough && !isDefaultEdge) {
-                console.log('Extra ingredient topildi:', savedItem.name);
-                extraIngredientsToAdd.push(savedItem);
-            } else if (isDefaultStandard) {
-                console.log('Standard ingredient topildi:', savedItem.name);
-                standardIngredientsToAdd.push(savedItem);
+            if (isDefaultStandard) {
+                savedStandardIngredients.push(savedItem);
+            } else if (!isDefaultDough && !isDefaultEdge) {
+                savedExtraIngredients.push(savedItem);
             }
         });
         
-        // Standard ingredients ni qayta tiklash
-        if (standardIngredientsToAdd.length > 0) {
-            console.log('Standard ingredients tiklanmoqda:', standardIngredientsToAdd);
-            
-            // Saqlangan standard ingredientlarni active qilish
-            standardIngredientsToAdd.forEach(savedItem => {
-                // Default ingredients ichidan to'g'ri ID ni topish
+        console.log('Standard ingredients:', savedStandardIngredients);
+        console.log('Extra ingredients:', savedExtraIngredients);
+        
+        // STANDARD INGREDIENTS NI QAYTA TIKLASH
+        if (savedStandardIngredients.length > 0) {
+            // Faqat saqlangan standard ingredients larni active qilish
+            savedStandardIngredients.forEach(savedItem => {
                 const matchedDefault = defaultIngredientsForThisProduct.find(defItem => 
                     defItem.title.toLowerCase().trim() === savedItem.name.toLowerCase().trim()
                 );
                 
                 if (matchedDefault) {
-                    // Element topish va active qilish
                     const standardElement = document.querySelector(`.for_vibor_2[data-id="${matchedDefault.id}"]`);
                     
                     if (standardElement) {
                         standardElement.classList.add("for_active_2");
                         setIngredient(matchedDefault);
-                        console.log('Standard ingredient qayta qo\'shildi:', matchedDefault);
+                        console.log('Standard ingredient active qilindi:', matchedDefault.title);
                     } else {
                         console.warn('Standard ingredient elementi topilmadi:', matchedDefault.id, savedItem.name);
                     }
                 }
             });
         } else {
-            // Agar saqlangan standard ingredients yo'q bo'lsa, default larni qo'yish
-            console.log('Saqlangan standard ingredients yo\'q, default larni qo\'yapmiz');
+            // Agar hech qanday saqlangan standard ingredient yo'q bo'lsa, 
+            // barcha default larni active qilish
+            console.log('Saqlangan standard ingredients yo\'q, barcha default larni qo\'yapmiz');
             defaultIngredientsForThisProduct.forEach(item => {
                 setIngredient(item);
                 const element = document.querySelector(`.for_vibor_2[data-id="${item.id}"]`);
                 if (element) {
                     element.classList.add("for_active_2");
-                } else {
-                    console.warn('Default ingredient elementi topilmadi:', item.title, item.id);
                 }
             });
         }
         
-        // Extra ingredients ni qayta tiklash
-        extraIngredientsToAdd.forEach(savedItem => {
-            // Extra ingredient elementini topish - data-title bilan
+        // EXTRA INGREDIENTS NI QAYTA TIKLASH
+        savedExtraIngredients.forEach(savedItem => {
+            // Extra ingredient elementini topish
             let extraElement = document.querySelector(`.for_vibor_0[data-title="${savedItem.name}"]`);
             
             if (!extraElement) {
-                // Agar data-title bilan topilmasa, boshqa usul bilan sinash
+                // data-title bilan topilmasa, title ni taqqoslash
                 const allExtraElements = document.querySelectorAll('.for_vibor_0');
                 allExtraElements.forEach(el => {
                     const elTitle = el.dataset.title || el.querySelector('span')?.textContent?.trim() || '';
@@ -691,21 +689,86 @@ function restoreEditData() {
                 };
                 
                 setIngredient(extraIngredient);
-                console.log('Extra ingredient qayta qo\'shildi:', extraIngredient);
+                console.log('Extra ingredient qayta qo\'shildi:', extraIngredient.title);
             } else {
                 console.warn('Extra ingredient elementi topilmadi:', savedItem.name);
             }
         });
+        
+    } else {
+        // Agar saqlangan ingredients yo'q bo'lsa, default larni qo'yish
+        console.log('Saqlangan ingredients yo\'q, default larni qo\'yapmiz');
+        defaultStandardIngredients.forEach(item => {
+            setIngredient(item);
+            const element = document.querySelector(`.for_vibor_2[data-id="${item.id}"]`);
+            if (element) {
+                element.classList.add("for_active_2");
+            }
+        });
     }
     
-    // 4. Narxlarni yangilash
+    // 5. Narxlarni yangilash
     updateTotalPrice();
     
     console.log('Edit ma\'lumotlari muvaffaqiyatli tiklandi');
     console.log('Hozirgi selectedPizza:', selectedPizza);
     console.log('Hozirgi count:', count);
+    console.log('Active standard elements:', document.querySelectorAll('.for_active_2').length);
+    console.log('Active extra elements:', document.querySelectorAll('.for_active_0').length);
     
     return true;
+}
+
+// Initialize Page funksiyasini ham bir oz tuzatish kerak
+function initializePage() {
+    // UI elementlarni to'ldirish
+    if (Object.keys(product).length) {
+        const t = document.getElementById("title"), i = document.getElementById("img"), d = document.getElementById("description"),
+            p = document.getElementById("price"), ap = document.getElementById("aksiyaPrice");
+        if (t) t.textContent = product.title || '';
+        if (i) i.src = product.img_1 || '';
+        if (d) d.textContent = product.description || '';
+        if (p) p.textContent = (basePrice || selectedPizza.price).toFixed(2) + "₾";
+        if (ap) ap.textContent = aksiyaBasePrice.toFixed(2) + "₾";
+    }
+
+    // Edit holatini tekshirish
+    const isEditRestored = restoreEditData();
+    
+    if (!isEditRestored) {
+        // Faqat edit rejimi bo'lmaganda default ma'lumotlarni yuklash
+        console.log('Oddiy rejim - default ma\'lumotlarni yuklamoqda');
+        
+        // Barcha class larni avval tozalash (oddiy rejim uchun ham)
+        document.querySelectorAll(".for_active_0, .for_active_2, .vibor_active").forEach(el => {
+            el.classList.remove("for_active_0", "for_active_2", "vibor_active");
+        });
+        
+        // Selected pizza ingredients ni tozalash
+        selectedPizza.ingredients = [];
+        
+        // 1) Default dough va edge qo'shish
+        setIngredient(defaultDough);
+        setIngredient(defaultEdge);
+        updateDoughSelection();
+
+        // 2) Default standard ingredients qo'shish
+        defaultStandardIngredients.forEach(item => {
+            setIngredient(item);
+            const element = document.querySelector(`.for_vibor_2[data-id="${item.id}"]`);
+            if (element) {
+                element.classList.add("for_active_2");
+            }
+        });
+    }
+
+    // Event listener larni o'rnatish (har doim kerak)
+    setupEventListeners();
+    
+    // Ingredient visibility ni boshqarish
+    handleIngredientVisibility();
+    
+    updateTotalPrice();
 }
 
 
