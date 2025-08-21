@@ -94,7 +94,7 @@ favorites
              data-price="${item.price}"
              data-type="${item.type || ''}"
              data-ingredients="${item.Ingredients || ''}"
-             data-aksiya-price="">
+             data-aksiya-price="${item.aksiyaPrice}">
           <div class="jss35">
             <label class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h">
               <span class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-7avhyl" 
@@ -208,7 +208,7 @@ favorites
           const qtyContainer = product.querySelector(".qty-container");
           if (qtyContainer) qtyContainer.style.display = "none";
           product.querySelector(".jss41").style.display = "inline-block";
-          priceEl.innerHTML = (cartItem.aksiyaPrice || cartItem.price).toFixed(2) + "<b>₾</b>";
+          priceEl.innerHTML = (cartItem.price).toFixed(2) + "<b>₾</b>";
         } else {
           cartItem.total = cartItem.count * (cartItem.aksiyaPrice || cartItem.price);
           localStorage.setItem("cart", JSON.stringify(cart));
