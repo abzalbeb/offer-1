@@ -1234,3 +1234,4 @@ if (localStorage.getItem('edit') === 'true') {
     console.log('Edit rejimi faol');
     console.log('Edit order data:', JSON.parse(localStorage.getItem('editOrderData')));
 }
+

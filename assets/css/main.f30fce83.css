@@ -1095,7 +1095,7 @@ h2 {
     right: var(--toastify-toast-right)
 }
 
-@media only screen and (max-width:480px) {
+/* @media only screen and (max-width:480px) {
     .Toastify__toast-container {
         left: env(safe-area-inset-left);
         margin: 0;
@@ -1121,7 +1121,7 @@ h2 {
         left: auto;
         right: env(safe-area-inset-right)
     }
-}
+} */
 
 .Toastify__toast {
     --y: 0;
