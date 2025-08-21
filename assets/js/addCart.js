@@ -636,8 +636,8 @@ document.querySelectorAll(".jss41").forEach(btn => {
         let img = product.dataset.img;
         let title = product.dataset.title;
         let description = product.dataset.description;
-        let price = parseFloat(product.dataset.price);
-        let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
+        let aksiyaPrice = parseFloat(product.dataset.price);
+        let price = parseFloat(product.dataset.aksiyaPrice) || null;
 
         let existing = cart.find(item => item.id === id);
 
