@@ -37,8 +37,6 @@ function updateCartPopup() {
     const emptyImg = document.querySelector(".cart-popup-img");
     const totalEl = document.querySelector(".cart-total .redflag");
 
-    console.log("Cart:", cart);
-    console.log("Orders:", orders);
 
     if (!container || !cartItemMap || !emptyImg || !totalEl) return;
 
@@ -178,11 +176,12 @@ function moveCartToOrders() {
             product.querySelector(".jss41").style.display = "inline-block";
             product.querySelector(".qty-container").style.display = "none";
             
+            
             // Narxni qayta tiklash
             const priceEl = product.querySelector(".product-price");
-            const price = parseFloat(product.dataset.price);
-            const aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
-            priceEl.innerHTML = (aksiyaPrice || price).toFixed(2) + "<b>₾</b>";
+            const aksiyaPrice = parseFloat(product.dataset.price);
+            const price = parseFloat(product.dataset.aksiyaPrice) || null;
+            priceEl.innerHTML = (aksiyaPrice || price).toFixed(2) + "<b></b>";
         }
     });
     
@@ -202,17 +201,29 @@ document.querySelectorAll(".jss41").forEach(btn => {
     btn.replaceWith(btn.cloneNode(true));
 });
 
-// Add to cart tugmasi bosilganda
+// MOBILE: Add to cart tugmasi bosilganda - TUZATILGAN
 document.querySelectorAll(".jss41").forEach(btn => {
     btn.addEventListener("click", function () {
         let product = this.closest(".product");
 
+        // Agar dataset da narxlar mavjud bo'lmasa, faqat o'shanda DOM dan o'qiymiz
+        if (!product.dataset.price || !product.dataset.aksiyaPrice) {
+            // DOM dan narxlarni olish (faqat birinchi marta)
+            let originalPrice = parseFloat(product.querySelector(".for_price").textContent.trim()) || 0;
+            let discountedPrice = parseFloat(product.querySelector(".for_aksiyaPrice").textContent.trim()) || null;
+
+            // dataset ga saqlash
+            product.dataset.price = originalPrice.toFixed(2);
+            product.dataset.aksiyaPrice = discountedPrice ? discountedPrice.toFixed(2) : "";
+        }
+
+        // Dataset dan olish
         let id = product.dataset.id;
         let img = product.dataset.img;
         let title = product.dataset.title;
         let description = product.dataset.description;
         let price = parseFloat(product.dataset.price);
-        let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
+        let aksiyaPrice = product.dataset.aksiyaPrice ? parseFloat(product.dataset.aksiyaPrice) : null;
 
         let existing = cart.find(item => item.id === id);
 
@@ -231,23 +242,45 @@ document.querySelectorAll(".jss41").forEach(btn => {
 
             this.style.display = "none";
             product.querySelector(".qty-container").style.display = "flex";
+
+            // TUZATISH: for_price ga price (asl narx) qo'yish
+            let priceEl = product.querySelector(".for_price");
+            priceEl.innerHTML = price.toFixed(2) + "<b></b>";
+
+            // Aksiya narxi uchun for_aksiyaPrice
+            if (aksiyaPrice) {
+                product.querySelector(".for_aksiyaPrice").innerHTML = aksiyaPrice.toFixed(2) + "<b>₾</b>";
+            } else {
+                product.querySelector(".for_aksiyaPrice").innerHTML = "";
+            }
+
             updateQuantityUI(product, id);
         }
     });
 });
 
-// Mahsulot uchun plus/minus UI ni yangilash
+// MOBILE: Mahsulot uchun plus/minus UI ni yangilash - TUZATILGAN
 function updateQuantityUI(product, id) {
     let cartItem = cart.find(item => item.id === id);
     if (!cartItem) return;
 
-  let minusBtn = product.querySelector(".qty-minus");
-  let plusBtn = product.querySelector(".qty-plus");
-  let countEl = product.querySelector(".qty-count");
-  let priceEl = product.querySelector(".for_price");
+    let minusBtn = product.querySelector(".qty-minus");
+    let plusBtn = product.querySelector(".qty-plus");
+    let countEl = product.querySelector(".qty-count");
+    let priceEl = product.querySelector(".for_price");  // Bu yerda price (asl narx) chiqadi
+    let aksiyaPriceEl = product.querySelector(".for_aksiyaPrice"); // Bu yerda aksiya narx chiqadi
 
     countEl.textContent = cartItem.count;
-    priceEl.innerHTML = cartItem.total.toFixed(2) + "<b>₾</b>";
+    
+    // TUZATISH: for_price ga faqat price (asl narx) * count
+    let totalPrice = cartItem.price * cartItem.count;
+    priceEl.innerHTML = totalPrice.toFixed(2) + "<b>₾</b>";
+    
+    // Aksiya narxi uchun
+    if (aksiyaPriceEl && cartItem.aksiyaPrice) {
+        let totalAksiya = cartItem.aksiyaPrice * cartItem.count;
+        aksiyaPriceEl.innerHTML = totalAksiya.toFixed(2) + "<b></b>";
+    }
 
     plusBtn.onclick = () => {
         cartItem.count += 1;
@@ -262,7 +295,12 @@ function updateQuantityUI(product, id) {
             saveCart();
             product.querySelector(".qty-container").style.display = "none";
             product.querySelector(".jss41").style.display = "inline-block";
-            priceEl.innerHTML = (cartItem.aksiyaPrice || cartItem.price).toFixed(2) + "<b>₾</b>";
+            
+            // TUZATISH: minus bosganda default narxlarni qaytarish
+            priceEl.innerHTML = cartItem.price.toFixed(2) + "<b>₾</b>";
+            if (aksiyaPriceEl && cartItem.aksiyaPrice) {
+                aksiyaPriceEl.innerHTML = cartItem.aksiyaPrice.toFixed(2) + "<b></b>";
+            }
         } else {
             saveCart();
             updateQuantityUI(product, id);
@@ -328,10 +366,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Orders ni ko'rish uchun funksiya (console da test qilish uchun)
-function viewOrders() {
-    console.log("Orders:", JSON.parse(localStorage.getItem("orders") || "[]"));
-}
+
 
 // Orders ni tozalash funksiyasi (test uchun)
 function clearOrders() {
@@ -344,7 +379,6 @@ function clearOrders() {
     if (typeof loadAndRenderOrders === 'function') {
         loadAndRenderOrders();
     }
-    console.log("Orders tozalandi");
 }
 
 // Global funksiya - boshqa fayllardan chaqirish uchun
@@ -361,10 +395,9 @@ window.addEventListener('storage', function(e) {
     }
 });
 
-
-
 }else{
 
+// DESKTOP VERSIYA
 
 let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 let orders = JSON.parse(localStorage.getItem("orders") || "[]");
@@ -404,8 +437,6 @@ function updateCartPopup() {
     const emptyImg = document.querySelector(".cart-popup-img");
     const totalEl = document.querySelector(".cart-total .redflag");
 
-    console.log("Cart:", cart);
-    console.log("Orders:", orders);
 
     if (!container || !cartItemMap || !emptyImg || !totalEl) return;
 
@@ -547,8 +578,8 @@ function moveCartToOrders() {
             
             // Narxni qayta tiklash
             const priceEl = product.querySelector(".product-price");
-            const price = parseFloat(product.dataset.price);
-            const aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
+            const aksiyaPrice = parseFloat(product.dataset.price);
+            const price = parseFloat(product.dataset.aksiyaPrice) || null;
             priceEl.innerHTML = (aksiyaPrice || price).toFixed(2) + "<b>₾</b>";
         }
     });
@@ -569,52 +600,58 @@ document.querySelectorAll(".jss41").forEach(btn => {
     btn.replaceWith(btn.cloneNode(true));
 });
 
-// Add to cart tugmasi bosilganda
+// DESKTOP: Add to cart tugmasi bosilganda - TUZATILGAN
 document.querySelectorAll(".jss41").forEach(btn => {
     btn.addEventListener("click", function () {
         let product = this.closest(".product");
 
-    // DOM dan narxlarni olish
-    let originalPrice = parseFloat(product.querySelector(".for_aksiyaPrice").textContent.trim());
-    let discountedPrice = parseFloat(product.querySelector(".for_price").textContent.trim());
+        // Agar dataset da narxlar mavjud bo'lmasa, faqat o'shanda DOM dan o'qiymiz
+        if (!product.dataset.price || !product.dataset.aksiyaPrice) {
+            // DOM dan narxlarni olish (faqat birinchi marta)
+            let originalPrice = parseFloat(product.querySelector(".for_aksiyaPrice").textContent.trim());
+            let discountedPrice = parseFloat(product.querySelector(".for_price").textContent.trim());
 
-    // data-atributlarga yozib qo'yish
-    product.dataset.price = originalPrice.toFixed(2);       // asl narx
-    product.dataset.aksiyaPrice = discountedPrice.toFixed(2); // aksiya narx
+            // data-atributlarga saqlash
+            product.dataset.price = originalPrice.toFixed(2);       // asl narx
+            product.dataset.aksiyaPrice = discountedPrice.toFixed(2); // aksiya narx
+        }
 
-    // keyin data-* dan olish
-    let id = product.dataset.id;
-    let img = product.dataset.img;
-    let title = product.dataset.title;
-    let description = product.dataset.description;
-    let price = parseFloat(product.dataset.price);
-    let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
+        // Dataset dan olish
+        let id = product.dataset.id;
+        let img = product.dataset.img;
+        let title = product.dataset.title;
+        let description = product.dataset.description;
+        let price = parseFloat(product.dataset.price);
+        let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
 
         let existing = cart.find(item => item.id === id);
 
-    if (!existing) {
-      cart.push({
-        id,
-        img,
-        title,
-        description,
-        price,               // asl narx
-        aksiyaPrice,         // aksiya narx
-        count: 1,
-        total: aksiyaPrice ? aksiyaPrice : price
-      });
-      saveCart();
+        if (!existing) {
+            cart.push({
+                id,
+                img,
+                title,
+                description,
+                price,               // asl narx
+                aksiyaPrice,         // aksiya narx
+                count: 1,
+                total: aksiyaPrice ? aksiyaPrice : price
+            });
+            saveCart();
 
             this.style.display = "none";
             product.querySelector(".qty-container").style.display = "flex";
+            
+            // TUZATISH: for_price ga price (asl narx) qo'yish
+            let priceEl = product.querySelector(".for_price");
+            priceEl.innerHTML = price.toFixed(2) + "<b></b>";
+            
             updateQuantityUI(product, id);
         }
     });
 });
 
-
-// Mahsulot uchun plus/minus UI ni yangilash
-// Mahsulot uchun plus/minus UI ni yangilash
+// DESKTOP: Mahsulot uchun plus/minus UI ni yangilash - TUZATILGAN
 function updateQuantityUI(product, id) {
     let cartItem = cart.find(item => item.id === id);
     if (!cartItem) return;
@@ -624,19 +661,21 @@ function updateQuantityUI(product, id) {
     let countEl = product.querySelector(".qty-count");
 
     // ikkita price elementini olish
-    let aksiyaPriceEl = product.querySelector(".for_price");       // aksiya chiqadigan joy
-    let originalPriceEl = product.querySelector(".for_aksiyaPrice"); // asl narx chiqadigan joy
+    let priceEl = product.querySelector(".for_price");           // Bu yerda price (asl narx) chiqadi
+    let aksiyaPriceEl = product.querySelector(".for_aksiyaPrice"); // Bu yerda aksiya narx chiqadi
 
     countEl.textContent = cartItem.count;
 
-    // Narxlarni hisoblash
+    // TUZATISH: for_price ga faqat price (asl narx) * count
+    let totalPrice = cartItem.price * cartItem.count;
     let totalAksiya = (cartItem.aksiyaPrice || cartItem.price) * cartItem.count;
-    let totalOriginal = cartItem.price * cartItem.count;
 
-    // Chiqarib qo‘yish
-    aksiyaPriceEl.innerHTML = totalAksiya.toFixed(2) + "<b>₾</b>";
-    if (originalPriceEl) {
-        originalPriceEl.innerHTML = totalOriginal.toFixed(2) + "<b></b>";
+    // for_price ga price (asl narx) ni qo'yish
+    priceEl.innerHTML = totalPrice.toFixed(2) + "<b>₾</b>";
+    
+    // for_aksiyaPrice ga aksiya narxini qo'yish
+    if (aksiyaPriceEl && cartItem.aksiyaPrice) {
+        aksiyaPriceEl.innerHTML = totalAksiya.toFixed(2) + "<b></b>";
     }
 
     plusBtn.onclick = () => {
@@ -653,10 +692,10 @@ function updateQuantityUI(product, id) {
             product.querySelector(".qty-container").style.display = "none";
             product.querySelector(".jss41").style.display = "inline-block";
 
-            // minus bosganda default narxlarni qaytarish
-            aksiyaPriceEl.innerHTML = (cartItem.aksiyaPrice || cartItem.price).toFixed(2) + "<b>₾</b>";
-            if (originalPriceEl) {
-                originalPriceEl.innerHTML = cartItem.price.toFixed(2) + "<b>₾</b>";
+            // TUZATISH: minus bosganda default narxlarni qaytarish
+            priceEl.innerHTML = cartItem.price.toFixed(2) + "<b>₾</b>";
+            if (aksiyaPriceEl && cartItem.aksiyaPrice) {
+                aksiyaPriceEl.innerHTML = cartItem.aksiyaPrice.toFixed(2) + "<b></b>";
             }
         } else {
             saveCart();
@@ -664,7 +703,6 @@ function updateQuantityUI(product, id) {
         }
     };
 }
-
 
 // Sahifa yuklanganda UI tiklash
 document.addEventListener("DOMContentLoaded", () => {
@@ -725,9 +763,7 @@ document.addEventListener('click', function(e) {
 });
 
 // Orders ni ko'rish uchun funksiya (console da test qilish uchun)
-function viewOrders() {
-    console.log("Orders:", JSON.parse(localStorage.getItem("orders") || "[]"));
-}
+
 
 // Orders ni tozalash funksiyasi (test uchun)
 function clearOrders() {
@@ -740,7 +776,6 @@ function clearOrders() {
     if (typeof loadAndRenderOrders === 'function') {
         loadAndRenderOrders();
     }
-    console.log("Orders tozalandi");
 }
 
 // Global funksiya - boshqa fayllardan chaqirish uchun
@@ -757,155 +792,7 @@ window.addEventListener('storage', function(e) {
     }
 });
 
-
-
-
 }
-
-
-
-
-
-(function () {
-  document.addEventListener("DOMContentLoaded", () => {
-
-    const getFavs = () => {
-      try {
-        const f = JSON.parse(localStorage.getItem("favorites") || "[]");
-        return Array.isArray(f) ? f : [];
-      } catch (_) { return []; }
-    };
-
-    const setFavs = (favs) => localStorage.setItem("favorites", JSON.stringify(favs));
-
-    const isFav = (favs, id) => favs.some(x => x.id === id);
-
-    function parseNum(v) {
-      const n = parseFloat(v);
-      return Number.isFinite(n) ? n : null;
-    }
-
-    function updateFavoriteUI(product, on) {
-      const checkbox = product.querySelector('input[type="checkbox"]');
-      const emptyHeart = product.querySelector('[data-testid="FavoriteBorderIcon"]')?.closest('span');
-      const filledHeartWrapper = product.querySelector('[data-testid="FavoriteIcon"]')?.closest('span.MuiTypography-root');
-
-      if (checkbox) checkbox.checked = !!on;
-      if (emptyHeart) emptyHeart.style.setProperty("display", on ? "none" : "inline-flex", "important");
-      if (filledHeartWrapper) filledHeartWrapper.style.setProperty("display", on ? "inline-flex" : "none", "important");
-    }
-
-    // --- initial UI sync ---
-    (function initialSync() {
-      const favs = getFavs();
-      document.querySelectorAll('.product').forEach(product => {
-        const id = product?.dataset?.id;
-        if (!id) return;
-        updateFavoriteUI(product, isFav(favs, id));
-      });
-    })();
-
-    // --- yurak toggle ---
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.MuiButtonBase-root.MuiCheckbox-root');
-      if (!btn) return;
-
-      const product = btn.closest('.product');
-      if (!product) return;
-
-      const id = product.dataset.id;
-      let favs = getFavs();
-
-      if (!isFav(favs, id)) {
-        favs.push({
-        id,
-        img: product.dataset.img,
-        img_1: product.dataset.img_1 || '',
-        title: product.dataset.title,
-        description: product.dataset.description,
-        price: parseNum(product.dataset.price),
-        aksiyaPrice: parseNum(product.dataset.aksiyaPrice),
-        type: product.dataset.type || 0, // <-- qo‘shildi
-        count: 1,
-        total: parseNum(product.dataset.aksiyaPrice) ?? parseNum(product.dataset.price)
-        });
-
-        setFavs(favs);
-        updateFavoriteUI(product, true);
-      } else {
-        favs = favs.filter(x => x.id !== id);
-        setFavs(favs);
-        updateFavoriteUI(product, false);
-
-        const container = document.getElementById('favorites-container');
-        if (container && container.contains(product)) {
-          const outer = product.closest('.jss32') || product;
-          outer.remove();
-        }
-
-        // Agar favorites sahifasida bo‘lsa va favorites bo‘sh qolsa, sahifani yangilash
-        if (window.location.pathname === '/favoritess/' && favs.length === 0) {
-          location.reload();
-        }
-      }
-    });
-
-    // --- mutation observer bilan dinamik qo‘shilgan productlar uchun sync ---
-    const observer = new MutationObserver(() => {
-      const favs = getFavs();
-      document.querySelectorAll('.product').forEach(product => {
-        const id = product?.dataset?.id;
-        if (!id) return;
-        updateFavoriteUI(product, isFav(favs, id));
-      });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-})();
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  const oldUrl = 'https://dominospizza.ge/static/media/empty_cart.ce51a99a8179668c0c85.png';
-  const newUrl = '../assets/image/empty_cart.ce51a99a8179668c0c85.png';
-
-  // Sahifadagi barcha <img> elementlarni tekshiramiz
-  document.querySelectorAll('img').forEach(img => {
-    if (img.src === oldUrl) {
-      img.src = newUrl;
-    }
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".view-cart-btn1").forEach(btn => {
-    btn.addEventListener("click", () => {
-      window.location.href = "../cart/";
-    });
-  });
-});
-document.addEventListener("click", (e) => {
-  const badge = e.target.closest(".MuiBadge-root.css-1rzb3uu");
-  if (badge) {
-    window.location.href = "../cart/";
-  }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const capa = document.getElementById("Capa_1");
-  if (capa) {
-    capa.addEventListener("click", () => {
-      window.location.href = "../tracking/";
-    });
-  }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("img").forEach(img => {
-    if (img.src === "https://dominospizza.ge/static/media/shop-white.f9932044a442888258cf4888ce686068.svg") {
-      img.src = "../assets/image/bike-white.c750e44adb7ca082feca9c0ac6e6bd23.svg";
-    }
-  });
-});
 
 document.addEventListener("click", (e) => {
   const img = e.target.closest("img");
@@ -949,4 +836,49 @@ document.addEventListener("DOMContentLoaded", function() {
             div.style.display = 'none';
         }
     });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const oldUrl = 'https://dominospizza.ge/static/media/empty_cart.ce51a99a8179668c0c85.png';
+  const newUrl = '../assets/image/empty_cart.ce51a99a8179668c0c85.png';
+
+  // Sahifadagi barcha <img> elementlarni tekshiramiz
+  document.querySelectorAll('img').forEach(img => {
+    if (img.src === oldUrl) {
+      img.src = newUrl;
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".view-cart-btn1").forEach(btn => {
+    btn.addEventListener("click", () => {
+      window.location.href = "../cart/";
+    });
+  });
+});
+document.addEventListener("click", (e) => {
+  const badge = e.target.closest(".MuiBadge-root.css-1rzb3uu");
+  if (badge) {
+    window.location.href = "../cart/";
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const capa = document.getElementById("Capa_1");
+  if (capa) {
+    capa.addEventListener("click", () => {
+      window.location.href = "../tracking/";
+    });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("img").forEach(img => {
+    if (img.src === "https://dominospizza.ge/static/media/shop-white.f9932044a442888258cf4888ce686068.svg") {
+      img.src = "../assets/image/bike-white.c750e44adb7ca082feca9c0ac6e6bd23.svg";
+    }
+  });
 });
