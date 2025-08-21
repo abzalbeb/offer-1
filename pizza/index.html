@@ -15,7 +15,6 @@
     <link href="../assets/css/main.f30fce83.css" rel="stylesheet">
       <link rel="stylesheet" href="../assets/css/terms-main.css">
       <link rel="stylesheet" href="../assets/css/addCart.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style data-jss="" data-meta="makeStyles">
         .jss1 {
@@ -1520,11 +1519,6 @@
                                         <p style="color: black;" class="p-style">Tracker</p>
                                     </div>
                                 </a>
-                                </a><a href="../favorites/">
-                                    <div><i class='bx bx-heart'></i>
-                                        <p style="color: black;" class="p-style">Likes</p>
-                                    </div>
-                                </a>
                                 <div class="flag-wrapper">
                                     <div style="cursor: pointer;">
                                         <img src="../assets/image/britsht.png"
@@ -1736,7 +1730,7 @@
                                 data-img="https://deykvccewcmn1.cloudfront.net/pepperoni_global.webp"
                                 data-img_1="https://deykvccewcmn1.cloudfront.net/Pepperoni.webp"
                                 data-title="Pepperoni" data-description="Pizza Sauce, Mozzarella, Pepperoni"
-                                data-price="27.90" data-aksiya-price="27.90" data-type="pizza"  style="cursor: pointer;">
+                                data-price="27.90" data-aksiya-price="27.90" data-ingredients=3 data-type="pizza"  style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35"><label
                                     class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h"><span
@@ -1808,8 +1802,8 @@
                                 data-img="https://deykvccewcmn1.cloudfront.net/margherita_global.webp"
                                 data-img_1="https://deykvccewcmn1.cloudfront.net/margherita_mobile_detail.webp"
                                 data-title="Margherita" data-description="Pizza Sauce, Mozzarella, Tomato"
-                                data-price="27.90" data-aksiya-price="" data-type="pizza" id="favorite"
-                    class="jss32 product card_product" id="favorite" style="cursor: pointer;">
+                                data-price="27.90" data-aksiya-price="" data-ingredients=33 data-type="pizza" id="favorite"
+                    class="jss32 product card_product" id="favorite"  style="cursor: pointer;">
                         <div class="jss34" style="padding: 0px;">
                             <div class="jss35">
                                 <label
@@ -3667,7 +3661,8 @@ document.getElementById("Premium").addEventListener("click", function() {
                     title: product.dataset.title,
                     description: product.dataset.description,
                     price: parseFloat(product.dataset.price),
-                    aksiyaPrice: parseFloat(product.dataset.aksiyaPrice) || null
+                    aksiyaPrice: parseFloat(product.dataset.aksiyaPrice) || null,
+                    Ingredients:parseFloat( product.dataset.ingredients),
                 };
 
                 // Tanlangan mahsulotni LocalStorage’ga vaqtincha saqlash
