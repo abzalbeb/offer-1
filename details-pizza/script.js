@@ -110,18 +110,25 @@ const defaultStandardIngredients3 = [
 ];
 
 const defaultStandardIngredients4 = [
-    { id: "240", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
-    { id: "241", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "topping" },
-    { id: "242", title: "Ham", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "topping" },
-    { id: "243", title: "Pepperoni", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Pepperoni_t.png", type: "topping" }
+    { id: "240", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+    { id: "241", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+    { id: "242", title: "Ham", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" },
+    { id: "243", title: "Pepperoni", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Pepperoni_t.png", type: "standard" }
 ];
 
 const defaultStandardIngredients44 = [
-    { id: "250", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
-    { id: "251", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "topping" },
-    { id: "252", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "topping" },
-    { id: "253", title: "Pepperoni", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Pepperoni_t.png", type: "topping" }
+    { id: "250", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+    { id: "251", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+    { id: "252", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
+    { id: "253", title: "Pepperoni", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Pepperoni_t.png", type: "standard" }
 ];
+
+const defaultStandardIngredients33 = [
+    { id: "330", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+    { id: "332", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+    { id: "333", title: "Tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "standard" }
+];
+
 
 // YANGI QO'SHILGAN QISM: Ingredients raqamiga qarab default ingredients tanlash
 function getDefaultStandardIngredients() {
@@ -141,6 +148,9 @@ function getDefaultStandardIngredients() {
         return defaultStandardIngredients4;
     } 
     else if (ingredientsCount === "44" || ingredientsCount === 44) {
+        return defaultStandardIngredients44;
+    } 
+    else if (ingredientsCount === "33" || ingredientsCount === 33) {
         return defaultStandardIngredients44;
     } 
     else {
@@ -889,6 +899,11 @@ function handleIngredientVisibility(){
         document.getElementById('pizza44-2')?.setAttribute('style', 'display:block');
         document.getElementById('pizza44-3')?.setAttribute('style', 'display:block');
         document.getElementById('pizza44-4')?.setAttribute('style', 'display:block');
+    }
+    else if(ingredientsCount === "33" || ingredientsCount === 33){
+        document.getElementById('pizza33-1')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza33-2')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza33-3')?.setAttribute('style', 'display:block');
     }
 }
 
