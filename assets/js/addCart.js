@@ -614,17 +614,30 @@ document.querySelectorAll(".jss41").forEach(btn => {
 
 
 // Mahsulot uchun plus/minus UI ni yangilash
+// Mahsulot uchun plus/minus UI ni yangilash
 function updateQuantityUI(product, id) {
     let cartItem = cart.find(item => item.id === id);
     if (!cartItem) return;
 
-  let minusBtn = product.querySelector(".qty-minus");
-  let plusBtn = product.querySelector(".qty-plus");
-  let countEl = product.querySelector(".qty-count");
-  let priceEl = product.querySelector(".for_price");
+    let minusBtn = product.querySelector(".qty-minus");
+    let plusBtn = product.querySelector(".qty-plus");
+    let countEl = product.querySelector(".qty-count");
+
+    // ikkita price elementini olish
+    let aksiyaPriceEl = product.querySelector(".for_price");       // aksiya chiqadigan joy
+    let originalPriceEl = product.querySelector(".for_aksiyaPrice"); // asl narx chiqadigan joy
 
     countEl.textContent = cartItem.count;
-    priceEl.innerHTML = cartItem.total.toFixed(2) + "<b>₾</b>";
+
+    // Narxlarni hisoblash
+    let totalAksiya = (cartItem.aksiyaPrice || cartItem.price) * cartItem.count;
+    let totalOriginal = cartItem.price * cartItem.count;
+
+    // Chiqarib qo‘yish
+    aksiyaPriceEl.innerHTML = totalAksiya.toFixed(2) + "<b>₾</b>";
+    if (originalPriceEl) {
+        originalPriceEl.innerHTML = totalOriginal.toFixed(2) + "<b></b>";
+    }
 
     plusBtn.onclick = () => {
         cartItem.count += 1;
@@ -639,13 +652,19 @@ function updateQuantityUI(product, id) {
             saveCart();
             product.querySelector(".qty-container").style.display = "none";
             product.querySelector(".jss41").style.display = "inline-block";
-            priceEl.innerHTML = (cartItem.aksiyaPrice || cartItem.price).toFixed(2) + "<b>₾</b>";
+
+            // minus bosganda default narxlarni qaytarish
+            aksiyaPriceEl.innerHTML = (cartItem.aksiyaPrice || cartItem.price).toFixed(2) + "<b>₾</b>";
+            if (originalPriceEl) {
+                originalPriceEl.innerHTML = cartItem.price.toFixed(2) + "<b>₾</b>";
+            }
         } else {
             saveCart();
             updateQuantityUI(product, id);
         }
     };
 }
+
 
 // Sahifa yuklanganda UI tiklash
 document.addEventListener("DOMContentLoaded", () => {

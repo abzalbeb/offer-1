@@ -92,7 +92,7 @@ favorites
              data-description="${item.description}"
              data-price="${item.price}"
              data-type="${item.type || ''}"
-             data-aksiya-price="${item.aksiyaPrice || ''}">
+             data-aksiya-price="">
           <div class="jss35">
             <label class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h">
               <span class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-7avhyl" 
@@ -131,7 +131,7 @@ favorites
             <div class="jss40">
                   <div>
                                     <p class="fs-18 text-red "><span class="for_price"></span> </p>
-                                    <p class="fs-18 text-red product-price" style="color: rgb(0, 0, 0); font-size: 12px; font-weight: 500; text-decoration: line-through;"> <span class="for_aksiyaPrice">${item.aksiyaPrice}</span> ₾</p>
+                                    <p class="fs-18 text-red product-price" style="color: rgb(0, 0, 0); font-size: 12px; font-weight: 500; text-decoration: line-through;"> <span class="for_aksiyaPrice">${item.price}</span> ₾</p>
                   </div>
               <button class="jss41" aria-label="Add to cart">Order</button>
               <!-- Boshqa mahsulotlar uchun qty-container QO'SHAMIZ -->
@@ -177,12 +177,17 @@ favorites
       const plusBtn = product.querySelector(".qty-plus");
       const countEl = product.querySelector(".qty-count");
       const priceEl = product.querySelector(".product-price");
+      const priceaksiyaEl = product.querySelector(".for_price");
 
       // Agar qty elementlari mavjud bo'lmasa (pizza uchun) return qilamiz
       if (!minusBtn || !plusBtn || !countEl) return;
 
       countEl.textContent = cartItem.count;
-      priceEl.innerHTML = cartItem.total.toFixed(2) + "<b>₾</b>";
+        const showPrice = cartItem.price*cartItem.count;
+        priceEl.innerHTML = showPrice.toFixed(2) + "<b>₾</b>";
+
+        const showPriceaksiya = cartItem.aksiyaPrice*cartItem.count;
+        priceaksiyaEl.innerHTML = showPriceaksiya.toFixed(2) + "<b>₾</b>";
 
       plusBtn.onclick = () => {
         cartItem.count += 1;
@@ -319,3 +324,4 @@ favorites
     } catch (_) {}
   });
 })();
+
