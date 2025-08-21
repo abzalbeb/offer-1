@@ -49,7 +49,7 @@ function haversineKm(lat1, lon1, lat2, lon2) {
 // TUZATILGAN: Manual va Geolokatsiya variantlari
 document.getElementById("geo-btnMobile").addEventListener("click", function() {
   if (!navigator.geolocation) {
-    alert("Brauzer geolokatsiyani qo'llab-quvvatlamaydi. Manual koordinata ishlatiladi.");
+    alert("გთხოვთ, ნებართვა მისცეთ ბრაუზერს თქვენი მდებარეობის გამოყენებაზე.");
     useManualCoordinates();
     return;
   }
@@ -66,11 +66,11 @@ document.getElementById("geo-btnMobile").addEventListener("click", function() {
     console.log("Aniqlik:", accuracy, "metr");
 
     // Foydalanuvchi real koordinatasi bilan hisoblash
-    calculateDistances(userLat, userLng, `🌍 Sizning joylashuvingiz m aniqlik)`);
+    calculateDistances(userLat, userLng);
 
   }, function(err) {
     console.error("❌ Geolokatsiya xatolik:", err);
-    alert("Geolokatsiya ishlamadi. Toshkent koordinatasi ishlatiladi.");
+    alert("გეოლოკაცია არ იმუშავა.");
     // useManualCoordinates();
   }, {
     enableHighAccuracy: true,
@@ -96,21 +96,17 @@ function calculateDistances(userLat, userLng, locationName) {
 
   // Har bir do'kon uchun masofa hisoblash
   locations.forEach((loc, i) => {
-    console.log(`\n--- DO'KON ${i+1}: ${loc.name} ---`);
     
     try {
       // Haversine formula bilan hisoblash
       const distanceKm = haversineKm(userLat, userLng, loc.lat, loc.lng);
       
-      console.log(`Masofa: ${distanceKm.toFixed(2)} km`);
       
       // HTML da ko'rsatish
       const span = document.querySelector(`[data-storeMobile="${i}"]`);
       if (span) {
         span.textContent = distanceKm.toFixed(0) + " KM";
-        console.log(`✅ Do'kon ${i+1} yangilandi: ${distanceKm.toFixed(0)} km`);
       } else {
-        console.warn(`❌ Span topilmadi for data-storeMobile=${i}`);
       }
       
     } catch (error) {
@@ -118,7 +114,6 @@ function calculateDistances(userLat, userLng, locationName) {
     }
   });
   
-  console.log("=== HISOBLASH TUGADI ===");
 }
 
 
@@ -368,11 +363,13 @@ items.forEach(el => {
         ${loc.img ? `<img src="${loc.img}" style="width:100px;height:auto;">` : ""}
       `)
       .openOn(map);
-      window.location='../'
-      localStorage.setItem("address", storeName)
+      
       
   });
 });
 
 
+}
+function chooseAdd(){
+  window.location.href='../'
 }
