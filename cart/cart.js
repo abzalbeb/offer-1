@@ -89,6 +89,9 @@ function renderCartHTML(cartItems) {
                                 </div>
                                 <div></div>
                             </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
+                                <h3 class="text-grey  fs-20"><s>${(item.aksiyaPrice*item.quantity).toFixed(2)}₾</s></h3>
+                            </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0px;">
                                 <h3 class="text-red  fs-24" style="text-align: end;">${item.price ? (typeof item.price === 'number' ? item.price.toFixed(2) : parseFloat(item.price).toFixed(2)) + '₾' : (item.price ? (typeof item.price === 'number' ? item.price.toFixed(2) : parseFloat(item.price).toFixed(2)) + '₾' : '')}</h3>
                                 <div>
@@ -153,10 +156,10 @@ function renderOrdersHTML(orders) {
                                 </div>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
-                                <h3 class="text-grey  fs-20"><s>${(order.totalPrice)}</s></h3>
+                                <h3 class="text-grey  fs-20"><s>${(order.aksiyaPrice * order.quantity).toFixed(2)}₾</s></h3>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0px;">
-                                <h3 class="text-red  fs-24" style="text-align: end;">${(order.price * order.quantity).toFixed(2)}</h3>
+                                <h3 class="text-red  fs-24" style="text-align: end;">${(order.price * order.quantity).toFixed(2)}₾</h3>
                                 <div>
                                     <div>
                                         <div class="Kanit-Regular quantity-controls" style='display:inline-flex'>

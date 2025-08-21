@@ -62,6 +62,7 @@ function updateCartPopup() {
     cart.forEach(item => {
         const itemTotal = item.total || 0;
         total += itemTotal;
+        
 
         const div = document.createElement("div");
         div.className = "item-card-container";
@@ -466,8 +467,9 @@ function updateCartPopup() {
 
     // Avval cart itemlarini qo'shish
     cart.forEach(item => {
-        const itemTotal = item.total || 0;
+        const itemTotal = item.price || 0;
         total += itemTotal;
+        
 
         const div = document.createElement("div");
         div.className = "item-card-container";
@@ -494,12 +496,15 @@ function updateCartPopup() {
         let itemTotal = 0;
          if (item.price) {
             itemTotal = item.price * (item.quantity);
-            console.log(item.quantity);
-            console.log(item.price);
+            // console.log(item.quantity);
+            // console.log(item.price);
+            
             
         }
 
         total += itemTotal;
+
+        
         // console.log(total);
         
 
