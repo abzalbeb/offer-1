@@ -1216,7 +1216,7 @@ function handleIngredientVisibility(){
 }
 
 if (localStorage.getItem("edit") == "true") {
-    for (let i = 0; i < document.querySelectorAll(".addToCart_btn").length; i++) {
+    for (let i = 0; i < document.querySelectorAll(".addToCartBtn").length; i++) {
         document.querySelectorAll(".addToCartBtn")[i].innerHTML = "Update cart"
     }
 }
