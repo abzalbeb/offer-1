@@ -164,22 +164,53 @@ const defaultStandardIngredients555 = [
 ];
 
 const defaultStandardIngredients66 = [
-  { id: "66", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
-  { id: "67", title: "Corn", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cornpng_parspng_com_8.webp", type: "topping" },
-  { id: "68", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "topping" },
-  { id: "69", title: "Chicken", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Chicken_topping.webp", type: "topping" },
-  { id: "70", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "topping" },
-  { id: "71", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "topping" }
+  { id: "66", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+  { id: "67", title: "Corn", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cornpng_parspng_com_8.webp", type: "standard" },
+  { id: "68", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
+  { id: "69", title: "Chicken", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Chicken_topping.webp", type: "standard" },
+  { id: "70", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
+  { id: "71", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" }
 ];
 
 const defaultStandardIngredients5555 = [
-  { id: "5555", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
-  { id: "5556", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "topping" },
-  { id: "5557", title: "Ham", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "topping" },
-  { id: "5558", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "topping" },
-  { id: "5559", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "topping" }
+  { id: "5555", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+  { id: "5556", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
+  { id: "5557", title: "Ham", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" },
+  { id: "5558", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
+  { id: "5559", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "standard" }
 ];
 
+const defaultStandardIngredients9 = [
+  { id: "990", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+  { id: "991", title: "Corn", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cornpng_parspng_com_8.webp", type: "standard" },
+  { id: "992", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
+  { id: "994", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
+  { id: "995", title: "Ham", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" },
+  { id: "996", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
+  { id: "997", title: "Black Olive", price: 0, img: "https://deykvccewcmn1.cloudfront.net/black olives.png", type: "standard" },
+  { id: "998", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "standard" },
+  { id: "999", title: "Pepperoni", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "standard" }
+];
+
+
+const defaultStandardIngredients8 = [
+  { id: "890", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
+  { id: "881", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "topping" },
+  { id: "882", title: "Chicken", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Chicken_topping.webp", type: "topping" },
+  { id: "884", title: "tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "topping" },
+  { id: "885", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "topping" },
+  { id: "886", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "topping" },
+  { id: "887", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "topping" },
+  { id: "888", title: "Pepperoni", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "topping" }
+];
+
+
+const defaultStandardIngredients4444 = [
+  { id: "4444", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
+  { id: "4441", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "topping" },
+  { id: "4442", title: "Tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "topping" },
+  { id: "4443", title: "Ranch Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ranch.webp", type: "topping" }
+];
 
 
 // YANGI QO'SHILGAN QISM: Ingredients raqamiga qarab default ingredients tanlash
@@ -218,6 +249,14 @@ function getDefaultStandardIngredients() {
     }
     else if (ingredientsCount === "5555" || ingredientsCount === 5555) {
         return defaultStandardIngredients5555;
+    }
+    else if (ingredientsCount === "9" || ingredientsCount === 9) {
+        return defaultStandardIngredients9;
+    } else if (ingredientsCount === "8" || ingredientsCount === 8) {
+        return defaultStandardIngredients8;
+    }
+    else if (ingredientsCount === "4444" || ingredientsCount === 4444) {
+        return defaultStandardIngredients8;
     }
     else {
         // Default holatda 6 ta ingredientni qaytarish
@@ -1010,6 +1049,31 @@ function handleIngredientVisibility(){
         document.getElementById('pizza5555-3')?.setAttribute('style', 'display:block');
         document.getElementById('pizza5555-4')?.setAttribute('style', 'display:block');
         document.getElementById('pizza5555-5')?.setAttribute('style', 'display:block');
+    }else if(ingredientsCount === "9" || ingredientsCount === 9){
+        document.getElementById('pizza9-1')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-2')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-3')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-4')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-5')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-6')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-7')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-8')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-9')?.setAttribute('style', 'display:block');
+    }else if(ingredientsCount === "8" || ingredientsCount === 8){
+        document.getElementById('pizza9-1')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-2')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-3')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-4')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-5')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-6')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-7')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-8')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza9-9')?.setAttribute('style', 'display:block');
+    }else if(ingredientsCount === "4444" || ingredientsCount === 4444){
+        document.getElementById('pizza4444-1')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza4444-2')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza4444-3')?.setAttribute('style', 'display:block');
+        document.getElementById('pizza4444-4')?.setAttribute('style', 'display:block');
     }
 }
 
