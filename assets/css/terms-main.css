@@ -11,6 +11,11 @@
     z-index: 25;
 }
 
+.header .bx-heart{
+    font-size: 35px;
+    color: black;
+}
+
 svg:not(:root) {
     overflow-clip-margin: content-box;
     overflow: hidden;
