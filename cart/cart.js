@@ -326,12 +326,10 @@ function changeCartQuantity(itemId, change) {
 
 // Function to delete order
 function deleteOrder(orderId) {
-    if (confirm('Bu buyurtmani o\'chirmoqchimisiz?')) {
         const orders = getOrdersFromLocalStorage();
         const filteredOrders = orders.filter(order => order.id !== orderId);
         localStorage.setItem('orders', JSON.stringify(filteredOrders));
         loadAndRenderAllItems(); // Re-render
-    }
 }
 
 // Function to delete cart item
