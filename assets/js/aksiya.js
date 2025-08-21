@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
   if (productEl) {
     const price = Number(productEl.dataset.price || 0);
     const aksiyaPrice = (price * k).toFixed(2);
-    // kerak bo'lsa shu yerda aksiya narxini yozib qo'yasiz
+
+    // shu yerda dataset ichiga yozamiz
+    productEl.dataset.aksiyaPrice = aksiyaPrice;
   }
 
   // Agar bir nechta narxlarni yangilamoqchi bo'lsangiz:
@@ -23,8 +25,15 @@ document.addEventListener('DOMContentLoaded', function () {
   aksiyaPrices.forEach((el, i) => {
     const originalPrice = parseFloat(el.textContent.replace(/[^\d.]/g, "")) || 0; // "12.50₾" -> 12.50
     const newPrice = (originalPrice * k).toFixed(2);
+
     if (forPrices[i]) {
       forPrices[i].textContent = newPrice + "₾";
+    }
+
+    // tegishli .product elementiga ham yozib qo'yamiz
+    const product = el.closest(".product");
+    if (product) {
+      product.dataset.aksiyaPrice = newPrice;
     }
   });
 });
