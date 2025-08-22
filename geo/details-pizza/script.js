@@ -1171,3 +1171,113 @@ if (localStorage.getItem('edit') === 'true') {
     console.log('Edit rejimi faol');
     console.log('Edit order data:', JSON.parse(localStorage.getItem('editOrderData')));
 }
+
+
+
+
+
+
+function getCurrentLanguage() {
+    const path = window.location.pathname;
+    
+    if (path.includes('/geo/') || path.startsWith('/geo')) return 'geo';
+    if (path === '/' || path === '' || path === '/index.html') return 'en';
+    
+    return 'en';
+}
+
+function getProductById(productId, currentLang) {
+    // Avval joriy tildagi mahsulotlarni tekshirish
+    const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
+    let product = currentLangProducts.find(p => p.id === productId);
+    
+    if (product && product.price > 0) { // Narx tekshirish qo'shildi
+        return product;
+    }
+    
+    // Agar joriy tilda topilmasa yoki narx 0 bo'lsa, boshqa tildan qidirish
+    const otherLang = currentLang === 'en' ? 'geo' : 'en';
+    const otherLangProducts = JSON.parse(localStorage.getItem(`allProducts_${otherLang}`)) || [];
+    product = otherLangProducts.find(p => p.id === productId);
+    
+    if (product) {
+        console.log(`Mahsulot ${otherLang} tilida topildi`);
+        // Boshqa tildan olingan mahsulotning narxini saqlash
+        return {
+            ...product,
+            language: currentLang // Joriy tilga moslashtirish
+        };
+    }
+    
+    return null;
+}
+
+// Asosiy update funksiyasi
+function updateSelectedProduct() {
+    const currentLang = getCurrentLanguage();
+    const selectedProductData = JSON.parse(localStorage.getItem("selectedProduct"));
+    
+    if (selectedProductData && selectedProductData.id) {
+        // Agar selectedProduct'dagi narx 0 bo'lsa yoki joriy til boshqa bo'lsa
+        if (selectedProductData.price === 0 || selectedProductData.price === null || selectedProductData.language !== currentLang) {
+            console.log("selectedProduct yangilanishi kerak...");
+        }
+        
+        // Joriy tilga mos mahsulotni topish
+        const correctProduct = getProductById(selectedProductData.id, currentLang);
+        
+        if (correctProduct && correctProduct.price > 0) {
+            // To'g'ri tildagi va to'g'ri narxli mahsulotni saqlash
+            localStorage.setItem("selectedProduct", JSON.stringify(correctProduct));
+            console.log("selectedProduct to'g'ri ma'lumot bilan yangilandi:", correctProduct.price);
+        } else {
+            // Agar hech narsa topilmasa, asl ma'lumotni saqlash (agar narxi bor bo'lsa)
+            if (selectedProductData.price > 0) {
+                console.log("Asl ma'lumot ishlatilmoqda");
+            } else {
+                console.error("Hech qanday yaroqli narx topilmadi!");
+            }
+        }
+    } else {
+        console.error('selectedProduct localStorage da topilmadi');
+    }
+}
+
+// Sahifa yuklanganda
+document.addEventListener('DOMContentLoaded', function() {
+    updateSelectedProduct();
+});
+
+// URL o'zgarishini kuzatish
+let currentUrl = location.href;
+let currentLang = getCurrentLanguage();
+
+// MutationObserver orqali DOM o'zgarishlarini kuzatish
+const observer = new MutationObserver(() => {
+    const newUrl = location.href;
+    const newLang = getCurrentLanguage();
+    
+    if (newUrl !== currentUrl || newLang !== currentLang) {
+        console.log("URL yoki til o'zgarishi aniqlandi");
+        currentUrl = newUrl;
+        currentLang = newLang;
+        
+        // Yangilash
+        setTimeout(updateSelectedProduct, 100);
+    }
+});
+
+observer.observe(document, { 
+    subtree: true, 
+    childList: true 
+});
+
+// Popstate event (browser back/forward tugmalari)
+window.addEventListener('popstate', function() {
+    setTimeout(updateSelectedProduct, 100);
+});
+
+// Sahifa fokusga qaytganda
+window.addEventListener('focus', function() {
+    setTimeout(updateSelectedProduct, 100);
+});
