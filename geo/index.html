@@ -5171,41 +5171,111 @@
             window.location.href = './cart/'
         }
 
-        document.querySelectorAll(".jss1 button").forEach(btn => {
-            btn.addEventListener("click", function () {
-                let product = this.closest(".card_product");
+// Hozirgi tilni aniqlash funksiyasi
+function getCurrentLanguage() {
+    const path = window.location.pathname;
+    
+    if (path.includes('/geo/') || path.startsWith('/geo')) return 'geo';
+    if (path === '/' || path === '' || path === '/index.html') return 'en';
+    
+    return 'en';
+}
 
-                // DOM’dan narxlarni olish
-                let originalPrice = parseFloat(product.querySelector(".for_price").textContent.trim());
-                let discountedPrice = parseFloat(product.querySelector(".for_aksiyaPrice").textContent.trim());
+// Sahifa yuklanganda barcha mahsulotlarni saqlash (yangilangan)
+function saveAllProducts() {
+    const currentLang = getCurrentLanguage();
+    const products = [];
+    
+    // Barcha mahsulot card'larini olish
+    document.querySelectorAll('.card_product').forEach(product => {
+        // Narxlarni olishdan oldin elementlarni tekshirish
+        const priceElement = product.querySelector(".for_price");
+        const aksiyaPriceElement = product.querySelector(".for_aksiyaPrice");
+        
+        let price = 0;
+        let aksiyaPrice = 0;
+        
+        if (priceElement && priceElement.textContent.trim()) {
+            price = parseFloat(priceElement.textContent.trim()) || 0;
+        }
+        
+        if (aksiyaPriceElement && aksiyaPriceElement.textContent.trim()) {
+            aksiyaPrice = parseFloat(aksiyaPriceElement.textContent.trim()) || 0;
+        }
+        
+        const productData = {
+            id: product.dataset.id,
+            img: product.dataset.img,
+            img_1: product.dataset.img_1,
+            title: product.dataset.title,
+            ingredients: product.dataset.ingredients || '',
+            description: product.dataset.description,
+            type: product.dataset.type,
+            price: price,
+            aksiyaPrice: aksiyaPrice,
+            language: currentLang
+        };
+        
+        products.push(productData);
+    });
+    
+    // Til bo'yicha saqlash
+    localStorage.setItem(`allProducts_${currentLang}`, JSON.stringify(products));
+    console.log(`${products.length} ta mahsulot ${currentLang} tilida saqlandi`);
+}
 
-                // data-atributlarga yozib qo‘yish
-                product.dataset.price = originalPrice.toFixed(2);        // asl narx
-                product.dataset.aksiyaPrice = discountedPrice.toFixed(2); // aksiya narx
+// Click event (yangilangan)
+document.querySelectorAll(".jss1 button").forEach(btn => {
+    btn.addEventListener("click", function () {
+        let product = this.closest(".card_product");
 
-                // Mahsulot ma'lumotlarini olish
-                let productData = {
-                    id: product.dataset.id,
-                    img: product.dataset.img,
-                    img_1: product.dataset.img_1,
-                    title: product.dataset.title,
-                    Ingredients: product.dataset.ingredients || 'null',
-                    description: product.dataset.description,
-                    price: parseFloat(product.dataset.price),
-                    aksiyaPrice: parseFloat(product.dataset.aksiyaPrice) || null
-                };
+        // DOM'dan narxlarni olish va tekshirish
+        const priceElement = product.querySelector(".for_price");
+        const aksiyaPriceElement = product.querySelector(".for_aksiyaPrice");
+        
+        let originalPrice = 0;
+        let discountedPrice = 0;
+        
+        if (priceElement && priceElement.textContent.trim()) {
+            originalPrice = parseFloat(priceElement.textContent.trim()) || 0;
+        }
+        
+        if (aksiyaPriceElement && aksiyaPriceElement.textContent.trim()) {
+            discountedPrice = parseFloat(aksiyaPriceElement.textContent.trim()) || 0;
+        }
 
-                // Tanlangan mahsulotni LocalStorage’ga vaqtincha saqlash
-                localStorage.setItem("selectedProduct", JSON.stringify(productData));
+        // data-atributlarga yozib qo'yish
+        product.dataset.price = originalPrice.toFixed(2);
+        product.dataset.aksiyaPrice = discountedPrice.toFixed(2);
 
-                // Agar mahsulot pizza bo'lsa - pizza sahifasiga yo'naltirish
-                if (product.dataset.type && product.dataset.type === 'pizza') {
-                    window.location.href = "./details-pizza/";
-                } else {
-                    window.location.href = "./details";
-                }
-            });
-        });
+        // Mahsulot ma'lumotlarini olish
+        let productData = {
+            id: product.dataset.id,
+            img: product.dataset.img,
+            img_1: product.dataset.img_1 || '',
+            title: product.dataset.title,
+            Ingredients: product.dataset.ingredients || '',
+            description: product.dataset.description,
+            price: originalPrice,
+            aksiyaPrice: discountedPrice || ''
+        };
+
+        // Tanlangan mahsulotni LocalStorage'ga saqlash
+        localStorage.setItem("selectedProduct", JSON.stringify(productData));
+
+        // Yo'naltirish
+        if (product.dataset.type && product.dataset.type === 'pizza') {
+            window.location.href = "./details-pizza/";
+        } else {
+            window.location.href = "./details";
+        }
+    });
+});
+
+// Sahifa yuklanganda barcha mahsulotlarni saqlash
+document.addEventListener('DOMContentLoaded', function() {
+    saveAllProducts();
+});
 
 
 
