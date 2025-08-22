@@ -209,6 +209,7 @@ favorites
     updateQuantityUI(product, id);
     if (typeof updateCartBadge === "function") updateCartBadge();
     if (typeof updateCartPopup === "function") updateCartPopup();
+            if (typeof translateCartItems === "function") translateCartItems();
     window.location.reload();
   };
 
@@ -234,6 +235,7 @@ favorites
 
   if (typeof updateCartBadge === "function") updateCartBadge();
   if (typeof updateCartPopup === "function") updateCartPopup();
+          if (typeof translateCartItems === "function") translateCartItems();
   window.location.reload();
 };
 
@@ -325,6 +327,7 @@ favorites
         
         if (typeof updateCartBadge === "function") updateCartBadge();
         if (typeof updateCartPopup === "function") updateCartPopup();
+        if (typeof translateCartItems === "function") translateCartItems();
       }
     });
 
@@ -346,6 +349,7 @@ favorites
       });
       if (typeof updateCartBadge === "function") updateCartBadge();
       if (typeof updateCartPopup === "function") updateCartPopup();
+              if (typeof translateCartItems === "function") translateCartItems();
     } catch (_) {}
   });
 })();
