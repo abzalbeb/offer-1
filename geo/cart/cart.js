@@ -381,154 +381,52 @@ function removeAll() {
     window.location.reload()
 }
 
-// 🌍 Tarjima funksiyasi (MyMemory API - tekin)
-async function translateText(text, targetLang) {
-    if (!text || text.trim() === '') return text;
-    
-    try {
-        // Maqsad tilni aniqlab olish
-        const langCode = targetLang === 'geo' ? 'ka' : 'en'; // ka = Georgian
-        
-        console.log(`🔄 Tarjima qilinmoqda: "${text}" -> ${langCode}`);
-        
-        // MyMemory API - tekin tarjima
-        const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=auto|${langCode}`);
-        const data = await response.json();
-        
-        if (data.responseStatus === 200) {
-            console.log(`✅ Tarjima muvaffaqiyatli: "${text}" -> "${data.responseData.translatedText}"`);
-            return data.responseData.translatedText;
-        } else {
-            console.warn('⚠️ Tarjima xatolik:', data.responseDetails);
-            return text; // Asl matnni qaytarish
-        }
-    } catch (error) {
-        console.error('❌ Tarjima API xatolik:', error);
-        return text; // Asl matnni qaytarish
-    }
-}
-
-// 🛠️ Yangilangan editOrder funksiyasi
-async function editOrder(orderId) {
+function editOrder(orderId) {
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     const order = orders.find(o => o.id === orderId);
     
-    if (!order) {
-        console.error(`❌ Order topilmadi: ${orderId}`);
-        return;
-    }
-    
-    console.log('🛠️ Edit boshlandi...', order);
-    
-    // Tahrirlash rejimini yoqamiz
-    localStorage.setItem('edit', 'true');
-    localStorage.setItem('for_id', orderId);
-    
-    // Hozirgi tilni aniqlaymiz
-    const currentLang = getCurrentLanguage();
-    console.log('🌍 Hozirgi til:', currentLang);
-    
-    // Asosiy mahsulot ma'lumotlari (order'dan to'liq nusxa olish)
-    let productData = {
-        ...order, // Order'dagi barcha ma'lumotlarni olish
-        language: currentLang,
-        isEdit: true,
-        timestamp: Date.now()
-    };
-    
-    // 🔥 TARJIMA JARAYONI
-    try {
-        console.log('🔄 Tarjima jarayoni boshlanmoqda...');
+    if (order) {
+        // Tahrirlash rejimini yoqamiz
+        localStorage.setItem('edit', 'true');
+        localStorage.setItem('for_id', orderId);
         
-        // Title ni tarjima qilish
-        if (productData.title) {
-            const originalTitle = productData.title;
-            productData.title = await translateText(productData.title, currentLang);
-            console.log(`📝 Title tarjimasi: "${originalTitle}" -> "${productData.title}"`);
+        // Mahsulot ma'lumotlarini saqlaymiz
+        const productData = {
+            id: order.id,
+            title: order.title,
+            img: order.img,
+            img_1: order.img_1,
+            description: order.description,
+            price: order.price,
+            aksiyaPrice: order.aksiyaPrice,
+            ingredients:order.ingredients
+        };
+        
+        localStorage.setItem('selectedProduct', JSON.stringify(productData));
+        
+        // Pizza uchun qo'shimcha ma'lumotlarni saqlaymiz
+        if (order.dataType === 'pizza' && order.pizzas) {
+            // Pizza size ma'lumotini alohida saqlash
+            const pizzaSize = order.pizzas[0] ? order.pizzas[0].title : null;
+            if (pizzaSize) {
+                localStorage.setItem('selectedPizzaSize', pizzaSize);
+                console.log('Pizza size saqlandi:', pizzaSize);
+            }
+            
+            // Butun order obyektini ham saqlaymiz
+            localStorage.setItem('selectedProduct', JSON.stringify(order));
         }
         
-        // Description ni tarjima qilish
-        if (productData.description) {
-            const originalDescription = productData.description;
-            productData.description = await translateText(productData.description, currentLang);
-            console.log(`📝 Description tarjimasi: "${originalDescription}" -> "${productData.description}"`);
-        }
-        
-        // Ingredients ni tarjima qilish (agar string bo'lsa)
-        if (productData.ingredients && typeof productData.ingredients === 'string') {
-            const originalIngredients = productData.ingredients;
-            productData.ingredients = await translateText(productData.ingredients, currentLang);
-            console.log(`🧄 Ingredients tarjimasi: "${originalIngredients}" -> "${productData.ingredients}"`);
-        }
-        
-        console.log('✅ Barcha tarjimalar tugadi');
-        
-    } catch (error) {
-        console.error('❌ Tarjima jarayonida xatolik:', error);
-        // Tarjima bo'lmasa ham davom ettirish
-    }
-    
-    // 💾 Tarjima qilingan ma'lumotni saqlash
-    console.log('💾 Tarjima qilingan ma\'lumot:', productData);
-    localStorage.setItem('selectedProduct', JSON.stringify(productData));
-    
-    // Pizza uchun qo'shimcha ma'lumotlarni saqlaymiz
-    if (order.dataType === 'pizza' && order.pizzas) {
-        const pizzaSize = order.pizzas[0] ? order.pizzas[0].title : null;
-        if (pizzaSize) {
-            localStorage.setItem('selectedPizzaSize', pizzaSize);
-            console.log('🍕 Pizza size saqlandi:', pizzaSize);
-        }
-        
-        // Edit order ma'lumotlarini ham saqlash
-        localStorage.setItem('editOrderData', JSON.stringify(order));
-    }
-    
-    // 🚀 Sahifaga o'tish
-    const hasPizza = order.dataType === 'pizza' ||
-                    (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
+        const hasPizza = order.dataType === 'pizza' ||
+                        (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
 
-    console.log('🔄 Sahifaga o\'tish...');
-    
-    // Biroz kutish - tarjima tugaganidan keyin sahifa o'tish
-    setTimeout(() => {
         if (hasPizza) {
-            console.log('➡️ Pizza sahifasiga o\'tish...');
             window.location.href = '../details-pizza/';
         } else {
-            console.log('➡️ Oddiy mahsulot sahifasiga o\'tish...');
             window.location.href = '../details/';
         }
-    }, 500); // 500ms kutish
-}
-
-// 🚀 Funksiyani ishlatish uchun wrapper (asinxron bo'lgani uchun)
-function editOrderHandler(orderId) {
-    console.log('🎯 Edit handler chaqirildi:', orderId);
-    
-    // Loading indicator ko'rsatish (ixtiyoriy)
-    if (typeof showLoader === 'function') {
-        showLoader('Tarjima qilinmoqda...');
     }
-    
-    editOrder(orderId).then(() => {
-        console.log('✅ Edit jarayoni tugadi');
-        // Loading indicator yashirish
-        if (typeof hideLoader === 'function') {
-            hideLoader();
-        }
-    }).catch(error => {
-        console.error('❌ Edit order xatolik:', error);
-        // Loading indicator yashirish
-        if (typeof hideLoader === 'function') {
-            hideLoader();
-        }
-        alert('Xatolik yuz berdi. Iltimos qayta urinib ko\'ring.');
-    });
 }
-
-// 🎯 HTML'da ishlatish uchun:
-// <button onclick="editOrderHandler(500)">Edit</button>
 
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
