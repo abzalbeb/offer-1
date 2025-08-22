@@ -137,14 +137,6 @@ svg:not(:root) {
 }
 
 
-.user-tooltip a:nth-child(1){
-    display: none;
-}
-
-.user-tooltip a:nth-child(3){
-    display: none;
-}
-
 .css-kj3bb2 {
     flex-shrink: 0;
     display: inline-flex;

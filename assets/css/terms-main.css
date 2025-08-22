@@ -145,13 +145,6 @@ svg:not(:root) {
     text-align: left !important;
 }
 
-.user-tooltip a:nth-child(1){
-    display: none;
-}
-
-.user-tooltip a:nth-child(3){
-    display: none;
-}
 
 
 .css-kj3bb2 {
