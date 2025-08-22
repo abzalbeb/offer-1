@@ -5161,7 +5161,8 @@
             window.location.href = './cart/'
         }
 
-// Hozirgi tilni aniqlash funksiyasi
+
+                // Hozirgi tilni aniqlash funksiyasi
 function getCurrentLanguage() {
     const path = window.location.pathname;
     
@@ -5196,14 +5197,15 @@ function saveAllProducts() {
         const productData = {
             id: product.dataset.id,
             img: product.dataset.img,
-            img_1: product.dataset.img_1,
+            img_1: product.dataset.img_1 || '',
             title: product.dataset.title,
             ingredients: product.dataset.ingredients || '',
             description: product.dataset.description,
-            type: product.dataset.type,
+            type: product.dataset.type || '',
             price: price,
-            aksiyaPrice: aksiyaPrice,
-            language: currentLang
+            aksiyaPrice: aksiyaPrice || 0,
+            language: currentLang, // MUHIM: language maydonini qo'shdik
+            timestamp: Date.now()   // Yangilanish vaqti
         };
         
         products.push(productData);
@@ -5211,7 +5213,7 @@ function saveAllProducts() {
     
     // Til bo'yicha saqlash
     localStorage.setItem(`allProducts_${currentLang}`, JSON.stringify(products));
-    console.log(`${products.length} ta mahsulot ${currentLang} tilida saqlandi`);
+    console.log(`✅ ${products.length} ta mahsulot ${currentLang} tilida saqlandi`);
 }
 
 // Click event (yangilangan)
@@ -5236,19 +5238,32 @@ document.querySelectorAll(".jss1 button").forEach(btn => {
 
         // data-atributlarga yozib qo'yish
         product.dataset.price = originalPrice.toFixed(2);
-        product.dataset.aksiyaPrice = discountedPrice.toFixed(2);
+        if (discountedPrice > 0) {
+            product.dataset.aksiyaPrice = discountedPrice.toFixed(2);
+        }
 
-        // Mahsulot ma'lumotlarini olish
+        // Mahsulot ma'lumotlarini olish (YANGILANGAN)
         let productData = {
             id: product.dataset.id,
             img: product.dataset.img,
             img_1: product.dataset.img_1 || '',
             title: product.dataset.title,
-            Ingredients: product.dataset.ingredients || '',
+            ingredients: product.dataset.ingredients || '', // "Ingredients" -> "ingredients"
             description: product.dataset.description,
+            type: product.dataset.type || '',
             price: originalPrice,
-            aksiyaPrice: discountedPrice || ''
+            aksiyaPrice: discountedPrice || 0,
+            language: getCurrentLanguage(), // MUHIM: language qo'shdik
+            timestamp: Date.now()           // Vaqt qo'shdik
         };
+
+        // Debug uchun log
+        console.log('📦 Mahsulot tanlandi:', {
+            id: productData.id,
+            title: productData.title,
+            language: productData.language,
+            price: productData.price
+        });
 
         // Tanlangan mahsulotni LocalStorage'ga saqlash
         localStorage.setItem("selectedProduct", JSON.stringify(productData));
@@ -5257,15 +5272,81 @@ document.querySelectorAll(".jss1 button").forEach(btn => {
         if (product.dataset.type && product.dataset.type === 'pizza') {
             window.location.href = "./details-pizza/";
         } else {
-            window.location.href = "./details";
+            window.location.href = "./details/";
         }
     });
 });
 
 // Sahifa yuklanganda barcha mahsulotlarni saqlash
 document.addEventListener('DOMContentLoaded', function() {
-    saveAllProducts();
+    console.log('🚀 HTML sahifa yuklandi, mahsulotlar saqlanmoqda...');
+    
+    // Biroz kechiktirib saqlash (DOM to'liq yuklanishi uchun)
+    setTimeout(() => {
+        saveAllProducts();
+        
+        // Debug uchun saqlangan ma'lumotlarni tekshirish
+        const currentLang = getCurrentLanguage();
+        const savedProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
+        console.log(`📊 Saqlandi: ${savedProducts.length} ta ${currentLang} mahsulot`);
+        
+        // Birinchi mahsulotni namuna sifatida ko'rsatish
+        if (savedProducts.length > 0) {
+            console.log('📋 Namuna mahsulot:', {
+                id: savedProducts[0].id,
+                title: savedProducts[0].title,
+                language: savedProducts[0].language,
+                price: savedProducts[0].price
+            });
+        }
+    }, 500);
 });
+
+// Debug funksiyalar (global scope uchun)
+window.debugProducts = function() {
+    const currentLang = getCurrentLanguage();
+    const allProductsEn = JSON.parse(localStorage.getItem("allProducts_en")) || [];
+    const allProductsGeo = JSON.parse(localStorage.getItem("allProducts_geo")) || [];
+    const selectedProduct = JSON.parse(localStorage.getItem("selectedProduct"));
+    
+    console.group('🔍 Debug: Mahsulotlar holati');
+    console.log('Joriy til:', currentLang);
+    console.log('EN mahsulotlar:', allProductsEn.length, 'ta');
+    console.log('GEO mahsulotlar:', allProductsGeo.length, 'ta');
+    console.log('Tanlangan mahsulot:', selectedProduct);
+    
+    if (selectedProduct?.id) {
+        const enProduct = allProductsEn.find(p => p.id === selectedProduct.id);
+        const geoProduct = allProductsGeo.find(p => p.id === selectedProduct.id);
+        
+        console.log(`EN da mavjud:`, enProduct ? `✅ ${enProduct.title}` : '❌ Yo\'q');
+        console.log(`GEO da mavjud:`, geoProduct ? `✅ ${geoProduct.title}` : '❌ Yo\'q');
+    }
+    console.groupEnd();
+};
+
+// Mahsulotlarni qayta saqlash
+window.resaveProducts = function() {
+    console.log('🔄 Mahsulotlar qayta saqlanmoqda...');
+    saveAllProducts();
+    
+    setTimeout(() => {
+        console.log('📊 Qayta saqlash tugadi');
+        window.debugProducts();
+    }, 500);
+};
+
+// LocalStorage ni tozalash
+window.clearProducts = function() {
+    localStorage.removeItem('selectedProduct');
+    localStorage.removeItem('allProducts_en');
+    localStorage.removeItem('allProducts_geo');
+    console.log('🧹 Barcha mahsulot ma\'lumotlari tozalandi');
+};
+
+console.log('✅ Mahsulot boshqaruv tizimi yuklandi');
+console.log('📚 Debug buyruqlar: debugProducts(), resaveProducts(), clearProducts()');
+
 
 
 

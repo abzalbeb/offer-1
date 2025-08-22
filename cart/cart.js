@@ -414,7 +414,7 @@ function editOrder(orderId) {
             }
             
             // Butun order obyektini ham saqlaymiz
-            localStorage.setItem('editOrderData', JSON.stringify(order));
+            localStorage.setItem('selectedProduct', JSON.stringify(order));
         }
         
         const hasPizza = order.dataType === 'pizza' ||

@@ -90,15 +90,15 @@ function renderCartHTML(cartItems) {
                                 <div></div>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
-                                <h3 class="text-grey  fs-20"><s>${(item.aksiyaPrice*item.quantity).toFixed(2)}₾</s></h3>
+                                <h3 class="text-grey  fs-20"><s>${(item.aksiyaPrice*item.count).toFixed(2)}₾</s></h3>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0px;">
-                                <h3 class="text-red  fs-24" style="text-align: end;">${item.price ? (typeof item.price === 'number' ? item.price.toFixed(2) : parseFloat(item.price).toFixed(2)) + '₾' : (item.price ? (typeof item.price === 'number' ? item.price.toFixed(2) : parseFloat(item.price).toFixed(2)) + '₾' : '')}</h3>
+                                <h3 class="text-red  fs-24" style="text-align: end;">${(item.price*item.count).toFixed(2)}₾</h3>
                                 <div>
                                     <div>
                                         <div class="Kanit-Regular" style="display: inline-flex;">
                                             <div style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 14px; box-shadow: lightgrey 0px 2px 4px 3px; display: inline-flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; background: rgb(0, 120, 174); color: rgb(255, 255, 255);" onclick="changeCartQuantity('${item.id}', -1)">-</div>
-                                            <div class="Kanit-Regular" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 24px; box-shadow: none; display: inline-flex; justify-content: center; align-items: center; cursor: auto; user-select: none; color: rgb(0, 0, 0); margin-left: 4px; margin-right: 4px;">${item.quantity || 1}</div>
+                                            <div class="Kanit-Regular" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 24px; box-shadow: none; display: inline-flex; justify-content: center; align-items: center; cursor: auto; user-select: none; color: rgb(0, 0, 0); margin-left: 4px; margin-right: 4px;">${item.count || 1}</div>
                                             <div style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 14px; box-shadow: lightgrey 0px 2px 4px 3px; display: inline-flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; background: rgb(0, 120, 174); color: rgb(255, 255, 255);" onclick="changeCartQuantity('${item.id}', 1)">+</div>
                                         </div>
                                     </div>
@@ -156,15 +156,15 @@ function renderOrdersHTML(orders) {
                                 </div>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
-                                <h3 class="text-grey  fs-20"><s>${(order.aksiyaPrice * order.quantity).toFixed(2)}₾</s></h3>
+                                <h3 class="text-grey  fs-20"><s>${(order.aksiyaPrice * order.count).toFixed(2)}₾</s></h3>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0px;">
-                                <h3 class="text-red  fs-24" style="text-align: end;">${(order.price * order.quantity).toFixed(2)}₾</h3>
+                                <h3 class="text-red  fs-24" style="text-align: end;">${(order.price * order.count).toFixed(2)}₾</h3>
                                 <div>
                                     <div>
                                         <div class="Kanit-Regular quantity-controls" style='display:inline-flex'>
                                             <div class="quantity-btn" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 14px; box-shadow: lightgrey 0px 2px 4px 3px; display: inline-flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; background: rgb(0, 120, 174); color: rgb(255, 255, 255);" onclick="changeQuantity(${order.id}, -1)">-</div>
-                                            <div class="quantity-display" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 24px; box-shadow: none; display: inline-flex; justify-content: center; align-items: center; cursor: auto; user-select: none; color: rgb(0, 0, 0); margin-left: 4px; margin-right: 4px;">${order.quantity || 1}</div>
+                                            <div class="quantity-display" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 24px; box-shadow: none; display: inline-flex; justify-content: center; align-items: center; cursor: auto; user-select: none; color: rgb(0, 0, 0); margin-left: 4px; margin-right: 4px;">${order.count || 1}</div>
                                             <div class="quantity-btn" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 14px; box-shadow: lightgrey 0px 2px 4px 3px; display: inline-flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; background: rgb(0, 120, 174); color: rgb(255, 255, 255);" onclick="changeQuantity(${order.id}, 1)">+</div>
                                         </div>
                                     </div>
@@ -245,16 +245,16 @@ function changeQuantity(orderId, change) {
     
     if (orderIndex !== -1) {
         const order = orders[orderIndex];
-        const newQuantity = (order.quantity || 1) + change;
+        const newQuantity = (order.count || 1) + change;
         
         if (newQuantity > 0) {
             // Calculate base price from original totalPrice
             const basePriceValue = parseFloat(order.totalPrice.replace('₾', ''));
-            const baseQuantity = order.quantity || 1;
+            const baseQuantity = order.count || 1;
             const unitPrice = basePriceValue / baseQuantity;
             
             // Update quantity and calculate new total price
-            order.quantity = newQuantity;
+            order.count = newQuantity;
             const newTotalPrice = (unitPrice * newQuantity).toFixed(2);
             order.totalPrice = newTotalPrice + '₾';
             
@@ -269,7 +269,7 @@ function changeQuantity(orderId, change) {
 // total larni yig'ish
 let subTotal = cart.reduce((sum, item) => sum + (item.total || 0), 0);
 
-document.querySelector(".subTotal").innerHTML = "subTotal.toFixed(2)"
+document.querySelector(".subTotal").innerHTML = subTotal.toFixed(2)
 }
 
 // Function to change cart item quantity
@@ -279,7 +279,7 @@ function changeCartQuantity(itemId, change) {
     
     if (itemIndex !== -1) {
         const item = cartItems[itemIndex];
-        const newQuantity = (item.quantity || 1) + change;
+        const newQuantity = (item.count || 1) + change;
         
         if (newQuantity > 0) {
             // Calculate unit price from current total or price
@@ -288,13 +288,13 @@ function changeCartQuantity(itemId, change) {
             if (item.unitPrice) {
                 // If unitPrice already exists, use it
                 unitPrice = item.unitPrice;
-            } else if (item.price && item.quantity) {
+            } else if (item.price && item.count) {
                 // Calculate unit price from total and quantity
-                unitPrice = parseFloat(item.price) / (item.quantity || 1);
+                unitPrice = parseFloat(item.price) / (item.count || 1);
                 item.unitPrice = unitPrice; // Store for future use
-            } else if (item.price && item.quantity) {
+            } else if (item.price && item.count) {
                 // Calculate unit price from price and quantity
-                unitPrice = parseFloat(item.price) / (item.quantity || 1);
+                unitPrice = parseFloat(item.price) / (item.count || 1);
                 item.unitPrice = unitPrice; // Store for future use
             } else if (item.price) {
                 // If only total exists, assume quantity is 1
@@ -307,7 +307,7 @@ function changeCartQuantity(itemId, change) {
             }
             
             // Update quantity and calculate new total
-            item.quantity = newQuantity;
+            item.count = newQuantity;
             const newTotal = (unitPrice * newQuantity).toFixed(2);
             item.total = parseFloat(newTotal);
             
@@ -414,7 +414,7 @@ function editOrder(orderId) {
             }
             
             // Butun order obyektini ham saqlaymiz
-            localStorage.setItem('editOrderData', JSON.stringify(order));
+            localStorage.setItem('selectedProduct', JSON.stringify(order));
         }
         
         const hasPizza = order.dataType === 'pizza' ||
@@ -433,10 +433,10 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 // cart subtotal
-let cartTotal = cart.reduce((sum, item) => sum + (item.price || 0), 0);
+let cartTotal = cart.reduce((sum, item) => sum + ((item.price || 0) * (item.count || 0)), 0);
 
 // orders subtotal (price * quantity)
-let ordersTotal = orders.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 0)), 0);
+let ordersTotal = orders.reduce((sum, item) => sum + ((item.price || 0) * (item.count || 0)), 0);
 
 // umumiy total
 let grandTotal = cartTotal + ordersTotal;
@@ -455,7 +455,7 @@ cartDiv.innerHTML += orders.map(item => {
          <div class="cart_card">
                                 <p class=" fs-20 capitalize"
                                     style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${item.title}</p>
-                                <span class="text-red " style="margin-left: auto; font-weight: 500;">${item.price*item.quantity}₾</span>
+                                <span class="text-red " style="margin-left: auto; font-weight: 500;">${item.price*item.count}₾</span>
                             </div>
     `;
 }).join("");

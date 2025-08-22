@@ -1371,7 +1371,7 @@ window.updateCartFromOrders = function() {
         }
 
         // Agar favorites sahifasida bo‘lsa va favorites bo‘sh qolsa, sahifani yangilash
-        if (window.location.pathname === '/favoritess/' && favs.length === 0) {
+        if (window.location.pathname === './favoritess/' && favs.length === 0) {
           location.reload();
         }
       }

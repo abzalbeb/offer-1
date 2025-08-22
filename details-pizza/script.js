@@ -487,7 +487,7 @@ const maxExtraIngredients = 5;
 // Edit holatini tekshirish va ma'lumotlarni qayta tiklash funksiyasi (TUZATILGAN)
 function restoreEditData() {
     const isEditMode = localStorage.getItem('edit') === 'true';
-    const editOrderData = JSON.parse(localStorage.getItem('editOrderData')) || null;
+    const editOrderData = JSON.parse(localStorage.getItem('selectedProduct')) || null;
     
     if (!isEditMode || !editOrderData) {
         return false; // Edit rejimi emas
@@ -1282,50 +1282,10 @@ function findProductById(productId) {
 
 // ===== MAHSULOTNI SAQLASH =====
 
-// Barcha mahsulotlarni saqlash (yangilangan)
-function saveAllProducts() {
-    const currentLang = getCurrentLanguage();
-    const products = [];
-    
-    document.querySelectorAll('.card_product').forEach(product => {
-        const priceElement = product.querySelector(".for_price");
-        const aksiyaPriceElement = product.querySelector(".for_aksiyaPrice");
-        
-        let price = 0;
-        let aksiyaPrice = 0;
-        
-        if (priceElement?.textContent?.trim()) {
-            price = parseFloat(priceElement.textContent.trim()) || 0;
-        }
-        
-        if (aksiyaPriceElement?.textContent?.trim()) {
-            aksiyaPrice = parseFloat(aksiyaPriceElement.textContent.trim()) || 0;
-        }
-        
-        const productData = {
-            id: product.dataset.id,
-            img: product.dataset.img,
-            img_1: product.dataset.img_1 || '',
-            title: product.dataset.title,
-            ingredients: product.dataset.ingredients || '',
-            description: product.dataset.description,
-            type: product.dataset.type || '',
-            price: price,
-            aksiyaPrice: aksiyaPrice,
-            language: currentLang,
-            timestamp: Date.now() // Yangilanish vaqti
-        };
-        
-        products.push(productData);
-    });
-    
-    localStorage.setItem(`allProducts_${currentLang}`, JSON.stringify(products));
-    console.log(`✅ ${products.length} ta mahsulot ${currentLang} tilida saqlandi`);
-}
-
 // ===== TANLANGAN MAHSULOTNI BOSHQARISH =====
 
 // selectedProduct ni yangilash
+// selectedProduct ni yangilash - MUKAMMALLASHTIRILGAN VERSIYA
 function updateSelectedProduct() {
     const selectedProductData = JSON.parse(localStorage.getItem("selectedProduct"));
     const currentLang = getCurrentLanguage();
@@ -1347,28 +1307,40 @@ function updateSelectedProduct() {
     const isLanguageMismatch = selectedProductData.language !== currentLang;
     const isContentMismatch = detectLanguageMismatch(selectedProductData.title, selectedProductData.language || 'en');
     
+    // Agar til nomuvofiqlik bo'lsa yoki kontent mos kelmasa
     if (isLanguageMismatch || isContentMismatch) {
         console.log(`🔄 Ma'lumot yangilanishi kerak:`, {
             languageMismatch: isLanguageMismatch,
             contentMismatch: isContentMismatch
         });
         
-        // Faqat joriy tildan qidirish
+        // Joriy tildan to'g'ri mahsulotni qidirish
         const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
         const correctProduct = currentLangProducts.find(p => p.id === selectedProductData.id);
         
         if (correctProduct && correctProduct.price > 0) {
+            // MUHIM: Faqat title va description ni yangilash, boshqasini asl holatida qoldirish
             const updatedProduct = { 
-                ...correctProduct, 
-                language: currentLang,
+                ...selectedProductData, // Asl ma'lumotni saqlash
+                title: correctProduct.title, // Faqat title ni yangilash
+                description: correctProduct.description, // Faqat description ni yangilash
+                language: currentLang, // Tilni yangilash
                 timestamp: Date.now()
             };
+            
             localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-            console.log(`✅ selectedProduct to'g'ri tilga yangilandi:`, {
+            console.log(`✅ selectedProduct title va description yangilandi:`, {
                 oldTitle: selectedProductData.title,
                 newTitle: updatedProduct.title,
+                oldDescription: selectedProductData.description,
+                newDescription: updatedProduct.description,
                 lang: updatedProduct.language,
-                price: updatedProduct.price
+                price: updatedProduct.price,
+                preservedData: {
+                    count: updatedProduct.count,
+                    aksiyaPrice: updatedProduct.aksiyaPrice,
+                    totalPrice: updatedProduct.totalPrice
+                }
             });
             
             // Custom event yuborish
@@ -1377,22 +1349,133 @@ function updateSelectedProduct() {
             }));
         } else {
             console.warn(`⚠️ Mahsulot ${currentLang} tilida topilmadi, asl ma'lumot saqlanmoqda`);
-            // Asl ma'lumotni saqlash, faqat tilni yangilash
-            const updatedProduct = { ...selectedProductData, language: currentLang };
+            // Faqat tilni yangilash, boshqa ma'lumotlarni o'zgartirmaslik
+            const updatedProduct = { 
+                ...selectedProductData, 
+                language: currentLang,
+                timestamp: Date.now()
+            };
             localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
         }
-    } else if (selectedProductData.price <= 0) {
-        // Faqat narx muammosi bo'lsa
+    } 
+    // Agar faqat narx muammosi bo'lsa (title va til to'g'ri)
+    else if (selectedProductData.price <= 0) {
         console.log('💰 Narx muammosi hal qilinmoqda...');
-        const updatedProduct = findProductById(selectedProductData.id);
+        const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
+        const correctProduct = currentLangProducts.find(p => p.id === selectedProductData.id);
         
-        if (updatedProduct) {
+        if (correctProduct && correctProduct.price > 0) {
+            // Faqat narxni yangilash
+            const updatedProduct = { 
+                ...selectedProductData,
+                price: correctProduct.price,
+                timestamp: Date.now()
+            };
             localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-            console.log(`✅ Narx yangilandi: ${updatedProduct.price}`);
+            console.log(`✅ Faqat narx yangilandi: ${updatedProduct.price}`);
+            
+            // Custom event yuborish
+            window.dispatchEvent(new CustomEvent('productUpdated', { 
+                detail: updatedProduct 
+            }));
         }
-    } else {
+    } 
+    // Hamma narsa to'g'ri
+    else {
         console.log('✅ selectedProduct allaqachon to\'g\'ri');
     }
+}
+
+// Qo'shimcha: Faqat title va description yangilash uchun alohida funksiya
+function updateSelectedProductTitleOnly() {
+    const selectedProductData = JSON.parse(localStorage.getItem("selectedProduct"));
+    const currentLang = getCurrentLanguage();
+    
+    if (!selectedProductData?.id) {
+        console.warn('⚠️ selectedProduct topilmadi');
+        return false;
+    }
+    
+    const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
+    const correctProduct = currentLangProducts.find(p => p.id === selectedProductData.id);
+    
+    if (correctProduct) {
+        const updatedProduct = { 
+            ...selectedProductData,
+            title: correctProduct.title,
+            description: correctProduct.description,
+            language: currentLang,
+            timestamp: Date.now()
+        };
+        
+        localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+        console.log(`✅ Title va Description yangilandi`);
+        
+        // Custom event yuborish
+        window.dispatchEvent(new CustomEvent('productUpdated', { 
+            detail: updatedProduct 
+        }));
+        
+        return true;
+    }
+    
+    return false;
+}
+
+// Debug uchun - selectedProduct holatini tekshirish va avtomatik yangilash
+function checkSelectedProductConsistency() {
+    const selectedProductData = JSON.parse(localStorage.getItem("selectedProduct"));
+    const currentLang = getCurrentLanguage();
+    
+    if (!selectedProductData) {
+        console.log('❌ selectedProduct mavjud emas');
+        return;
+    }
+    
+    console.group('🔍 selectedProduct Consistency Check');
+    console.log('ID:', selectedProductData.id);
+    console.log('Current Lang:', currentLang);
+    console.log('Saved Lang:', selectedProductData.language);
+    console.log('Title:', selectedProductData.title);
+    console.log('Description:', selectedProductData.description);
+    
+    // Til nomuvofiqligini tekshirish
+    const hasLanguageMismatch = selectedProductData.language !== currentLang;
+    const hasContentMismatch = detectLanguageMismatch(selectedProductData.title, selectedProductData.language || 'en');
+    
+    console.log('Language Mismatch:', hasLanguageMismatch);
+    console.log('Content Mismatch:', hasContentMismatch);
+    
+    if (hasLanguageMismatch || hasContentMismatch) {
+        console.log('🔧 Yangilash talab qilinadi');
+        
+        // Avtomatik yangilash
+        const targetProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
+        const correctProduct = targetProducts.find(p => p.id === selectedProductData.id);
+        
+        if (correctProduct) {
+            const updatedProduct = { 
+                ...selectedProductData,
+                title: correctProduct.title,
+                description: correctProduct.description,
+                language: currentLang,
+                timestamp: Date.now()
+            };
+            
+            localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+            console.log('✅ Avtomatik yangiland!', {
+                newTitle: updatedProduct.title,
+                newDescription: updatedProduct.description
+            });
+            
+            return updatedProduct;
+        }
+    } else {
+        console.log('✅ Hammasi to\'g\'ri');
+    }
+    
+    console.groupEnd();
+    return selectedProductData;
 }
 
 // Til va kontent o'rtasidagi nomuvofiqlikni aniqlash
@@ -1415,65 +1498,6 @@ function detectLanguageMismatch(text, expectedLang) {
     }
     
     return false;
-}
-
-// ===== MAHSULOT CLICK HANDLER =====
-
-// Click event handler (yangilangan)
-function initializeProductClickHandlers() {
-    document.querySelectorAll(".jss1 button").forEach(btn => {
-        btn.addEventListener("click", function() {
-            const product = this.closest(".card_product");
-            if (!product) return;
-            
-            // Narxlarni olish
-            const priceElement = product.querySelector(".for_price");
-            const aksiyaPriceElement = product.querySelector(".for_aksiyaPrice");
-            
-            let originalPrice = 0;
-            let discountedPrice = 0;
-            
-            if (priceElement?.textContent?.trim()) {
-                originalPrice = parseFloat(priceElement.textContent.trim()) || 0;
-            }
-            
-            if (aksiyaPriceElement?.textContent?.trim()) {
-                discountedPrice = parseFloat(aksiyaPriceElement.textContent.trim()) || 0;
-            }
-            
-            // Dataset'ni yangilash
-            product.dataset.price = originalPrice.toFixed(2);
-            if (discountedPrice > 0) {
-                product.dataset.aksiyaPrice = discountedPrice.toFixed(2);
-            }
-            
-            // Mahsulot ma'lumotlari
-            const productData = {
-                id: product.dataset.id,
-                img: product.dataset.img,
-                img_1: product.dataset.img_1 || '',
-                title: product.dataset.title,
-                ingredients: product.dataset.ingredients || '',
-                description: product.dataset.description,
-                type: product.dataset.type || '',
-                price: originalPrice,
-                aksiyaPrice: discountedPrice || 0,
-                language: getCurrentLanguage(),
-                timestamp: Date.now()
-            };
-            
-            // LocalStorage'ga saqlash
-            localStorage.setItem("selectedProduct", JSON.stringify(productData));
-            console.log('📦 Mahsulot tanlandi:', productData);
-            
-            // Yo'naltirish
-            const redirectUrl = product.dataset.type === 'pizza' 
-                ? './details-pizza/' 
-                : './details';
-                
-            window.location.href = redirectUrl;
-        });
-    });
 }
 
 // ===== TIL O'ZGARISHINI KUZATISH =====
@@ -1635,7 +1659,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Initialization tugadi');
 });
 
-// ===== HELPER FUNKSIYALAR =====
 
 // Debug uchun
 function debugProductData() {
@@ -1652,20 +1675,5 @@ function debugProductData() {
     console.groupEnd();
 }
 
-// LocalStorage'ni tozalash
-function clearProductData() {
-    localStorage.removeItem('selectedProduct');
-    localStorage.removeItem('allProducts_en');
-    localStorage.removeItem('allProducts_geo');
-    console.log('🧹 Barcha mahsulot ma\'lumotlari tozalandi');
-}
-
-// Global scope'ga export qilish (agar kerak bo'lsa)
-window.ProductManager = {
-    getCurrentLanguage,
-    findProductById,
-    updateSelectedProduct,
-    saveAllProducts,
-    debugProductData,
-    clearProductData
-};
+console.log('✅ Edit boshqaruv tizimi yuklandi');
+console.log('📚 Debug buyruq: debugEdit()');
