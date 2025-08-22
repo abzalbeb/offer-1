@@ -19,6 +19,9 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
+        .favorit_empty{
+            display: none;
+        }
         .jss411 {
     color: #ffffff;
     width: 65px;
@@ -1755,6 +1758,28 @@
         </div>
     </div>
 
+    <div class="jss1 favorit_empty" id="favorites-container-no" style="margin-top: 20px;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="empty_card">
+                    <div
+                        style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding-block: 20px; row-gap: 12px;">
+                        <h2 class="Kanit-SemiBold text-blue" style="font-size: 36px; text-align: center;">რჩეულები</h2>
+                        <div style="display: flex; justify-content: center;"><img
+                                src="../../assets/image/no_favorites.88bcc4bdc48c858e65a4.png"
+                                style="filter: grayscale(100%);"></div>
+                        <div>
+                            <h3 class="Kanit-Medium" style="color: rgb(73, 73, 73); font-family: 'Kanit', sans-serif !important; font-size: 24px;">ჯერ არ არის რჩეული<span class="Kanit-Medium text-red" style="font-size: 24px;"> </span></h3>
+                        </div>
+                        <div style="text-align: center;">
+                        </div><button onclick="window.location='../'"
+                            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-Regular fs-14 empty_btn css-13z6b64"
+                            tabindex="0" type="button" style="font-weight: bold;font-family: 'Kanit', sans-serif !important;color:white;border:none;text-transform: uppercase;">მენიუში დაბრუნება<span
+                                class="MuiTouchRipple-root css-w0pj6f"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <div class="footer-main" style="margin-top: 0px;" id="footer-destop">
             <div class="footer-inner padding-inline">
                 <div class="footer-content">
@@ -2045,7 +2070,7 @@
     if (favorites.length > 0) {
 
     }else{
-         window.location.href = "../favoritess/";
+         document.querySelector(".favorit_empty").style="display:block"
     }
     // Aks holda hech narsa qilmaymiz, foydalanuvchi shu sahifada qoladi
   });

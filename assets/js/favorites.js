@@ -25,8 +25,8 @@ favorites
              data-img_1="${item.img_1}"
              data-title="${item.title}"
              data-description="${item.description}"
-             data-price="${item.aksiyaPrice || item.price}"
-             data-aksiya-price="${item.price}"
+             data-price="${item.price}"
+             data-aksiya-price="${item.aksiyaPrice || ""}"
              data-type="${item.type || ''}"
              data-ingredients="${item.Ingredients || ''}"
              data-aksiya-price="${item.price}">
@@ -67,8 +67,8 @@ favorites
             </div>
             <div class="jss40">
               <div>
-                <p class="fs-18 text-red "><span class="for_price"></span> </p>
-                <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">${item.aksiyaPrice || item.price}</span> ₾</p>
+                <p class="fs-18 text-red "><span class="for_price"></span> ₾</p>
+                <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">${item.price}</span>0 ₾</p>
               </div>
               <button class="jss411" aria-label="Add to cart">Order</button>
               <!-- PIZZA uchun qty-container QO'SHMAYMIZ -->
@@ -85,6 +85,9 @@ favorites
 favorites
   .filter(item => item.type !== 'pizza')
   .forEach(item => {
+
+    console.log(item.price);
+    
     const productHTML = `
       <div class="jss32">
         <div class="jss34 product" 
@@ -92,11 +95,10 @@ favorites
              data-img="${item.img}"
              data-title="${item.title}"
              data-description="${item.description}"
-             data-price="${item.aksiyaPrice || item.price}"
-             data-aksiya-price="${item.price}"
+             data-price="${item.price}"
+             data-aksiya-price="${item.aksiyaPrice || ""}"
              data-type="${item.type || ''}"
-             data-ingredients="${item.Ingredients || ''}"
-             data-aksiya-price="${item.price}">
+             data-ingredients="${item.Ingredients || ''}">
           <div class="jss35">
             <label class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h">
               <span class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-7avhyl" 
@@ -134,8 +136,8 @@ favorites
             </div>
             <div class="jss40">
                   <div>
-                    <p class="fs-18 text-red "><span class="for_price">${item.price}</span> ₾</p>
-                    <p class="fs-18 text-red product-price" style="color: rgb(0, 0, 0); font-size: 12px; font-weight: 500; text-decoration: line-through;"> <span class="for_aksiyaPrice">${item.aksiyaPrice || item.price}</span> ₾</p>
+                    <p class="fs-18 text-red "><span class="for_price">${item.aksiyaPrice}</span> ₾</p>
+                    <p class="fs-18 text-red product-price" style="color: rgb(0, 0, 0); font-size: 12px; font-weight: 500; text-decoration: line-through;"> <span class="for_aksiyaPrice">${item.price}</span> ₾</p>
                   </div>
               <button class="jss41" aria-label="Add to cart">Order</button>
               <!-- Boshqa mahsulotlar uchun qty-container QO'SHAMIZ -->
@@ -205,7 +207,7 @@ favorites
             
             if (newPriceEl && cartItem.aksiyaPrice) {
                 // for_aksiyaPrice da aksiya narxi
-                newPriceEl.textContent = (cartItem.aksiyaPrice * cartItem.count).toFixed(2);
+                newPriceEl.textContent = (cartItem.aksiyaPrice * cartItem.count).toFixed(2) ;
             }
         }
 
@@ -291,6 +293,9 @@ favorites
       const price = parseFloat(product.dataset.aksiyaPrice); // asl narx
       const type = product.dataset.type;
 
+      
+      
+
       let cart = [];
       try {
         cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -350,7 +355,7 @@ favorites
 })();
 
 setTimeout(() => {
-  document.querySelectorAll(".for_price").forEach(priceEl => {
+  document.querySelectorAll("#favorites-container .for_price").forEach(priceEl => {
     if (priceEl.textContent.includes('₾')) {
       priceEl.textContent = priceEl.textContent.replace('₾', '').trim();
     }
