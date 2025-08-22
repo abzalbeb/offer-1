@@ -194,22 +194,22 @@ const defaultStandardIngredients9 = [
 
 
 const defaultStandardIngredients8 = [
-  { id: "890", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
-  { id: "881", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "topping" },
-  { id: "882", title: "Chicken", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Chicken_topping.webp", type: "topping" },
-  { id: "884", title: "tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "topping" },
-  { id: "885", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "topping" },
-  { id: "886", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "topping" },
-  { id: "887", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "topping" },
-  { id: "888", title: "Pepperoni", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "topping" }
+  { id: "890", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+  { id: "881", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
+  { id: "882", title: "Chicken", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Chicken_topping.webp", type: "standard" },
+  { id: "884", title: "tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "standard" },
+  { id: "885", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
+  { id: "886", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
+  { id: "887", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "standard" },
+  { id: "888", title: "Pepperoni", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "standard" }
 ];
 
 
 const defaultStandardIngredients4444 = [
-  { id: "4444", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
-  { id: "4441", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "topping" },
-  { id: "4442", title: "Tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "topping" },
-  { id: "4443", title: "Ranch Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ranch.webp", type: "topping" }
+  { id: "4444", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+  { id: "4441", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+  { id: "4442", title: "Tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "standard" },
+  { id: "4443", title: "Ranch Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ranch.webp", type: "standard" }
 ];
 
 
