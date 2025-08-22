@@ -65,151 +65,151 @@ imgDivs.forEach(div => {
 // --- Default pizza ---
 const defaultPizza = {
     id: "2",
-    title: "საშუალო ზომა - 26 სმ 6 ცალი",
+    title: "Medium Size - 26cm 6pcs",
     price: parseFloat(product.price),
     ingredients: []
 };
 let selectedPizza = JSON.parse(JSON.stringify(defaultPizza));
 
 // --- Default ingredients ---
-const defaultDough = { id: "1001", title: "იტალიური თხელი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/thin-dough.webp", type: "dough" };
-const defaultEdge = { id: "edge-default", title: "კლასიკური ზღვარი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Classic.webp", type: "edge" };
+const defaultDough = { id: "1001", title: "Italian Thin", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/thin-dough.webp", type: "dough" };
+const defaultEdge = { id: "edge-default", title: "Classic Edge", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Classic.webp", type: "edge" };
 
 // Default standard ingredients (data-id lardan olingan)
 const defaultStandardIngredients7 = [
-    { id: "230", title: "მოცარელა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mozarella.webp", type: "standard" },
-    { id: "231", title: "სიმინდი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cornpng_parspng_com_8.webp", type: "standard" },
-    { id: "232", title: "პიცის სოუსი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
-    { id: "233", title: "სოკო", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
-    { id: "235", title: "ხახვი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
-    { id: "236", title: "შავი ზეთისხილი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/black%20olives.png", type: "standard" },
-    { id: "237", title: "მწვანე წიწაკა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" }
+    { id: "230", title: "Mozzarella", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mozarella.webp", type: "standard" },
+    { id: "231", title: "Corn", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cornpng_parspng_com_8.webp", type: "standard" },
+    { id: "232", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
+    { id: "233", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
+    { id: "235", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
+    { id: "236", title: "Black Olive", price: 0, img: "https://deykvccewcmn1.cloudfront.net/black%20olives.png", type: "standard" },
+    { id: "237", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" }
 ];
 
 const defaultStandardIngredients777 = [
-  { id: "777", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-  { id: "778", title: "პიცის სოუსი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
-  { id: "779", title: "სოკო", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
-  { id: "780", title: "ლორი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" },
-  { id: "781", title: "ხახვი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
-  { id: "782", title: "მწვანე წიწაკა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" },
-  { id: "783", title: "პეპერონი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "standard" }
+  { id: "777", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+  { id: "778", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+  { id: "779", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
+  { id: "780", title: "Ham", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" },
+  { id: "781", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
+  { id: "782", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" },
+  { id: "783", title: "Pepperoni", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "standard" }
 ]
 
 
 const defaultStandardIngredients6 = [
-    { id: "201", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-    { id: "202", title: "პიცის სოუსი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
-    { id: "203", title: "ქათამი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Chicken_topping.webp", type: "standard" },
-    { id: "204", title: "ხახვი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
-    { id: "205", title: "მწვანე წიწაკა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" },
-    { id: "206", title: "ტკბილი ჩილის სოუსი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/20240831224905902_pizzasauce.webp", type: "standard" },
+    { id: "201", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+    { id: "202", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+    { id: "203", title: "Chicken", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Chicken_topping.webp", type: "standard" },
+    { id: "204", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
+    { id: "205", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" },
+    { id: "206", title: "Sweet Chilli Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/20240831224905902_pizzasauce.webp", type: "standard" },
 ];
 const defaultStandardIngredients666 = [
-  { id: "666", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-  { id: "667", title: "პიცის სოუსი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
-  { id: "668", title: "პომიდორი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "standard" },
-  { id: "669", title: "ფეტა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/feta.webp", type: "standard" },
-  { id: "669", title: "შავი ზეთისხილი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/black%20olives.png", type: "standard" },
-  { id: "671", title: "მწვანე წიწაკა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" }
+  { id: "666", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+  { id: "667", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+  { id: "668", title: "Tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "standard" },
+  { id: "669", title: "Feta", price: 0, img: "https://deykvccewcmn1.cloudfront.net/feta.webp", type: "standard" },
+  { id: "670", title: "Black Olive", price: 0, img: "https://deykvccewcmn1.cloudfront.net/black%20olives.png", type: "standard" },
+  { id: "671", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" }
 ];
 
 const defaultStandardIngredients5 = [
-    { id: "220", title: "მოცარელა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mozarella.webp", type: "standard" },
-    { id: "221", title: "ჩედარი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cheddar.webp", type: "standard" },
-    { id: "222", title: "პიცის სოუსი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
-    { id: "223", title: "გორგონზოლას ყველი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/gorgonzola.webp", type: "standard" },
-    { id: "226", title: "ფეტა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/feta.webp", type: "standard" }
+    { id: "220", title: "Mozzarella", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mozarella.webp", type: "standard" },
+    { id: "221", title: "Cheddar", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cheddar.webp", type: "standard" },
+    { id: "222", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
+    { id: "223", title: "Gorgonzola Cheese", price: 0, img: "https://deykvccewcmn1.cloudfront.net/gorgonzola.webp", type: "standard" },
+    { id: "226", title: "Feta", price: 0, img: "https://deykvccewcmn1.cloudfront.net/feta.webp", type: "standard" }
 ];
 
 const defaultStandardIngredients3 = [
-    { id: "207", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-    { id: "208", title: "პიცის სოუსი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
-    { id: "209", title: "პეპერონი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "standard" },
+    { id: "207", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+    { id: "208", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+    { id: "209", title: "Pepperoni", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "standard" },
 ];
 
 const defaultStandardIngredients4 = [
-    { id: "240", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-    { id: "241", title: "პიცის სოუსი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
-    { id: "242", title: "ლორი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" },
-    { id: "243", title: "პეპერონი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Pepperoni_t.png", type: "standard" }
+    { id: "240", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+    { id: "241", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+    { id: "242", title: "Ham", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" },
+    { id: "243", title: "Pepperoni", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Pepperoni_t.png", type: "standard" }
 ];
 
 const defaultStandardIngredients44 = [
-    { id: "250", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-    { id: "251", title: "პიცის სოუსი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
-    { id: "252", title: "სოკო", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
-    { id: "253", title: "პეპერონი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Pepperoni_t.png", type: "standard" }
+    { id: "250", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+    { id: "251", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+    { id: "252", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
+    { id: "253", title: "Pepperoni", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/Pepperoni_t.png", type: "standard" }
 ];
 
 const defaultStandardIngredients33 = [
-    { id: "330", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-    { id: "332", title: "პიცის სოუსი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
-    { id: "333", title: "პომიდორი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "standard" }
+    { id: "330", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+    { id: "332", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+    { id: "333", title: "Tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "standard" }
 ];
 
 const defaultStandardIngredients440 = [
-    { id: "440", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-    { id: "441", title: "პიცის სოუსი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
-    { id: "442", title: "სოკო", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
-    { id: "443", title: "ლორი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" }
+    { id: "440", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+    { id: "441", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "standard" },
+    { id: "442", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
+    { id: "443", title: "Ham", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" }
 ];
 
 const defaultStandardIngredients555 = [
-  { id: "555", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-  { id: "556", title: "სიმინდი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cornpng_parspng_com_8.webp", type: "standard" },
-  { id: "557", title: "პომიდორი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "standard" },
-  { id: "558", title: "ხახვი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
-  { id: "559", title: "თევზი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tuna_t.png", type: "standard" }
+  { id: "555", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+  { id: "556", title: "Corn", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cornpng_parspng_com_8.webp", type: "standard" },
+  { id: "557", title: "Tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "standard" },
+  { id: "558", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
+  { id: "559", title: "Fish", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tuna_t.png", type: "standard" }
 ];
 
 const defaultStandardIngredients66 = [
-  { id: "66", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-  { id: "67", title: "სიმინდი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cornpng_parspng_com_8.webp", type: "standard" },
-  { id: "68", title: "პიცის სოუსი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
-  { id: "69", title: "ქათამი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Chicken_topping.webp", type: "standard" },
-  { id: "70", title: "სოკო", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
-  { id: "71", title: "მწვანე წიწაკა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" }
+  { id: "66", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+  { id: "67", title: "Corn", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cornpng_parspng_com_8.webp", type: "standard" },
+  { id: "68", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
+  { id: "69", title: "Chicken", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Chicken_topping.webp", type: "standard" },
+  { id: "70", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
+  { id: "71", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green%20pepper.png", type: "standard" }
 ];
 
 const defaultStandardIngredients5555 = [
-  { id: "5555", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-  { id: "5556", title: "პიცის სოუსი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
-  { id: "5557", title: "ლორი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" },
-  { id: "5558", title: "ხახვი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
-  { id: "5559", title: "მწვანე წიწაკა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "standard" }
+  { id: "5555", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+  { id: "5556", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
+  { id: "5557", title: "Ham", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" },
+  { id: "5558", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
+  { id: "5559", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "standard" }
 ];
 
 const defaultStandardIngredients9 = [
-  { id: "990", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
-  { id: "991", title: "სიმინდი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cornpng_parspng_com_8.webp", type: "standard" },
-  { id: "992", title: "პიცის სოუსი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
-  { id: "994", title: "სოკო", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
-  { id: "995", title: "ლორი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" },
-  { id: "996", title: "ხახვი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
-  { id: "997", title: "შავი ზეთისხილი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/black olives.png", type: "standard" },
-  { id: "998", title: "მწვანე წიწაკა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "standard" },
-  { id: "999", title: "პეპერონი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "standard" }
+  { id: "990", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "standard" },
+  { id: "991", title: "Corn", price: 0, img: "https://deykvccewcmn1.cloudfront.net/cornpng_parspng_com_8.webp", type: "standard" },
+  { id: "992", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "standard" },
+  { id: "994", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "standard" },
+  { id: "995", title: "Ham", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ham.webp", type: "standard" },
+  { id: "996", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "standard" },
+  { id: "997", title: "Black Olive", price: 0, img: "https://deykvccewcmn1.cloudfront.net/black olives.png", type: "standard" },
+  { id: "998", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "standard" },
+  { id: "999", title: "Pepperoni", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "standard" }
 ];
 
 
 const defaultStandardIngredients8 = [
-  { id: "890", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
-  { id: "881", title: "პიცის სოუსი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "topping" },
-  { id: "882", title: "ქათამი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Chicken_topping.webp", type: "topping" },
-  { id: "884", title: "პომიდორი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "topping" },
-  { id: "885", title: "სოკო", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "topping" },
-  { id: "886", title: "ხახვი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "topping" },
-  { id: "887", title: "მწვანე წიწაკა", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "topping" },
-  { id: "888", title: "პეპერონი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "topping" }
+  { id: "890", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
+  { id: "881", title: "Pizza Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/pizza_sauce.webp", type: "topping" },
+  { id: "882", title: "Chicken", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Chicken_topping.webp", type: "topping" },
+  { id: "884", title: "tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "topping" },
+  { id: "885", title: "Mushrooms", price: 0, img: "https://deykvccewcmn1.cloudfront.net/mushroom.png", type: "topping" },
+  { id: "886", title: "Onions", price: 0, img: "https://deykvccewcmn1.cloudfront.net/spanish-onion.webp", type: "topping" },
+  { id: "887", title: "Green Pepper", price: 0, img: "https://deykvccewcmn1.cloudfront.net/green pepper.png", type: "topping" },
+  { id: "888", title: "Pepperoni", price: 0, img: "https://deykvccewcmn1.cloudfront.net/Pepperoni_t.png", type: "topping" }
 ];
 
 
 const defaultStandardIngredients4444 = [
-  { id: "4444", title: "მოცარელა", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
-  { id: "4441", title: "პიცის სოუსი", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "topping" },
-  { id: "4442", title: "პომიდორი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "topping" },
-  { id: "4443", title: "რანჩო ტირიფი", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ranch.webp", type: "topping" }
+  { id: "4444", title: "Mozzarella", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/mozarella.webp", type: "topping" },
+  { id: "4441", title: "Pizza Sauce", price: 0, img: "https://dominosge.s3.eu-central-1.amazonaws.com/pizza_sauce.webp", type: "topping" },
+  { id: "4442", title: "Tomato", price: 0, img: "https://deykvccewcmn1.cloudfront.net/tomato.png", type: "topping" },
+  { id: "4443", title: "Ranch Sauce", price: 0, img: "https://deykvccewcmn1.cloudfront.net/ranch.webp", type: "topping" }
 ];
 
 
@@ -399,7 +399,7 @@ function updateIngredientsDisplay() {
 
         const extraText = document.createElement('span');
         extraText.className = 'fs-13 ';
-        extraText.textContent = `დამატებითი ინგრედიენტები: ${ingredient.title}`;
+        extraText.textContent = `Extra Ingredients: ${ingredient.title}`;
 
         const extraPriceDiv = document.createElement('span');
         extraPriceDiv.className = 'fs-13 ';
@@ -484,10 +484,10 @@ const maxExtraIngredients = 5;
 
 
 // Edit holatini tekshirish va ma'lumotlarni qayta tiklash funksiyasi
-// Edit holatini tekshirish va ma'lumotlarni qayta tiklash funksiyasi
+// Edit holatini tekshirish va ma'lumotlarni qayta tiklash funksiyasi (TUZATILGAN)
 function restoreEditData() {
     const isEditMode = localStorage.getItem('edit') === 'true';
-    const editOrderData = JSON.parse(localStorage.getItem('editOrderData')) || null;
+    const editOrderData = JSON.parse(localStorage.getItem('selectedProduct')) || null;
     
     if (!isEditMode || !editOrderData) {
         return false; // Edit rejimi emas
@@ -495,9 +495,17 @@ function restoreEditData() {
     
     console.log('Edit rejimi faol. Ma\'lumotlarni tiklamoqda...', editOrderData);
     
+    // AVVAL BARCHA CLASS LARNI TO'LIQ TOZALASH
+    document.querySelectorAll(".for_active_0, .for_active_2, .vibor_active").forEach(el => {
+        el.classList.remove("for_active_0", "for_active_2", "vibor_active");
+    });
+    
+    // Selected pizza ingredients ni to'liq tozalash
+    selectedPizza.ingredients = [];
+    
     // 1. Count ni qayta tiklash
-    if (editOrderData.quantity) {
-        count = editOrderData.quantity;
+    if (editOrderData.count) {
+        count = editOrderData.count;
         const countElement = document.getElementById("count");
         if (countElement) {
             countElement.textContent = count;
@@ -510,20 +518,23 @@ function restoreEditData() {
         const savedPizzaSize = editOrderData.pizzas[0].title;
         console.log('Saqlangan pizza size:', savedPizzaSize);
 
+        // Barcha pizza size lardan active ni olib tashlash
         document.querySelectorAll(".pizza_size_select").forEach(el => {
-            // Avval hamma class va svg ni tozalaymiz
             el.classList.remove("active");
             const svgIcon = el.querySelector("svg");
             if (svgIcon) svgIcon.style.display = "none";
+        });
 
+        // To'g'ri pizza size ni topish va active qilish
+        document.querySelectorAll(".pizza_size_select").forEach(el => {
             const elSize = el.dataset.size || el.textContent.trim();
             if (
                 elSize === savedPizzaSize ||
                 elSize.includes(savedPizzaSize) ||
                 savedPizzaSize.includes(elSize)
             ) {
-                // Active holat
                 el.classList.add("active");
+                const svgIcon = el.querySelector("svg");
                 if (svgIcon) svgIcon.style.display = "inline-block";
 
                 selectedPizza.id = el.dataset.id || selectedPizza.id;
@@ -535,31 +546,23 @@ function restoreEditData() {
         });
     }
     
-    // 3. Ingredients ni qayta tiklash
+    // 3. Default dough va edge ni DOIM qo'shish
+    setIngredient(defaultDough);
+    setIngredient(defaultEdge);
+    updateDoughSelection();
+    
+    // 4. Ingredients ni qayta tiklash
     if (editOrderData.pizzas && editOrderData.pizzas[0] && editOrderData.pizzas[0].ingredients) {
         const savedIngredients = editOrderData.pizzas[0].ingredients;
         console.log('Saqlangan ingredients:', savedIngredients);
         
-        // Avval barcha active classlarni olib tashlash
-        document.querySelectorAll(".for_active_0, .for_active_2").forEach(el => {
-            el.classList.remove("for_active_0", "for_active_2");
-        });
-        
-        // Selected pizza ingredients ni tozalash
-        selectedPizza.ingredients = [];
-        
-        // Default dough va edge qayta qo'shish
-        setIngredient(defaultDough);
-        setIngredient(defaultEdge);
-        updateDoughSelection();
-        
-        // YANGI: editOrderData.ingredients raqami bo'yicha default ingredients ni aniqlash
+        // editOrderData.ingredients raqami bo'yicha default ingredients ni aniqlash
         const ingredientsNumber = editOrderData.ingredients;
         console.log('Edit order ingredients raqami:', ingredientsNumber);
         
         let defaultIngredientsForThisProduct = [];
         
-        // editOrderData.ingredients raqamiga qarab to'g'ri default ingredients tanlash
+        // Ingredients raqamiga qarab to'g'ri default ingredients tanlash
         if (ingredientsNumber === "6" || ingredientsNumber === 6) {
             defaultIngredientsForThisProduct = defaultStandardIngredients6;
         } else if (ingredientsNumber === "3" || ingredientsNumber === 3) {
@@ -599,76 +602,71 @@ function restoreEditData() {
         
         console.log('Bu mahsulot uchun default ingredients:', defaultIngredientsForThisProduct);
         
-        // Standard ingredients va extra ingredients ni ajratish
-        const standardIngredientsToAdd = [];
-        const extraIngredientsToAdd = [];
+        // Saqlangan ingredients larni nom bo'yicha guruhlash
+        const savedStandardIngredients = [];
+        const savedExtraIngredients = [];
         
         savedIngredients.forEach(savedItem => {
-            console.log('Tekshirilayotgan ingredient:', savedItem);
+            const ingredientName = savedItem.name.toLowerCase().trim();
             
-            // Default ingredients ro'yxatida bor-yo'qligini tekshirish
+            // Default standard ingredients ichida bor-yo'qligini tekshirish
             const isDefaultStandard = defaultIngredientsForThisProduct.some(defItem => 
-                defItem.title.toLowerCase().trim() === savedItem.name.toLowerCase().trim()
+                defItem.title.toLowerCase().trim() === ingredientName
             );
             
-            const isDefaultDough = defaultDough.title.toLowerCase().trim() === savedItem.name.toLowerCase().trim();
-            const isDefaultEdge = defaultEdge.title.toLowerCase().trim() === savedItem.name.toLowerCase().trim();
+            const isDefaultDough = defaultDough.title.toLowerCase().trim() === ingredientName;
+            const isDefaultEdge = defaultEdge.title.toLowerCase().trim() === ingredientName;
             
-            // Agar default ingredient bo'lmasa va dough/edge ham bo'lmasa, demak bu extra ingredient
-            if (!isDefaultStandard && !isDefaultDough && !isDefaultEdge) {
-                console.log('Extra ingredient topildi:', savedItem.name);
-                extraIngredientsToAdd.push(savedItem);
-            } else if (isDefaultStandard) {
-                console.log('Standard ingredient topildi:', savedItem.name);
-                standardIngredientsToAdd.push(savedItem);
+            if (isDefaultStandard) {
+                savedStandardIngredients.push(savedItem);
+            } else if (!isDefaultDough && !isDefaultEdge) {
+                savedExtraIngredients.push(savedItem);
             }
         });
         
-        // Standard ingredients ni qayta tiklash
-        if (standardIngredientsToAdd.length > 0) {
-            console.log('Standard ingredients tiklanmoqda:', standardIngredientsToAdd);
-            
-            // Saqlangan standard ingredientlarni active qilish
-            standardIngredientsToAdd.forEach(savedItem => {
-                // Default ingredients ichidan to'g'ri ID ni topish
+        console.log('Standard ingredients:', savedStandardIngredients);
+        console.log('Extra ingredients:', savedExtraIngredients);
+        
+        // STANDARD INGREDIENTS NI QAYTA TIKLASH
+        if (savedStandardIngredients.length > 0) {
+            // Faqat saqlangan standard ingredients larni active qilish
+            savedStandardIngredients.forEach(savedItem => {
                 const matchedDefault = defaultIngredientsForThisProduct.find(defItem => 
                     defItem.title.toLowerCase().trim() === savedItem.name.toLowerCase().trim()
                 );
                 
                 if (matchedDefault) {
-                    // Element topish va active qilish
                     const standardElement = document.querySelector(`.for_vibor_2[data-id="${matchedDefault.id}"]`);
                     
                     if (standardElement) {
                         standardElement.classList.add("for_active_2");
                         setIngredient(matchedDefault);
-                        console.log('Standard ingredient qayta qo\'shildi:', matchedDefault);
+                        console.log('Standard ingredient active qilindi:', matchedDefault.title);
                     } else {
                         console.warn('Standard ingredient elementi topilmadi:', matchedDefault.id, savedItem.name);
                     }
                 }
             });
         } else {
-            // Agar saqlangan standard ingredients yo'q bo'lsa, default larni qo'yish
-            console.log('Saqlangan standard ingredients yo\'q, default larni qo\'yapmiz');
+            // Agar hech qanday saqlangan standard ingredient yo'q bo'lsa, 
+            // barcha default larni active qilish
+            console.log('Saqlangan standard ingredients yo\'q, barcha default larni qo\'yapmiz');
             defaultIngredientsForThisProduct.forEach(item => {
                 setIngredient(item);
                 const element = document.querySelector(`.for_vibor_2[data-id="${item.id}"]`);
                 if (element) {
                     element.classList.add("for_active_2");
-                } else {
-                    console.warn('Default ingredient elementi topilmadi:', item.title, item.id);
                 }
             });
         }
         
-        // Extra ingredients ni qayta tiklash
-        extraIngredientsToAdd.forEach(savedItem => {
-            // Extra ingredient elementini topish - data-title bilan
+        // EXTRA INGREDIENTS NI QAYTA TIKLASH
+        savedExtraIngredients.forEach(savedItem => {
+            // Extra ingredient elementini topish
             let extraElement = document.querySelector(`.for_vibor_0[data-title="${savedItem.name}"]`);
             
             if (!extraElement) {
-                // Agar data-title bilan topilmasa, boshqa usul bilan sinash
+                // data-title bilan topilmasa, title ni taqqoslash
                 const allExtraElements = document.querySelectorAll('.for_vibor_0');
                 allExtraElements.forEach(el => {
                     const elTitle = el.dataset.title || el.querySelector('span')?.textContent?.trim() || '';
@@ -691,21 +689,86 @@ function restoreEditData() {
                 };
                 
                 setIngredient(extraIngredient);
-                console.log('Extra ingredient qayta qo\'shildi:', extraIngredient);
+                console.log('Extra ingredient qayta qo\'shildi:', extraIngredient.title);
             } else {
                 console.warn('Extra ingredient elementi topilmadi:', savedItem.name);
             }
         });
+        
+    } else {
+        // Agar saqlangan ingredients yo'q bo'lsa, default larni qo'yish
+        console.log('Saqlangan ingredients yo\'q, default larni qo\'yapmiz');
+        defaultStandardIngredients.forEach(item => {
+            setIngredient(item);
+            const element = document.querySelector(`.for_vibor_2[data-id="${item.id}"]`);
+            if (element) {
+                element.classList.add("for_active_2");
+            }
+        });
     }
     
-    // 4. Narxlarni yangilash
+    // 5. Narxlarni yangilash
     updateTotalPrice();
     
     console.log('Edit ma\'lumotlari muvaffaqiyatli tiklandi');
     console.log('Hozirgi selectedPizza:', selectedPizza);
     console.log('Hozirgi count:', count);
+    console.log('Active standard elements:', document.querySelectorAll('.for_active_2').length);
+    console.log('Active extra elements:', document.querySelectorAll('.for_active_0').length);
     
     return true;
+}
+
+// Initialize Page funksiyasini ham bir oz tuzatish kerak
+function initializePage() {
+    // UI elementlarni to'ldirish
+    if (Object.keys(product).length) {
+        const t = document.getElementById("title"), i = document.getElementById("img"), d = document.getElementById("description"),
+            p = document.getElementById("price"), ap = document.getElementById("aksiyaPrice");
+        if (t) t.textContent = product.title || '';
+        if (i) i.src = product.img_1 || '';
+        if (d) d.textContent = product.description || '';
+        if (p) p.textContent = (basePrice || selectedPizza.price).toFixed(2) + "₾";
+        if (ap) ap.textContent = aksiyaBasePrice.toFixed(2) + "₾";
+    }
+
+    // Edit holatini tekshirish
+    const isEditRestored = restoreEditData();
+    
+    if (!isEditRestored) {
+        // Faqat edit rejimi bo'lmaganda default ma'lumotlarni yuklash
+        console.log('Oddiy rejim - default ma\'lumotlarni yuklamoqda');
+        
+        // Barcha class larni avval tozalash (oddiy rejim uchun ham)
+        document.querySelectorAll(".for_active_0, .for_active_2, .vibor_active").forEach(el => {
+            el.classList.remove("for_active_0", "for_active_2", "vibor_active");
+        });
+        
+        // Selected pizza ingredients ni tozalash
+        selectedPizza.ingredients = [];
+        
+        // 1) Default dough va edge qo'shish
+        setIngredient(defaultDough);
+        setIngredient(defaultEdge);
+        updateDoughSelection();
+
+        // 2) Default standard ingredients qo'shish
+        defaultStandardIngredients.forEach(item => {
+            setIngredient(item);
+            const element = document.querySelector(`.for_vibor_2[data-id="${item.id}"]`);
+            if (element) {
+                element.classList.add("for_active_2");
+            }
+        });
+    }
+
+    // Event listener larni o'rnatish (har doim kerak)
+    setupEventListeners();
+    
+    // Ingredient visibility ni boshqarish
+    handleIngredientVisibility();
+    
+    updateTotalPrice();
 }
 
 
@@ -935,7 +998,7 @@ function addToCartHandler() {
         date: new Date().toISOString(),
         description: product.description,
         title: product.title,
-        quantity: count,
+        count: count,
         price: selectedPizza.price, // 2-struktura price ni ham saqlaydi
         totalPrice: totalPrice.toFixed(2) + "₾",
         dataType: 'pizza',
@@ -1153,7 +1216,7 @@ function handleIngredientVisibility(){
 }
 
 if (localStorage.getItem("edit") == "true") {
-    for (let i = 0; i < document.querySelectorAll(".addToCart_btn").length; i++) {
+    for (let i = 0; i < document.querySelectorAll(".addToCartBtn").length; i++) {
         document.querySelectorAll(".addToCartBtn")[i].innerHTML = "Update cart"
     }
 }
@@ -1171,11 +1234,6 @@ if (localStorage.getItem('edit') === 'true') {
     console.log('Edit rejimi faol');
     console.log('Edit order data:', JSON.parse(localStorage.getItem('editOrderData')));
 }
-
-
-
-
-
 
 // ===== ASOSIY FUNKSIYALAR =====
 
@@ -1223,47 +1281,6 @@ function findProductById(productId) {
 }
 
 // ===== MAHSULOTNI SAQLASH =====
-
-// Barcha mahsulotlarni saqlash (yangilangan)
-function saveAllProducts() {
-    const currentLang = getCurrentLanguage();
-    const products = [];
-    
-    document.querySelectorAll('.card_product').forEach(product => {
-        const priceElement = product.querySelector(".for_price");
-        const aksiyaPriceElement = product.querySelector(".for_aksiyaPrice");
-        
-        let price = 0;
-        let aksiyaPrice = 0;
-        
-        if (priceElement?.textContent?.trim()) {
-            price = parseFloat(priceElement.textContent.trim()) || 0;
-        }
-        
-        if (aksiyaPriceElement?.textContent?.trim()) {
-            aksiyaPrice = parseFloat(aksiyaPriceElement.textContent.trim()) || 0;
-        }
-        
-        const productData = {
-            id: product.dataset.id,
-            img: product.dataset.img,
-            img_1: product.dataset.img_1 || '',
-            title: product.dataset.title,
-            ingredients: product.dataset.ingredients || '',
-            description: product.dataset.description,
-            type: product.dataset.type || '',
-            price: price,
-            aksiyaPrice: aksiyaPrice,
-            language: currentLang,
-            timestamp: Date.now() // Yangilanish vaqti
-        };
-        
-        products.push(productData);
-    });
-    
-    localStorage.setItem(`allProducts_${currentLang}`, JSON.stringify(products));
-    console.log(`✅ ${products.length} ta mahsulot ${currentLang} tilida saqlandi`);
-}
 
 // ===== TANLANGAN MAHSULOTNI BOSHQARISH =====
 
@@ -1357,65 +1374,6 @@ function detectLanguageMismatch(text, expectedLang) {
     }
     
     return false;
-}
-
-// ===== MAHSULOT CLICK HANDLER =====
-
-// Click event handler (yangilangan)
-function initializeProductClickHandlers() {
-    document.querySelectorAll(".jss1 button").forEach(btn => {
-        btn.addEventListener("click", function() {
-            const product = this.closest(".card_product");
-            if (!product) return;
-            
-            // Narxlarni olish
-            const priceElement = product.querySelector(".for_price");
-            const aksiyaPriceElement = product.querySelector(".for_aksiyaPrice");
-            
-            let originalPrice = 0;
-            let discountedPrice = 0;
-            
-            if (priceElement?.textContent?.trim()) {
-                originalPrice = parseFloat(priceElement.textContent.trim()) || 0;
-            }
-            
-            if (aksiyaPriceElement?.textContent?.trim()) {
-                discountedPrice = parseFloat(aksiyaPriceElement.textContent.trim()) || 0;
-            }
-            
-            // Dataset'ni yangilash
-            product.dataset.price = originalPrice.toFixed(2);
-            if (discountedPrice > 0) {
-                product.dataset.aksiyaPrice = discountedPrice.toFixed(2);
-            }
-            
-            // Mahsulot ma'lumotlari
-            const productData = {
-                id: product.dataset.id,
-                img: product.dataset.img,
-                img_1: product.dataset.img_1 || '',
-                title: product.dataset.title,
-                ingredients: product.dataset.ingredients || '',
-                description: product.dataset.description,
-                type: product.dataset.type || '',
-                price: originalPrice,
-                aksiyaPrice: discountedPrice || 0,
-                language: getCurrentLanguage(),
-                timestamp: Date.now()
-            };
-            
-            // LocalStorage'ga saqlash
-            localStorage.setItem("selectedProduct", JSON.stringify(productData));
-            console.log('📦 Mahsulot tanlandi:', productData);
-            
-            // Yo'naltirish
-            const redirectUrl = product.dataset.type === 'pizza' 
-                ? './details-pizza/' 
-                : './details';
-                
-            window.location.href = redirectUrl;
-        });
-    });
 }
 
 // ===== TIL O'ZGARISHINI KUZATISH =====
@@ -1577,7 +1535,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Initialization tugadi');
 });
 
-// ===== HELPER FUNKSIYALAR =====
 
 // Debug uchun
 function debugProductData() {
@@ -1594,20 +1551,5 @@ function debugProductData() {
     console.groupEnd();
 }
 
-// LocalStorage'ni tozalash
-function clearProductData() {
-    localStorage.removeItem('selectedProduct');
-    localStorage.removeItem('allProducts_en');
-    localStorage.removeItem('allProducts_geo');
-    console.log('🧹 Barcha mahsulot ma\'lumotlari tozalandi');
-}
-
-// Global scope'ga export qilish (agar kerak bo'lsa)
-window.ProductManager = {
-    getCurrentLanguage,
-    findProductById,
-    updateSelectedProduct,
-    saveAllProducts,
-    debugProductData,
-    clearProductData
-};
+console.log('✅ Edit boshqaruv tizimi yuklandi');
+console.log('📚 Debug buyruq: debugEdit()');

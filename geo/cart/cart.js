@@ -90,15 +90,15 @@ function renderCartHTML(cartItems) {
                                 <div></div>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
-                                <h3 class="text-grey  fs-20"><s>${(item.aksiyaPrice*item.quantity).toFixed(2)}₾</s></h3>
+                                <h3 class="text-grey  fs-20"><s>${(item.aksiyaPrice*item.count).toFixed(2)}₾</s></h3>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0px;">
-                                <h3 class="text-red  fs-24" style="text-align: end;">${item.price ? (typeof item.price === 'number' ? item.price.toFixed(2) : parseFloat(item.price).toFixed(2)) + '₾' : (item.price ? (typeof item.price === 'number' ? item.price.toFixed(2) : parseFloat(item.price).toFixed(2)) + '₾' : '')}</h3>
+                                <h3 class="text-red  fs-24" style="text-align: end;">${(item.price*item.count).toFixed(2)}₾</h3>
                                 <div>
                                     <div>
                                         <div class="Kanit-Regular" style="display: inline-flex;">
                                             <div style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 14px; box-shadow: lightgrey 0px 2px 4px 3px; display: inline-flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; background: rgb(0, 120, 174); color: rgb(255, 255, 255);" onclick="changeCartQuantity('${item.id}', -1)">-</div>
-                                            <div class="Kanit-Regular" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 24px; box-shadow: none; display: inline-flex; justify-content: center; align-items: center; cursor: auto; user-select: none; color: rgb(0, 0, 0); margin-left: 4px; margin-right: 4px;">${item.quantity || 1}</div>
+                                            <div class="Kanit-Regular" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 24px; box-shadow: none; display: inline-flex; justify-content: center; align-items: center; cursor: auto; user-select: none; color: rgb(0, 0, 0); margin-left: 4px; margin-right: 4px;">${item.count || 1}</div>
                                             <div style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 14px; box-shadow: lightgrey 0px 2px 4px 3px; display: inline-flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; background: rgb(0, 120, 174); color: rgb(255, 255, 255);" onclick="changeCartQuantity('${item.id}', 1)">+</div>
                                         </div>
                                     </div>
@@ -156,15 +156,15 @@ function renderOrdersHTML(orders) {
                                 </div>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
-                                <h3 class="text-grey  fs-20"><s>${(order.aksiyaPrice * order.quantity).toFixed(2)}₾</s></h3>
+                                <h3 class="text-grey  fs-20"><s>${(order.aksiyaPrice * order.count).toFixed(2)}₾</s></h3>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0px;">
-                                <h3 class="text-red  fs-24" style="text-align: end;">${(order.price * order.quantity).toFixed(2)}₾</h3>
+                                <h3 class="text-red  fs-24" style="text-align: end;">${(order.price * order.count).toFixed(2)}₾</h3>
                                 <div>
                                     <div>
                                         <div class="Kanit-Regular quantity-controls" style='display:inline-flex'>
                                             <div class="quantity-btn" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 14px; box-shadow: lightgrey 0px 2px 4px 3px; display: inline-flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; background: rgb(0, 120, 174); color: rgb(255, 255, 255);" onclick="changeQuantity(${order.id}, -1)">-</div>
-                                            <div class="quantity-display" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 24px; box-shadow: none; display: inline-flex; justify-content: center; align-items: center; cursor: auto; user-select: none; color: rgb(0, 0, 0); margin-left: 4px; margin-right: 4px;">${order.quantity || 1}</div>
+                                            <div class="quantity-display" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 24px; box-shadow: none; display: inline-flex; justify-content: center; align-items: center; cursor: auto; user-select: none; color: rgb(0, 0, 0); margin-left: 4px; margin-right: 4px;">${order.count || 1}</div>
                                             <div class="quantity-btn" style="border-radius: 100px; padding-block: 8px; width: 39px; height: 39px; font-weight: bold; font-size: 14px; box-shadow: lightgrey 0px 2px 4px 3px; display: inline-flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; background: rgb(0, 120, 174); color: rgb(255, 255, 255);" onclick="changeQuantity(${order.id}, 1)">+</div>
                                         </div>
                                     </div>
@@ -245,16 +245,16 @@ function changeQuantity(orderId, change) {
     
     if (orderIndex !== -1) {
         const order = orders[orderIndex];
-        const newQuantity = (order.quantity || 1) + change;
+        const newQuantity = (order.count || 1) + change;
         
         if (newQuantity > 0) {
             // Calculate base price from original totalPrice
             const basePriceValue = parseFloat(order.totalPrice.replace('₾', ''));
-            const baseQuantity = order.quantity || 1;
+            const baseQuantity = order.count || 1;
             const unitPrice = basePriceValue / baseQuantity;
             
             // Update quantity and calculate new total price
-            order.quantity = newQuantity;
+            order.count = newQuantity;
             const newTotalPrice = (unitPrice * newQuantity).toFixed(2);
             order.totalPrice = newTotalPrice + '₾';
             
@@ -269,7 +269,7 @@ function changeQuantity(orderId, change) {
 // total larni yig'ish
 let subTotal = cart.reduce((sum, item) => sum + (item.total || 0), 0);
 
-document.querySelector(".subTotal").innerHTML = "subTotal.toFixed(2)"
+document.querySelector(".subTotal").innerHTML = subTotal.toFixed(2)
 }
 
 // Function to change cart item quantity
@@ -279,7 +279,7 @@ function changeCartQuantity(itemId, change) {
     
     if (itemIndex !== -1) {
         const item = cartItems[itemIndex];
-        const newQuantity = (item.quantity || 1) + change;
+        const newQuantity = (item.count || 1) + change;
         
         if (newQuantity > 0) {
             // Calculate unit price from current total or price
@@ -288,13 +288,13 @@ function changeCartQuantity(itemId, change) {
             if (item.unitPrice) {
                 // If unitPrice already exists, use it
                 unitPrice = item.unitPrice;
-            } else if (item.price && item.quantity) {
+            } else if (item.price && item.count) {
                 // Calculate unit price from total and quantity
-                unitPrice = parseFloat(item.price) / (item.quantity || 1);
+                unitPrice = parseFloat(item.price) / (item.count || 1);
                 item.unitPrice = unitPrice; // Store for future use
-            } else if (item.price && item.quantity) {
+            } else if (item.price && item.count) {
                 // Calculate unit price from price and quantity
-                unitPrice = parseFloat(item.price) / (item.quantity || 1);
+                unitPrice = parseFloat(item.price) / (item.count || 1);
                 item.unitPrice = unitPrice; // Store for future use
             } else if (item.price) {
                 // If only total exists, assume quantity is 1
@@ -307,7 +307,7 @@ function changeCartQuantity(itemId, change) {
             }
             
             // Update quantity and calculate new total
-            item.quantity = newQuantity;
+            item.count = newQuantity;
             const newTotal = (unitPrice * newQuantity).toFixed(2);
             item.total = parseFloat(newTotal);
             
@@ -381,62 +381,164 @@ function removeAll() {
     window.location.reload()
 }
 
-function editOrder(orderId) {
+// 🌍 Tarjima funksiyasi (MyMemory API - tekin)
+async function translateText(text, targetLang) {
+    if (!text || text.trim() === '') return text;
+    
+    try {
+        // Maqsad tilni aniqlab olish
+        const langCode = targetLang === 'geo' ? 'ka' : 'en'; // ka = Georgian
+        
+        console.log(`🔄 Tarjima qilinmoqda: "${text}" -> ${langCode}`);
+        
+        // MyMemory API - tekin tarjima
+        const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=auto|${langCode}`);
+        const data = await response.json();
+        
+        if (data.responseStatus === 200) {
+            console.log(`✅ Tarjima muvaffaqiyatli: "${text}" -> "${data.responseData.translatedText}"`);
+            return data.responseData.translatedText;
+        } else {
+            console.warn('⚠️ Tarjima xatolik:', data.responseDetails);
+            return text; // Asl matnni qaytarish
+        }
+    } catch (error) {
+        console.error('❌ Tarjima API xatolik:', error);
+        return text; // Asl matnni qaytarish
+    }
+}
+
+// 🛠️ Yangilangan editOrder funksiyasi
+async function editOrder(orderId) {
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     const order = orders.find(o => o.id === orderId);
     
-    if (order) {
-        // Tahrirlash rejimini yoqamiz
-        localStorage.setItem('edit', 'true');
-        localStorage.setItem('for_id', orderId);
+    if (!order) {
+        console.error(`❌ Order topilmadi: ${orderId}`);
+        return;
+    }
+    
+    console.log('🛠️ Edit boshlandi...', order);
+    
+    // Tahrirlash rejimini yoqamiz
+    localStorage.setItem('edit', 'true');
+    localStorage.setItem('for_id', orderId);
+    
+    // Hozirgi tilni aniqlaymiz
+    const currentLang = getCurrentLanguage();
+    console.log('🌍 Hozirgi til:', currentLang);
+    
+    // Asosiy mahsulot ma'lumotlari (order'dan to'liq nusxa olish)
+    let productData = {
+        ...order, // Order'dagi barcha ma'lumotlarni olish
+        language: currentLang,
+        isEdit: true,
+        timestamp: Date.now()
+    };
+    
+    // 🔥 TARJIMA JARAYONI
+    try {
+        console.log('🔄 Tarjima jarayoni boshlanmoqda...');
         
-        // Mahsulot ma'lumotlarini saqlaymiz
-        const productData = {
-            id: order.id,
-            title: order.title,
-            img: order.img,
-            img_1: order.img_1,
-            description: order.description,
-            price: order.price,
-            aksiyaPrice: order.aksiyaPrice,
-            ingredients:order.ingredients
-        };
-        
-        localStorage.setItem('selectedProduct', JSON.stringify(productData));
-        
-        // Pizza uchun qo'shimcha ma'lumotlarni saqlaymiz
-        if (order.dataType === 'pizza' && order.pizzas) {
-            // Pizza size ma'lumotini alohida saqlash
-            const pizzaSize = order.pizzas[0] ? order.pizzas[0].title : null;
-            if (pizzaSize) {
-                localStorage.setItem('selectedPizzaSize', pizzaSize);
-                console.log('Pizza size saqlandi:', pizzaSize);
-            }
-            
-            // Butun order obyektini ham saqlaymiz
-            localStorage.setItem('editOrderData', JSON.stringify(order));
+        // Title ni tarjima qilish
+        if (productData.title) {
+            const originalTitle = productData.title;
+            productData.title = await translateText(productData.title, currentLang);
+            console.log(`📝 Title tarjimasi: "${originalTitle}" -> "${productData.title}"`);
         }
         
-        const hasPizza = order.dataType === 'pizza' ||
-                        (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
+        // Description ni tarjima qilish
+        if (productData.description) {
+            const originalDescription = productData.description;
+            productData.description = await translateText(productData.description, currentLang);
+            console.log(`📝 Description tarjimasi: "${originalDescription}" -> "${productData.description}"`);
+        }
+        
+        // Ingredients ni tarjima qilish (agar string bo'lsa)
+        if (productData.ingredients && typeof productData.ingredients === 'string') {
+            const originalIngredients = productData.ingredients;
+            productData.ingredients = await translateText(productData.ingredients, currentLang);
+            console.log(`🧄 Ingredients tarjimasi: "${originalIngredients}" -> "${productData.ingredients}"`);
+        }
+        
+        console.log('✅ Barcha tarjimalar tugadi');
+        
+    } catch (error) {
+        console.error('❌ Tarjima jarayonida xatolik:', error);
+        // Tarjima bo'lmasa ham davom ettirish
+    }
+    
+    // 💾 Tarjima qilingan ma'lumotni saqlash
+    console.log('💾 Tarjima qilingan ma\'lumot:', productData);
+    localStorage.setItem('selectedProduct', JSON.stringify(productData));
+    
+    // Pizza uchun qo'shimcha ma'lumotlarni saqlaymiz
+    if (order.dataType === 'pizza' && order.pizzas) {
+        const pizzaSize = order.pizzas[0] ? order.pizzas[0].title : null;
+        if (pizzaSize) {
+            localStorage.setItem('selectedPizzaSize', pizzaSize);
+            console.log('🍕 Pizza size saqlandi:', pizzaSize);
+        }
+        
+        // Edit order ma'lumotlarini ham saqlash
+        localStorage.setItem('editOrderData', JSON.stringify(order));
+    }
+    
+    // 🚀 Sahifaga o'tish
+    const hasPizza = order.dataType === 'pizza' ||
+                    (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
 
+    console.log('🔄 Sahifaga o\'tish...');
+    
+    // Biroz kutish - tarjima tugaganidan keyin sahifa o'tish
+    setTimeout(() => {
         if (hasPizza) {
+            console.log('➡️ Pizza sahifasiga o\'tish...');
             window.location.href = '../details-pizza/';
         } else {
+            console.log('➡️ Oddiy mahsulot sahifasiga o\'tish...');
             window.location.href = '../details/';
         }
-    }
+    }, 500); // 500ms kutish
 }
+
+// 🚀 Funksiyani ishlatish uchun wrapper (asinxron bo'lgani uchun)
+function editOrderHandler(orderId) {
+    console.log('🎯 Edit handler chaqirildi:', orderId);
+    
+    // Loading indicator ko'rsatish (ixtiyoriy)
+    if (typeof showLoader === 'function') {
+        showLoader('Tarjima qilinmoqda...');
+    }
+    
+    editOrder(orderId).then(() => {
+        console.log('✅ Edit jarayoni tugadi');
+        // Loading indicator yashirish
+        if (typeof hideLoader === 'function') {
+            hideLoader();
+        }
+    }).catch(error => {
+        console.error('❌ Edit order xatolik:', error);
+        // Loading indicator yashirish
+        if (typeof hideLoader === 'function') {
+            hideLoader();
+        }
+        alert('Xatolik yuz berdi. Iltimos qayta urinib ko\'ring.');
+    });
+}
+
+// 🎯 HTML'da ishlatish uchun:
+// <button onclick="editOrderHandler(500)">Edit</button>
 
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 // cart subtotal
-let cartTotal = cart.reduce((sum, item) => sum + (item.price || 0), 0);
+let cartTotal = cart.reduce((sum, item) => sum + ((item.price || 0) * (item.count || 0)), 0);
 
 // orders subtotal (price * quantity)
-let ordersTotal = orders.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 0)), 0);
+let ordersTotal = orders.reduce((sum, item) => sum + ((item.price || 0) * (item.count || 0)), 0);
 
 // umumiy total
 let grandTotal = cartTotal + ordersTotal;
@@ -455,7 +557,7 @@ cartDiv.innerHTML += orders.map(item => {
          <div class="cart_card">
                                 <p class=" fs-20 capitalize"
                                     style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${item.title}</p>
-                                <span class="text-red " style="margin-left: auto; font-weight: 500;">${item.price*item.quantity}₾</span>
+                                <span class="text-red " style="margin-left: auto; font-weight: 500;">${item.price*item.count}₾</span>
                             </div>
     `;
 }).join("");

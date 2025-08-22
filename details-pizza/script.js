@@ -487,7 +487,7 @@ const maxExtraIngredients = 5;
 // Edit holatini tekshirish va ma'lumotlarni qayta tiklash funksiyasi (TUZATILGAN)
 function restoreEditData() {
     const isEditMode = localStorage.getItem('edit') === 'true';
-    const editOrderData = JSON.parse(localStorage.getItem('editOrderData')) || null;
+    const editOrderData = JSON.parse(localStorage.getItem('selectedProduct')) || null;
     
     if (!isEditMode || !editOrderData) {
         return false; // Edit rejimi emas
@@ -1282,47 +1282,6 @@ function findProductById(productId) {
 
 // ===== MAHSULOTNI SAQLASH =====
 
-// Barcha mahsulotlarni saqlash (yangilangan)
-function saveAllProducts() {
-    const currentLang = getCurrentLanguage();
-    const products = [];
-    
-    document.querySelectorAll('.card_product').forEach(product => {
-        const priceElement = product.querySelector(".for_price");
-        const aksiyaPriceElement = product.querySelector(".for_aksiyaPrice");
-        
-        let price = 0;
-        let aksiyaPrice = 0;
-        
-        if (priceElement?.textContent?.trim()) {
-            price = parseFloat(priceElement.textContent.trim()) || 0;
-        }
-        
-        if (aksiyaPriceElement?.textContent?.trim()) {
-            aksiyaPrice = parseFloat(aksiyaPriceElement.textContent.trim()) || 0;
-        }
-        
-        const productData = {
-            id: product.dataset.id,
-            img: product.dataset.img,
-            img_1: product.dataset.img_1 || '',
-            title: product.dataset.title,
-            ingredients: product.dataset.ingredients || '',
-            description: product.dataset.description,
-            type: product.dataset.type || '',
-            price: price,
-            aksiyaPrice: aksiyaPrice,
-            language: currentLang,
-            timestamp: Date.now() // Yangilanish vaqti
-        };
-        
-        products.push(productData);
-    });
-    
-    localStorage.setItem(`allProducts_${currentLang}`, JSON.stringify(products));
-    console.log(`✅ ${products.length} ta mahsulot ${currentLang} tilida saqlandi`);
-}
-
 // ===== TANLANGAN MAHSULOTNI BOSHQARISH =====
 
 // selectedProduct ni yangilash
@@ -1415,65 +1374,6 @@ function detectLanguageMismatch(text, expectedLang) {
     }
     
     return false;
-}
-
-// ===== MAHSULOT CLICK HANDLER =====
-
-// Click event handler (yangilangan)
-function initializeProductClickHandlers() {
-    document.querySelectorAll(".jss1 button").forEach(btn => {
-        btn.addEventListener("click", function() {
-            const product = this.closest(".card_product");
-            if (!product) return;
-            
-            // Narxlarni olish
-            const priceElement = product.querySelector(".for_price");
-            const aksiyaPriceElement = product.querySelector(".for_aksiyaPrice");
-            
-            let originalPrice = 0;
-            let discountedPrice = 0;
-            
-            if (priceElement?.textContent?.trim()) {
-                originalPrice = parseFloat(priceElement.textContent.trim()) || 0;
-            }
-            
-            if (aksiyaPriceElement?.textContent?.trim()) {
-                discountedPrice = parseFloat(aksiyaPriceElement.textContent.trim()) || 0;
-            }
-            
-            // Dataset'ni yangilash
-            product.dataset.price = originalPrice.toFixed(2);
-            if (discountedPrice > 0) {
-                product.dataset.aksiyaPrice = discountedPrice.toFixed(2);
-            }
-            
-            // Mahsulot ma'lumotlari
-            const productData = {
-                id: product.dataset.id,
-                img: product.dataset.img,
-                img_1: product.dataset.img_1 || '',
-                title: product.dataset.title,
-                ingredients: product.dataset.ingredients || '',
-                description: product.dataset.description,
-                type: product.dataset.type || '',
-                price: originalPrice,
-                aksiyaPrice: discountedPrice || 0,
-                language: getCurrentLanguage(),
-                timestamp: Date.now()
-            };
-            
-            // LocalStorage'ga saqlash
-            localStorage.setItem("selectedProduct", JSON.stringify(productData));
-            console.log('📦 Mahsulot tanlandi:', productData);
-            
-            // Yo'naltirish
-            const redirectUrl = product.dataset.type === 'pizza' 
-                ? './details-pizza/' 
-                : './details';
-                
-            window.location.href = redirectUrl;
-        });
-    });
 }
 
 // ===== TIL O'ZGARISHINI KUZATISH =====
@@ -1635,7 +1535,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Initialization tugadi');
 });
 
-// ===== HELPER FUNKSIYALAR =====
 
 // Debug uchun
 function debugProductData() {
@@ -1652,20 +1551,5 @@ function debugProductData() {
     console.groupEnd();
 }
 
-// LocalStorage'ni tozalash
-function clearProductData() {
-    localStorage.removeItem('selectedProduct');
-    localStorage.removeItem('allProducts_en');
-    localStorage.removeItem('allProducts_geo');
-    console.log('🧹 Barcha mahsulot ma\'lumotlari tozalandi');
-}
-
-// Global scope'ga export qilish (agar kerak bo'lsa)
-window.ProductManager = {
-    getCurrentLanguage,
-    findProductById,
-    updateSelectedProduct,
-    saveAllProducts,
-    debugProductData,
-    clearProductData
-};
+console.log('✅ Edit boshqaruv tizimi yuklandi');
+console.log('📚 Debug buyruq: debugEdit()');
