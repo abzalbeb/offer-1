@@ -132,8 +132,8 @@ favorites
             </div>
             <div class="jss40">
                   <div>
-                                    <p class="fs-18 text-red "><span class="for_price"></span> </p>
-                                    <p class="fs-18 text-red product-price" style="color: rgb(0, 0, 0); font-size: 12px; font-weight: 500; text-decoration: line-through;"> <span class="for_aksiyaPrice">${item.price}</span> ₾</p>
+                                    <p class="fs-18 text-red "><span class="for_price">${item.aksiyaPrice}</span> </p>
+                                    <p class="fs-18 text-red product-price" style="color: rgb(0, 0, 0); font-size: 12px; font-weight: 500; text-decoration: line-through;"> <span class="for_aksiyaPrice">${item.price*item.count}</span>0 ₾</p>
                   </div>
               <button class="jss41" aria-label="Add to cart">Order</button>
               <!-- Boshqa mahsulotlar uchun qty-container QO'SHAMIZ -->
@@ -164,60 +164,81 @@ favorites
 
     // Mahsulot sonini yangilash va + / - ni ishlatish uchun ichki funksiya
     function updateQuantityUI(product, id) {
-      let cart = [];
-      try {
-        cart = JSON.parse(localStorage.getItem("cart") || "[]");
-        if (!Array.isArray(cart)) cart = [];
-      } catch (_) {
-        cart = [];
-      }
+  let cart = [];
+  try {
+    cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    if (!Array.isArray(cart)) cart = [];
+  } catch (_) {
+    cart = [];
+  }
 
-      const cartItem = cart.find(item => item.id === id);
-      if (!cartItem) return;
+  const cartItem = cart.find(item => item.id === id);
+  if (!cartItem) return;
 
-      const minusBtn = product.querySelector(".qty-minus");
-      const plusBtn = product.querySelector(".qty-plus");
-      const countEl = product.querySelector(".qty-count");
-      const priceEl = product.querySelector(".product-price");
-      const priceaksiyaEl = product.querySelector(".for_price");
+  const minusBtn = product.querySelector(".qty-minus");
+  const plusBtn = product.querySelector(".qty-plus");
+  const countEl = product.querySelector(".qty-count");
+  const priceEl = product.querySelector(".product-price");
+  const priceaksiyaEl = product.querySelector(".for_price");
 
-      // Agar qty elementlari mavjud bo'lmasa (pizza uchun) return qilamiz
-      if (!minusBtn || !plusBtn || !countEl) return;
+  if (!minusBtn || !plusBtn || !countEl) return; // qty elementi yo'q bo'lsa chiqib ketamiz
 
-      countEl.textContent = cartItem.count;
-        const showPrice = cartItem.price*cartItem.count;
-        priceEl.innerHTML = showPrice.toFixed(2) + "<b>₾</b>";
+  // 🔥 Shart: agar localStorage'da cart bo'lsa va shu item for_favorite true bo'lsa
+  if (localStorage.getItem("cart") && cartItem.for_favorite === true) {
+    countEl.textContent = cartItem.count;
 
-        const showPriceaksiya = cartItem.aksiyaPrice*cartItem.count;
-        priceaksiyaEl.innerHTML = showPriceaksiya.toFixed(2) + "<b>₾</b>";
+    const showPrice = cartItem.aksiyaPrice * cartItem.count;
+    priceEl.innerHTML = showPrice.toFixed(2) + "<b>₾</b>";
 
-      plusBtn.onclick = () => {
-        cartItem.count += 1;
-        cartItem.total = cartItem.count * (cartItem.aksiyaPrice || cartItem.price);
-        localStorage.setItem("cart", JSON.stringify(cart));
-        updateQuantityUI(product, id);
-        if (typeof updateCartBadge === "function") updateCartBadge();
-        if (typeof updateCartPopup === "function") updateCartPopup();
-      };
+    const showPriceaksiya = cartItem.price * cartItem.count;
+    priceaksiyaEl.innerHTML = showPriceaksiya.toFixed(2) + "<b>₾</b>";
+  } else {
+    countEl.textContent = cartItem.count;
 
-      minusBtn.onclick = () => {
-        cartItem.count -= 1;
-        if (cartItem.count <= 0) {
-          cart = cart.filter(item => item.id !== id);
-          localStorage.setItem("cart", JSON.stringify(cart));
-          const qtyContainer = product.querySelector(".qty-container");
-          if (qtyContainer) qtyContainer.style.display = "none";
-          product.querySelector(".jss41").style.display = "inline-block";
-          priceEl.innerHTML = (cartItem.price).toFixed(2) + "<b>₾</b>";
-        } else {
-          cartItem.total = cartItem.count * (cartItem.aksiyaPrice || cartItem.price);
-          localStorage.setItem("cart", JSON.stringify(cart));
-          updateQuantityUI(product, id);
-        }
-        if (typeof updateCartBadge === "function") updateCartBadge();
-        if (typeof updateCartPopup === "function") updateCartPopup();
-      };
-    }
+    const showPrice = cartItem.price * cartItem.count;
+    priceEl.innerHTML = showPrice.toFixed(2) + "<b>₾</b>";
+
+    const showPriceaksiya = cartItem.aksiyaPrice * cartItem.count;
+    priceaksiyaEl.innerHTML = showPriceaksiya.toFixed(2) + "<b>₾</b>";
+  }
+
+  plusBtn.onclick = () => {
+    cartItem.count += 1;
+    cartItem.total = cartItem.count * (cartItem.aksiyaPrice || cartItem.price);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateQuantityUI(product, id);
+    if (typeof updateCartBadge === "function") updateCartBadge();
+    if (typeof updateCartPopup === "function") updateCartPopup();
+    window.location.reload();
+  };
+
+  minusBtn.onclick = () => {
+  cartItem.count -= 1;
+  if (cartItem.count <= 0) {
+    cart = cart.filter(item => item.id !== id);
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    const qtyContainer = product.querySelector(".qty-container");
+    if (qtyContainer) qtyContainer.style.display = "none";
+    product.querySelector(".jss41").style.display = "inline-block";
+
+    // 🔥 Ikkala narxni qayta ko‘rsatamiz
+    priceEl.innerHTML = (cartItem.aksiyaPrice || cartItem.price).toFixed(2) + "<b></b>";
+    priceaksiyaEl.innerHTML = (cartItem.price).toFixed(2) + "<b>₾</b>";
+    
+  } else {
+    cartItem.total = cartItem.count * (cartItem.aksiyaPrice || cartItem.price);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateQuantityUI(product, id);
+  }
+
+  if (typeof updateCartBadge === "function") updateCartBadge();
+  if (typeof updateCartPopup === "function") updateCartPopup();
+  window.location.reload();
+};
+
+}
+
 
     // === jss411 tugmalariga delegation (Pizza uchun selectedProduct saqlash) ===
     document.addEventListener("click", function (e) {

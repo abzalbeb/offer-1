@@ -4249,7 +4249,7 @@ function loadExistingOrder(orderId) {
     };
 
     // Update count
-    count = existingOrder.quantity;
+    count = existingOrder.count;
     updateQuantity();
 
     // Load pizzas
@@ -4600,7 +4600,7 @@ function addToCart() {
     const newOrder = {
         ...product,
         id: orderId,
-        quantity: count,
+        count: count,
         pizzas: pizzasArray,
         totalPrice: totalPrice + "₾",
         date: new Date().toISOString()
@@ -4657,7 +4657,7 @@ function updateCartDisplay() {
             <div class="cart-item-header">
                 <img src="${order.img}" alt="${order.title}" width="50">
                 <div class="cart-item-info">
-                    <h3>${order.title} (x${order.quantity})</h3>
+                    <h3>${order.title} (x${order.count})</h3>
                     <p class="item-description">${order.description}</p>
                     <p class="item-id">Buyurtma ID: ${order.id}</p>
                 </div>

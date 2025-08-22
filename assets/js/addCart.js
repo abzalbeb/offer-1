@@ -204,7 +204,7 @@ function updateCartPopup() {
         // Orders strukturasi boshqacha bo'lgani uchun
         let itemTotal = 0;
          if (item.price) {
-            itemTotal = item.price * (item.quantity || item.count);
+            itemTotal = item.price * (item.count);
         }
 
         total += itemTotal;
@@ -221,7 +221,7 @@ function updateCartPopup() {
             </div>
             <div class="card-price-item">
                 <p class="fs-18 text-red redflag" style="font-size:15px;">
-                    ${item.price*(item.quantity || item.count)}<b>₾</b>
+                    ${item.price*(item.count)}<b>₾</b>
                 </p>
             </div>
         `;
@@ -258,7 +258,7 @@ function saveOrders() {
 function addToOrders(item) {
     const orderItem = {
         ...item,
-        quantity: item.count, // quantity maydonini qo'shish
+        count: item.count, // quantity maydonini qo'shish
         date: new Date().toISOString(),
         status: 'pending'
     };
@@ -405,7 +405,7 @@ function updateQuantityUI(product, id) {
 
     // for_price ga price (asl narx) ni qo'yish
     if (priceEl) {
-        priceEl.innerHTML = totalPrice.toFixed(2) + "<b>₾</b>";
+        priceEl.innerHTML = totalPrice.toFixed(2) + "<b></b>";
     }
     
     // for_aksiyaPrice ga aksiya narxini qo'yish
@@ -814,7 +814,7 @@ function updateCartPopup() {
 
     // Avval cart itemlarini qo'shish
     cart.forEach(item => {
-        const itemTotal = item.price || 0;
+        const itemTotal = item.price*item.count;
         total += itemTotal;
         
         const div = document.createElement("div");
@@ -841,7 +841,8 @@ function updateCartPopup() {
         // Orders strukturasi boshqacha bo'lgani uchun
         let itemTotal = 0;
          if (item.price) {
-            itemTotal = item.price * (item.quantity || item.count);
+            itemTotal = item.price * (item.count);
+            
         }
 
         total += itemTotal;
@@ -858,7 +859,7 @@ function updateCartPopup() {
             </div>
             <div class="card-price-item">
                 <p class="fs-18 text-red redflag" style="font-size:15px;">
-                    ${item.price*(item.quantity || item.count)}<b>₾</b>
+                    ${item.price*(item.count)}<b>₾</b>
                 </p>
             </div>
         `;
@@ -895,7 +896,7 @@ function saveOrders() {
 function addToOrders(item) {
     const orderItem = {
         ...item,
-        quantity: item.count, // quantity maydonini qo'shish
+        count: item.count, // quantity maydonini qo'shish
         date: new Date().toISOString(),
         status: 'pending'
     };
@@ -974,8 +975,8 @@ function initAddToCartButtons() {
                 let originalPrice = parseFloat(product.querySelector(".for_price").textContent.trim());
 
                 // data-atributlarga saqlash
-                product.dataset.price = originalPrice.toFixed(2);       // asl narx
-                product.dataset.aksiyaPrice = discountedPrice.toFixed(2); // aksiya narx
+                product.dataset.aksiyaPrice = originalPrice.toFixed(2);       // asl narx
+                product.dataset.price = discountedPrice.toFixed(2); // aksiya narx
             }
 
             // Dataset dan olish
@@ -983,8 +984,9 @@ function initAddToCartButtons() {
             let img = product.dataset.img;
             let title = product.dataset.title;
             let description = product.dataset.description;
-            let price = parseFloat(product.dataset.price);
-            let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
+            let for_favorite=  true;
+            let aksiyaPrice = parseFloat(product.dataset.price);
+            let price = parseFloat(product.dataset.aksiyaPrice) || null;
 
             let existing = cart.find(item => item.id === id);
 
@@ -995,7 +997,8 @@ function initAddToCartButtons() {
                     title,
                     description,
                     price,               // asl narx
-                    aksiyaPrice,         // aksiya narx
+                    aksiyaPrice,   
+                    for_favorite,      // aksiya narx
                     count: 1,
                     total: aksiyaPrice ? aksiyaPrice : price
                 });

@@ -504,8 +504,8 @@ function restoreEditData() {
     selectedPizza.ingredients = [];
     
     // 1. Count ni qayta tiklash
-    if (editOrderData.quantity) {
-        count = editOrderData.quantity;
+    if (editOrderData.count) {
+        count = editOrderData.count;
         const countElement = document.getElementById("count");
         if (countElement) {
             countElement.textContent = count;
@@ -998,7 +998,7 @@ function addToCartHandler() {
         date: new Date().toISOString(),
         description: product.description,
         title: product.title,
-        quantity: count,
+        count: count,
         price: selectedPizza.price, // 2-struktura price ni ham saqlaydi
         totalPrice: totalPrice.toFixed(2) + "₾",
         dataType: 'pizza',
