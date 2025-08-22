@@ -25,11 +25,10 @@ favorites
              data-img_1="${item.img_1}"
              data-title="${item.title}"
              data-description="${item.description}"
-             data-price="${item.aksiyaPrice || item.price}"
-             data-aksiya-price="${item.price}"
+             data-price="${item.price}"
              data-type="${item.type || ''}"
              data-ingredients="${item.Ingredients || ''}"
-             data-aksiya-price="${item.price}">
+             data-aksiya-price="${item.aksiyaPrice || ''}">
           <div class="jss35">
             <label class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h">
               <span class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-7avhyl" 
@@ -68,7 +67,7 @@ favorites
             <div class="jss40">
               <div>
                 <p class="fs-18 text-red "><span class="for_price"></span> </p>
-                <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">${item.aksiyaPrice || item.price}</span> ₾</p>
+                                 <p class="fs-18 text-red product-price "><span class="for_aksiyaPrice">${item.price}</span> ₾</p>
               </div>
               <button class="jss411" aria-label="Add to cart">Order</button>
               <!-- PIZZA uchun qty-container QO'SHMAYMIZ -->
@@ -92,11 +91,10 @@ favorites
              data-img="${item.img}"
              data-title="${item.title}"
              data-description="${item.description}"
-             data-price="${item.aksiyaPrice || item.price}"
-             data-aksiya-price="${item.price}"
+             data-price="${item.price}"
              data-type="${item.type || ''}"
              data-ingredients="${item.Ingredients || ''}"
-             data-aksiya-price="${item.price}">
+             data-aksiya-price="${item.aksiyaPrice}">
           <div class="jss35">
             <label class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1tuw01h">
               <span class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-7avhyl" 
@@ -134,8 +132,8 @@ favorites
             </div>
             <div class="jss40">
                   <div>
-                    <p class="fs-18 text-red "><span class="for_price">${item.price}</span> ₾</p>
-                    <p class="fs-18 text-red product-price" style="color: rgb(0, 0, 0); font-size: 12px; font-weight: 500; text-decoration: line-through;"> <span class="for_aksiyaPrice">${item.aksiyaPrice || item.price}</span> ₾</p>
+                                    <p class="fs-18 text-red "><span class="for_price">${item.aksiyaPrice}</span> </p>
+                                    <p class="fs-18 text-red product-price" style="color: rgb(0, 0, 0); font-size: 12px; font-weight: 500; text-decoration: line-through;"> <span class="for_aksiyaPrice">${item.price*item.count}</span>0 ₾</p>
                   </div>
               <button class="jss41" aria-label="Add to cart">Order</button>
               <!-- Boshqa mahsulotlar uchun qty-container QO'SHAMIZ -->
@@ -166,76 +164,81 @@ favorites
 
     // Mahsulot sonini yangilash va + / - ni ishlatish uchun ichki funksiya
     function updateQuantityUI(product, id) {
-        let cart = [];
-        try {
-            cart = JSON.parse(localStorage.getItem("cart") || "[]");
-            if (!Array.isArray(cart)) cart = [];
-        } catch (_) {
-            cart = [];
-        }
+  let cart = [];
+  try {
+    cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    if (!Array.isArray(cart)) cart = [];
+  } catch (_) {
+    cart = [];
+  }
 
-        const cartItem = cart.find(item => item.id === id);
-        if (!cartItem) return;
+  const cartItem = cart.find(item => item.id === id);
+  if (!cartItem) return;
 
-        const minusBtn = product.querySelector(".qty-minus");
-        const plusBtn = product.querySelector(".qty-plus");
-        const countEl = product.querySelector(".qty-count");
-        const type = product.dataset.type;
+  const minusBtn = product.querySelector(".qty-minus");
+  const plusBtn = product.querySelector(".qty-plus");
+  const countEl = product.querySelector(".qty-count");
+  const priceEl = product.querySelector(".product-price");
+  const priceaksiyaEl = product.querySelector(".for_price");
 
-        if (!minusBtn || !plusBtn || !countEl) return;
+  if (!minusBtn || !plusBtn || !countEl) return; // qty elementi yo'q bo'lsa chiqib ketamiz
 
-        countEl.textContent = cartItem.count;
+  // 🔥 Shart: agar localStorage'da cart bo'lsa va shu item for_favorite true bo'lsa
+  if (localStorage.getItem("cart") && cartItem.for_favorite === true) {
+    countEl.textContent = cartItem.count;
 
-        // 🔹 Cart.js bilan mos narx tizimi: price - asl narx, aksiyaPrice - aksiya narxi
-        if (type === 'pizza') {
-            // Pizza uchun: for_aksiyaPrice da aksiya narxi ko'rsatiladi
-            const priceEl = product.querySelector(".product-price .for_aksiyaPrice");
-            if (priceEl) {
-                priceEl.textContent = (cartItem.aksiyaPrice * cartItem.count).toFixed(2);
-            }
-        } else {
-            // Boshqa mahsulotlar uchun
-            const oldPriceEl = product.querySelector(".for_price"); // asl narx (chizilmagan)
-            const newPriceEl = product.querySelector(".product-price .for_aksiyaPrice"); // aksiya narxi (chizilgan)
+    const showPrice = cartItem.aksiyaPrice * cartItem.count;
+    priceEl.innerHTML = showPrice.toFixed(2) + "<b>₾</b>";
 
-            if (oldPriceEl) {
-                // for_price da asl narx
-                oldPriceEl.textContent = (cartItem.price * cartItem.count).toFixed(2);
-            }
-            
-            if (newPriceEl && cartItem.aksiyaPrice) {
-                // for_aksiyaPrice da aksiya narxi
-                newPriceEl.textContent = (cartItem.aksiyaPrice * cartItem.count).toFixed(2);
-            }
-        }
+    const showPriceaksiya = cartItem.price * cartItem.count;
+    priceaksiyaEl.innerHTML = showPriceaksiya.toFixed(2) + "<b>₾</b>";
+  } else {
+    countEl.textContent = cartItem.count;
 
-        // 🔹 + va - tugmalarni boshqarish
-        plusBtn.onclick = () => {
-            cartItem.count += 1;
-            cartItem.total = cartItem.count * (cartItem.aksiyaPrice || cartItem.price);
-            localStorage.setItem("cart", JSON.stringify(cart));
-            updateQuantityUI(product, id);
-            if (typeof updateCartBadge === "function") updateCartBadge();
-            if (typeof updateCartPopup === "function") updateCartPopup();
-        };
+    const showPrice = cartItem.price * cartItem.count;
+    priceEl.innerHTML = showPrice.toFixed(2) + "<b>₾</b>";
 
-        minusBtn.onclick = () => {
-            cartItem.count -= 1;
-            if (cartItem.count <= 0) {
-                cart = cart.filter(item => item.id !== id);
-                localStorage.setItem("cart", JSON.stringify(cart));
-                const qtyContainer = product.querySelector(".qty-container");
-                if (qtyContainer) qtyContainer.style.display = "none";
-                product.querySelector(".jss41").style.display = "inline-block";
-            } else {
-                cartItem.total = cartItem.count * (cartItem.aksiyaPrice || cartItem.price);
-                localStorage.setItem("cart", JSON.stringify(cart));
-                updateQuantityUI(product, id);
-            }
-            if (typeof updateCartBadge === "function") updateCartBadge();
-            if (typeof updateCartPopup === "function") updateCartPopup();
-        };
-    }
+    const showPriceaksiya = cartItem.aksiyaPrice * cartItem.count;
+    priceaksiyaEl.innerHTML = showPriceaksiya.toFixed(2) + "<b>₾</b>";
+  }
+
+  plusBtn.onclick = () => {
+    cartItem.count += 1;
+    cartItem.total = cartItem.count * (cartItem.aksiyaPrice || cartItem.price);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateQuantityUI(product, id);
+    if (typeof updateCartBadge === "function") updateCartBadge();
+    if (typeof updateCartPopup === "function") updateCartPopup();
+    window.location.reload();
+  };
+
+  minusBtn.onclick = () => {
+  cartItem.count -= 1;
+  if (cartItem.count <= 0) {
+    cart = cart.filter(item => item.id !== id);
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    const qtyContainer = product.querySelector(".qty-container");
+    if (qtyContainer) qtyContainer.style.display = "none";
+    product.querySelector(".jss41").style.display = "inline-block";
+
+    // 🔥 Ikkala narxni qayta ko‘rsatamiz
+    priceEl.innerHTML = (cartItem.aksiyaPrice || cartItem.price).toFixed(2) + "<b></b>";
+    priceaksiyaEl.innerHTML = (cartItem.price).toFixed(2) + "<b>₾</b>";
+    
+  } else {
+    cartItem.total = cartItem.count * (cartItem.aksiyaPrice || cartItem.price);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateQuantityUI(product, id);
+  }
+
+  if (typeof updateCartBadge === "function") updateCartBadge();
+  if (typeof updateCartPopup === "function") updateCartPopup();
+  window.location.reload();
+};
+
+}
+
 
     // === jss411 tugmalariga delegation (Pizza uchun selectedProduct saqlash) ===
     document.addEventListener("click", function (e) {
@@ -249,10 +252,9 @@ favorites
       const img_1 = product.dataset.img_1;
       const title = product.dataset.title;
       const description = product.dataset.description;
-      // Cart.js bilan mos qilish: price - asl narx, aksiyaPrice - aksiya narxi
-      const aksiyaPrice = parseFloat(product.dataset.price); // aksiya narxi
-      const price = parseFloat(product.dataset.aksiyaPrice); // asl narx
-      const ingredients = product.dataset.ingredients || '';
+      const price = parseFloat(product.dataset.price);
+      const ingredients = product.dataset.ingredients || ''; // BU QATORNI TUZATDIM
+      const aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || price;
       const type = product.dataset.type;
 
       // selectedProduct obyektini yaratamiz
@@ -265,7 +267,7 @@ favorites
         price: price,
         aksiyaPrice: aksiyaPrice,
         type: type,
-        Ingredients: ingredients
+        Ingredients: ingredients // BU HAM TUZATLANDI
       };
 
       // localStorage ga selectedProduct nomida saqlaymiz
@@ -286,9 +288,8 @@ favorites
       const img = product.dataset.img;
       const title = product.dataset.title;
       const description = product.dataset.description;
-      // Cart.js bilan mos qilish: price - asl narx, aksiyaPrice - aksiya narxi
-      const aksiyaPrice = parseFloat(product.dataset.price); // aksiya narxi
-      const price = parseFloat(product.dataset.aksiyaPrice); // asl narx
+      const price = parseFloat(product.dataset.price);
+      const aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
       const type = product.dataset.type;
 
       let cart = [];
@@ -306,11 +307,11 @@ favorites
           img,
           title,
           description,
-          price,        // asl narx
-          aksiyaPrice,  // aksiya narxi
+          price,
+          aksiyaPrice,
           type,
           count: 1,
-          total: aksiyaPrice || price
+          total: aksiyaPrice ? aksiyaPrice : price
         });
         localStorage.setItem("cart", JSON.stringify(cart));
 
@@ -348,11 +349,3 @@ favorites
     } catch (_) {}
   });
 })();
-
-setTimeout(() => {
-  document.querySelectorAll(".for_price").forEach(priceEl => {
-    if (priceEl.textContent.includes('₾')) {
-      priceEl.textContent = priceEl.textContent.replace('₾', '').trim();
-    }
-  });
-}, 50);

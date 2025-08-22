@@ -192,7 +192,7 @@ function updateCartPopup() {
             </div>
             <div class="card-price-item">
                 <p class="fs-18 text-red redflag" style="font-size:15px;">
-                    ${item.price*item.count}<b>₾</b>
+                    ${item.price*item.count}<b></b>
                 </p>
             </div>
         `;
