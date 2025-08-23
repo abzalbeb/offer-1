@@ -70,7 +70,7 @@ document.getElementById("geo-btnMobile").addEventListener("click", function() {
 
   }, function(err) {
     console.error("❌ Geolokatsiya xatolik:", err);
-    alert("Geolokatsiya ishlamadi. Toshkent koordinatasi ishlatiladi.");
+    alert("Geolocation permission denied. Please enable location access in your browser settings.");
     // useManualCoordinates();
   }, {
     enableHighAccuracy: true,
@@ -253,11 +253,11 @@ document.getElementById("geo-btn").addEventListener("click", function() {
     console.log("Aniqlik:", accuracy, "metr");
 
     // Foydalanuvchi real koordinatasi bilan hisoblash
-    calculateDistances(userLat, userLng, `🌍 Sizning joylashuvingiz m aniqlik)`);
+    calculateDistances(userLat, userLng, ``);
 
   }, function(err) {
     console.error("❌ Geolokatsiya xatolik:", err);
-    alert("Geolokatsiya ishlamadi. Toshkent koordinatasi ishlatiladi.");
+    alert("Geolocation permission denied. Please enable location access in your browser settings.");
     // useManualCoordinates();
   }, {
     enableHighAccuracy: true,

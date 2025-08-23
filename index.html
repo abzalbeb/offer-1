@@ -4926,59 +4926,51 @@
             window.location.href = './cart/'
         }
 
+        // JSON fayllarni import qilish va localStorage ga saqlash
 
-                // Hozirgi tilni aniqlash funksiyasi
-function getCurrentLanguage() {
-    const path = window.location.pathname;
-    
-    if (path.includes('/geo/') || path.startsWith('/geo')) return 'geo';
-    if (path === '/' || path === '' || path === '/index.html') return 'en';
-    
-    return 'en';
-}
-
-// Sahifa yuklanganda barcha mahsulotlarni saqlash (yangilangan)
-function saveAllProducts() {
-    const currentLang = getCurrentLanguage();
-    const products = [];
-    
-    // Barcha mahsulot card'larini olish
-    document.querySelectorAll('.card_product').forEach(product => {
-        // Narxlarni olishdan oldin elementlarni tekshirish
-        const priceElement = product.querySelector(".for_price");
-        const aksiyaPriceElement = product.querySelector(".for_aksiyaPrice");
-        
-        let price = 0;
-        let aksiyaPrice = 0;
-        
-        if (priceElement && priceElement.textContent.trim()) {
-            price = parseFloat(priceElement.textContent.trim()) || 0;
+// JSON fayllarni yuklash va localStorage ga saqlash
+async function loadAndSaveAllProducts() {
+    try {
+        // data.json ni yuklash (ingliz tili)
+        const enResponse = await fetch('./data.json');
+        if (enResponse.ok) {
+            const enProducts = await enResponse.json();
+            localStorage.setItem('allProducts_en', JSON.stringify(enProducts));
         }
         
-        if (aksiyaPriceElement && aksiyaPriceElement.textContent.trim()) {
-            aksiyaPrice = parseFloat(aksiyaPriceElement.textContent.trim()) || 0;
+        // data2.json ni yuklash (gruzin tili)
+        const geoResponse = await fetch('./data2.json');
+        if (geoResponse.ok) {
+            const geoProducts = await geoResponse.json();
+            localStorage.setItem('allProducts_geo', JSON.stringify(geoProducts));
         }
         
-        const productData = {
-            id: product.dataset.id,
-            img: product.dataset.img,
-            img_1: product.dataset.img_1 || '',
-            title: product.dataset.title,
-            ingredients: product.dataset.ingredients || '',
-            description: product.dataset.description,
-            type: product.dataset.type || '',
-            price: price,
-            aksiyaPrice: aksiyaPrice || 0,
-            language: currentLang, // MUHIM: language maydonini qo'shdik
-            timestamp: Date.now()   // Yangilanish vaqti
-        };
-        
-        products.push(productData);
-    });
-    
-    // Til bo'yicha saqlash
-    localStorage.setItem(`allProducts_${currentLang}`, JSON.stringify(products));
+    } catch (error) {
+        console.error('JSON yuklashda xatolik:', error);
+    }
 }
+
+// Saqlangan ma'lumotlarni olish
+function getStoredProducts(lang) {
+    const stored = localStorage.getItem(`allProducts_${lang}`);
+    return stored ? JSON.parse(stored) : [];
+}
+
+// Ma'lumotlarni tozalash
+function clearStoredProducts(lang) {
+    if (lang) {
+        localStorage.removeItem(`allProducts_${lang}`);
+    } else {
+        // Barcha tillarni tozalash
+        localStorage.removeItem('allProducts_en');
+        localStorage.removeItem('allProducts_geo');
+    }
+}
+
+// Sahifa yuklanganda avtomatik ishga tushirish
+document.addEventListener('DOMContentLoaded', function() {
+    loadAndSaveAllProducts();
+});
 
 // Click event (yangilangan)
 document.querySelectorAll(".jss1 button").forEach(btn => {
@@ -5035,58 +5027,6 @@ document.querySelectorAll(".jss1 button").forEach(btn => {
         }
     });
 });
-
-// Sahifa yuklanganda barcha mahsulotlarni saqlash
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Biroz kechiktirib saqlash (DOM to'liq yuklanishi uchun)
-    setTimeout(() => {
-        saveAllProducts();
-        
-        // Debug uchun saqlangan ma'lumotlarni tekshirish
-        const currentLang = getCurrentLanguage();
-        const savedProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
-        
-        // Birinchi mahsulotni namuna sifatida ko'rsatish
-       
-    }, 500);
-});
-
-// Debug funksiyalar (global scope uchun)
-window.debugProducts = function() {
-    const currentLang = getCurrentLanguage();
-    const allProductsEn = JSON.parse(localStorage.getItem("allProducts_en")) || [];
-    const allProductsGeo = JSON.parse(localStorage.getItem("allProducts_geo")) || [];
-    const selectedProduct = JSON.parse(localStorage.getItem("selectedProduct"));
-    
-  
-    
-    if (selectedProduct?.id) {
-        const enProduct = allProductsEn.find(p => p.id === selectedProduct.id);
-        const geoProduct = allProductsGeo.find(p => p.id === selectedProduct.id);
-        
-    }
-    console.groupEnd();
-};
-
-// Mahsulotlarni qayta saqlash
-window.resaveProducts = function() {
-    saveAllProducts();
-    
-    setTimeout(() => {
-        window.debugProducts();
-    }, 500);
-};
-
-// LocalStorage ni tozalash
-window.clearProducts = function() {
-    localStorage.removeItem('selectedProduct');
-    localStorage.removeItem('allProducts_en');
-    localStorage.removeItem('allProducts_geo');
-};
-
-
-
 
 
         document.addEventListener("DOMContentLoaded", function () {

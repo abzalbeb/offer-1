@@ -59,7 +59,7 @@ if (window.matchMedia("(max-width: 600px)").matches) {
       for (let field of requiredFields) {
         const value = document.querySelector(field.selector)?.value.trim();
         if (!value) {
-          alert(`${field.name} maydoni majburiy!`);
+          alert(`${field.name} field is mandatory!`);
           return;
         }
       }
@@ -179,7 +179,7 @@ if (window.matchMedia("(max-width: 600px)").matches) {
       for (let field of requiredFields) {
         const value = document.querySelector(field.selector)?.value.trim();
         if (!value) {
-          alert(`${field.name} maydoni majburiy!`);
+          alert(`${field.name} field is mandatory!`);
           return;
         }
       }

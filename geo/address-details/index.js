@@ -50,16 +50,16 @@ if (window.matchMedia("(max-width: 600px)").matches) {
       }
 
       const requiredFields = [
-        { selector: '#buildingMobile', name: "Building Name" },
-        { selector: '#entranceMobile', name: "Entrance" },
-        { selector: '#FloorMobile', name: "Floor" },
-        { selector: '#ApartmentMobile', name: "Apartment" }
+        { selector: '#buildingMobile', name: "შენობის სახელწოდება" },
+        { selector: '#entranceMobile', name: "შესასვლელი" },
+        { selector: '#FloorMobile', name: "სართული" },
+        { selector: '#ApartmentMobile', name: "ბინა" }
       ];
 
       for (let field of requiredFields) {
         const value = document.querySelector(field.selector)?.value.trim();
         if (!value) {
-          alert(`${field.name} maydoni majburiy!`);
+          alert(`${field.name} ველი სავალდებულოა!`);
           return;
         }
       }
@@ -170,16 +170,16 @@ if (window.matchMedia("(max-width: 600px)").matches) {
       }
 
       const requiredFields = [
-        { selector: '#buildingDestop', name: "Building Name" },
-        { selector: '#entranceDestop', name: "Entrance" },
-        { selector: '#FloorDestop', name: "Floor" },
-        { selector: '#ApartmentDestop', name: "Apartment" }
+        { selector: '#buildingDestop', name: "შენობის სახელწოდება" },
+        { selector: '#entranceDestop', name: "შესასვლელი" },
+        { selector: '#FloorDestop', name: "სართული" },
+        { selector: '#ApartmentDestop', name: "ბინა" }
       ];
 
       for (let field of requiredFields) {
         const value = document.querySelector(field.selector)?.value.trim();
         if (!value) {
-          alert(`${field.name} maydoni majburiy!`);
+          alert(`${field.name} ველი სავალდებულოა!`);
           return;
         }
       }
