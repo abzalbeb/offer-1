@@ -565,11 +565,11 @@ function editOrder(orderId) {
             id: order.id,
             title: order.title,
             img: order.img,
-            img_1: order.img_1,
+            img_1: order.img_1 || '',
             description: order.description,
             price: order.price,
-            aksiyaPrice: order.aksiyaPrice,
-            ingredients:order.ingredients
+            aksiyaPrice: order.aksiyaPrice || '',
+            ingredients:order.ingredients || ''
         };
         
         localStorage.setItem('selectedProduct', JSON.stringify(productData));

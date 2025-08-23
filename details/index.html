@@ -4244,8 +4244,8 @@ function loadExistingOrder(orderId) {
         title: existingOrder.title,
         img: existingOrder.img,
         description: existingOrder.description,
-        price: parseFloat(existingOrder.price),
-        aksiyaPrice: parseFloat(existingOrder.aksiyaPrice)
+        price: existingOrder.price,
+        aksiyaPrice: existingOrder.aksiyaPrice || ''
     };
 
     // Update count

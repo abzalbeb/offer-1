@@ -4051,7 +4051,12 @@ if (aksiyaPriceElement && product.aksiyaPrice) {
 }
 
     
-  
+    console.log("Price updated:", {
+        basePrice: basePrice,
+        additionalPrice: additionalPrice,
+        count: count,
+        totalPrice: totalPrice
+    });
 }
 
 // Initialize when page loads
@@ -4120,6 +4125,7 @@ function initializePage() {
 
             // Ingredient allaqachon tanlanganligini tekshirish
             if (selectedItems.has(key)) {
+                console.log(`Ingredient already selected: ${key}. Removing...`);
                 removeIngredient(pizzaId, key);
                 return;
             }
@@ -4137,6 +4143,7 @@ function initializePage() {
             }
 
             // Yangi ingredient qo'shish
+            console.log(`Adding new ingredient: ${key}`);
             selectedItems.add(key);
             this.classList.add('for_active_1');
 
@@ -4216,31 +4223,35 @@ document.addEventListener("click", (e) => {
 });
 
 function loadExistingOrder(orderId) {
+    console.log("Loading existing order:", orderId);
 
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     const existingOrder = orders.find(order => order.id === orderId);
 
     if (!existingOrder) {
+        console.log("Order not found");
         return;
     }
 
+    console.log("Found order:", existingOrder);
 
     // Update product info
     product = {
         title: existingOrder.title,
         img: existingOrder.img,
         description: existingOrder.description,
-        price: parseFloat(existingOrder.price),
-        aksiyaPrice: parseFloat(existingOrder.aksiyaPrice)
+        price: existingOrder.price,
+        aksiyaPrice: existingOrder.aksiyaPrice || ''
     };
 
     // Update count
-    count = existingOrder.quantity;
+    count = existingOrder.count;
     updateQuantity();
 
     // Load pizzas
     if (existingOrder.pizzas && existingOrder.pizzas.length > 0) {
         existingOrder.pizzas.forEach((pizza, index) => {
+            console.log(`Loading pizza ${index}:`, pizza);
             
             // Pizza ma'lumotlarini saqlash
             pizzaSelectionData.set(index.toString(), {
@@ -4264,6 +4275,7 @@ function loadExistingOrder(orderId) {
                 });
 
                 if (matchingCard) {
+                    console.log(`Selecting pizza card for ${pizza.title}`);
                     selectPizza(index.toString(), matchingCard);
 
                     // Ingredientlarni yuklash
@@ -4280,6 +4292,7 @@ function loadExistingOrder(orderId) {
 
 // YANGILANGAN selectPizza funksiyasi
 function selectPizza(id, card) {
+    console.log(`Selecting pizza for ID: ${id}`);
 
     const bonusCards = document.querySelector(`#bonus_cards_${id}`);
     const selectedCard = document.querySelector(`#selected_card_${id}`);
@@ -4328,11 +4341,13 @@ function selectPizza(id, card) {
 }
 
 function loadPizzaIngredients(pizzaId, ingredients) {
+    console.log(`Loading ingredients for pizza ${pizzaId}:`, ingredients);
 
     if (!ingredients || !ingredients.length) return;
 
     const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
     if (!container) {
+        console.log(`Container not found for pizza ${pizzaId}`);
         return;
     }
 
@@ -4350,12 +4365,14 @@ function loadPizzaIngredients(pizzaId, ingredients) {
         const key = cleanName + '+' + ing.price + '₾';
         selectedItemsMap.get(pizzaId).add(key);
 
+        console.log(`Adding ingredient: ${cleanName}, key: ${key}`);
 
         // Tegishli tugmani faollashtirish
         const buttons = document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}`);
         buttons.forEach(btn => {
             if (btn.dataset.title === cleanName && parseFloat(btn.dataset.price) === ing.price) {
                 btn.classList.add('for_active_1');
+                console.log(`Activated button for: ${cleanName}`);
             }
         });
 
@@ -4389,6 +4406,7 @@ function loadPizzaIngredients(pizzaId, ingredients) {
 
 // YANGILANGAN removeIngredient funksiyasi
 function removeIngredient(pizzaId, key) {
+    console.log(`Removing ingredient: ${key} from pizza ${pizzaId}`);
 
     const selectedItems = selectedItemsMap.get(pizzaId);
     if (selectedItems) {
@@ -4408,6 +4426,7 @@ function removeIngredient(pizzaId, key) {
         
         if (btnTitle === ingredientName && btnPrice === price) {
             v.classList.remove('for_active_1');
+            console.log(`Deactivated button for: ${ingredientName}`);
         }
     });
 
@@ -4417,6 +4436,7 @@ function removeIngredient(pizzaId, key) {
         const elementToRemove = container.querySelector(`[data-key="${key}"]`);
         if (elementToRemove) {
             elementToRemove.remove();
+            console.log(`Removed ingredient div: ${key}`);
         }
     }
     
@@ -4427,14 +4447,19 @@ function removeIngredient(pizzaId, key) {
 // Qo'shimcha: Debug uchun ingredient holatini tekshirish funksiyasi
 function checkIngredientState(pizzaId) {
     const selectedItems = selectedItemsMap.get(pizzaId);
+    console.log(`Pizza ${pizzaId} selected ingredients:`, Array.from(selectedItems || []));
     
     const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
     const domElements = container ? container.querySelectorAll('[data-key]').length : 0;
+    console.log(`DOM elements count: ${domElements}`);
     
     const activeButtons = document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}.for_active_1`).length;
+    console.log(`Active buttons count: ${activeButtons}`);
 }
 
 function addToCart() {
+    console.log("AddToCart called");
+    console.log("pizzaSelectionData:", pizzaSelectionData);
 
     if (!product || !product.title) {
         return;
@@ -4519,6 +4544,7 @@ function addToCart() {
             const savedData = pizzaSelectionData.get(id);
             pizza.title = savedData.title;
             pizza.price = savedData.price;
+            console.log(`Using saved data for pizza ${id}:`, savedData);
         } else {
             const titleElement = document.querySelector(`#bonus_texts_${id} h2`);
             const priceElement = document.querySelector(`#selected_card_${id} .for_red_count`);
@@ -4528,6 +4554,7 @@ function addToCart() {
                 const priceText = priceElement.textContent;
                 pizza.price = parseFloat(priceText.replace(/[^\d.]/g, '')) || 0;
             }
+            console.log(`Using DOM data for pizza ${id}:`, pizza);
         }
 
         // Pizza narxini qo'shish
@@ -4551,6 +4578,7 @@ function addToCart() {
             });
         }
 
+        console.log(`Final pizza ${id}:`, pizza);
         pizzasArray.push(pizza);
     });
 
@@ -4568,12 +4596,13 @@ function addToCart() {
     const newOrder = {
         ...product,
         id: orderId,
-        quantity: count,
+        count: count,
         pizzas: pizzasArray,
         totalPrice: totalPrice + "₾",
         date: new Date().toISOString()
     };
 
+    console.log("Final order with calculated total:", newOrder);
 
     // Order processing
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -4599,7 +4628,7 @@ function addToCart() {
     selectedItemsMap.clear();
 
     setTimeout(() => {
-        window.location.href = "../../cart";
+        window.location.href = "../cart";
     }, 1000);
 }
 
@@ -4624,7 +4653,7 @@ function updateCartDisplay() {
             <div class="cart-item-header">
                 <img src="${order.img}" alt="${order.title}" width="50">
                 <div class="cart-item-info">
-                    <h3>${order.title} (x${order.quantity})</h3>
+                    <h3>${order.title} (x${order.count})</h3>
                     <p class="item-description">${order.description}</p>
                     <p class="item-id">Buyurtma ID: ${order.id}</p>
                 </div>
@@ -4650,53 +4679,10 @@ function updateCartDisplay() {
         cartItems.appendChild(itemDiv);
     });
 
-    // Add event listeners for edit and remove buttons
-    document.querySelectorAll('.edit-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            editOrder(parseInt(this.dataset.id));
-        });
-    });
-
-    document.querySelectorAll('.remove-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            removeFromCart(parseInt(this.dataset.id));
-        });
-    });
-}
-
-function editOrder(orderId) {
-    console.log("Editing order:", orderId);
     
-    const orders = JSON.parse(localStorage.getItem('orders')) || [];
-    const orderIndex = orders.findIndex(order => order.id === orderId);
-
-    if (orderIndex !== -1) {
-        const order = orders[orderIndex];
-
-        localStorage.setItem('edit', 'true');
-        localStorage.setItem('for_id', orderId.toString());
-
-        product = {
-            title: order.title,
-            img: order.img,
-            description: order.description,
-            price: parseFloat(order.price),
-            aksiyaPrice: parseFloat(order.aksiyaPrice)
-        };
-        localStorage.setItem('selectedProduct', JSON.stringify(product));
-
-    }
 }
 
-function removeFromCart(orderId) {
-    if (confirm('Haqiqatan ham bu buyurtmani o\'chirmoqchimisiz?')) {
-        const orders = JSON.parse(localStorage.getItem('orders')) || [];
-        const updatedOrders = orders.filter(order => order.id !== orderId);
 
-        localStorage.setItem('orders', JSON.stringify(updatedOrders));
-        updateCartDisplay();
-    }
-}
 
 // General functions with pizza ID parameter
 function select_choose(id) {
