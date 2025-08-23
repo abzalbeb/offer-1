@@ -1,4 +1,58 @@
 // -----------------------------
+// LOADER FUNCTIONS
+// -----------------------------
+function showLoader() {
+    const loaderHTML = `
+        <div role="presentation" class="MuiDialog-root MuiModal-root css-126xj0f" id="app-loader" style="z-index: 99999; display: flex;">
+            <div tabindex="0" data-testid="sentinelStart"></div>
+            <div class="MuiDialog-container MuiDialog-scrollPaper css-ekeie0" role="presentation" tabindex="-1"
+                style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1); display: flex;">
+                <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm css-yv7evq"
+                    role="dialog" aria-labelledby=":r4:"
+                    style="background: transparent; box-shadow: none; overflow: hidden;">
+                    <div class="MuiDialogContent-root css-1ty026z" style="overflow: hidden; z-index: 99999;">
+                        <section>
+                            <div class="ctn-preloader">
+                                <div><img src="https://dominospizza.ge/static/media/loader.2122b9244c2f5b65e627.gif" alt="Loader..." width="100">
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div tabindex="0" data-testid="sentinelEnd"></div>
+        </div>
+    `;
+    
+    // Loader ni body ga qo'shish yoki ko'rsatish
+    let existingLoader = document.getElementById('app-loader');
+    if (!existingLoader) {
+        document.body.insertAdjacentHTML('beforeend', loaderHTML);
+    } else {
+        // Agar mavjud bo'lsa, faqat display ni o'zgartirish
+        existingLoader.style.display = 'flex';
+        const container = existingLoader.querySelector('.css-ekeie0');
+        if (container) container.style.display = 'flex';
+    }
+    
+    // Body scroll ni bloklash
+    document.body.style.overflow = 'hidden';
+}
+
+function hideLoader() {
+    const loader = document.getElementById('app-loader');
+    if (loader) {
+        // Display none qilish
+        loader.style.display = 'none';
+        const container = loader.querySelector('.css-ekeie0');
+        if (container) container.style.display = 'none';
+        
+        // Body scroll ni tiklash
+        document.body.style.overflow = '';
+    }
+}
+
+// -----------------------------
 // PATH-BASED LANGUAGE DETECTOR
 // -----------------------------
 function getCurrentLanguage() {
@@ -45,7 +99,7 @@ async function translateTextLibre(text, targetLang) {
         // HTML entitylarni ochirish
         translated = translated.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
 
-        // Agar javobda ruscha harflar bo‘lsa — tarjimani bekor qilish
+        // Agar javobda ruscha harflar bo'lsa — tarjimani bekor qilish
         if (/[а-яё]/i.test(translated)) {
             console.warn('[translateText] Skipped non-English/Georgian translation:', translated);
             return text; 
@@ -56,7 +110,6 @@ async function translateTextLibre(text, targetLang) {
         return text;
     }
 }
-
 
 // -----------------------------
 // TRANSLATE STORAGE BY PATH (uses translateTextLibre -> MyMemory)
@@ -163,7 +216,10 @@ async function translateStorageUsingLibre() {
 
 // expose quick runner
 window.translateStorageNow = function() {
-    return translateStorageUsingLibre();
+    showLoader();
+    return translateStorageUsingLibre().finally(() => {
+        hideLoader();
+    });
 };
 
 // -----------------------------
@@ -412,118 +468,156 @@ function renderAllItemsHTML(orders, cartItems) {
 
 // Function to change order quantity and update total price
 function changeQuantity(orderId, change) {
-    const orders = getOrdersFromLocalStorage();
-    const orderIndex = orders.findIndex(order => order.id === orderId);
+    showLoader(); // Loader ko'rsatish
     
-    if (orderIndex !== -1) {
-        const order = orders[orderIndex];
-        const newQuantity = (order.count || 1) + change;
+    try {
+        const orders = getOrdersFromLocalStorage();
+        const orderIndex = orders.findIndex(order => order.id === orderId);
         
-        if (newQuantity > 0) {
-            // Calculate base price from original totalPrice
-            const basePriceValue = parseFloat(order.totalPrice.replace('₾', ''));
-            const baseQuantity = order.count || 1;
-            const unitPrice = basePriceValue / baseQuantity;
+        if (orderIndex !== -1) {
+            const order = orders[orderIndex];
+            const newQuantity = (order.count || 1) + change;
             
-            // Update quantity and calculate new total price
-            order.count = newQuantity;
-            const newTotalPrice = (unitPrice * newQuantity).toFixed(2);
-            order.totalPrice = newTotalPrice + '₾';
-            
-            localStorage.setItem('orders', JSON.stringify(orders));
-            window.location.reload()
-            loadAndRenderAllItems(); // Re-render
+            if (newQuantity > 0) {
+                // Calculate base price from original totalPrice
+                const basePriceValue = parseFloat(order.totalPrice.replace('₾', ''));
+                const baseQuantity = order.count || 1;
+                const unitPrice = basePriceValue / baseQuantity;
+                
+                // Update quantity and calculate new total price
+                order.count = newQuantity;
+                const newTotalPrice = (unitPrice * newQuantity).toFixed(2);
+                order.totalPrice = newTotalPrice + '₾';
+                
+                localStorage.setItem('orders', JSON.stringify(orders));
+                
+                setTimeout(() => {
+                    window.location.reload();
+                }, 300);
+            }
         }
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // total larni yig'ish
+        let subTotal = cart.reduce((sum, item) => sum + (item.total || 0), 0);
+
+        if (document.querySelector(".subTotal")) {
+            document.querySelector(".subTotal").innerHTML = subTotal.toFixed(2)
+        }
+        
+    } catch (error) {
+        console.error('changeQuantity error:', error);
+        hideLoader();
     }
-
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-// total larni yig'ish
-let subTotal = cart.reduce((sum, item) => sum + (item.total || 0), 0);
-
-if (document.querySelector(".subTotal")) {
-    document.querySelector(".subTotal").innerHTML = subTotal.toFixed(2)
-}
 }
 
 // Function to change cart item quantity
 function changeCartQuantity(itemId, change) {
-    const cartItems = getCartFromLocalStorage();
-    const itemIndex = cartItems.findIndex(item => item.id === itemId);
+    showLoader(); // Loader ko'rsatish
     
-    if (itemIndex !== -1) {
-        const item = cartItems[itemIndex];
-        const newQuantity = (item.count || 1) + change;
+    try {
+        const cartItems = getCartFromLocalStorage();
+        const itemIndex = cartItems.findIndex(item => item.id === itemId);
         
-        if (newQuantity > 0) {
-            // Calculate unit price from current total or price
-            let unitPrice = 0;
+        if (itemIndex !== -1) {
+            const item = cartItems[itemIndex];
+            const newQuantity = (item.count || 1) + change;
             
-            if (item.unitPrice) {
-                // If unitPrice already exists, use it
-                unitPrice = item.unitPrice;
-            } else if (item.price && item.count) {
-                // Calculate unit price from total and quantity
-                unitPrice = parseFloat(item.price) / (item.count || 1);
-                item.unitPrice = unitPrice; // Store for future use
-            } else if (item.price && item.count) {
-                // Calculate unit price from price and quantity
-                unitPrice = parseFloat(item.price) / (item.count || 1);
-                item.unitPrice = unitPrice; // Store for future use
-            } else if (item.price) {
-                // If only total exists, assume quantity is 1
-                unitPrice = parseFloat(item.price);
-                item.unitPrice = unitPrice;
-            } else if (item.price) {
-                // If only price exists, assume quantity is 1
-                unitPrice = parseFloat(item.price);
-                item.unitPrice = unitPrice;
+            if (newQuantity > 0) {
+                // Calculate unit price from current total or price
+                let unitPrice = 0;
+                
+                if (item.unitPrice) {
+                    // If unitPrice already exists, use it
+                    unitPrice = item.unitPrice;
+                } else if (item.price && item.count) {
+                    // Calculate unit price from total and quantity
+                    unitPrice = parseFloat(item.price) / (item.count || 1);
+                    item.unitPrice = unitPrice; // Store for future use
+                } else if (item.price) {
+                    // If only total exists, assume quantity is 1
+                    unitPrice = parseFloat(item.price);
+                    item.unitPrice = unitPrice;
+                } else if (item.price) {
+                    // If only price exists, assume quantity is 1
+                    unitPrice = parseFloat(item.price);
+                    item.unitPrice = unitPrice;
+                }
+                
+                // Update quantity and calculate new total
+                item.count = newQuantity;
+                const newTotal = (unitPrice * newQuantity).toFixed(2);
+                item.total = parseFloat(newTotal);
+                
+                // Also update price if it exists (for backward compatibility)
+                if (item.price !== undefined) {
+                    item.price = parseFloat(newTotal);
+                }
+                
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                
+                setTimeout(() => {
+                    window.location.reload();
+                }, 300);
+            } else if (newQuantity <= 0) {
+                // Remove item if quantity becomes 0 or less
+                deleteCartItem(itemId);
             }
-            
-            // Update quantity and calculate new total
-            item.count = newQuantity;
-            const newTotal = (unitPrice * newQuantity).toFixed(2);
-            item.total = parseFloat(newTotal);
-            
-            // Also update price if it exists (for backward compatibility)
-            if (item.price !== undefined) {
-                item.price = parseFloat(newTotal);
-            }
-            
-            localStorage.setItem('cart', JSON.stringify(cartItems));
-            loadAndRenderAllItems(); // Re-render
-                        window.location.reload()
-        } else if (newQuantity <= 0) {
-            // Remove item if quantity becomes 0 or less
-            deleteCartItem(itemId);
         }
+    } catch (error) {
+        console.error('changeCartQuantity error:', error);
+        hideLoader();
     }
 }
 
 // Function to delete order
 function deleteOrder(orderId) {
+    showLoader(); // Loader ko'rsatish
+    
+    try {
         const orders = getOrdersFromLocalStorage();
         const filteredOrders = orders.filter(order => order.id !== orderId);
         localStorage.setItem('orders', JSON.stringify(filteredOrders));
-        loadAndRenderAllItems(); // Re-render
+        
+        setTimeout(() => {
+            loadAndRenderAllItems(); // Re-render
+            hideLoader();
+        }, 300);
+    } catch (error) {
+        console.error('deleteOrder error:', error);
+        hideLoader();
+    }
 }
 
 // Function to delete cart item
 function deleteCartItem(itemId) {
+    showLoader(); // Loader ko'rsatish
+    
+    try {
         const cartItems = getCartFromLocalStorage();
         const filteredCart = cartItems.filter(item => item.id !== itemId);
         localStorage.setItem('cart', JSON.stringify(filteredCart));
-                window.location.reload();
-        loadAndRenderAllItems(); // Re-render
-    
+        
+        setTimeout(() => {
+            window.location.reload();
+        }, 300);
+    } catch (error) {
+        console.error('deleteCartItem error:', error);
+        hideLoader();
+    }
 }
 
 // Main function to load and render all items (orders + cart)
 function loadAndRenderAllItems() {
-    const orders = getOrdersFromLocalStorage();
-    const cartItems = getCartFromLocalStorage();
-    const container = document.getElementById('ordersContainer');
-    if (container) container.innerHTML = renderAllItemsHTML(orders, cartItems);
+    try {
+        const orders = getOrdersFromLocalStorage();
+        const cartItems = getCartFromLocalStorage();
+        const container = document.getElementById('ordersContainer');
+        if (container) container.innerHTML = renderAllItemsHTML(orders, cartItems);
+    } catch (error) {
+        console.error('loadAndRenderAllItems error:', error);
+    }
 }
 
 // Keep the old function for backward compatibility
@@ -531,72 +625,92 @@ function loadAndRenderOrders() {
     loadAndRenderAllItems();
 }
 
- function removeCart(){
+function removeCart(){
     const el = document.querySelector(".css-ekeie0");
     if (el) el.style="display:flex"
     document.querySelector("body").style="overflow: hidden"
 }
 
- function calcels(){
+function calcels(){
     const el = document.querySelector(".css-ekeie0");
     if (el) el.style="display:none"
     document.querySelector("body").style="overflow: scroll"
 }
 
 function removeAll() {
-    localStorage.removeItem('cart')
-    localStorage.removeItem('order')
-    localStorage.removeItem('orders')
-    localStorage.removeItem('selectedProduct')
-    window.location.reload()
-}
-
-function editOrder(orderId) {
-    const orders = JSON.parse(localStorage.getItem('orders')) || [];
-    const order = orders.find(o => o.id === orderId);
+    showLoader(); // Loader ko'rsatish
     
-    if (order) {
-        // Tahrirlash rejimini yoqamiz
-        localStorage.setItem('edit', 'true');
-        localStorage.setItem('for_id', orderId);
+    try {
+        localStorage.removeItem('cart')
+        localStorage.removeItem('order')
+        localStorage.removeItem('orders')
+        localStorage.removeItem('selectedProduct')
         
-        // Mahsulot ma'lumotlarini saqlaymiz
-        const productData = {
-            id: order.id,
-            title: order.title,
-            img: order.img,
-            img_1: order.img_1 || '',
-            description: order.description,
-            price: order.price || '',
-            aksiyaPrice: order.aksiyaPrice || '',
-            ingredients:order.ingredients || ''
-        };
-        
-        localStorage.setItem('selectedProduct', JSON.stringify(productData));
-        
-        // Pizza uchun qo'shimcha ma'lumotlarni saqlaymiz
-        if (order.dataType === 'pizza' && order.pizzas) {
-            // Pizza size ma'lumotini alohida saqlash
-            const pizzaSize = order.pizzas[0] ? order.pizzas[0].title : null;
-            if (pizzaSize) {
-                localStorage.setItem('selectedPizzaSize', pizzaSize);
-            }
-            
-            // Butun order obyektini ham saqlaymiz
-            localStorage.setItem('selectedProduct', JSON.stringify(order));
-        }
-        
-        const hasPizza = order.dataType === 'pizza' ||
-                        (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
-
-        if (hasPizza) {
-            window.location.href = '../details-pizza/';
-        } else {
-            window.location.href = '../details/';
-        }
+        setTimeout(() => {
+            window.location.reload();
+        }, 500);
+    } catch (error) {
+        console.error('removeAll error:', error);
+        hideLoader();
     }
 }
 
+function editOrder(orderId) {
+    showLoader(); // Loader ko'rsatish
+    
+    try {
+        const orders = JSON.parse(localStorage.getItem('orders')) || [];
+        const order = orders.find(o => o.id === orderId);
+        
+        if (order) {
+            // Tahrirlash rejimini yoqamiz
+            localStorage.setItem('edit', 'true');
+            localStorage.setItem('for_id', orderId);
+            
+            // Mahsulot ma'lumotlarini saqlaymiz
+            const productData = {
+                id: order.id,
+                title: order.title,
+                img: order.img,
+                img_1: order.img_1 || '',
+                description: order.description,
+                price: order.price || '',
+                aksiyaPrice: order.aksiyaPrice || '',
+                ingredients:order.ingredients || ''
+            };
+            
+            localStorage.setItem('selectedProduct', JSON.stringify(productData));
+            
+            // Pizza uchun qo'shimcha ma'lumotlarni saqlaymiz
+            if (order.dataType === 'pizza' && order.pizzas) {
+                // Pizza size ma'lumotini alohida saqlash
+                const pizzaSize = order.pizzas[0] ? order.pizzas[0].title : null;
+                if (pizzaSize) {
+                    localStorage.setItem('selectedPizzaSize', pizzaSize);
+                }
+                
+                // Butun order obyektini ham saqlaymiz
+                localStorage.setItem('selectedProduct', JSON.stringify(order));
+            }
+            
+            const hasPizza = order.dataType === 'pizza' ||
+                            (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
+
+            setTimeout(() => {
+                if (hasPizza) {
+                    window.location.href = '../details-pizza/';
+                } else {
+                    window.location.href = '../details/';
+                }
+            }, 300);
+        } else {
+            hideLoader();
+        }
+    } catch (error) {
+        console.error('editOrder error:', error);
+        hideLoader();
+    }
+}
 
 // existing subtotal calc & cart_cards rendering
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -615,8 +729,18 @@ if (document.querySelector(".subTotal")) {
 }
 
 function payment_page() {
-    sessionStorage.setItem("dataprice", grandTotal.toFixed(2) + "₾")
-    window.location="../oplata"
+    showLoader(); // Loader ko'rsatish
+    
+    try {
+        sessionStorage.setItem("dataprice", grandTotal.toFixed(2) + "₾");
+        
+        setTimeout(() => {
+            window.location="../oplata";
+        }, 300);
+    } catch (error) {
+        console.error('payment_page error:', error);
+        hideLoader();
+    }
 }
 
 let cartDiv = document.querySelector(".cart_cards");
@@ -643,21 +767,33 @@ if (cartDiv) {
 }
 
 // -----------------------------
-// DOMContentLoaded: run translation then render
+// DOMContentLoaded: run translation then render WITH LOADER
 // -----------------------------
 document.addEventListener('DOMContentLoaded', function() {
+    // Show loader at the beginning
+    showLoader();
+    
     // try translating storage items based on path language (MyMemory), then render
     translateStorageUsingLibre()
-        .catch(err => { console.error('translateStorageUsingLibre error:', err); })
+        .catch(err => { 
+            console.error('translateStorageUsingLibre error:', err); 
+        })
         .finally(() => {
             try {
                 loadAndRenderAllItems();
+                
+                // Hide loader after everything is done
+                setTimeout(() => {
+                    hideLoader();
+                }, 500); // Small delay to show completion
+                
             } catch (e) {
                 console.error('loadAndRenderAllItems error:', e);
+                hideLoader();
             }
         });
 });
 
 // -----------------------------
-// End of merged code
+// End of merged code with loader integration
 // -----------------------------
