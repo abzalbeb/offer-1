@@ -277,7 +277,7 @@ if (order == "medium_pizza") {
                                                     <p class="">შეგიძლიათ აირჩიოთ მასალა, რომლის დამატებაც გსურთ</p>
                                                     <div
                                                         style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 22px;">
-                                                        <div data-title="Corn" data-price="+2.5₾"
+                                                        <div data-title="Corn" data-id="1-1" data-price="+2.5₾"
                                                             class="for_vibor_0 MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a"  >
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -304,7 +304,7 @@ if (order == "medium_pizza") {
                                                                     </path>
                                                                 </svg></div>
                                                         </div>
-                                                        <div data-title="Green Pepper" data-price="+2.5₾"
+                                                        <div data-title="Green Pepper" data-id="1-2" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -332,7 +332,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Chicken" data-price="+3₾"
+                                                        <div data-title="Chicken" data-id="1-3" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -360,7 +360,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Halapenio" data-price="+2.5₾"
+                                                        <div data-title="Halapenio" data-id="1-4" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -388,7 +388,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Pepperoni" data-price="+3₾"
+                                                        <div data-title="Pepperoni" data-id="1-5" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -416,7 +416,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Mushrooms" data-price="+2.5₾"
+                                                        <div data-title="Mushrooms" data-id="1-6" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -444,7 +444,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Onions" data-price="+2.5₾"
+                                                        <div data-title="Onions" data-id="1-7"  data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -472,7 +472,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Pizza Sauce" data-price="+2.5₾"
+                                                        <div data-title="Pizza Sauce" data-id="1-8" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -500,7 +500,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Fish" data-price="+3₾"
+                                                        <div data-title="Fish" data-id="1-9" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -528,7 +528,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Feta" data-price="+3₾"
+                                                        <div data-title="Feta" data-id="1-10" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -556,7 +556,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Mozzarella" data-price="+3₾"
+                                                        <div data-title="Mozzarella" data-id="1-11" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -584,7 +584,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Cheddar" data-price="+3₾"
+                                                        <div data-title="Cheddar" data-id="1-12" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -612,7 +612,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Ham" data-price="+3₾"
+                                                        <div data-title="Ham" data-id="1-13" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -640,7 +640,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Tomato" data-price="+2.5₾"
+                                                        <div data-title="Tomato" data-id="1-14" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -668,7 +668,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Bacon" data-price="+3₾"
+                                                        <div data-title="Bacon" data-id="1-15" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -696,7 +696,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Gorgonzola Cheese" data-price="+3₾"
+                                                        <div data-title="Gorgonzola Cheese" data-id="1-16" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -724,7 +724,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Black Olive" data-price="+2.5₾"
+                                                        <div data-title="Black Olive" data-id="1-17" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1374,7 +1374,7 @@ if (order == "medium_pizza") {
                                                     <p class="">შეგიძლიათ აირჩიოთ მასალა, რომლის დამატებაც გსურთ</p>
                                                     <div
                                                         style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 22px;">
-                                                        <div data-title="Corn" data-price="+2.5₾"
+                                                        <div data-title="Corn" data-id="1-1" data-price="+2.5₾"
                                                             class="for_vibor_1 MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a"  >
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1401,7 +1401,7 @@ if (order == "medium_pizza") {
                                                                     </path>
                                                                 </svg></div>
                                                         </div>
-                                                        <div data-title="Green Pepper" data-price="+2.5₾"
+                                                        <div data-title="Green Pepper" data-id="1-2" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1429,7 +1429,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Chicken" data-price="+3₾"
+                                                        <div data-title="Chicken" data-id="1-3" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1457,7 +1457,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Halapenio" data-price="+2.5₾"
+                                                        <div data-title="Halapenio" data-id="1-4" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1485,7 +1485,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Pepperoni" data-price="+3₾"
+                                                        <div data-title="Pepperoni" data-id="1-5" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1513,7 +1513,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Mushrooms" data-price="+2.5₾"
+                                                        <div data-title="Mushrooms" data-id="1-6" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1541,7 +1541,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Onions" data-price="+2.5₾"
+                                                        <div data-title="Onions" data-id="1-7" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1569,7 +1569,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Pizza Sauce" data-price="+2.5₾"
+                                                        <div data-title="Pizza Sauce" data-id="1-8" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1597,7 +1597,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Fish" data-price="+3₾"
+                                                        <div data-title="Fish" data-id="1-9" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1625,7 +1625,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Feta" data-price="+3₾"
+                                                        <div data-title="Feta" data-id="1-10" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1653,7 +1653,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Mozzarella" data-price="+3₾"
+                                                        <div data-title="Mozzarella" data-id="1-11" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1681,7 +1681,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Cheddar" data-price="+3₾"
+                                                        <div data-title="Cheddar" data-id="1-12" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1709,7 +1709,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Ham" data-price="+3₾"
+                                                        <div data-title="Ham" data-id="1-13" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1737,7 +1737,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Tomato" data-price="+2.5₾"
+                                                        <div data-title="Tomato" data-id="1-14" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1765,7 +1765,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Bacon" data-price="+3₾"
+                                                        <div data-title="Bacon" data-id="1-15" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1793,7 +1793,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Gorgonzola Cheese" data-price="+3₾"
+                                                        <div data-title="Gorgonzola Cheese" data-id="1-16" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -1821,7 +1821,7 @@ if (order == "medium_pizza") {
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Black Olive" data-price="+2.5₾"
+                                                        <div data-title="Black Olive" data-id="1-17" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2676,7 +2676,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                     <p class="">შეგიძლიათ აირჩიოთ მასალა, რომლის დამატებაც გსურთ</p>
                                                     <div
                                                         style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 22px;">
-                                                        <div data-title="Corn" data-price="+2.5₾"
+                                                        <div data-title="Corn" data-id="1-1" data-price="+2.5₾"
                                                             class="for_vibor_0 MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a"  >
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2703,7 +2703,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </path>
                                                                 </svg></div>
                                                         </div>
-                                                        <div data-title="Green Pepper" data-price="+2.5₾"
+                                                        <div data-title="Green Pepper" data-id="1-2" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2731,7 +2731,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Chicken" data-price="+3₾"
+                                                        <div data-title="Chicken" data-id="1-3" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2759,7 +2759,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Halapenio" data-price="+2.5₾"
+                                                        <div data-title="Halapenio" data-id="1-4" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2787,7 +2787,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Pepperoni" data-price="+3₾"
+                                                        <div data-title="Pepperoni" data-id="1-5" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2815,7 +2815,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Mushrooms" data-price="+2.5₾"
+                                                        <div data-title="Mushrooms" data-id="1-6" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2843,7 +2843,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Onions" data-price="+2.5₾"
+                                                        <div data-title="Onions" data-id="1-7" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2871,7 +2871,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Pizza Sauce" data-price="+2.5₾"
+                                                        <div data-title="Pizza Sauce" data-id="1-8" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2899,7 +2899,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Fish" data-price="+3₾"
+                                                        <div data-title="Fish" data-id="1-9" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2927,7 +2927,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Feta" data-price="+3₾"
+                                                        <div data-title="Feta" data-id="1-10" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2955,7 +2955,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Mozzarella" data-price="+3₾"
+                                                        <div data-title="Mozzarella" data-id="1-11" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -2983,7 +2983,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Cheddar" data-price="+3₾"
+                                                        <div data-title="Cheddar" data-id="1-12" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3011,7 +3011,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Ham" data-price="+3₾"
+                                                        <div data-title="Ham" data-id="1-13" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3039,7 +3039,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Tomato" data-price="+2.5₾"
+                                                        <div data-title="Tomato" data-id="1-14" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3067,7 +3067,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Bacon" data-price="+3₾"
+                                                        <div data-title="Bacon" data-id="1-15" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3095,7 +3095,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Gorgonzola Cheese" data-price="+3₾"
+                                                        <div data-title="Gorgonzola Cheese" data-id="1-16" data-price="+3₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3123,7 +3123,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Black Olive" data-price="+2.5₾"
+                                                        <div data-title="Black Olive" data-id="1-17" data-price="+2.5₾"
                                                             class="for_vibor_0  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3773,7 +3773,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                     <p class="">შეგიძლიათ აირჩიოთ მასალა, რომლის დამატებაც გსურთ</p>
                                                     <div
                                                         style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 22px;">
-                                                        <div data-title="Corn" data-price="+2.5₾"
+                                                        <div data-title="Corn" data-id="1-1" data-price="+2.5₾"
                                                             class="for_vibor_1 MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a"  >
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3800,7 +3800,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </path>
                                                                 </svg></div>
                                                         </div>
-                                                        <div data-title="Green Pepper" data-price="+2.5₾"
+                                                        <div data-title="Green Pepper" data-id="1-2" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3828,7 +3828,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Chicken" data-price="+3₾"
+                                                        <div data-title="Chicken" data-id="1-3" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3856,7 +3856,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Halapenio" data-price="+2.5₾"
+                                                        <div data-title="Halapenio" data-id="1-4" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3884,7 +3884,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Pepperoni" data-price="+3₾"
+                                                        <div data-title="Pepperoni" data-id="1-5" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3912,7 +3912,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Mushrooms" data-price="+2.5₾"
+                                                        <div data-title="Mushrooms" data-id="1-6" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3940,7 +3940,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Onions" data-price="+2.5₾"
+                                                        <div data-title="Onions" data-id="1-7" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3968,7 +3968,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Pizza Sauce" data-price="+2.5₾"
+                                                        <div data-title="Pizza Sauce" data-id="1-8" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -3996,7 +3996,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Fish" data-price="+3₾"
+                                                        <div data-title="Fish" data-id="1-9" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -4024,7 +4024,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Feta" data-price="+3₾"
+                                                        <div data-title="Feta" data-id="1-10" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -4052,7 +4052,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Mozzarella" data-price="+3₾"
+                                                        <div data-title="Mozzarella" data-id="1-11" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -4080,7 +4080,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Cheddar" data-price="+3₾"
+                                                        <div data-title="Cheddar" data-id="1-12" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -4108,7 +4108,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Ham" data-price="+3₾"
+                                                        <div data-title="Ham" data-id="1-13" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -4136,7 +4136,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Tomato" data-price="+2.5₾"
+                                                        <div data-title="Tomato" data-id="1-14" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -4164,7 +4164,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Bacon" data-price="+3₾"
+                                                        <div data-title="Bacon" data-id="1-15" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -4192,7 +4192,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Gorgonzola Cheese" data-price="+3₾"
+                                                        <div data-title="Gorgonzola Cheese" data-id="1-16" data-price="+3₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">
@@ -4220,7 +4220,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                                                     </svg></div>
                                                             </div>
                                                         </div>
-                                                        <div data-title="Black Olive" data-price="+2.5₾"
+                                                        <div data-title="Black Olive" data-id="1-17" data-price="+2.5₾"
                                                             class="for_vibor_1  MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3.8 MuiGrid-grid-md-1.8 css-1d1l40a">
                                                             <div
                                                                 style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10px;">

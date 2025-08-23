@@ -4236,13 +4236,7 @@ function loadExistingOrder(orderId) {
     console.log("Found order:", existingOrder);
 
     // Update product info
-    product = {
-        title: existingOrder.title,
-        img: existingOrder.img,
-        description: existingOrder.description,
-        price: existingOrder.price,
-        aksiyaPrice: existingOrder.aksiyaPrice || ''
-    };
+    
 
     // Update count
     count = existingOrder.count;
@@ -4272,6 +4266,7 @@ function loadExistingOrder(orderId) {
                     if (cardTitle === pizza.title) {
                         matchingCard = card;
                     }
+                    
                 });
 
                 if (matchingCard) {
@@ -4457,6 +4452,7 @@ function checkIngredientState(pizzaId) {
     console.log(`Active buttons count: ${activeButtons}`);
 }
 
+// YANGILANGAN addToCart funksiyasi - ingredient data va id bilan
 function addToCart() {
     console.log("AddToCart called");
     console.log("pizzaSelectionData:", pizzaSelectionData);
@@ -4465,16 +4461,16 @@ function addToCart() {
         return;
     }
 
-        if (selectedItemsMap.length > 0) {
-    // hech narsa qilmaydi
+    if (selectedItemsMap.length > 0) {
+        // hech narsa qilmaydi
     } else {
-                    const errorPopup = document.querySelector('#Toastify-error');
-            if (errorPopup) {
-                errorPopup.style.setProperty('display', 'flex', 'important');
-                setTimeout(() => {
-                    errorPopup.style.setProperty('display', 'none', 'important');
-                }, 2200);
-            }
+        const errorPopup = document.querySelector('#Toastify-error');
+        if (errorPopup) {
+            errorPopup.style.setProperty('display', 'flex', 'important');
+            setTimeout(() => {
+                errorPopup.style.setProperty('display', 'none', 'important');
+            }, 2200);
+        }
     }
 
     let orderId;
@@ -4534,6 +4530,7 @@ function addToCart() {
 
     selectedPizzaBlocks.forEach(id => {
         let pizza = {
+            id: id, // DATA-ID ATRIBUTINI QO'SHDIM
             title: '',
             price: 0,
             ingredients: []
@@ -4570,6 +4567,7 @@ function addToCart() {
                 const price = parseFloat(priceStr.replace(/[^\d.]/g, '')) || 0;
 
                 pizza.ingredients.push({
+                    id: id, // INGREDIENT UCHUN HAM DATA-ID QO'SHDIM
                     name: ingredientName,
                     price: price
                 });
@@ -4597,12 +4595,12 @@ function addToCart() {
         ...product,
         id: orderId,
         count: count,
-        pizzas: pizzasArray,
+        pizzas: pizzasArray, // HAR BIR PIZZA ENDI ID GA EGA
         totalPrice: totalPrice + "₾",
         date: new Date().toISOString()
     };
 
-    console.log("Final order with calculated total:", newOrder);
+    console.log("Final order with calculated total and pizza IDs:", newOrder);
 
     // Order processing
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -4631,6 +4629,7 @@ function addToCart() {
         window.location.href = "../cart";
     }, 1000);
 }
+
 
 function updateCartDisplay() {
     const cartItems = document.getElementById('cartItems');
