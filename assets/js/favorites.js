@@ -86,7 +86,6 @@ favorites
   .filter(item => item.type !== 'pizza')
   .forEach(item => {
 
-    console.log(item.price);
     
     const productHTML = `
       <div class="jss32">
@@ -274,7 +273,6 @@ favorites
       localStorage.setItem("selectedProduct", JSON.stringify(selectedProduct));
       window.location.href='../details-pizza/'
       
-      console.log("Selected product saved:", selectedProduct);
     });
 
     // === Order tugmalariga delegation ===

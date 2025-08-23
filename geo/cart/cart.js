@@ -64,7 +64,6 @@ async function translateTextLibre(text, targetLang) {
 async function translateStorageUsingLibre() {
     try {
         const targetLang = getCurrentLanguage();
-        console.log('[translateStorage] targetLang =', targetLang);
 
         // read current storage using helper funcs defined later (they exist)
         const orders = (typeof getOrdersFromLocalStorage === 'function') ? getOrdersFromLocalStorage() : JSON.parse(localStorage.getItem('orders') || '[]');
@@ -108,13 +107,11 @@ async function translateStorageUsingLibre() {
         });
 
         if (uniqMap.size === 0) {
-            console.log('[translateStorage] nothing to translate');
             return;
         }
 
         // build unique text array
         const uniqTexts = Array.from(uniqMap.keys());
-        console.log('[translateStorage] unique texts count:', uniqTexts.length);
 
         // translate sequentially to be gentle with the API
         const translated = [];
@@ -122,7 +119,6 @@ async function translateStorageUsingLibre() {
             const s = uniqTexts[i];
             const tr = await translateTextLibre(s, targetLang);
             translated.push(tr);
-            console.log(`[translateStorage] translated ${i+1}/${uniqTexts.length}`);
             // small delay (avoid rate limit)
             await new Promise(r => setTimeout(r, 150));
         }
@@ -156,7 +152,6 @@ async function translateStorageUsingLibre() {
         try {
             localStorage.setItem('orders', JSON.stringify(orders));
             localStorage.setItem('cart', JSON.stringify(cart));
-            console.log('[translateStorage] saved translations to localStorage (MyMemory)');
         } catch (err) {
             console.error('[translateStorage] saving to localStorage failed:', err);
         }
@@ -168,7 +163,6 @@ async function translateStorageUsingLibre() {
 
 // expose quick runner
 window.translateStorageNow = function() {
-    console.log('translateStorageNow() called — starting translation based on path (MyMemory)');
     return translateStorageUsingLibre();
 };
 
@@ -586,7 +580,6 @@ function editOrder(orderId) {
             const pizzaSize = order.pizzas[0] ? order.pizzas[0].title : null;
             if (pizzaSize) {
                 localStorage.setItem('selectedPizzaSize', pizzaSize);
-                console.log('Pizza size saqlandi:', pizzaSize);
             }
             
             // Butun order obyektini ham saqlaymiz

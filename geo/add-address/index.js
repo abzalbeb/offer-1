@@ -417,7 +417,6 @@ function myAddressInfo() {
   const addressStr = sessionStorage.getItem('addresses');
 
   if (!addressStr) {
-    console.log("addresses sessionStorage-da topilmadi");
     return;
   }
 
@@ -431,7 +430,6 @@ function myAddressInfo() {
 
   // Agar array bo‘sh bo‘lsa, sahifaga o‘tkazmaymiz
   if (!Array.isArray(addresses) || addresses.length === 0) {
-    console.log("addresses bo‘sh, sahifaga o‘tkazilmaydi");
     return;
   }
 
