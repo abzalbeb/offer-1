@@ -1,3 +1,181 @@
+// -----------------------------
+// PATH-BASED LANGUAGE DETECTOR
+// -----------------------------
+function getCurrentLanguage() {
+    // URL dan tilni aniqlash
+    const path = window.location.pathname || '';
+
+    // Geo til - /geo/ bilan boshlanadi yoki ichida /geo/ bor
+    if (path.includes('/geo/') || path.startsWith('/geo')) return 'geo';
+
+    // Eng til - root yoki index.html
+    if (path === '/' || path === '' || path === '/index.html') return 'en';
+
+    // Default eng tili
+    return 'en';
+}
+window.getCurrentLanguage = getCurrentLanguage; // for testing in console
+
+// -----------------------------
+// MyMemory-based translate function (replaces previous LibreTranslate usage)
+// Uses: https://api.mymemory.translated.net/get?q=...&langpair=... 
+// -----------------------------
+async function translateTextLibre(text, targetLang) {
+    if (!text || !String(text).trim()) return text;
+
+    const langpair = (targetLang === 'geo') ? 'en|ka' : 'ka|en';
+    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langpair}`;
+
+    try {
+        const res = await fetch(url);
+        if (!res.ok) {
+            console.error('[translateText] MyMemory API non-OK', res.status);
+            return text;
+        }
+        const j = await res.json();
+        let translated = (j && j.responseData && j.responseData.translatedText) 
+            ? j.responseData.translatedText 
+            : null;
+
+        if (!translated && Array.isArray(j.matches) && j.matches.length > 0) {
+            translated = j.matches[0].translation || j.matches[0].translationText || null;
+        }
+        if (!translated) return text;
+
+        // HTML entitylarni ochirish
+        translated = translated.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+
+        // Agar javobda ruscha harflar bo‘lsa — tarjimani bekor qilish
+        if (/[а-яё]/i.test(translated)) {
+            console.warn('[translateText] Skipped non-English/Georgian translation:', translated);
+            return text; 
+        }
+        return translated;
+    } catch (err) {
+        console.error('[translateText] MyMemory request failed:', err);
+        return text;
+    }
+}
+
+
+// -----------------------------
+// TRANSLATE STORAGE BY PATH (uses translateTextLibre -> MyMemory)
+// -----------------------------
+async function translateStorageUsingLibre() {
+    try {
+        const targetLang = getCurrentLanguage();
+        console.log('[translateStorage] targetLang =', targetLang);
+
+        // read current storage using helper funcs defined later (they exist)
+        const orders = (typeof getOrdersFromLocalStorage === 'function') ? getOrdersFromLocalStorage() : JSON.parse(localStorage.getItem('orders') || '[]');
+        const cart = (typeof getCartFromLocalStorage === 'function') ? getCartFromLocalStorage() : JSON.parse(localStorage.getItem('cart') || '[]');
+
+        // gather texts (deduped)
+        const tasks = []; // {type, idx, field, text, pizzaIdx?}
+        const uniqMap = new Map(); // text -> index in uniqTexts
+
+        function pushText(type, idx, field, text, pizzaIdx) {
+            if (!text || !String(text).trim()) return;
+            const t = String(text);
+            if (!uniqMap.has(t)) uniqMap.set(t, uniqMap.size);
+            tasks.push({ type, idx, field, text: t, pizzaIdx });
+        }
+
+        orders.forEach((o, i) => {
+            if (o && o.title) pushText('order', i, 'title', o.title);
+            if (o && o.description) pushText('order', i, 'description', o.description);
+
+            if (Array.isArray(o.pizzas)) {
+                o.pizzas.forEach((p, pi) => {
+                    if (p && p.title) pushText('order-pizza', i, 'title', p.title, pi);
+                    if (p && p.description) pushText('order-pizza', i, 'description', p.description, pi);
+
+                    // INGREDIENTLAR
+                    if (Array.isArray(p.ingredients)) {
+                        p.ingredients.forEach((ing, ii) => {
+                            if (ing && ing.name) {
+                                pushText('order-ingredient', i, 'name', ing.name, pi + ':' + ii);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        cart.forEach((c, i) => {
+            if (c && c.title) pushText('cart', i, 'title', c.title);
+            if (c && c.description) pushText('cart', i, 'description', c.description);
+        });
+
+        if (uniqMap.size === 0) {
+            console.log('[translateStorage] nothing to translate');
+            return;
+        }
+
+        // build unique text array
+        const uniqTexts = Array.from(uniqMap.keys());
+        console.log('[translateStorage] unique texts count:', uniqTexts.length);
+
+        // translate sequentially to be gentle with the API
+        const translated = [];
+        for (let i = 0; i < uniqTexts.length; i++) {
+            const s = uniqTexts[i];
+            const tr = await translateTextLibre(s, targetLang);
+            translated.push(tr);
+            console.log(`[translateStorage] translated ${i+1}/${uniqTexts.length}`);
+            // small delay (avoid rate limit)
+            await new Promise(r => setTimeout(r, 150));
+        }
+
+        // apply translations back using maps
+        tasks.forEach(task => {
+            const uniqIndex = uniqMap.get(task.text);
+            const tr = translated[uniqIndex] || task.text;
+            if (task.type === 'order') {
+                if (orders[task.idx]) orders[task.idx][task.field] = tr;
+            } else if (task.type === 'order-pizza') {
+                if (orders[task.idx] && Array.isArray(orders[task.idx].pizzas) && orders[task.idx].pizzas[task.pizzaIdx]) {
+                    orders[task.idx].pizzas[task.pizzaIdx][task.field] = tr;
+                }
+            } else if (task.type === 'cart') {
+                if (cart[task.idx]) cart[task.idx][task.field] = tr;
+            }
+                else if (task.type === 'order-ingredient') {
+           if (orders[task.idx] && Array.isArray(orders[task.idx].pizzas)) {
+            const [pi, ii] = String(task.pizzaIdx).split(':').map(Number);
+            if (orders[task.idx].pizzas[pi] && Array.isArray(orders[task.idx].pizzas[pi].ingredients)) {
+                if (orders[task.idx].pizzas[pi].ingredients[ii]) {
+                    orders[task.idx].pizzas[pi].ingredients[ii].name = tr;
+                }
+            }
+        }
+    }
+        });
+
+        // save back
+        try {
+            localStorage.setItem('orders', JSON.stringify(orders));
+            localStorage.setItem('cart', JSON.stringify(cart));
+            console.log('[translateStorage] saved translations to localStorage (MyMemory)');
+        } catch (err) {
+            console.error('[translateStorage] saving to localStorage failed:', err);
+        }
+
+    } catch (err) {
+        console.error('[translateStorage] fatal error:', err);
+    }
+}
+
+// expose quick runner
+window.translateStorageNow = function() {
+    console.log('translateStorageNow() called — starting translation based on path (MyMemory)');
+    return translateStorageUsingLibre();
+};
+
+// -----------------------------
+// ORIGINAL USER CODE (kept intact, but deduplicated helpers only once)
+// -----------------------------
+
 // Function to get orders from localStorage
 function getOrdersFromLocalStorage() {
     try {
@@ -145,9 +323,9 @@ function renderOrdersHTML(orders) {
                                     <div>
                                         <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px; width: 100%">
                                             <div style="display: flex; align-items: center;">
-                                                <span class="fs-14" style="color: black; font-weight: 600; font-style: italic;">Promotion: ${order.title || ''}</span>
+                                                <span class="fs-14" style="color: black; font-weight: 600; font-style: italic;">დაწინაურება: ${order.title || ''}</span>
                                             </div>
-                                            <p class="fs-14 title_prices" style="color: black; font-weight: 600; font-style: italic;">starting from ${order.price ? order.price.toFixed(2) + '₾' : ''}</p>
+                                            <p class="fs-14 title_prices" style="color: black; font-weight: 600; font-style: italic;">დაწყებული ${order.price ? order.price.toFixed(2) + '₾' : ''}</p>
                                         </div>
                                         <div>
                                             ${renderPizzas(order.pizzas)}
@@ -269,7 +447,9 @@ function changeQuantity(orderId, change) {
 // total larni yig'ish
 let subTotal = cart.reduce((sum, item) => sum + (item.total || 0), 0);
 
-document.querySelector(".subTotal").innerHTML = subTotal.toFixed(2)
+if (document.querySelector(".subTotal")) {
+    document.querySelector(".subTotal").innerHTML = subTotal.toFixed(2)
+}
 }
 
 // Function to change cart item quantity
@@ -316,7 +496,6 @@ function changeCartQuantity(itemId, change) {
                 item.price = parseFloat(newTotal);
             }
             
-            
             localStorage.setItem('cart', JSON.stringify(cartItems));
             loadAndRenderAllItems(); // Re-render
                         window.location.reload()
@@ -350,13 +529,8 @@ function loadAndRenderAllItems() {
     const orders = getOrdersFromLocalStorage();
     const cartItems = getCartFromLocalStorage();
     const container = document.getElementById('ordersContainer');
-    container.innerHTML = renderAllItemsHTML(orders, cartItems);
+    if (container) container.innerHTML = renderAllItemsHTML(orders, cartItems);
 }
-
-// Load all items when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    loadAndRenderAllItems();
-});
 
 // Keep the old function for backward compatibility
 function loadAndRenderOrders() {
@@ -364,12 +538,14 @@ function loadAndRenderOrders() {
 }
 
  function removeCart(){
-    document.querySelector(".css-ekeie0").style="display:flex"
+    const el = document.querySelector(".css-ekeie0");
+    if (el) el.style="display:flex"
     document.querySelector("body").style="overflow: hidden"
 }
 
  function calcels(){
-    document.querySelector(".css-ekeie0").style="display:none"
+    const el = document.querySelector(".css-ekeie0");
+    if (el) el.style="display:none"
     document.querySelector("body").style="overflow: scroll"
 }
 
@@ -429,6 +605,7 @@ function editOrder(orderId) {
 }
 
 
+// existing subtotal calc & cart_cards rendering
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
@@ -440,32 +617,54 @@ let ordersTotal = orders.reduce((sum, item) => sum + ((item.price || 0) * (item.
 
 // umumiy total
 let grandTotal = cartTotal + ordersTotal;
-document.querySelector(".subTotal").innerHTML = grandTotal.toFixed(2) + "₾"
+if (document.querySelector(".subTotal")) {
+    document.querySelector(".subTotal").innerHTML = grandTotal.toFixed(2) + "₾";
+}
 
 function payment_page() {
-            sessionStorage.setItem("dataprice", grandTotal.toFixed(2) + "₾")
-            window.location="../oplata"
-        }
-
+    sessionStorage.setItem("dataprice", grandTotal.toFixed(2) + "₾")
+    window.location="../oplata"
+}
 
 let cartDiv = document.querySelector(".cart_cards");
+if (cartDiv) {
+    cartDiv.innerHTML += orders.map(item => {
+        return `
+             <div class="cart_card">
+                                    <p class=" fs-20 capitalize"
+                                        style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${item.title}</p>
+                                    <span class="text-red " style="margin-left: auto; font-weight: 500;">${(item.price*item.count).toFixed(2)}₾</span>
+                                </div>
+        `;
+    }).join("");
 
-cartDiv.innerHTML += orders.map(item => {
-    return `
-         <div class="cart_card">
-                                <p class=" fs-20 capitalize"
-                                    style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${item.title}</p>
-                                <span class="text-red " style="margin-left: auto; font-weight: 500;">${item.price*item.count}₾</span>
-                            </div>
-    `;
-}).join("");
+    cartDiv.innerHTML += cart.map(item => {
+        return `
+             <div class="cart_card">
+                                    <p class=" fs-20 capitalize"
+                                        style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${item.title}</p>
+                                    <span class="text-red " style="margin-left: auto; font-weight: 500;">${(item.price*item.count).toFixed(2)}₾</span>
+                                </div>
+        `;
+    }).join("");
+}
 
-cartDiv.innerHTML += cart.map(item => {
-    return `
-         <div class="cart_card">
-                                <p class=" fs-20 capitalize"
-                                    style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${item.title}</p>
-                                <span class="text-red " style="margin-left: auto; font-weight: 500;">${item.price*item.count}₾</span>
-                            </div>
-    `;
-}).join("");
+// -----------------------------
+// DOMContentLoaded: run translation then render
+// -----------------------------
+document.addEventListener('DOMContentLoaded', function() {
+    // try translating storage items based on path language (MyMemory), then render
+    translateStorageUsingLibre()
+        .catch(err => { console.error('translateStorageUsingLibre error:', err); })
+        .finally(() => {
+            try {
+                loadAndRenderAllItems();
+            } catch (e) {
+                console.error('loadAndRenderAllItems error:', e);
+            }
+        });
+});
+
+// -----------------------------
+// End of merged code
+// -----------------------------

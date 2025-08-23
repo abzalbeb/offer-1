@@ -464,7 +464,7 @@ function updateIngredientsDisplay() {
     addToCartBtn.className = 'MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-fullWidth  fs-18 jss8 css-np2orv addToCartBtn';
     addToCartBtn.setAttribute('tabindex', '0');
     addToCartBtn.setAttribute('type', 'button');
-    addToCartBtn.textContent = 'Add to cart';
+    addToCartBtn.textContent = 'კალათაში დამატება';
 
     const rippleSpan = document.createElement('span');
     rippleSpan.className = 'MuiTouchRipple-root css-w0pj6f';
@@ -1217,7 +1217,7 @@ function handleIngredientVisibility(){
 
 if (localStorage.getItem("edit") == "true") {
     for (let i = 0; i < document.querySelectorAll(".addToCartBtn").length; i++) {
-        document.querySelectorAll(".addToCartBtn")[i].innerHTML = "Update cart"
+        document.querySelectorAll(".addToCartBtn")[i].innerHTML = "კალათაში დამატება"
     }
 }
 
