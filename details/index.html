@@ -4683,54 +4683,10 @@ function updateCartDisplay() {
         cartItems.appendChild(itemDiv);
     });
 
-    // Add event listeners for edit and remove buttons
-    document.querySelectorAll('.edit-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            editOrder(parseInt(this.dataset.id));
-        });
-    });
-
-    document.querySelectorAll('.remove-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            removeFromCart(parseInt(this.dataset.id));
-        });
-    });
-}
-
-function editOrder(orderId) {
-    console.log("Editing order:", orderId);
     
-    const orders = JSON.parse(localStorage.getItem('orders')) || [];
-    const orderIndex = orders.findIndex(order => order.id === orderId);
-
-    if (orderIndex !== -1) {
-        const order = orders[orderIndex];
-
-        localStorage.setItem('edit', 'true');
-        localStorage.setItem('for_id', orderId.toString());
-
-        product = {
-            title: order.title,
-            img: order.img,
-            description: order.description,
-            price: parseFloat(order.price),
-            aksiyaPrice: parseFloat(order.aksiyaPrice)
-        };
-        localStorage.setItem('selectedProduct', JSON.stringify(product));
-
-        window.location.href = "order.html";
-    }
 }
 
-function removeFromCart(orderId) {
-    if (confirm('Haqiqatan ham bu buyurtmani o\'chirmoqchimisiz?')) {
-        const orders = JSON.parse(localStorage.getItem('orders')) || [];
-        const updatedOrders = orders.filter(order => order.id !== orderId);
 
-        localStorage.setItem('orders', JSON.stringify(updatedOrders));
-        updateCartDisplay();
-    }
-}
 
 // General functions with pizza ID parameter
 function select_choose(id) {
