@@ -112,7 +112,6 @@ function translateCartItems() {
             loadAndRenderOrders();
         }
         
-        console.log('Cart translated to:', currentLang);
     }
 }
 
@@ -154,8 +153,6 @@ function updateCartPopup() {
     const emptyImg = document.querySelector(".cart-popup-img");
     const totalEl = document.querySelector(".cart-total .redflag");
 
-    console.log("Cart:", cart);
-    console.log("Orders:", orders);
 
     if (!container || !cartItemMap || !emptyImg || !totalEl) return;
 
@@ -328,7 +325,6 @@ function initAddToCartButtons() {
     document.querySelectorAll(".jss41").forEach(btn => {
         btn.addEventListener("click", function () {
             let product = this.closest(".product");
-            console.log("Add to cart clicked");
 
             // Agar dataset da narxlar mavjud bo'lmasa, faqat o'shanda DOM dan o'qiymiz
             if (!product.dataset.price || !product.dataset.aksiyaPrice) {
@@ -599,7 +595,6 @@ window.addEventListener('storage', function(e) {
 
 // Orders ni ko'rish uchun funksiya (console da test qilish uchun)
 function viewOrders() {
-    console.log("Orders:", JSON.parse(localStorage.getItem("orders") || "[]"));
 }
 
 // Orders ni tozalash funksiyasi (test uchun)

@@ -274,7 +274,6 @@ favorites
       localStorage.setItem("selectedProduct", JSON.stringify(selectedProduct));
       window.location.href='../details-pizza/'
       
-      console.log("Selected product saved:", selectedProduct);
     });
 
     // === Order tugmalariga delegation ===
