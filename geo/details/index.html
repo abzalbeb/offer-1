@@ -4013,43 +4013,37 @@ function calculateTotalPrice() {
             // Ingredientlar narxini qo'shish
             const selectedItems = selectedItemsMap.get(id);
             if (selectedItems && selectedItems.size > 0) {
-                selectedItems.forEach(key => {
-                    const parts = key.split('+');
-                    if (parts.length > 1) {
-                        const priceStr = parts.slice(1).join('+');
-                        const price = parseFloat(priceStr.replace(/[^\d.]/g, '')) || 0;
-                        additionalPrice += price;
-                    }
+                selectedItems.forEach(itemData => {
+                    additionalPrice += itemData.price || 0;
                 });
             }
         }
     });
 
     // Umumiy narxni hisoblash
-let totalPrice;
-let basePrice = product.price || product.aksiyaPrice;  // DOIMO oddiy narxni birinchi tanla
+    let totalPrice;
+    let basePrice = product.price || product.aksiyaPrice;  // DOIMO oddiy narxni birinchi tanla
 
-if (product.description && product.description.includes("get second for free")) {
-    // 1+1 aksiya: asosiy narx * miqdor + qo'shimcha narx (faqat bir marta)
-    totalPrice = (basePrice * count) + additionalPrice;
-} else {
-    // Oddiy mahsulot: (asosiy narx + qo'shimcha narx) * miqdor
-    totalPrice = (basePrice + additionalPrice) * count;
-}
+    if (product.description && product.description.includes("get second for free")) {
+        // 1+1 aksiya: asosiy narx * miqdor + qo'shimcha narx (faqat bir marta)
+        totalPrice = (basePrice * count) + additionalPrice;
+    } else {
+        // Oddiy mahsulot: (asosiy narx + qo'shimcha narx) * miqdor
+        totalPrice = (basePrice + additionalPrice) * count;
+    }
 
-// Narxlarni yangilash
-const priceElement = document.getElementById("price");
-const aksiyaPriceElement = document.getElementById("aksiyaPrice");
+    // Narxlarni yangilash
+    const priceElement = document.getElementById("price");
+    const aksiyaPriceElement = document.getElementById("aksiyaPrice");
 
-if (priceElement) {
-    priceElement.textContent = totalPrice.toFixed(2) + "₾";
-}
+    if (priceElement) {
+        priceElement.textContent = totalPrice.toFixed(2) + "₾";
+    }
 
-if (aksiyaPriceElement && product.aksiyaPrice) {
-    // faqat aksiya narxi bo'lsa ko'rsatamiz
-    aksiyaPriceElement.textContent = (product.aksiyaPrice * count + additionalPrice).toFixed(2) + "₾";
-}
-
+    if (aksiyaPriceElement && product.aksiyaPrice) {
+        // faqat aksiya narxi bo'lsa ko'rsatamiz
+        aksiyaPriceElement.textContent = (product.aksiyaPrice * count + additionalPrice).toFixed(2) + "₾";
+    }
     
     console.log("Price updated:", {
         basePrice: basePrice,
@@ -4104,6 +4098,7 @@ function initializePage() {
             bonusCards.querySelectorAll('.bonus_card').forEach(card => {
                 card.addEventListener('click', function () {
                     selectPizza(id, card);
+                    console.log(id, card);
                 });
             });
         }
@@ -4120,42 +4115,50 @@ function initializePage() {
             const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
 
             const title = this.dataset.title;
-            const price = this.dataset.price;
-            const key = title + '+' + price + '₾';
+            const price = parseFloat(this.dataset.price) || 0;
+            const ingredientId = this.dataset.id; // Ingredient'ning o'z data-id'si
 
-            // Ingredient allaqachon tanlanganligini tekshirish
-            if (selectedItems.has(key)) {
-                console.log(`Ingredient already selected: ${key}. Removing...`);
-                removeIngredient(pizzaId, key);
+            // Ingredient object yaratish
+            const ingredientData = {
+                id: ingredientId,
+                title: title,
+                price: price
+            };
+
+            // Ingredient allaqachon tanlanganligini tekshirish (id orqali)
+            const existingIngredient = Array.from(selectedItems).find(item => item.id === ingredientId);
+            if (existingIngredient) {
+                console.log(`Ingredient already selected: ${ingredientId}. Removing...`);
+                removeIngredient(pizzaId, ingredientId);
                 return;
             }
 
             // Maksimal tanlash limitini tekshirish
             if (selectedItems.size >= maxSelection) {
-            const errorPopup = document.querySelector('#Toastify-nostore');
-            if (errorPopup) {
-                errorPopup.style.setProperty('display', 'flex', 'important');
-                setTimeout(() => {
-                    errorPopup.style.setProperty('display', 'none', 'important');
-                }, 2200);
-            }
+                const errorPopup = document.querySelector('#Toastify-nostore');
+                if (errorPopup) {
+                    errorPopup.style.setProperty('display', 'flex', 'important');
+                    setTimeout(() => {
+                        errorPopup.style.setProperty('display', 'none', 'important');
+                    }, 2200);
+                }
                 return;
             }
 
             // Yangi ingredient qo'shish
-            console.log(`Adding new ingredient: ${key}`);
-            selectedItems.add(key);
+            console.log(`Adding new ingredient:`, ingredientData);
+            selectedItems.add(ingredientData);
             this.classList.add('for_active_1');
 
             // DOM'ga ingredient div qo'shish
             const ingredientDiv = document.createElement('div');
-            ingredientDiv.dataset.key = key;
+            ingredientDiv.dataset.ingredientId = ingredientId;
             ingredientDiv.style.cssText = "max-width: 350px; width: 100%; display: flex; justify-content: space-between; margin-bottom: 5px;";
 
             ingredientDiv.innerHTML = `
                 <div style="display: flex; justify-content: space-between; flex: 1 1 0%;">
                     <span class="fs-13 for_ingradient_title">${title}</span>
-                    <span class="fs-13 for_ingradient_price">${price}</span>
+                    <span class="fs-13 for_ingradient_price">${price}₾</span>
                 </div>
                 <div>
                     <svg class="delete-icon" viewBox="0 0 24 24" style="cursor:pointer; width: 20px; height: 20px;">
@@ -4166,7 +4169,7 @@ function initializePage() {
 
             // Delete tugmasi uchun event listener
             ingredientDiv.querySelector('.delete-icon').addEventListener('click', () => {
-                removeIngredient(pizzaId, key);
+                removeIngredient(pizzaId, ingredientId);
             });
 
             container.appendChild(ingredientDiv);
@@ -4235,9 +4238,6 @@ function loadExistingOrder(orderId) {
 
     console.log("Found order:", existingOrder);
 
-    // Update product info
-    
-
     // Update count
     count = existingOrder.count;
     updateQuantity();
@@ -4249,28 +4249,40 @@ function loadExistingOrder(orderId) {
             
             // Pizza ma'lumotlarini saqlash
             pizzaSelectionData.set(index.toString(), {
+                id: pizza.id, // Pizza'ning o'z ID'si
                 title: pizza.title,
                 price: pizza.price,
                 originalIngredients: pizza.ingredients || []
             });
 
-            // Pizza tanlash
+            // Pizza tanlash - ID orqali topish
             const block = document.querySelector(`.pizza-block[data-id="${index}"]`);
             if (block) {
-                // Matching card topish
+                // Pizza ID orqali bonus_card topish
                 const cards = block.querySelectorAll('.bonus_card');
                 let matchingCard = null;
 
                 cards.forEach(card => {
-                    const cardTitle = card.querySelector('h2')?.textContent;
-                    if (cardTitle === pizza.title) {
+                    const cardId = card.dataset.id;
+                    if (cardId && cardId === pizza.id) {
                         matchingCard = card;
+                        console.log(`Found matching card with ID: ${cardId}`);
                     }
-                    
                 });
 
+                // Agar ID orqali topmasa, title orqali qidiramiz (backward compatibility)
+                if (!matchingCard) {
+                    cards.forEach(card => {
+                        const cardTitle = card.querySelector('h2')?.textContent;
+                        if (cardTitle === pizza.title) {
+                            matchingCard = card;
+                            console.log(`Found matching card by title: ${cardTitle}`);
+                        }
+                    });
+                }
+
                 if (matchingCard) {
-                    console.log(`Selecting pizza card for ${pizza.title}`);
+                    console.log(`Selecting pizza card for ${pizza.title} with ID ${pizza.id}`);
                     selectPizza(index.toString(), matchingCard);
 
                     // Ingredientlarni yuklash
@@ -4279,6 +4291,8 @@ function loadExistingOrder(orderId) {
                             loadPizzaIngredients(index.toString(), pizza.ingredients);
                         }, 300);
                     }
+                } else {
+                    console.log(`No matching card found for pizza: ${pizza.title} with ID: ${pizza.id}`);
                 }
             }
         });
@@ -4305,6 +4319,7 @@ function selectPizza(id, card) {
         const title = card.querySelector('h2')?.textContent || '';
         const description = card.querySelector('p')?.textContent || '';
         const priceText = card.querySelector('.for_red_count')?.textContent || '0₾';
+        const pizzaId = card.dataset.id; // bonus_card'ning o'z data-id'si
 
         selectedCard.querySelector(`#bonus_img_${id}`).src = imgSrc;
         selectedCard.querySelector(`#bonus_texts_${id} h2`).textContent = title;
@@ -4314,6 +4329,7 @@ function selectPizza(id, card) {
         // Pizza ma'lumotlarini saqlash
         const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
         pizzaSelectionData.set(id, {
+            id: pizzaId, // bonus_card'ning o'z ID'si
             title: title,
             price: price,
             originalIngredients: []
@@ -4351,35 +4367,46 @@ function loadPizzaIngredients(pizzaId, ingredients) {
     selectedItemsMap.set(pizzaId, new Set());
 
     ingredients.forEach(ing => {
-        // Ingredient name'ni tozalash
-        let cleanName = ing.name;
-        if (cleanName.includes('+₾')) {
-            cleanName = cleanName.replace('+₾', '');
-        }
+        const ingredientData = {
+            id: ing.id,
+            title: ing.name,
+            price: ing.price
+        };
 
-        const key = cleanName + '+' + ing.price + '₾';
-        selectedItemsMap.get(pizzaId).add(key);
+        selectedItemsMap.get(pizzaId).add(ingredientData);
 
-        console.log(`Adding ingredient: ${cleanName}, key: ${key}`);
+        console.log(`Adding ingredient:`, ingredientData);
 
-        // Tegishli tugmani faollashtirish
+        // Tegishli tugmani faollashtirish - ID orqali topish
         const buttons = document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}`);
         buttons.forEach(btn => {
-            if (btn.dataset.title === cleanName && parseFloat(btn.dataset.price) === ing.price) {
+            const btnId = btn.dataset.id;
+            
+            // Avval ID orqali tekshirish
+            if (btnId && btnId === ing.id) {
                 btn.classList.add('for_active_1');
-                console.log(`Activated button for: ${cleanName}`);
+                console.log(`Activated button for ingredient ID: ${ing.id}`);
+                return;
+            }
+            
+            // Agar ID orqali topmasa, title va price orqali tekshirish (backward compatibility)
+            const btnTitle = btn.dataset.title;
+            const btnPrice = parseFloat(btn.dataset.price);
+            if (btnTitle === ing.name && btnPrice === ing.price) {
+                btn.classList.add('for_active_1');
+                console.log(`Activated button for ingredient by title/price: ${ing.name} - ${ing.price}`);
             }
         });
 
         // Ingredient div yaratish
         const ingredientDiv = document.createElement('div');
-        ingredientDiv.dataset.key = key;
+        ingredientDiv.dataset.ingredientId = ing.id;
         ingredientDiv.style.cssText = "max-width: 350px; width:100%; display: flex; justify-content: space-between; margin-bottom: 5px;";
 
         ingredientDiv.innerHTML = `
             <div style="display: flex; justify-content: space-between; flex: 1 1 0%;">
-                <span class="fs-13 for_ingradient_title">${cleanName}</span>
-                <span class="fs-13 for_ingradient_price">${ing.price}</span>
+                <span class="fs-13 for_ingradient_title">${ing.name}</span>
+                <span class="fs-13 for_ingradient_price">${ing.price}₾</span>
             </div>
             <div>
                 <svg class="delete-icon" viewBox="0 0 24 24" style="cursor:pointer; width: 20px; height: 20px;">
@@ -4389,7 +4416,7 @@ function loadPizzaIngredients(pizzaId, ingredients) {
         `;
 
         ingredientDiv.querySelector('.delete-icon').addEventListener('click', () => {
-            removeIngredient(pizzaId, key);
+            removeIngredient(pizzaId, ing.id);
         });
 
         container.appendChild(ingredientDiv);
@@ -4400,38 +4427,33 @@ function loadPizzaIngredients(pizzaId, ingredients) {
 }
 
 // YANGILANGAN removeIngredient funksiyasi
-function removeIngredient(pizzaId, key) {
-    console.log(`Removing ingredient: ${key} from pizza ${pizzaId}`);
+function removeIngredient(pizzaId, ingredientId) {
+    console.log(`Removing ingredient: ${ingredientId} from pizza ${pizzaId}`);
 
     const selectedItems = selectedItemsMap.get(pizzaId);
     if (selectedItems) {
-        selectedItems.delete(key);
+        // Set'dan ingredient'ni topib o'chirish
+        const ingredientToRemove = Array.from(selectedItems).find(item => item.id === ingredientId);
+        if (ingredientToRemove) {
+            selectedItems.delete(ingredientToRemove);
+        }
     }
 
-    // Tugmani deaktivatsiya qilish
-    const parts = key.split('+');
-    const ingredientName = parts[0];
-    const priceStr = parts.slice(1).join('+');
-    const price = parseFloat(priceStr.replace('₾', ''));
-
-    // Tegishli tugmani topish va deaktivatsiya qilish
+    // Tugmani deaktivatsiya qilish (ID orqali)
     document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}`).forEach(v => {
-        const btnTitle = v.dataset.title;
-        const btnPrice = parseFloat(v.dataset.price);
-        
-        if (btnTitle === ingredientName && btnPrice === price) {
+        if (v.dataset.id === ingredientId) {
             v.classList.remove('for_active_1');
-            console.log(`Deactivated button for: ${ingredientName}`);
+            console.log(`Deactivated button for ingredient ID: ${ingredientId}`);
         }
     });
 
     // DOM'dan ingredient div'ini o'chirish
     const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
     if (container) {
-        const elementToRemove = container.querySelector(`[data-key="${key}"]`);
+        const elementToRemove = container.querySelector(`[data-ingredient-id="${ingredientId}"]`);
         if (elementToRemove) {
             elementToRemove.remove();
-            console.log(`Removed ingredient div: ${key}`);
+            console.log(`Removed ingredient div with ID: ${ingredientId}`);
         }
     }
     
@@ -4445,14 +4467,13 @@ function checkIngredientState(pizzaId) {
     console.log(`Pizza ${pizzaId} selected ingredients:`, Array.from(selectedItems || []));
     
     const container = document.querySelector(`#ingredient_cards_${pizzaId}`);
-    const domElements = container ? container.querySelectorAll('[data-key]').length : 0;
+    const domElements = container ? container.querySelectorAll('[data-ingredient-id]').length : 0;
     console.log(`DOM elements count: ${domElements}`);
     
     const activeButtons = document.querySelectorAll(`.pizza-block[data-id="${pizzaId}"] .for_vibor_${pizzaId}.for_active_1`).length;
     console.log(`Active buttons count: ${activeButtons}`);
 }
 
-// YANGILANGAN addToCart funksiyasi - ingredient data va id bilan
 function addToCart() {
     console.log("AddToCart called");
     console.log("pizzaSelectionData:", pizzaSelectionData);
@@ -4528,55 +4549,51 @@ function addToCart() {
     let additionalPrice = 0;
     const pizzasArray = [];
 
-    selectedPizzaBlocks.forEach(id => {
+    selectedPizzaBlocks.forEach(blockId => {
         let pizza = {
-            id: id, // DATA-ID ATRIBUTINI QO'SHDIM
+            id: '', // bonus_card'ning data-id'si
             title: '',
             price: 0,
             ingredients: []
         };
 
         // Pizza ma'lumotlarini olish
-        if (pizzaSelectionData.has(id)) {
-            const savedData = pizzaSelectionData.get(id);
+        if (pizzaSelectionData.has(blockId)) {
+            const savedData = pizzaSelectionData.get(blockId);
+            pizza.id = savedData.id; // bonus_card'ning o'z ID'si
             pizza.title = savedData.title;
             pizza.price = savedData.price;
-            console.log(`Using saved data for pizza ${id}:`, savedData);
+            console.log(`Using saved data for pizza block ${blockId}:`, savedData);
         } else {
-            const titleElement = document.querySelector(`#bonus_texts_${id} h2`);
-            const priceElement = document.querySelector(`#selected_card_${id} .for_red_count`);
+            const titleElement = document.querySelector(`#bonus_texts_${blockId} h2`);
+            const priceElement = document.querySelector(`#selected_card_${blockId} .for_red_count`);
             
             if (titleElement) pizza.title = titleElement.textContent;
             if (priceElement) {
                 const priceText = priceElement.textContent;
                 pizza.price = parseFloat(priceText.replace(/[^\d.]/g, '')) || 0;
             }
-            console.log(`Using DOM data for pizza ${id}:`, pizza);
+            console.log(`Using DOM data for pizza block ${blockId}:`, pizza);
         }
 
         // Pizza narxini qo'shish
         additionalPrice += pizza.price;
 
         // Ingredientlarni qo'shish va ularning narxini hisoblash
-        const selectedItems = selectedItemsMap.get(id);
+        const selectedItems = selectedItemsMap.get(blockId);
         if (selectedItems && selectedItems.size > 0) {
-            selectedItems.forEach(key => {
-                const parts = key.split('+');
-                const ingredientName = parts[0];
-                const priceStr = parts.slice(1).join('+');
-                const price = parseFloat(priceStr.replace(/[^\d.]/g, '')) || 0;
-
+            selectedItems.forEach(ingredientData => {
                 pizza.ingredients.push({
-                    id: id, // INGREDIENT UCHUN HAM DATA-ID QO'SHDIM
-                    name: ingredientName,
-                    price: price
+                    id: ingredientData.id,
+                    name: ingredientData.title,
+                    price: ingredientData.price
                 });
 
-                additionalPrice += price;
+                additionalPrice += ingredientData.price;
             });
         }
 
-        console.log(`Final pizza ${id}:`, pizza);
+        console.log(`Final pizza for block ${blockId}:`, pizza);
         pizzasArray.push(pizza);
     });
 
@@ -4595,12 +4612,12 @@ function addToCart() {
         ...product,
         id: orderId,
         count: count,
-        pizzas: pizzasArray, // HAR BIR PIZZA ENDI ID GA EGA
+        pizzas: pizzasArray, // HAR BIR PIZZA VA INGREDIENT ENDI O'Z ID'LARI GA EGA
         totalPrice: totalPrice + "₾",
         date: new Date().toISOString()
     };
 
-    console.log("Final order with calculated total and pizza IDs:", newOrder);
+    console.log("Final order with pizza and ingredient IDs:", newOrder);
 
     // Order processing
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -4629,7 +4646,6 @@ function addToCart() {
         window.location.href = "../cart";
     }, 1000);
 }
-
 
 function updateCartDisplay() {
     const cartItems = document.getElementById('cartItems');
@@ -4660,11 +4676,11 @@ function updateCartDisplay() {
             </div>
             ${order.pizzas.map(pizza => `
                 <div class="pizza-variant">
-                    <h4>${pizza.title} - ${pizza.price}₾</h4>
+                    <h4>${pizza.title} (ID: ${pizza.id}) - ${pizza.price}₾</h4>
                     ${pizza.ingredients && pizza.ingredients.length > 0 ? `
                         <ul class="ingredients-list">
                             ${pizza.ingredients.map(ing => `
-                                <li>${ing.name} +${ing.price}₾</li>
+                                <li>${ing.name} (ID: ${ing.id}) +${ing.price}₾</li>
                             `).join('')}
                         </ul>
                     ` : '<p style="color: #666; font-size: 12px;">Qo\'shimcha ingredientlar yo\'q</p>'}
@@ -4677,11 +4693,7 @@ function updateCartDisplay() {
         `;
         cartItems.appendChild(itemDiv);
     });
-
-    
 }
-
-
 
 // General functions with pizza ID parameter
 function select_choose(id) {

@@ -889,7 +889,7 @@ if (order == "medium_pizza") {
                             </div>
 
                             <div class="bonus_cards" id="bonus_cards_0">
-                                <div class="bonus_card">
+                                <div data-id="11-2" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -899,7 +899,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-3" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/margherita_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -909,7 +909,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-4" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mushroom_&_ham_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -919,7 +919,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-5" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mexican_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -929,7 +929,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-6" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/greek_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -939,7 +939,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-7" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/deluxe_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -950,7 +950,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-8" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/calipso_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -960,7 +960,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-9" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20250620091628501_chilli.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -972,7 +972,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-10" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20240831212119268_HoneyMusterChicken.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -983,7 +983,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-11" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/american_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -993,7 +993,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-12" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/grilled_chicken.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -1003,7 +1003,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-13" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/chicken_BBQ.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -1013,7 +1013,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-14" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/veggie_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -1023,7 +1023,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-15" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mix_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -1033,7 +1033,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-16" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4meat_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -1043,7 +1043,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-17" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/extravaganza_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -1053,7 +1053,7 @@ if (order == "medium_pizza") {
                                     </div>
                                     <div class="for_red_count">+3.00₾</div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-18" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4cheese_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -1063,7 +1063,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-19" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/double_pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -1073,7 +1073,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-20" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/domino_s_pizza_Global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -1083,7 +1083,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/bacon_&_ranch_sauce_global.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -1986,7 +1986,7 @@ if (order == "medium_pizza") {
                             </div>
 
                             <div class="bonus_cards" id="bonus_cards_1">
-                                <div class="bonus_card">
+                                <div data-id="11-22" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -1996,7 +1996,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-23" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/margherita_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2006,7 +2006,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-24" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mushroom_&_ham_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2016,7 +2016,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-25" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mexican_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2026,7 +2026,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-26" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/greek_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2036,7 +2036,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-27" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/deluxe_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2047,7 +2047,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-28" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/calipso_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2057,7 +2057,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-29" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20250620091628501_chilli.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -2069,7 +2069,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-30" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20240831212119268_HoneyMusterChicken.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -2080,7 +2080,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-31" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/american_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2090,7 +2090,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-32" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/grilled_chicken.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2100,7 +2100,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-33" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/chicken_BBQ.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2110,7 +2110,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-34" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/veggie_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2120,7 +2120,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-35" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mix_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2130,7 +2130,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-36" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4meat_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2140,7 +2140,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-37" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/extravaganza_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2150,7 +2150,7 @@ if (order == "medium_pizza") {
                                     </div>
                                     <div class="for_red_count">+3.00₾</div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-38" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4cheese_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2160,7 +2160,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-39" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/double_pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2170,7 +2170,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-40" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/domino_s_pizza_Global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2180,7 +2180,7 @@ if (order == "medium_pizza") {
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-41" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/bacon_&_ranch_sauce_global.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -2234,7 +2234,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                             </div>
 
                             <div class="bonus_cards" id="bonus_cards_0">
-                                <div class="bonus_card">
+                                <div data-id="11-42" class="bonus_card">
                                     <img src="https://dominosge.s3.eu-central-1.amazonaws.com/Cheese-Bread-Bacon-&-Jalapeno.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2244,7 +2244,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-43" class="bonus_card">
                                     <img src="https://dominosge.s3.eu-central-1.amazonaws.com/Cheese_Bread_Ham.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2254,7 +2254,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-44" class="bonus_card">
                                     <img src="https://dominosge.s3.eu-central-1.amazonaws.com/Cheese_Bread_Bacon_&_Jalapeno.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2305,7 +2305,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                             
 
                             <div class="bonus_cards" id="bonus_cards_1">
-                                <div class="bonus_card">
+                                <div data-id="11-46" class="bonus_card">
                                     <img src="https://dominosge.s3.eu-central-1.amazonaws.com/Cheese-Bread-Bacon-&-Jalapeno.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2315,7 +2315,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-47" class="bonus_card">
                                     <img src="https://dominosge.s3.eu-central-1.amazonaws.com/Cheese_Bread_Ham.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2325,7 +2325,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-48" class="bonus_card">
                                     <img src="https://dominosge.s3.eu-central-1.amazonaws.com/Cheese_Bread_Bacon_&_Jalapeno.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2375,7 +2375,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                             </div>
 
                             <div class="bonus_cards" id="bonus_cards_2">
-                                <div class="bonus_card">
+                                <div data-id="11-50" class="bonus_card">
                                     <img src="https://dominosge.s3.eu-central-1.amazonaws.com/20250319105853125_cheddarsauce.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -2384,7 +2384,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-51" class="bonus_card">
                                     <img src="https://dominosge.s3.eu-central-1.amazonaws.com/20250319110127170_chipotlesauce.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3288,7 +3288,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                             </div>
 
                             <div class="bonus_cards" id="bonus_cards_0">
-                                <div class="bonus_card">
+                                <div data-id="11-52" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/deluxe_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3299,7 +3299,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-53" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/calipso_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3309,7 +3309,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-54" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3319,7 +3319,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-55" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/margherita_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3329,7 +3329,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-56" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mushroom_&_ham_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3339,7 +3339,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-57" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mexican_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3349,7 +3349,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-58" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/greek_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3359,7 +3359,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-59" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/american_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3369,7 +3369,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-60" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/chicken_BBQ.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3379,7 +3379,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-61" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/veggie_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3389,7 +3389,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-62" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mix_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3399,7 +3399,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-63" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4meat_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3409,7 +3409,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-64" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/extravaganza_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3419,7 +3419,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                     </div>
                                     <div class="for_red_count">+4.00₾</div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-65" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20250620091628501_chilli.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -3431,7 +3431,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-66" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20240831212119268_HoneyMusterChicken.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -3442,7 +3442,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-67" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/grilled_chicken.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3452,7 +3452,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-68" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/double_pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3462,7 +3462,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+6.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-69" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/domino_s_pizza_Global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -3472,7 +3472,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+6.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-70" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/bacon_&_ranch_sauce_global.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -3483,7 +3483,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+6.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-71" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4cheese_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4385,7 +4385,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                             </div>
 
                             <div class="bonus_cards" id="bonus_cards_1">
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/deluxe_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4396,7 +4396,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/calipso_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4406,7 +4406,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4416,7 +4416,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/margherita_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4426,7 +4426,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mushroom_&_ham_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4436,7 +4436,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mexican_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4446,7 +4446,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/greek_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4456,7 +4456,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/american_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4466,7 +4466,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/chicken_BBQ.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4476,7 +4476,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/veggie_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4486,7 +4486,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mix_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4496,7 +4496,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4meat_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4506,7 +4506,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/extravaganza_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4516,7 +4516,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                     </div>
                                     <div class="for_red_count">+4.00₾</div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20250620091628501_chilli.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -4528,7 +4528,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20240831212119268_HoneyMusterChicken.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -4539,7 +4539,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/grilled_chicken.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4549,7 +4549,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/double_pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4559,7 +4559,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+6.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/domino_s_pizza_Global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4569,7 +4569,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+6.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/bacon_&_ranch_sauce_global.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -4580,7 +4580,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+6.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4cheese_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4717,7 +4717,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                             </div>
 
                             <div class="bonus_cards" id="bonus_cards_2">
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://dominosge.s3.eu-central-1.amazonaws.com/20250319110018170_yogurtsauce.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4726,7 +4726,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://dominosge.s3.eu-central-1.amazonaws.com/20250319110232362_hotsauce.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4778,7 +4778,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                             </div>
 
                             <div class="bonus_cards" id="bonus_cards_0">
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4788,7 +4788,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/margherita_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4798,7 +4798,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mushroom_&_ham_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4808,7 +4808,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mexican_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4818,7 +4818,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/greek_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4828,7 +4828,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/deluxe_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4839,7 +4839,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/calipso_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4849,7 +4849,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20250620091628501_chilli.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -4861,7 +4861,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20240831212119268_HoneyMusterChicken.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -4872,7 +4872,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/american_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4882,7 +4882,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/grilled_chicken.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4892,7 +4892,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/chicken_BBQ.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4902,7 +4902,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/veggie_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4912,7 +4912,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mix_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4922,7 +4922,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4meat_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4932,7 +4932,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/extravaganza_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4942,7 +4942,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                     </div>
                                     <div class="for_red_count">+3.00₾</div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4cheese_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4952,7 +4952,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/double_pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4962,7 +4962,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/domino_s_pizza_Global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -4972,7 +4972,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/bacon_&_ranch_sauce_global.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -5024,7 +5024,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                             
 
                             <div class="bonus_cards" id="bonus_cards_1">
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5034,7 +5034,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/margherita_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5044,7 +5044,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mushroom_&_ham_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5054,7 +5054,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mexican_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5064,7 +5064,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/greek_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5074,7 +5074,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/deluxe_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5085,7 +5085,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/calipso_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5095,7 +5095,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20250620091628501_chilli.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -5107,7 +5107,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20240831212119268_HoneyMusterChicken.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -5118,7 +5118,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/american_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5128,7 +5128,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/grilled_chicken.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5138,7 +5138,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/chicken_BBQ.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5148,7 +5148,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/veggie_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5158,7 +5158,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mix_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5168,7 +5168,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4meat_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5178,7 +5178,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/extravaganza_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5188,7 +5188,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                     </div>
                                     <div class="for_red_count">+3.00₾</div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4cheese_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5198,7 +5198,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/double_pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5208,7 +5208,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/domino_s_pizza_Global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5218,7 +5218,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/bacon_&_ranch_sauce_global.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -5269,7 +5269,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                             </div>
 
                             <div class="bonus_cards" id="bonus_cards_2">
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5279,7 +5279,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/margherita_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5289,7 +5289,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mushroom_&_ham_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5299,7 +5299,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mexican_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5309,7 +5309,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/greek_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5319,7 +5319,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/deluxe_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5330,7 +5330,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/calipso_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5340,7 +5340,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count"></div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20250620091628501_chilli.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -5352,7 +5352,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/20240831212119268_HoneyMusterChicken.webp"
                                         alt="">
                                     <div class="for_flex">
@@ -5363,7 +5363,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/american_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5373,7 +5373,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/grilled_chicken.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5383,7 +5383,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/chicken_BBQ.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5393,7 +5393,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/veggie_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5403,7 +5403,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/mix_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5413,7 +5413,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4meat_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5423,7 +5423,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+3.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/extravaganza_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5433,7 +5433,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                     </div>
                                     <div class="for_red_count">+3.00₾</div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/4cheese_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5443,7 +5443,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/double_pepperoni_global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5453,7 +5453,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/domino_s_pizza_Global.webp" alt="">
                                     <div class="for_flex">
                                         <div class="bonus_texts">
@@ -5463,7 +5463,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                                         <div class="for_red_count">+4.00₾</div>
                                     </div>
                                 </div>
-                                <div class="bonus_card">
+                                <div data-id="11-21" class="bonus_card">
                                     <img src="https://deykvccewcmn1.cloudfront.net/bacon_&_ranch_sauce_global.webp"
                                         alt="">
                                     <div class="for_flex">

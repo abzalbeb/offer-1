@@ -667,36 +667,43 @@ function editOrder(orderId) {
             localStorage.setItem('edit', 'true');
             localStorage.setItem('for_id', orderId);
             
-            // Mahsulot ma'lumotlarini saqlaymiz
+            // Pizza uchun ingredient countini saqlash
+            if (order.pizzas && order.pizzas.length > 0) {
+                localStorage.setItem('ingredient', order.pizzas.length.toString());
+            }
+            
+            // ASOSIY PRODUCT MA'LUMOTLARINI TO'G'RI SHAKLLANTIRISH
             const productData = {
-                id: order.id,
+                id: order.productId || order.id, // Asosiy mahsulot ID'si (order ID'si emas!)
                 title: order.title,
                 img: order.img,
                 img_1: order.img_1 || '',
                 description: order.description,
-                price: order.price || '',
-                aksiyaPrice: order.aksiyaPrice || '',
-                ingredients:order.ingredients || ''
+                price: order.price || 0, // null o'rniga 0
+                aksiyaPrice: order.aksiyaPrice || 0, // null o'rniga 0
+                ingredients: order.ingredients || '',
+                type: order.type || '',
+                dataType: order.dataType || '',
+                language: order.language || 'en'
             };
             
+            // FAQAT BIR MARTA selectedProduct'ni set qilish
             localStorage.setItem('selectedProduct', JSON.stringify(productData));
             
             // Pizza uchun qo'shimcha ma'lumotlarni saqlaymiz
             if (order.dataType === 'pizza' && order.pizzas) {
-                // Pizza size ma'lumotini alohida saqlash
+                // Birinchi pizzaning title'ini size sifatida saqlash (agar kerak bo'lsa)
                 const pizzaSize = order.pizzas[0] ? order.pizzas[0].title : null;
                 if (pizzaSize) {
                     localStorage.setItem('selectedPizzaSize', pizzaSize);
                 }
-                
-                // Butun order obyektini ham saqlaymiz
-                localStorage.setItem('selectedProduct', JSON.stringify(order));
             }
             
-            const hasPizza = order.dataType === 'pizza' ||
-                            (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
-
+            const hasPizza = order.dataType === 'pizza' || 
+                           (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
+            
             setTimeout(() => {
+                hideLoader(); // Loader yashirish
                 if (hasPizza) {
                     window.location.href = '../details-pizza/';
                 } else {
@@ -704,12 +711,97 @@ function editOrder(orderId) {
                 }
             }, 300);
         } else {
+            console.error('Order not found with ID:', orderId);
             hideLoader();
         }
     } catch (error) {
         console.error('editOrder error:', error);
         hideLoader();
     }
+}
+
+// QO'SHIMCHA: Edit rejimida product ma'lumotlarini to'g'ri olish uchun helper function
+function getProductDataForEdit(order) {
+    // Agar order ichida originalProduct mavjud bo'lsa, uni ishlatamiz
+    if (order.originalProduct) {
+        return {
+            ...order.originalProduct,
+            // Edit qilinadigan qiymatlarni order'dan olamiz
+            count: order.count
+        };
+    }
+    
+    // Aks holda order'dan product ma'lumotlarini tiklaymiz
+    return {
+        id: order.productId || extractProductId(order.id), // Mahsulot ID'sini ajratish
+        title: order.title,
+        img: order.img,
+        img_1: order.img_1 || '',
+        description: order.description,
+        price: order.originalPrice || order.price || 0,
+        aksiyaPrice: order.originalAksiyaPrice || order.aksiyaPrice || 0,
+        ingredients: order.ingredients || '',
+        type: order.type || '',
+        dataType: order.dataType || '',
+        language: order.language || 'en'
+    };
+}
+
+// Product ID'sini order ID'sidan ajratish uchun helper function
+function extractProductId(orderId) {
+    // Bu yerda sizning ID tizimingizga mos ravishda logika yozishingiz kerak
+    // Masalan: agar order ID formatiz "productId-timestamp" bo'lsa
+    if (typeof orderId === 'string' && orderId.includes('-')) {
+        return orderId.split('-')[0];
+    }
+    return orderId;
+}
+
+// ADDTOCART FUNKSIYASIDA HAM O'ZGARTIRISH KERAK
+// Order yaratishda originalProduct ma'lumotlarini saqlash
+function createOrderWithOriginalProduct(productData, pizzasArray, count, totalPrice) {
+    const orderId = lastOrderId + 1;
+    lastOrderId = orderId;
+    localStorage.setItem("lastOrderId", lastOrderId.toString());
+    
+    const newOrder = {
+        // Order ma'lumotlari
+        id: orderId,
+        count: count,
+        pizzas: pizzasArray,
+        totalPrice: totalPrice + "₾",
+        date: new Date().toISOString(),
+        
+        // Product ma'lumotlari (flatted)
+        productId: productData.id, // Asosiy mahsulot ID'si
+        title: productData.title,
+        img: productData.img,
+        img_1: productData.img_1 || '',
+        description: productData.description,
+        price: productData.price,
+        aksiyaPrice: productData.aksiyaPrice,
+        ingredients: productData.ingredients || '',
+        type: productData.type || '',
+        dataType: productData.dataType || '',
+        language: productData.language || 'en',
+        
+        // Original product ma'lumotlarini saqlash (edit uchun)
+        originalProduct: {
+            id: productData.id,
+            title: productData.title,
+            img: productData.img,
+            img_1: productData.img_1 || '',
+            description: productData.description,
+            price: productData.price,
+            aksiyaPrice: productData.aksiyaPrice,
+            ingredients: productData.ingredients || '',
+            type: productData.type || '',
+            dataType: productData.dataType || '',
+            language: productData.language || 'en'
+        }
+    };
+    
+    return newOrder;
 }
 
 // existing subtotal calc & cart_cards rendering
