@@ -1380,7 +1380,102 @@ if (localStorage.getItem('edit') === 'true') {
     console.log('Edit order data:', JSON.parse(localStorage.getItem('editOrderData')));
 }
 
-// ===== ASOSIY FUNKSIYALAR =====
+
+
+
+
+
+
+
+
+
+
+
+
+// Loading modal elementini yaratish va DOM ga qo'shish
+function createLoadingModal() {
+    // Agar allaqachon mavjud bo'lsa, qaytarish
+    if (document.getElementById('loadingModal')) {
+        return document.getElementById('loadingModal');
+    }
+
+    const loadingModal = document.createElement('div');
+    loadingModal.id = 'loadingModal';
+    loadingModal.setAttribute('role', 'presentation');
+    loadingModal.className = 'MuiDialog-root MuiModal-root css-126xj0f';
+    loadingModal.style.cssText = 'z-index: 99999; display: none;';
+    
+    loadingModal.innerHTML = `
+        <div tabindex="0" data-testid="sentinelStart"></div>
+        <div class="MuiDialog-container MuiDialog-scrollPaper css-ekeie0" role="presentation" tabindex="-1"
+            style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1);">
+            <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm css-yv7evq"
+                role="dialog" aria-labelledby=":r4:"
+                style="background: transparent; box-shadow: none; overflow: hidden;">
+                <div class="MuiDialogContent-root css-1ty026z" style="overflow: hidden; z-index: 99999;">
+                    <section>
+                        <div class="ctn-preloader">
+                            <div>
+                                <img src="https://dominospizza.ge/static/media/loader.2122b9244c2f5b65e627.gif" 
+                                     alt="Loader..." width="100">
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div tabindex="0" data-testid="sentinelEnd"></div>
+    `;
+    
+    document.body.appendChild(loadingModal);
+    return loadingModal;
+}
+
+// Loading ni ko'rsatish
+function showLoading() {
+    const loadingModal = createLoadingModal();
+    loadingModal.style.display = 'block';
+    console.log('🔄 Loading ko\'rsatildi');
+}
+
+// Loading ni yashirish
+function hideLoading() {
+    const loadingModal = document.getElementById('loadingModal');
+    if (loadingModal) {
+        loadingModal.style.display = 'none';
+        console.log('✅ Loading yashirildi');
+    }
+}
+
+// Kechikish bilan loading yashirish (minimum ko'rsatish vaqti uchun)
+function hideLoadingWithDelay(minDelay = 500) {
+    setTimeout(() => {
+        hideLoading();
+    }, minDelay);
+}
+
+// Promise bilan ishlash uchun loading wrapper
+async function withLoading(asyncFunction, minDelay = 500) {
+    showLoading();
+    
+    try {
+        const startTime = Date.now();
+        const result = await asyncFunction();
+        
+        // Minimum kechikishni ta'minlash
+        const elapsedTime = Date.now() - startTime;
+        const remainingDelay = Math.max(0, minDelay - elapsedTime);
+        
+        setTimeout(() => {
+            hideLoading();
+        }, remainingDelay);
+        
+        return result;
+    } catch (error) {
+        hideLoading();
+        throw error;
+    }
+}
 
 // Hozirgi tilni aniqlash
 function getCurrentLanguage() {
@@ -1389,48 +1484,323 @@ function getCurrentLanguage() {
     return 'en'; // default
 }
 
-// Mahsulotni ID bo'yicha topish (to'g'ri tilda)
-function findProductById(productId) {
-    const currentLang = getCurrentLanguage();
-    
-    console.log(`🔍 Mahsulot qidirilmoqda: ID=${productId}, Til=${currentLang}`);
-    
-    // Avval joriy tildan qidirish
-    const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
-    let product = currentLangProducts.find(p => p.id === productId);
-    
-    if (product && product.price > 0) {
-        console.log(`✅ Mahsulot joriy tildan topildi: ${currentLang}`);
-        return { ...product, language: currentLang };
+// 2. MyMemory API orqali tarjima qilish (Loading bilan)
+async function translateText(text, sourceLang, targetLang) {
+    if (!text || sourceLang === targetLang) {
+        return text;
     }
     
-    // Agar joriy tildan topilmasa, boshqa tildan qidirish va xabar berish
-    const otherLang = currentLang === 'en' ? 'geo' : 'en';
-    const otherLangProducts = JSON.parse(localStorage.getItem(`allProducts_${otherLang}`)) || [];
-    product = otherLangProducts.find(p => p.id === productId);
-    
-    if (product && product.price > 0) {
-        console.warn(`⚠️ Mahsulot ${currentLang} tilida topilmadi, ${otherLang} tilidan olinmoqda`);
-        // MUHIM: Faqat narx va asosiy ma'lumotlarni olish, tilga bog'liq bo'lmagan ma'lumotlarni saqlash
-        return {
-            ...product,
-            language: currentLang, // Joriy tilga moslashtirish
-            // Til bo'yicha to'g'ri ma'lumotlar kerak bo'lsa, ularni bo'sh qoldirish yoki default qiymat berish
-            title: `[${currentLang.toUpperCase()}] ${product.title}`, // Debug uchun
-            description: `[${currentLang.toUpperCase()}] ${product.description}` // Debug uchun
-        };
+    try {
+        // API uchun til kodlarini o'zgartirish
+        const apiSourceLang = sourceLang === 'geo' ? 'ka' : 'en'; // Georgian = ka
+        const apiTargetLang = targetLang === 'geo' ? 'ka' : 'en';
+        
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${apiSourceLang}|${apiTargetLang}`;
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.responseStatus === 200 && data.responseData?.translatedText) {
+            console.log(`📝 Tarjima: "${text}" -> "${data.responseData.translatedText}"`);
+            return data.responseData.translatedText;
+        } else {
+            console.warn('⚠️ Tarjima xatoligi:', data);
+            return text; // Asl matnni qaytarish
+        }
+        
+    } catch (error) {
+        console.error('❌ Tarjima API xatoligi:', error);
+        return text; // Asl matnni qaytarish
     }
-    
-    console.error(`❌ Mahsulot topilmadi: ${productId}`);
-    return null;
 }
 
-// ===== MAHSULOTNI SAQLASH =====
+// YANGI: Matndan tilni aniqlash funksiyasi
+function detectLanguageFromText(text) {
+    if (!text || typeof text !== 'string') return 'en';
+    
+    // Gruzin harflarini tekshirish (Unicode range: U+10A0-U+10FF)
+    const georgianPattern = /[\u10A0-\u10FF]/;
+    
+    if (georgianPattern.test(text)) {
+        return 'geo';
+    } else {
+        return 'en';
+    }
+}
 
-// ===== TANLANGAN MAHSULOTNI BOSHQARISH =====
+// 3. Edit rejimida til o'zgarishini tekshirish va tarjima qilish (Loading bilan)
+async function handleEditLanguageTranslation() {
+    const isEditMode = localStorage.getItem('edit') === 'true';
+    const currentLang = getCurrentLanguage();
+    const selectedProduct = JSON.parse(localStorage.getItem("selectedProduct")) || {};
+    
+    // Faqat edit rejimida va mahsulot mavjud bo'lganda
+    if (!isEditMode || !selectedProduct.id) {
+        console.log('🚫 Edit rejimi emas yoki mahsulot yo\'q');
+        return false;
+    }
+    
+    // YANGI: Haqiqiy tilni matndan aniqlash
+    const actualLangFromTitle = detectLanguageFromText(selectedProduct.title);
+    const actualLangFromDesc = detectLanguageFromText(selectedProduct.description);
+    const actualLang = actualLangFromTitle; // title asosida aniqlash
+    
+    console.log('🔍 Edit til tekshiruvi:', {
+        currentPath: window.location.pathname,
+        currentLang: currentLang,
+        savedLang: selectedProduct.language || 'en',
+        actualLang: actualLang,
+        productTitle: selectedProduct.title,
+        needTranslation: actualLang !== currentLang
+    });
+    
+    // Haqiqiy til va joriy tilni taqqoslash
+    if (actualLang === currentLang) {
+        console.log('✅ Matn allaqachon kerakli tilda, tarjima kerak emas');
+        return false;
+    }
+    
+    console.log('🔄 Til o\'zgargan, tarjima boshlanmoqda...');
+    
+    // Loading bilan tarjima qilish
+    return await withLoading(async () => {
+        // Title va description ni tarjima qilish (haqiqiy tildan)
+        const translatedTitle = await translateText(selectedProduct.title, actualLang, currentLang);
+        const translatedDescription = await translateText(selectedProduct.description, actualLang, currentLang);
+        
+        // DOM elementlarni yangilash
+        const titleElement = document.getElementById("title");
+        const descriptionElement = document.getElementById("description");
+        
+        if (titleElement && translatedTitle) {
+            titleElement.textContent = translatedTitle;
+            console.log(`✅ Title yangilandi: ${translatedTitle}`);
+        }
+        
+        if (descriptionElement && translatedDescription) {
+            descriptionElement.textContent = translatedDescription;
+            console.log(`✅ Description yangilandi: ${translatedDescription}`);
+        }
+        
+        // localStorage ni yangilash (ixtiyoriy)
+        const updatedProduct = {
+            ...selectedProduct,
+            title: translatedTitle || selectedProduct.title,
+            description: translatedDescription || selectedProduct.description,
+            language: currentLang,
+            originalLanguage: actualLang, // Haqiqiy asl tilni saqlash
+            translatedAt: new Date().toISOString()
+        };
+        
+        localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+        
+        console.log('✅ Edit rejimida tarjima muvaffaqiyatli bajarildi');
+        return true;
+    }, 800); // Minimum 800ms ko'rsatish
+}
 
-// selectedProduct ni yangilash
-function updateSelectedProduct() {
+// 4. Mavjud initializePage funksiyasini yangilash (Loading bilan)
+async function initializePage() {
+    console.log('🚀 Sahifa initialization boshlanmoqda...');
+    
+    return await withLoading(async () => {
+        // Avval edit rejimida tarjimani tekshirish
+        const translationHandled = await handleEditLanguageTranslation();
+        
+        // UI elementlarni to'ldirish
+        if (Object.keys(product).length) {
+            const t = document.getElementById("title");
+            const i = document.getElementById("img");
+            const d = document.getElementById("description");
+            const p = document.getElementById("price");
+            const ap = document.getElementById("aksiyaPrice");
+            
+            // Agar tarjima bo'lmagan bo'lsa, oddiy ma'lumotlarni ko'rsatish
+            if (!translationHandled) {
+                if (t) t.textContent = product.title || '';
+                if (d) d.textContent = product.description || '';
+            }
+            
+            // Qolgan elementlar (rasm va narxlar har doim bir xil)
+            if (i) i.src = product.img_1 || '';
+            if (p) p.textContent = (basePrice || selectedPizza.price).toFixed(2) + "₾";
+            if (ap) ap.textContent = aksiyaBasePrice.toFixed(2) + "₾";
+            
+            console.log('✅ UI elementlari to\'ldirildi');
+        }
+
+        // Edit holatini tekshirish
+        const isEditRestored = restoreEditData();
+        
+        if (!isEditRestored) {
+            // Faqat edit rejimi bo'lmaganda default ma'lumotlarni yuklash
+            
+            // Barcha class larni avval tozalash (oddiy rejim uchun ham)
+            document.querySelectorAll(".for_active_0, .for_active_2, .vibor_active").forEach(el => {
+                el.classList.remove("for_active_0", "for_active_2", "vibor_active");
+            });
+            
+            // Selected pizza ingredients ni tozalash
+            selectedPizza.ingredients = [];
+            
+            // 1) Default dough va edge qo'shish
+            setIngredient(defaultDough);
+            setIngredient(defaultEdge);
+            updateDoughSelection();
+
+            // 2) Default standard ingredients qo'shish
+            defaultStandardIngredients.forEach(item => {
+                setIngredient(item);
+                const element = document.querySelector(`.for_vibor_2[data-id="${item.id}"]`);
+                if (element) {
+                    element.classList.add("for_active_2");
+                }
+            });
+        }
+
+        // Event listener larni o'rnatish (har doim kerak)
+        setupEventListeners();
+        
+        // Ingredient visibility ni boshqarish
+        handleIngredientVisibility();
+        
+        updateTotalPrice();
+        
+        console.log('✅ Sahifa initialization tugadi');
+        return true;
+    }, 1000); // Minimum 1s ko'rsatish
+}
+
+// 5. Language Observer ni soddalashtirish
+class SimpleLanguageObserver {
+    constructor() {
+        this.currentLang = getCurrentLanguage();
+        this.init();
+    }
+    
+    init() {
+        // URL o'zgarishini kuzatish
+        window.addEventListener('popstate', () => this.checkLanguageChange());
+        window.addEventListener('hashchange', () => this.checkLanguageChange());
+        
+        // Focus event
+        window.addEventListener('focus', () => this.checkLanguageChange());
+        
+        // Custom event
+        window.addEventListener('languageChanged', () => this.handleLanguageChange());
+        
+        // History API override
+        this.overrideHistoryAPI();
+        
+        console.log('👁️ Language Observer ishga tushdi');
+    }
+    
+    checkLanguageChange() {
+        const newLang = getCurrentLanguage();
+        
+        if (newLang !== this.currentLang) {
+            console.log(`🌐 Til o'zgarish aniqlandi: ${this.currentLang} -> ${newLang}`);
+            this.currentLang = newLang;
+            
+            // Biroz kechiktirib ishga tushirish
+            setTimeout(() => this.handleLanguageChange(), 300);
+        }
+    }
+    
+    async handleLanguageChange() {
+        const isEditMode = localStorage.getItem('edit') === 'true';
+        
+        if (isEditMode) {
+            console.log('📝 Edit rejimida til o\'zgarish, tarjima qilinmoqda...');
+            showLoading();
+            try {
+                await handleEditLanguageTranslation();
+            } finally {
+                hideLoadingWithDelay(500);
+            }
+        } else {
+            console.log('🔄 Oddiy rejimda til o\'zgarish, sahifani qayta yuklash...');
+            showLoading();
+            setTimeout(() => {
+                location.reload();
+            }, 300);
+        }
+    }
+    
+    overrideHistoryAPI() {
+        const originalPushState = history.pushState;
+        const originalReplaceState = history.replaceState;
+        
+        history.pushState = (...args) => {
+            originalPushState.apply(history, args);
+            setTimeout(() => this.checkLanguageChange(), 0);
+        };
+        
+        history.replaceState = (...args) => {
+            originalReplaceState.apply(history, args);
+            setTimeout(() => this.checkLanguageChange(), 0);
+        };
+    }
+}
+
+// 6. Manual tarjima funksiyasi (test uchun) - Loading bilan
+async function testTranslation() {
+    const currentLang = getCurrentLanguage();
+    const isEditMode = localStorage.getItem('edit') === 'true';
+    
+    console.log('🧪 Test tarjima:', {
+        currentLang: currentLang,
+        isEditMode: isEditMode,
+        path: window.location.pathname
+    });
+    
+    if (isEditMode) {
+        showLoading();
+        try {
+            await handleEditLanguageTranslation();
+        } finally {
+            hideLoadingWithDelay(500);
+        }
+    } else {
+        console.log('Edit rejimi emas, test mumkin emas');
+    }
+}
+
+// Mahsulotni ID bo'yicha topish (to'g'ri tilda) - Loading bilan
+async function findProductById(productId) {
+    const currentLang = getCurrentLanguage();
+    
+    return await withLoading(async () => {
+        // Avval joriy tildan qidirish
+        const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
+        let product = currentLangProducts.find(p => p.id === productId);
+        
+        if (product && product.price > 0) {
+            return { ...product, language: currentLang };
+        }
+        
+        // Agar joriy tildan topilmasa, boshqa tildan qidirish va xabar berish
+        const otherLang = currentLang === 'en' ? 'geo' : 'en';
+        const otherLangProducts = JSON.parse(localStorage.getItem(`allProducts_${otherLang}`)) || [];
+        product = otherLangProducts.find(p => p.id === productId);
+        
+        if (product && product.price > 0) {
+            console.warn(`⚠️ Mahsulot ${currentLang} tilida topilmadi, ${otherLang} tilidan olinmoqda`);
+            return {
+                ...product,
+                language: currentLang,
+                title: `[${currentLang.toUpperCase()}] ${product.title}`,
+                description: `[${currentLang.toUpperCase()}] ${product.description}`
+            };
+        }
+        
+        console.error(`❌ Mahsulot topilmadi: ${productId}`);
+        return null;
+    }, 300);
+}
+
+// selectedProduct ni yangilash (Loading bilan)
+async function updateSelectedProduct() {
     const selectedProductData = JSON.parse(localStorage.getItem("selectedProduct"));
     const currentLang = getCurrentLanguage();
     
@@ -1438,61 +1808,60 @@ function updateSelectedProduct() {
         console.warn('⚠️ selectedProduct topilmadi');
         return;
     }
-    
-    console.log(`📋 selectedProduct tekshirilmoqda:`, {
-        id: selectedProductData.id,
-        currentTitle: selectedProductData.title,
-        savedLang: selectedProductData.language,
-        currentLang: currentLang,
-        price: selectedProductData.price
-    });
-    
+
     // Title va language mos kelishini tekshirish
     const isLanguageMismatch = selectedProductData.language !== currentLang;
     const isContentMismatch = detectLanguageMismatch(selectedProductData.title, selectedProductData.language || 'en');
     
     if (isLanguageMismatch || isContentMismatch) {
-        console.log(`🔄 Ma'lumot yangilanishi kerak:`, {
-            languageMismatch: isLanguageMismatch,
-            contentMismatch: isContentMismatch
-        });
+        showLoading();
         
-        // Faqat joriy tildan qidirish
-        const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
-        const correctProduct = currentLangProducts.find(p => p.id === selectedProductData.id);
-        
-        if (correctProduct && correctProduct.price > 0) {
-            const updatedProduct = { 
-                ...correctProduct, 
-                language: currentLang,
-                timestamp: Date.now()
-            };
-            localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-            console.log(`✅ selectedProduct to'g'ri tilga yangilandi:`, {
-                oldTitle: selectedProductData.title,
-                newTitle: updatedProduct.title,
-                lang: updatedProduct.language,
-                price: updatedProduct.price
-            });
+        try {
+            // Faqat joriy tildan qidirish
+            const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
+            const correctProduct = currentLangProducts.find(p => p.id === selectedProductData.id);
             
-            // Custom event yuborish
-            window.dispatchEvent(new CustomEvent('productUpdated', { 
-                detail: updatedProduct 
-            }));
-        } else {
-            console.warn(`⚠️ Mahsulot ${currentLang} tilida topilmadi, asl ma'lumot saqlanmoqda`);
-            // Asl ma'lumotni saqlash, faqat tilni yangilash
-            const updatedProduct = { ...selectedProductData, language: currentLang };
-            localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+            if (correctProduct && correctProduct.price > 0) {
+                const updatedProduct = { 
+                    ...correctProduct, 
+                    language: currentLang,
+                    timestamp: Date.now()
+                };
+                localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+                console.log(`✅ selectedProduct to'g'ri tilga yangilandi:`, {
+                    oldTitle: selectedProductData.title,
+                    newTitle: updatedProduct.title,
+                    lang: updatedProduct.language,
+                    price: updatedProduct.price
+                });
+                
+                // Custom event yuborish
+                window.dispatchEvent(new CustomEvent('productUpdated', { 
+                    detail: updatedProduct 
+                }));
+            } else {
+                console.warn(`⚠️ Mahsulot ${currentLang} tilida topilmadi, asl ma'lumot saqlanmoqda`);
+                // Asl ma'lumotni saqlash, faqat tilni yangilash
+                const updatedProduct = { ...selectedProductData, language: currentLang };
+                localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+            }
+        } finally {
+            hideLoadingWithDelay(500);
         }
     } else if (selectedProductData.price <= 0) {
         // Faqat narx muammosi bo'lsa
         console.log('💰 Narx muammosi hal qilinmoqda...');
-        const updatedProduct = findProductById(selectedProductData.id);
+        showLoading();
         
-        if (updatedProduct) {
-            localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-            console.log(`✅ Narx yangilandi: ${updatedProduct.price}`);
+        try {
+            const updatedProduct = await findProductById(selectedProductData.id);
+            
+            if (updatedProduct) {
+                localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
+                console.log(`✅ Narx yangilandi: ${updatedProduct.price}`);
+            }
+        } finally {
+            hideLoadingWithDelay(300);
         }
     } else {
         console.log('✅ selectedProduct allaqachon to\'g\'ri');
@@ -1509,12 +1878,10 @@ function detectLanguageMismatch(text, expectedLang) {
     
     // Nomuvofiqlikni tekshirish
     if (expectedLang === 'en' && hasGeorgian) {
-        console.log(`🔍 Til nomuvofiqlik aniqlandi: text="${text}" expectedLang="${expectedLang}"`);
         return true;
     }
     
     if (expectedLang === 'geo' && !hasGeorgian) {
-        console.log(`🔍 Til nomuvofiqlik aniqlandi: text="${text}" expectedLang="${expectedLang}"`);
         return true;
     }
     
@@ -1553,9 +1920,6 @@ class LanguageObserver {
         const newUrl = window.location.href;
         
         if (newLang !== this.currentLang || newUrl !== this.currentUrl) {
-            console.log(`🌍 Til/URL o'zgarishi: ${this.currentLang} -> ${newLang}`);
-            console.log(`📍 URL: ${this.currentUrl} -> ${newUrl}`);
-            
             this.currentLang = newLang;
             this.currentUrl = newUrl;
             
@@ -1564,20 +1928,25 @@ class LanguageObserver {
         }
     }
     
-    handleLanguageChange() {
-        console.log(`🌍 Til o'zgarishi ishlangan, yangilash boshlandi...`);
+    async handleLanguageChange() {
+        // Loading ko'rsatish
+        showLoading();
         
-        // Ma'lumotlarni majburiy yangilash
-        this.forceUpdateProduct();
-        
-        // Sahifa kontentini yangilash (agar kerak bo'lsa)
-        if (typeof refreshPageContent === 'function') {
-            refreshPageContent();
+        try {
+            // Ma'lumotlarni majburiy yangilash
+            await this.forceUpdateProduct();
+            
+            // Sahifa kontentini yangilash (agar kerak bo'lsa)
+            if (typeof refreshPageContent === 'function') {
+                await refreshPageContent();
+            }
+        } finally {
+            hideLoadingWithDelay(500);
         }
     }
     
     // Majburiy mahsulot yangilash
-    forceUpdateProduct() {
+    async forceUpdateProduct() {
         const selectedProductData = JSON.parse(localStorage.getItem("selectedProduct"));
         const currentLang = getCurrentLanguage();
         
@@ -1585,8 +1954,6 @@ class LanguageObserver {
             console.warn('⚠️ selectedProduct topilmadi');
             return;
         }
-        
-        console.log(`🔄 Majburiy yangilash: ${selectedProductData.language} -> ${currentLang}`);
         
         // Faqat joriy tildan qidirish
         const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
@@ -1599,11 +1966,6 @@ class LanguageObserver {
                 timestamp: Date.now()
             };
             localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-            console.log(`✅ Majburiy yangilash muvaffaqiyatli:`, {
-                oldTitle: selectedProductData.title,
-                newTitle: updatedProduct.title,
-                lang: updatedProduct.language
-            });
             
             // Custom event yuborish
             window.dispatchEvent(new CustomEvent('productUpdated', { 
@@ -1612,7 +1974,6 @@ class LanguageObserver {
             
             // Sahifani qayta yuklash (oxirgi variant)
             if (typeof location !== 'undefined') {
-                console.log('🔄 Sahifa qayta yuklanmoqda...');
                 setTimeout(() => {
                     location.reload();
                 }, 100);
@@ -1656,45 +2017,73 @@ class LanguageObserver {
     }
 }
 
-// ===== ASOSIY INITIALIZATION =====
-
 // Global observer instance
 let languageObserver;
 
-// DOMContentLoaded event
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Sahifa yuklandi, initialization boshlanyapti...');
+// DOMContentLoaded event (Loading bilan)
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('🚀 DOM yuklandi, tarjima tizimi ishga tushmoqda...');
     
-    // Barcha mahsulotlarni saqlash (agar sahifada mahsulotlar mavjud bo'lsa)
-    if (document.querySelectorAll('.card_product').length > 0) {
-        saveAllProducts();
-        initializeProductClickHandlers();
+    showLoading();
+    
+    try {
+        // Barcha mahsulotlarni saqlash (agar sahifada mahsulotlar mavjud bo'lsa)
+        if (document.querySelectorAll('.card_product').length > 0) {
+            saveAllProducts();
+            initializeProductClickHandlers();
+        }
+        
+        // selectedProduct'ni yangilash (oddiy holatda)
+        await updateSelectedProduct();
+        
+        // Language observer'ni ishga tushirish
+        languageObserver = new SimpleLanguageObserver();
+        
+        // InitializePage'ni chaqirish
+        await initializePage();
+        
+        console.log('✅ Tarjima tizimi tayyor');
+    } finally {
+        hideLoadingWithDelay(800);
     }
-    
-    // selectedProduct'ni yangilash
-    updateSelectedProduct();
-    
-    // Language observer'ni ishga tushirish
-    languageObserver = new LanguageObserver();
-    
-    console.log('✅ Initialization tugadi');
 });
 
-
-// Debug uchun
-function debugProductData() {
-    const selectedProduct = JSON.parse(localStorage.getItem("selectedProduct"));
-    const currentLang = getCurrentLanguage();
-    const allProductsEn = JSON.parse(localStorage.getItem("allProducts_en")) || [];
-    const allProductsGeo = JSON.parse(localStorage.getItem("allProducts_geo")) || [];
+// Manual funksiyalar (Loading bilan)
+window.debugTranslation = async function() {
+    console.log('🐛 Tarjima debug:', {
+        currentLang: getCurrentLanguage(),
+        path: window.location.pathname,
+        isEditMode: localStorage.getItem('edit') === 'true',
+        selectedProduct: JSON.parse(localStorage.getItem("selectedProduct"))
+    });
     
-    console.group('🔍 Debug Ma\'lumotlari');
-    console.log('Joriy til:', currentLang);
-    console.log('Tanlangan mahsulot:', selectedProduct);
-    console.log('EN mahsulotlar soni:', allProductsEn.length);
-    console.log('GEO mahsulotlar soni:', allProductsGeo.length);
-    console.groupEnd();
+    // Manual test
+    await testTranslation();
+};
+
+// Console da ishlatish uchun global funksiya
+window.translateNow = handleEditLanguageTranslation;
+
+// Debug uchun (Loading bilan)
+async function debugProductData() {
+    showLoading();
+    
+    try {
+        const selectedProduct = JSON.parse(localStorage.getItem("selectedProduct"));
+        const currentLang = getCurrentLanguage();
+        const allProductsEn = JSON.parse(localStorage.getItem("allProducts_en")) || [];
+        const allProductsGeo = JSON.parse(localStorage.getItem("allProducts_geo")) || [];
+        
+        console.log('🐛 Debug ma\'lumotlari:', {
+            selectedProduct,
+            currentLang,
+            allProductsEn: allProductsEn.length,
+            allProductsGeo: allProductsGeo.length
+        });
+    } finally {
+        hideLoadingWithDelay(300);
+    }
 }
 
-console.log('✅ Edit boshqaruv tizimi yuklandi');
-console.log('📚 Debug buyruq: debugEdit()');
+// Global funksiya sifatida qo'shish
+window.debugProductData = debugProductData;
