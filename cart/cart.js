@@ -236,6 +236,15 @@ function getOrdersFromLocalStorage() {
         return [];
     }
 }
+function getOrders_pizzaFromLocalStorage() {
+    try {
+        const orders_pizza = localStorage.getItem('orders_pizza');
+        return orders_pizza ? JSON.parse(orders_pizza) : [];
+    } catch (error) {
+        console.error('Error loading orders from localStorage:', error);
+        return [];
+    }
+}
 
 // Function to get cart from localStorage
 function getCartFromLocalStorage() {
@@ -384,10 +393,62 @@ function renderOrdersHTML(orders) {
                                 </div>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
-                                <h3 class="text-grey  fs-20"><s>${(order.aksiyaPrice * order.count).toFixed(2)}₾</s></h3>
+                                <h3 class="text-grey fs-20"><s>
+${(() => {
+    let basePrice = parseFloat(order.aksiyaPrice) || 0;
+    let additionalPrice = 0;
+    
+    // Pizzalar narxini qo'shish
+    if (order.pizzas && order.pizzas.length > 0) {
+        order.pizzas.forEach(pizza => {
+            additionalPrice += parseFloat(pizza.price) || 0;
+            
+            // Ingredientlar narxini qo'shish
+            if (pizza.ingredients && pizza.ingredients.length > 0) {
+                pizza.ingredients.forEach(ingredient => {
+                    additionalPrice += parseFloat(ingredient.price) || 0;
+                });
+            }
+        });
+    }
+    
+    // Agar 1+1 aksiya bo'lsa
+    if (order.description && order.description.includes("get second for free")) {
+        return ((basePrice * order.count) + additionalPrice).toFixed(2);
+    } else {
+        return ((basePrice + additionalPrice) * order.count).toFixed(2);
+    }
+})()}₾
+</s></h3>
                             </div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0px;">
-                                <h3 class="text-red  fs-24" style="text-align: end;">${(order.price * order.count).toFixed(2)}₾</h3>
+                                <h3 class="text-red fs-24" style="text-align: end;">
+${(() => {
+    let basePrice = parseFloat(order.price) || 0;
+    let additionalPrice = 0;
+    
+    // Pizzalar narxini qo'shish
+    if (order.pizzas && order.pizzas.length > 0) {
+        order.pizzas.forEach(pizza => {
+            additionalPrice += parseFloat(pizza.price) || 0;
+            
+            // Ingredientlar narxini qo'shish
+            if (pizza.ingredients && pizza.ingredients.length > 0) {
+                pizza.ingredients.forEach(ingredient => {
+                    additionalPrice += parseFloat(ingredient.price) || 0;
+                });
+            }
+        });
+    }
+    
+    // Agar 1+1 aksiya bo'lsa
+    if (order.description && order.description.includes("get second for free")) {
+        return ((basePrice * order.count) + additionalPrice).toFixed(2);
+    } else {
+        return ((basePrice + additionalPrice) * order.count).toFixed(2);
+    }
+})()}₾
+</h3>
                                 <div>
                                     <div>
                                         <div class="Kanit-Regular quantity-controls" style='display:inline-flex'>
@@ -688,7 +749,7 @@ function editOrder(orderId) {
             };
             
             // FAQAT BIR MARTA selectedProduct'ni set qilish
-            localStorage.setItem('selectedProduct', JSON.stringify(productData));
+            localStorage.setItem('selectedProduct', JSON.stringify(order));
             
             // Pizza uchun qo'shimcha ma'lumotlarni saqlaymiz
             if (order.dataType === 'pizza' && order.pizzas) {

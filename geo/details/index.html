@@ -3965,8 +3965,8 @@
     <script src="./script.js"></script>
 
 
-    <script>
-        // Global variables
+   <script>
+ // Global variables
 const maxSelection = 5;
 const selectedItemsMap = new Map();
 let count = 1;
@@ -4609,12 +4609,40 @@ function addToCart() {
     }
 
     const newOrder = {
-        ...product,
+        // Order ma'lumotlari
         id: orderId,
         count: count,
         pizzas: pizzasArray, // HAR BIR PIZZA VA INGREDIENT ENDI O'Z ID'LARI GA EGA
         totalPrice: totalPrice + "₾",
-        date: new Date().toISOString()
+        date: new Date().toISOString(),
+        
+        // Product ma'lumotlari (flatted)
+        productId: product.id, // Asosiy mahsulot ID'si
+        title: product.title,
+        img: product.img,
+        img_1: product.img_1 || '',
+        description: product.description,
+        price: product.price,
+        aksiyaPrice: product.aksiyaPrice,
+        ingredients: product.ingredients || '',
+        type: product.type || '',
+        dataType: product.dataType || '',
+        language: product.language || 'en',
+        
+        // Original product ma'lumotlarini saqlash (edit uchun)
+        originalProduct: {
+            id: product.id,
+            title: product.title,
+            img: product.img,
+            img_1: product.img_1 || '',
+            description: product.description,
+            price: product.price,
+            aksiyaPrice: product.aksiyaPrice,
+            ingredients: product.ingredients || '',
+            type: product.type || '',
+            dataType: product.dataType || '',
+            language: product.language || 'en'
+        }
     };
 
     console.log("Final order with pizza and ingredient IDs:", newOrder);
