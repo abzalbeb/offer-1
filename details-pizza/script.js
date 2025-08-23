@@ -484,7 +484,7 @@ const maxExtraIngredients = 5;
 
 
 // Edit holatini tekshirish va ma'lumotlarni qayta tiklash funksiyasi
-// Edit holatini tekshirish va ma'lumotlarni qayta tiklash funksiyasi (TUZATILGAN)
+// Edit holatini tekshirish va ma'lumotlarni qayta tiklash funksiyasi (ID bo'yicha ishlaydi)
 function restoreEditData() {
     const isEditMode = localStorage.getItem('edit') === 'true';
     const editOrderData = JSON.parse(localStorage.getItem('selectedProduct')) || null;
@@ -511,9 +511,13 @@ function restoreEditData() {
         }
     }
     
-    // 2. Pizza size ni qayta tiklash
+    // 2. Pizza size ni ID bo'yicha qayta tiklash
     if (editOrderData.pizzas && editOrderData.pizzas[0]) {
-        const savedPizzaSize = editOrderData.pizzas[0].title;
+        const savedPizzaData = editOrderData.pizzas[0];
+        const savedPizzaSizeId = savedPizzaData.id;
+        const savedPizzaTitle = savedPizzaData.title;
+        
+        console.log('Saqlangan pizza data:', {id: savedPizzaSizeId, title: savedPizzaTitle});
 
         // Barcha pizza size lardan active ni olib tashlash
         document.querySelectorAll(".pizza_size_select").forEach(el => {
@@ -522,24 +526,45 @@ function restoreEditData() {
             if (svgIcon) svgIcon.style.display = "none";
         });
 
-        // To'g'ri pizza size ni topish va active qilish
-        document.querySelectorAll(".pizza_size_select").forEach(el => {
-            const elSize = el.dataset.size || el.textContent.trim();
-            if (
-                elSize === savedPizzaSize ||
-                elSize.includes(savedPizzaSize) ||
-                savedPizzaSize.includes(elSize)
-            ) {
-                el.classList.add("active");
-                const svgIcon = el.querySelector("svg");
+        // Avval ID bo'yicha qidirish
+        let foundPizzaSize = false;
+        if (savedPizzaSizeId) {
+            const pizzaElementById = document.querySelector(`.pizza_size_select[data-id="${savedPizzaSizeId}"]`);
+            if (pizzaElementById) {
+                pizzaElementById.classList.add("active");
+                const svgIcon = pizzaElementById.querySelector("svg");
                 if (svgIcon) svgIcon.style.display = "inline-block";
 
-                selectedPizza.id = el.dataset.id || selectedPizza.id;
-                selectedPizza.title = el.dataset.size || savedPizzaSize;
-                selectedPizza.price = parseFloat(el.dataset.price) || selectedPizza.price;
+                selectedPizza.id = pizzaElementById.dataset.id;
+                selectedPizza.title = pizzaElementById.dataset.size || savedPizzaTitle;
+                selectedPizza.price = parseFloat(pizzaElementById.dataset.price) || selectedPizza.price;
 
+                foundPizzaSize = true;
+                console.log('Pizza size ID bo\'yicha tiklandi:', savedPizzaSizeId);
             }
-        });
+        }
+        
+        // Agar ID bo'yicha topilmasa, title bo'yicha qidirish (backward compatibility)
+        if (!foundPizzaSize && savedPizzaTitle) {
+            document.querySelectorAll(".pizza_size_select").forEach(el => {
+                const elSize = el.dataset.size || el.textContent.trim();
+                if (
+                    elSize === savedPizzaTitle ||
+                    elSize.includes(savedPizzaTitle) ||
+                    savedPizzaTitle.includes(elSize)
+                ) {
+                    el.classList.add("active");
+                    const svgIcon = el.querySelector("svg");
+                    if (svgIcon) svgIcon.style.display = "inline-block";
+
+                    selectedPizza.id = el.dataset.id || selectedPizza.id;
+                    selectedPizza.title = el.dataset.size || savedPizzaTitle;
+                    selectedPizza.price = parseFloat(el.dataset.price) || selectedPizza.price;
+
+                    console.log('Pizza size title bo\'yicha tiklandi:', savedPizzaTitle);
+                }
+            });
+        }
     }
     
     // 3. Default dough va edge ni DOIM qo'shish
@@ -547,7 +572,7 @@ function restoreEditData() {
     setIngredient(defaultEdge);
     updateDoughSelection();
     
-    // 4. Ingredients ni qayta tiklash
+    // 4. Ingredients ni ID bo'yicha qayta tiklash
     if (editOrderData.pizzas && editOrderData.pizzas[0] && editOrderData.pizzas[0].ingredients) {
         const savedIngredients = editOrderData.pizzas[0].ingredients;
         
@@ -595,45 +620,62 @@ function restoreEditData() {
         }
         
         
-        // Saqlangan ingredients larni nom bo'yicha guruhlash
-        const savedStandardIngredients = [];
+        // ID lar bo'yicha guruhlash
+        const savedStandardIngredientIds = [];
         const savedExtraIngredients = [];
         
         savedIngredients.forEach(savedItem => {
-            const ingredientName = savedItem.name.toLowerCase().trim();
-            
-            // Default standard ingredients ichida bor-yo'qligini tekshirish
-            const isDefaultStandard = defaultIngredientsForThisProduct.some(defItem => 
-                defItem.title.toLowerCase().trim() === ingredientName
-            );
-            
-            const isDefaultDough = defaultDough.title.toLowerCase().trim() === ingredientName;
-            const isDefaultEdge = defaultEdge.title.toLowerCase().trim() === ingredientName;
-            
-            if (isDefaultStandard) {
-                savedStandardIngredients.push(savedItem);
-            } else if (!isDefaultDough && !isDefaultEdge) {
-                savedExtraIngredients.push(savedItem);
+            // Agar savedItem da id mavjud bo'lsa, uni ishlatish
+            if (savedItem.id) {
+                // ID bo'yicha default standard ingredients ichida bor-yo'qligini tekshirish
+                const isDefaultStandard = defaultIngredientsForThisProduct.some(defItem => 
+                    defItem.id == savedItem.id
+                );
+                
+                const isDefaultDough = defaultDough.id == savedItem.id;
+                const isDefaultEdge = defaultEdge.id == savedItem.id;
+                
+                if (isDefaultStandard) {
+                    savedStandardIngredientIds.push(savedItem.id);
+                } else if (!isDefaultDough && !isDefaultEdge) {
+                    savedExtraIngredients.push(savedItem);
+                }
+            } else {
+                // Agar ID yo'q bo'lsa, nom bo'yicha qidirish (backward compatibility)
+                const ingredientName = savedItem.name.toLowerCase().trim();
+                
+                // Default standard ingredients ichida nom bo'yicha qidirish
+                const matchedDefault = defaultIngredientsForThisProduct.find(defItem => 
+                    defItem.title.toLowerCase().trim() === ingredientName
+                );
+                
+                const isDefaultDough = defaultDough.title.toLowerCase().trim() === ingredientName;
+                const isDefaultEdge = defaultEdge.title.toLowerCase().trim() === ingredientName;
+                
+                if (matchedDefault) {
+                    savedStandardIngredientIds.push(matchedDefault.id);
+                } else if (!isDefaultDough && !isDefaultEdge) {
+                    savedExtraIngredients.push(savedItem);
+                }
             }
         });
         
+        console.log('Standard ingredients IDs:', savedStandardIngredientIds);
+        console.log('Extra ingredients:', savedExtraIngredients);
         
-        // STANDARD INGREDIENTS NI QAYTA TIKLASH
-        if (savedStandardIngredients.length > 0) {
-            // Faqat saqlangan standard ingredients larni active qilish
-            savedStandardIngredients.forEach(savedItem => {
-                const matchedDefault = defaultIngredientsForThisProduct.find(defItem => 
-                    defItem.title.toLowerCase().trim() === savedItem.name.toLowerCase().trim()
-                );
-                
-                if (matchedDefault) {
-                    const standardElement = document.querySelector(`.for_vibor_2[data-id="${matchedDefault.id}"]`);
+        // STANDARD INGREDIENTS NI ID BO'YICHA QAYTA TIKLASH
+        if (savedStandardIngredientIds.length > 0) {
+            // Faqat saqlangan ID lardagi standard ingredients larni active qilish
+            defaultIngredientsForThisProduct.forEach(defItem => {
+                if (savedStandardIngredientIds.includes(defItem.id)) {
+                    const standardElement = document.querySelector(`.for_vibor_2[data-id="${defItem.id}"]`);
                     
                     if (standardElement) {
                         standardElement.classList.add("for_active_2");
-                        setIngredient(matchedDefault);
+                        setIngredient(defItem);
+                        console.log('Standard ingredient active qilindi (ID):', defItem.id, defItem.title);
                     } else {
-                        console.warn('Standard ingredient elementi topilmadi:', matchedDefault.id, savedItem.name);
+                        console.warn('Standard ingredient elementi topilmadi (ID):', defItem.id, defItem.title);
                     }
                 }
             });
@@ -649,20 +691,45 @@ function restoreEditData() {
             });
         }
         
-        // EXTRA INGREDIENTS NI QAYTA TIKLASH
+        // EXTRA INGREDIENTS NI ID BO'YICHA QAYTA TIKLASH
         savedExtraIngredients.forEach(savedItem => {
-            // Extra ingredient elementini topish
-            let extraElement = document.querySelector(`.for_vibor_0[data-title="${savedItem.name}"]`);
+            let extraElement;
+            let itemId = savedItem.id;
+            let itemName = savedItem.name || savedItem.title || '';
             
-            if (!extraElement) {
-                // data-title bilan topilmasa, title ni taqqoslash
-                const allExtraElements = document.querySelectorAll('.for_vibor_0');
-                allExtraElements.forEach(el => {
-                    const elTitle = el.dataset.title || el.querySelector('span')?.textContent?.trim() || '';
-                    if (elTitle.toLowerCase().trim() === savedItem.name.toLowerCase().trim()) {
-                        extraElement = el;
-                    }
-                });
+            console.log('Extra ingredient tiklanmoqda:', {id: itemId, name: itemName});
+            
+            // 1) Avval ID bo'yicha qidirish
+            if (itemId) {
+                extraElement = document.querySelector(`.for_vibor_0[data-id="${itemId}"]`);
+                console.log('ID bo\'yicha qidiruv:', itemId, extraElement ? 'topildi' : 'topilmadi');
+            }
+            
+            // 2) Agar ID bo'yicha topilmasa, title bo'yicha qidirish
+            if (!extraElement && itemName) {
+                // data-title atributi bo'yicha qidirish
+                extraElement = document.querySelector(`.for_vibor_0[data-title="${itemName}"]`);
+                console.log('data-title bo\'yicha qidiruv:', itemName, extraElement ? 'topildi' : 'topilmadi');
+                
+                // Agar data-title bilan topilmasa, matn taqqoslash orqali qidirish
+                if (!extraElement) {
+                    const allExtraElements = document.querySelectorAll('.for_vibor_0');
+                    allExtraElements.forEach(el => {
+                        const elTitle = el.dataset.title || el.querySelector('span')?.textContent?.trim() || '';
+                        if (elTitle.toLowerCase().trim() === itemName.toLowerCase().trim()) {
+                            extraElement = el;
+                            console.log('Matn taqqoslash orqali topildi:', elTitle);
+                        }
+                    });
+                }
+                
+                // Agar topilgan bo'lsa, unga ID ni qo'shish
+                if (extraElement && !extraElement.dataset.id) {
+                    const generatedId = itemId || generateExtraIngredientId(itemName);
+                    extraElement.setAttribute('data-id', generatedId);
+                    itemId = generatedId;
+                    console.log('Elementga ID qo\'shildi:', generatedId);
+                }
             }
             
             if (extraElement) {
@@ -670,16 +737,27 @@ function restoreEditData() {
                 
                 // Extra ingredient obyektini yaratish
                 const extraIngredient = {
-                    id: generateExtraIngredientId(savedItem.name),
-                    title: savedItem.name,
+                    id: itemId || generateExtraIngredientId(itemName),
+                    title: itemName,
                     price: savedItem.price || 0,
                     img: extraElement.dataset.img || extraElement.querySelector('img')?.src || '',
                     type: "extra"
                 };
                 
                 setIngredient(extraIngredient);
+                console.log('Extra ingredient qayta qo\'shildi:', extraIngredient);
             } else {
-                console.warn('Extra ingredient elementi topilmadi:', savedItem.name);
+                console.warn('Extra ingredient elementi topilmadi:', {id: itemId, name: itemName});
+                
+                // Debug: barcha for_vibor_0 elementlarini ko'rsatish
+                console.log('Mavjud extra elementlar:');
+                document.querySelectorAll('.for_vibor_0').forEach((el, index) => {
+                    console.log(`${index + 1}:`, {
+                        'data-id': el.dataset.id,
+                        'data-title': el.dataset.title,
+                        'text': el.querySelector('span')?.textContent?.trim()
+                    });
+                });
             }
         });
         
@@ -755,9 +833,19 @@ function initializePage() {
 
 
 // Event handler funksiyalar
+// Extra ingredients uchun ID bilan ishlaydigan handler
 function handleExtraIngredientClick() {
+    // ID ni olish - avval data-id dan, keyin title dan generate qilish
+    let id = this.dataset.id;
     const title = this.dataset.title;
-    const id = generateExtraIngredientId(title);
+    
+    // Agar data-id yo'q bo'lsa, title dan ID generate qilish
+    if (!id && title) {
+        id = generateExtraIngredientId(title);
+        // HTML elementiga ID ni qo'shish (keyingi marta uchun)
+        this.setAttribute('data-id', id);
+    }
+    
     const priceStr = this.dataset.price || "+0₾";
     const price = parseFloat(priceStr.replace(/[^\d.]/g, '')) || 0;
     const img = this.querySelector('img')?.src || '';
@@ -767,12 +855,14 @@ function handleExtraIngredientClick() {
     if (isActive) {
         this.classList.remove("for_active_0");
         removeIngredientById(id);
+        console.log(`${title} olib tashlandi (ID: ${id})`);
     } else {
         const currentExtraCount = selectedPizza.ingredients.filter(i => i.type === "extra").length;
 
         if (currentExtraCount < maxExtraIngredients) {
             this.classList.add("for_active_0");
             setIngredient({ id, title, price, img, type: "extra" });
+            console.log(`${title} qo'shildi (ID: ${id}). Extra ingredients soni: ${currentExtraCount + 1}`);
         } else {
             const errorPopup = document.querySelector('#Toastify-nostore');
             if (errorPopup) {
@@ -785,6 +875,23 @@ function handleExtraIngredientClick() {
     }
 
     updateTotalPrice();
+}
+
+
+
+// Extra ingredient ID generator ni yaxshilash
+function generateExtraIngredientId(title) {
+    if (!title || typeof title !== 'string') {
+        return "extra_unknown_" + Date.now();
+    }
+    
+    // Title ni tozalash va ID yaratish
+    const cleanTitle = title.toLowerCase()
+        .replace(/\s+/g, '_')           // bo'shliqlarni _ ga almashtirish
+        .replace(/[^a-z0-9_]/g, '')     // faqat harflar, raqamlar va _ qoldirish
+        .substring(0, 20);              // 20 belgiga qisqartirish
+    
+    return `extra_${cleanTitle}`;
 }
 
 function handleStandardIngredientClick() {
@@ -931,7 +1038,47 @@ function initializePage() {
     
     updateTotalPrice();
 }
+// Extra ingredients elementlariga ID qo'shish funksiyasi
+function initializeExtraIngredientsIds() {
+    const extraElements = document.querySelectorAll('.for_vibor_0');
+    
+    console.log(`Extra ingredients elementlar soni: ${extraElements.length}`);
+    
+    extraElements.forEach((element, index) => {
+        // Agar data-id yo'q bo'lsa, qo'shish
+        if (!element.dataset.id) {
+            const title = element.dataset.title || element.querySelector('span')?.textContent?.trim() || `extra_item_${index}`;
+            const generatedId = generateExtraIngredientId(title);
+            
+            element.setAttribute('data-id', generatedId);
+            console.log(`Extra ingredient ga ID qo'shildi:`, {
+                title: title,
+                generatedId: generatedId,
+                element: element
+            });
+        } else {
+            console.log(`Extra ingredient allaqachon ID ga ega:`, {
+                id: element.dataset.id,
+                title: element.dataset.title
+            });
+        }
+    });
+}
 
+// Sahifa yuklanganda extra ingredients ga ID larni qo'shish
+function setupExtraIngredientsWithIds() {
+    // Avval ID larni qo'shish
+    initializeExtraIngredientsIds();
+    
+    // Keyin event handler larni o'rnatish
+    const extraItems = document.querySelectorAll(".for_vibor_0");
+    extraItems.forEach(el => {
+        el.removeEventListener("click", handleExtraIngredientClick);
+        el.addEventListener("click", handleExtraIngredientClick);
+    });
+    
+    console.log('Extra ingredients ID lar bilan o\'rnatildi');
+}
 // --- PLUS/MINUS tugmalari ---
 document.getElementById("plus")?.addEventListener("click", () => {
     if (count < maxSelection) {
@@ -949,7 +1096,7 @@ document.getElementById("minus")?.addEventListener("click", () => {
     }
 });
 
-// --- ADD TO CART HANDLER (YANGILANGAN VERSIYA) ---
+// ADD TO CART HANDLER - ID bilan saqlaydigan versiya
 function addToCartHandler() {
     // Dough va edge mavjud bo'lmasa default qo'shish
     if (!selectedPizza.ingredients.some(i => i.type === "dough")) {
@@ -959,14 +1106,19 @@ function addToCartHandler() {
         setIngredient(defaultEdge);
     }
 
-    // Ingredients arrayni 2-chi strukturaga o'xshash formatga o'zgartirish
+    // Ingredients arrayni ID va name bilan saqlaydigan formatga o'zgartirish
     const formattedIngredients = selectedPizza.ingredients.map(ingredient => ({
-        name: ingredient.title,  // title -> name ga o'zgartirish
-        price: ingredient.price
-        // id, img, type larni olib tashlaymiz chunki 2-struktura bunday ma'lumot bermaydi
+        id: ingredient.id,        // ID ni ham saqlash
+        name: ingredient.title,   // title -> name ga o'zgartirish
+        price: ingredient.price,  // narxni saqlash
+        type: ingredient.type     // type ni ham saqlash (debug uchun)
     }));
 
     const totalPrice = (selectedPizza.price + getIngredientsTotal()) * count;
+
+    // Aktiv pizza size elementini topish va uning ID sini olish
+    const activePizzaSize = document.querySelector(".pizza_size_select.active");
+    const pizzaSizeId = activePizzaSize ? activePizzaSize.dataset.id : "2"; // default medium
 
     const cartProduct = {
         id: parseInt(product.id) || product.id,
@@ -977,15 +1129,16 @@ function addToCartHandler() {
         description: product.description,
         title: product.title,
         count: count,
-        price: selectedPizza.price, // 2-struktura price ni ham saqlaydi
+        price: selectedPizza.price,
         totalPrice: totalPrice.toFixed(2) + "₾",
         dataType: 'pizza',
         ingredients: product.Ingredients || product.ingredients,
         pizzas: [
             {
+                id: pizzaSizeId,              // Pizza size ID ni saqlash
                 title: selectedPizza.title,
-                price: 0, // 2-strukturada pizza price 0 bo'ladi
-                ingredients: formattedIngredients // yangi format
+                price: 0,
+                ingredients: formattedIngredients // ID bilan yangi format
             }
         ]
     };
@@ -1190,7 +1343,7 @@ function handleIngredientVisibility(){
 
 if (localStorage.getItem("edit") == "true") {
     for (let i = 0; i < document.querySelectorAll(".addToCartBtn").length; i++) {
-        document.querySelectorAll(".addToCartBtn")[i].innerHTML = "Update cart"
+        document.querySelectorAll(".addToCartBtn")[i].innerHTML = "კალათაში დამატება"
     }
 }
 
@@ -1248,7 +1401,6 @@ function findProductById(productId) {
 // ===== TANLANGAN MAHSULOTNI BOSHQARISH =====
 
 // selectedProduct ni yangilash
-// selectedProduct ni yangilash - MUKAMMALLASHTIRILGAN VERSIYA
 function updateSelectedProduct() {
     const selectedProductData = JSON.parse(localStorage.getItem("selectedProduct"));
     const currentLang = getCurrentLanguage();
@@ -1264,26 +1416,26 @@ function updateSelectedProduct() {
     const isLanguageMismatch = selectedProductData.language !== currentLang;
     const isContentMismatch = detectLanguageMismatch(selectedProductData.title, selectedProductData.language || 'en');
     
-    // Agar til nomuvofiqlik bo'lsa yoki kontent mos kelmasa
     if (isLanguageMismatch || isContentMismatch) {
        
         
-        // Joriy tildan to'g'ri mahsulotni qidirish
+        // Faqat joriy tildan qidirish
         const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
         const correctProduct = currentLangProducts.find(p => p.id === selectedProductData.id);
         
         if (correctProduct && correctProduct.price > 0) {
-            // MUHIM: Faqat title va description ni yangilash, boshqasini asl holatida qoldirish
             const updatedProduct = { 
-                ...selectedProductData, // Asl ma'lumotni saqlash
-                title: correctProduct.title, // Faqat title ni yangilash
-                description: correctProduct.description, // Faqat description ni yangilash
-                language: currentLang, // Tilni yangilash
+                ...correctProduct, 
+                language: currentLang,
                 timestamp: Date.now()
             };
-            
             localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-           
+            console.log(`✅ selectedProduct to'g'ri tilga yangilandi:`, {
+                oldTitle: selectedProductData.title,
+                newTitle: updatedProduct.title,
+                lang: updatedProduct.language,
+                price: updatedProduct.price
+            });
             
             // Custom event yuborish
             window.dispatchEvent(new CustomEvent('productUpdated', { 
@@ -1291,113 +1443,22 @@ function updateSelectedProduct() {
             }));
         } else {
             console.warn(`⚠️ Mahsulot ${currentLang} tilida topilmadi, asl ma'lumot saqlanmoqda`);
-            // Faqat tilni yangilash, boshqa ma'lumotlarni o'zgartirmaslik
-            const updatedProduct = { 
-                ...selectedProductData, 
-                language: currentLang,
-                timestamp: Date.now()
-            };
+            // Asl ma'lumotni saqlash, faqat tilni yangilash
+            const updatedProduct = { ...selectedProductData, language: currentLang };
             localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
         }
-    } 
-    // Agar faqat narx muammosi bo'lsa (title va til to'g'ri)
-    else if (selectedProductData.price <= 0) {
-        const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
-        const correctProduct = currentLangProducts.find(p => p.id === selectedProductData.id);
+    } else if (selectedProductData.price <= 0) {
+        // Faqat narx muammosi bo'lsa
+        console.log('💰 Narx muammosi hal qilinmoqda...');
+        const updatedProduct = findProductById(selectedProductData.id);
         
-        if (correctProduct && correctProduct.price > 0) {
-            // Faqat narxni yangilash
-            const updatedProduct = { 
-                ...selectedProductData,
-                price: correctProduct.price,
-                timestamp: Date.now()
-            };
+        if (updatedProduct) {
             localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-            
-            // Custom event yuborish
-            window.dispatchEvent(new CustomEvent('productUpdated', { 
-                detail: updatedProduct 
-            }));
+            console.log(`✅ Narx yangilandi: ${updatedProduct.price}`);
         }
-    } 
-    
-}
-
-// Qo'shimcha: Faqat title va description yangilash uchun alohida funksiya
-function updateSelectedProductTitleOnly() {
-    const selectedProductData = JSON.parse(localStorage.getItem("selectedProduct"));
-    const currentLang = getCurrentLanguage();
-    
-    if (!selectedProductData?.id) {
-        console.warn('⚠️ selectedProduct topilmadi');
-        return false;
+    } else {
+        console.log('✅ selectedProduct allaqachon to\'g\'ri');
     }
-    
-    const currentLangProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
-    const correctProduct = currentLangProducts.find(p => p.id === selectedProductData.id);
-    
-    if (correctProduct) {
-        const updatedProduct = { 
-            ...selectedProductData,
-            title: correctProduct.title,
-            description: correctProduct.description,
-            language: currentLang,
-            timestamp: Date.now()
-        };
-        
-        localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-        
-        // Custom event yuborish
-        window.dispatchEvent(new CustomEvent('productUpdated', { 
-            detail: updatedProduct 
-        }));
-        
-        return true;
-    }
-    
-    return false;
-}
-
-// Debug uchun - selectedProduct holatini tekshirish va avtomatik yangilash
-function checkSelectedProductConsistency() {
-    const selectedProductData = JSON.parse(localStorage.getItem("selectedProduct"));
-    const currentLang = getCurrentLanguage();
-    
-    if (!selectedProductData) {
-        return;
-    }
-
-    
-    // Til nomuvofiqligini tekshirish
-    const hasLanguageMismatch = selectedProductData.language !== currentLang;
-    const hasContentMismatch = detectLanguageMismatch(selectedProductData.title, selectedProductData.language || 'en');
-    
-
-    
-    if (hasLanguageMismatch || hasContentMismatch) {
-        
-        // Avtomatik yangilash
-        const targetProducts = JSON.parse(localStorage.getItem(`allProducts_${currentLang}`)) || [];
-        const correctProduct = targetProducts.find(p => p.id === selectedProductData.id);
-        
-        if (correctProduct) {
-            const updatedProduct = { 
-                ...selectedProductData,
-                title: correctProduct.title,
-                description: correctProduct.description,
-                language: currentLang,
-                timestamp: Date.now()
-            };
-            
-            localStorage.setItem("selectedProduct", JSON.stringify(updatedProduct));
-          
-            
-            return updatedProduct;
-        }
-    } 
-    
-    console.groupEnd();
-    return selectedProductData;
 }
 
 // Til va kontent o'rtasidagi nomuvofiqlikni aniqlash
