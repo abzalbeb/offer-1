@@ -66,7 +66,7 @@ document.getElementById("geo-btnMobile").addEventListener("click", function() {
 
   }, function(err) {
     console.error("❌ Geolokatsiya xatolik:", err);
-    alert("Geolokatsiya ishlamadi. Toshkent koordinatasi ishlatiladi.");
+    alert("Geolocation permission denied. Please enable location access in your browser settings.");
     // useManualCoordinates();
   }, {
     enableHighAccuracy: true,
@@ -242,7 +242,7 @@ document.getElementById("geo-btn").addEventListener("click", function() {
 
   }, function(err) {
     console.error("❌ Geolokatsiya xatolik:", err);
-    alert("Geolokatsiya ishlamadi. Toshkent koordinatasi ishlatiladi.");
+    alert("Geolocation permission denied. Please enable location access in your browser settings.");
     // useManualCoordinates();
   }, {
     enableHighAccuracy: true,
@@ -346,11 +346,13 @@ items.forEach(el => {
         ${loc.img ? `<img src="${loc.img}" style="width:100px;height:auto;">` : ""}
       `)
       .openOn(map);
-      window.location='../'
-      localStorage.setItem("address", storeName)
       
   });
 });
 
 
+}
+
+function btnAddress(){
+  window.location.href='../'
 }
