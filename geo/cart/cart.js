@@ -341,7 +341,7 @@ function renderPizzas(pizzas) {
         <div>
             <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px; width: 100%; margin-top: 15px;">
                 <div style="display: flex; align-items: center;">
-                    <span class="fs-16 text-black" style="text-decoration: none;">Product ${index + 1} : ${pizza.title || ''}</span>
+                    <span class="fs-16 text-black" style="text-decoration: none;">პროდუქტი ${index + 1} : ${pizza.title || ''}</span>
                 </div>
                 <p class="fs-16 text-black">${pizza.price ? pizza.price.toFixed(2) + '₾' : ''}</p>
             </div>

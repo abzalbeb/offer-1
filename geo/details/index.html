@@ -3764,7 +3764,7 @@
                 <div><a href=""  rel="noopener noreferrer"><img
                             src="../../assets/image/messenger.bdb78ff46cdfba34c11a.png" height="40" width="40"
                             alt="messenger" loading="lazy"></a></div>
-                <p style="font-size: 12px; " class="footer-p-style">Contact Us</p>
+                <p style="font-size: 12px; " class="footer-p-style">დაგვიკავშირდით</p>
             </div>
         </div>
         <div style="position: fixed; bottom: 70px; right: 20px; display: flex; justify-content: flex-end;"
@@ -3773,7 +3773,7 @@
                 <div><a href=""  rel="noopener noreferrer"><img
                             src="../../assets/image/messenger.bdb78ff46cdfba34c11a.png" height="60" width="60"
                             alt="messenger" loading="lazy"></a></div>
-                <p style="font-size: 16px; " class="footer-p-style">Contact Us</p>
+                <p style="font-size: 16px; " class="footer-p-style">დაგვიკავშირდით</p>
             </div>
         </div>
         <div class="bottom-nav">
@@ -3976,7 +3976,7 @@ let pizzaSelectionData = new Map(); // Pizza tanlovi ma'lumotlari
 
 if (localStorage.getItem("edit") == "true") {
     for (let i = 0; i < document.querySelectorAll(".addToCart_btn").length; i++) {
-        document.querySelectorAll(".addToCart_btn")[i].innerHTML = "Update cart"
+        document.querySelectorAll(".addToCart_btn")[i].innerHTML = "ბარათის განახლება"
     }
 }
 
@@ -4530,17 +4530,7 @@ function addToCart() {
         return;
     }
 
-    if (selectedItemsMap.length > 0) {
-        // hech narsa qilmaydi
-    } else {
-        const errorPopup = document.querySelector('#Toastify-error');
-        if (errorPopup) {
-            errorPopup.style.setProperty('display', 'flex', 'important');
-            setTimeout(() => {
-                errorPopup.style.setProperty('display', 'none', 'important');
-            }, 2200);
-        }
-    }
+    
 
     let orderId;
     
@@ -4583,10 +4573,15 @@ function addToCart() {
             const id = block.dataset.id;
             const selectedCard = block.querySelector(`#selected_card_${id}`);
 
-            if (!selectedCard || selectedCard.style.display !== 'flex') {
+             if (!selectedCard || selectedCard.style.display !== 'flex') {
                 const selectChoose = document.querySelector(`#select_choose_${id}`);
                 if (selectChoose) {
                     selectChoose.style.border = '1px solid red';
+                    document.querySelector("#Toastify-error").style="display:flex"
+
+                    setTimeout(() => {
+                        document.querySelector("#Toastify-error").style="display:none"
+                    }, 2000);
                 }
             }
         });
@@ -4718,9 +4713,11 @@ function addToCart() {
     pizzaSelectionData.clear();
     selectedItemsMap.clear();
 
+   document.querySelector("#Toastify-success").style="display:flex"
+
     setTimeout(() => {
         window.location.href = "../cart";
-    }, 1000);
+    }, 2000);
 }
 
 

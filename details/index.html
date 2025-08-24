@@ -4534,17 +4534,7 @@ function addToCart() {
         return;
     }
 
-    if (selectedItemsMap.length > 0) {
-        // hech narsa qilmaydi
-    } else {
-        const errorPopup = document.querySelector('#Toastify-error');
-        if (errorPopup) {
-            errorPopup.style.setProperty('display', 'flex', 'important');
-            setTimeout(() => {
-                errorPopup.style.setProperty('display', 'none', 'important');
-            }, 2200);
-        }
-    }
+   
 
     let orderId;
     
@@ -4586,11 +4576,17 @@ function addToCart() {
         document.querySelectorAll('.pizza-block').forEach(block => {
             const id = block.dataset.id;
             const selectedCard = block.querySelector(`#selected_card_${id}`);
+            
 
             if (!selectedCard || selectedCard.style.display !== 'flex') {
                 const selectChoose = document.querySelector(`#select_choose_${id}`);
                 if (selectChoose) {
                     selectChoose.style.border = '1px solid red';
+                    document.querySelector("#Toastify-error").style="display:flex"
+
+                    setTimeout(() => {
+                        document.querySelector("#Toastify-error").style="display:none"
+                    }, 2000);
                 }
             }
         });
@@ -4722,9 +4718,11 @@ function addToCart() {
     pizzaSelectionData.clear();
     selectedItemsMap.clear();
 
+    document.querySelector("#Toastify-success").style="display:flex"
+
     setTimeout(() => {
         window.location.href = "../cart";
-    }, 1000);
+    }, 2000);
 }
 
 

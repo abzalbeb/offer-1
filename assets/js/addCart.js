@@ -1426,6 +1426,73 @@ window.updateCartFromOrders = function() {
   });
 })();
 
+document.addEventListener('DOMContentLoaded', () => {
+  const oldUrl = 'https://dominospizza.ge/static/media/empty_cart.ce51a99a8179668c0c85.png';
+  const newUrl = '../assets/image/empty_cart.ce51a99a8179668c0c85.png';
+
+  // Sahifadagi barcha <img> elementlarni tekshiramiz
+  document.querySelectorAll('img').forEach(img => {
+    if (img.src === oldUrl) {
+      img.src = newUrl;
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".view-cart-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      window.location.href = "../cart/";
+    });
+  });
+});
+document.addEventListener("click", (e) => {
+  const badge = e.target.closest(".MuiBadge-root.css-1rzb3uu");
+  if (badge) {
+    window.location.href = "../cart/";
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const capa = document.getElementById("Capa_1");
+  if (capa) {
+    capa.addEventListener("click", () => {
+      window.location.href = "../tracking/";
+    });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("img").forEach(img => {
+    if (img.src === "https://dominospizza.ge/static/media/shop-white.f9932044a442888258cf4888ce686068.svg") {
+      img.src = "../assets/image/bike-white.c750e44adb7ca082feca9c0ac6e6bd23.svg";
+    }
+  });
+});
+
+document.addEventListener("click", (e) => {
+  const img = e.target.closest("img");
+  if (img) {
+    const style = window.getComputedStyle(img);
+    if (
+      style.height === "38px" &&
+      style.width === "38px" &&
+      style.objectFit === "contain"
+    ) {
+      window.location.href = "../stores/";
+    }
+  }
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const capa = document.getElementById("Layer_1");
+  if (capa) {
+    capa.addEventListener("click", () => {
+      window.location.href = "../";
+    });
+  }
+});
+
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".cart-icon").forEach(icon => {
@@ -1435,10 +1502,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".view-cart-btn1").forEach(btn => {
-    btn.addEventListener("click", () => {
-      window.location.href = "../cart/";
+document.addEventListener("DOMContentLoaded", function() {
+    const geDivs = document.querySelectorAll('.lang_Ge');
+
+    geDivs.forEach(div => {
+        const img = div.querySelector('img');
+        if (img && img.getAttribute('src') === '../assets/image/usa-flag-round-circle-design-shape-united-state-america-flag_1091279-1016-removebg-preview.png') {
+            div.style.display = 'none';
+        }
     });
-  });
 });
