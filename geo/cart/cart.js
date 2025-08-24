@@ -920,6 +920,7 @@ function createOrderWithOriginalProduct(productData, pizzasArray, count, totalPr
     return newOrder;
 }
 
+
 // existing subtotal calc & cart_cards rendering
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
@@ -933,7 +934,7 @@ let ordersTotal = orders.reduce((sum, item) => {
     let count = item.count || 0;
 
     // originalProduct narxi
-    let basePrice = productData.price || productData.aksiyaPrice || 0;
+    let basePrice = productData.price || 0;
 
     // pizzas narxi va ingredientlar narxi
     let pizzasPrice = 0;
@@ -949,13 +950,16 @@ let ordersTotal = orders.reduce((sum, item) => {
                     0
                 );
             }
-
+        //    console.log(ingPrice);
+           
             return pSum + pizzaPrice + ingPrice;
         }, 0);
     }
-
+console.log(pizzasPrice);
     // umumiy hisob (count ga ko‘paytirilgan)
-    return sum + ((basePrice + pizzasPrice) * count);
+    return sum + ((basePrice * count) + pizzasPrice);
+    
+    
 }, 0);
 
 // umumiy total

@@ -622,14 +622,8 @@ function changeQuantity(orderId, change) {
             }
         }
 
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        // total larni yig'ish
-        let subTotal = cart.reduce((sum, item) => sum + (item.total || 0), 0);
-
-        if (document.querySelector(".subTotal")) {
-            document.querySelector(".subTotal").innerHTML = subTotal.toFixed(2)
-        }
+       
+        
         
     } catch (error) {
         console.error('changeQuantity error:', error);
@@ -933,7 +927,7 @@ let ordersTotal = orders.reduce((sum, item) => {
     let count = item.count || 0;
 
     // originalProduct narxi
-    let basePrice = productData.price || productData.aksiyaPrice || 0;
+    let basePrice = productData.price || 0;
 
     // pizzas narxi va ingredientlar narxi
     let pizzasPrice = 0;
@@ -949,17 +943,23 @@ let ordersTotal = orders.reduce((sum, item) => {
                     0
                 );
             }
-
+        //    console.log(ingPrice);
+           
             return pSum + pizzaPrice + ingPrice;
         }, 0);
     }
-
+console.log(pizzasPrice);
     // umumiy hisob (count ga ko‘paytirilgan)
-    return sum + ((basePrice + pizzasPrice) * count);
+    return sum + ((basePrice * count) + pizzasPrice);
+    
+    
 }, 0);
 
 // umumiy total
 let grandTotal = cartTotal + ordersTotal;
+
+console.log(cartTotal);
+
 
 if (document.querySelector(".subTotal")) {
     document.querySelector(".subTotal").innerHTML = grandTotal.toFixed(2) + "₾";
