@@ -29,7 +29,6 @@ async function translateTextLibre(text, targetLang) {
     try {
         const res = await fetch(url);
         if (!res.ok) {
-            console.error('[translateText] MyMemory API non-OK', res.status);
             return text;
         }
         const j = await res.json();
@@ -47,12 +46,10 @@ async function translateTextLibre(text, targetLang) {
 
         // Agar javobda ruscha harflar bo‘lsa — tarjimani bekor qilish
         if (/[а-яё]/i.test(translated)) {
-            console.warn('[translateText] Skipped non-English/Georgian translation:', translated);
             return text; 
         }
         return translated;
     } catch (err) {
-        console.error('[translateText] MyMemory request failed:', err);
         return text;
     }
 }
@@ -153,11 +150,9 @@ async function translateStorageUsingLibre() {
             localStorage.setItem('orders', JSON.stringify(orders));
             localStorage.setItem('cart', JSON.stringify(cart));
         } catch (err) {
-            console.error('[translateStorage] saving to localStorage failed:', err);
         }
 
     } catch (err) {
-        console.error('[translateStorage] fatal error:', err);
     }
 }
 
@@ -176,7 +171,6 @@ function getOrdersFromLocalStorage() {
         const orders = localStorage.getItem('orders');
         return orders ? JSON.parse(orders) : [];
     } catch (error) {
-        console.error('Error loading orders from localStorage:', error);
         return [];
     }
 }
@@ -187,7 +181,6 @@ function getCartFromLocalStorage() {
         const cart = localStorage.getItem('cart');
         return cart ? JSON.parse(cart) : [];
     } catch (error) {
-        console.error('Error loading cart from localStorage:', error);
         return [];
     }
 }
@@ -648,12 +641,11 @@ if (cartDiv) {
 document.addEventListener('DOMContentLoaded', function() {
     // try translating storage items based on path language (MyMemory), then render
     translateStorageUsingLibre()
-        .catch(err => { console.error('translateStorageUsingLibre error:', err); })
+        .catch(err => {  })
         .finally(() => {
             try {
                 loadAndRenderAllItems();
             } catch (e) {
-                console.error('loadAndRenderAllItems error:', e);
             }
         });
 });

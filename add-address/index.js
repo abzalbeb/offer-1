@@ -48,7 +48,6 @@ if (window.matchMedia("(max-width: 600px)").matches) {
           };
         },
         err => {
-          console.warn("Geolocation error:", err.message);
         }
       );
     }
@@ -255,7 +254,6 @@ if (window.matchMedia("(max-width: 600px)").matches) {
           };
         },
         err => {
-          console.warn("Geolocation error:", err.message);
         }
       );
     }
@@ -424,7 +422,6 @@ function myAddressInfo() {
   try {
     addresses = JSON.parse(addressStr);
   } catch (e) {
-    console.error("addresses JSON parse qilishda xatolik:", e);
     return;
   }
 

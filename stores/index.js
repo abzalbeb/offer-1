@@ -54,22 +54,20 @@ document.getElementById("geo-btnMobile").addEventListener("click", function() {
     return;
   }
 
-  console.log("🔍 Geolokatsiyani tekshirish...");
+
 
   navigator.geolocation.getCurrentPosition(function(pos) {
     const userLat = pos.coords.latitude;
     const userLng = pos.coords.longitude;
     const accuracy = pos.coords.accuracy;
 
-    console.log("📍 Geolokatsiya natijasi:");
-    console.log("Lat:", userLat, "Lng:", userLng);
-    console.log("Aniqlik:", accuracy, "metr");
+   
 
     // Foydalanuvchi real koordinatasi bilan hisoblash
     calculateDistances(userLat, userLng, `🌍 Sizning joylashuvingiz m aniqlik)`);
 
   }, function(err) {
-    console.error("❌ Geolokatsiya xatolik:", err);
+   
     alert("Geolocation permission denied. Please enable location access in your browser settings.");
     // useManualCoordinates();
   }, {
@@ -84,9 +82,7 @@ document.getElementById("geo-btnMobile").addEventListener("click", function() {
 
 // MASOFALARNI HISOBLASH FUNKSIYASI
 function calculateDistances(userLat, userLng, locationName) {
-  console.log("=== MASOFALAR HISOBLASH ===");
-  console.log("Foydalanuvchi:", locationName);
-  console.log("Koordinatalar:", userLat, userLng);
+
 
   // Foydalanuvchi markeri
   const userMarker = L.marker([userLat, userLng]).addTo(map)
@@ -96,29 +92,29 @@ function calculateDistances(userLat, userLng, locationName) {
 
   // Har bir do'kon uchun masofa hisoblash
   locations.forEach((loc, i) => {
-    console.log(`\n--- DO'KON ${i+1}: ${loc.name} ---`);
+    
     
     try {
       // Haversine formula bilan hisoblash
       const distanceKm = haversineKm(userLat, userLng, loc.lat, loc.lng);
       
-      console.log(`Masofa: ${distanceKm.toFixed(2)} km`);
+      
       
       // HTML da ko'rsatish
       const span = document.querySelector(`[data-storeMobile="${i}"]`);
       if (span) {
         span.textContent = distanceKm.toFixed(0) + " KM";
-        console.log(`✅ Do'kon ${i+1} yangilandi: ${distanceKm.toFixed(0)} km`);
+       
       } else {
-        console.warn(`❌ Span topilmadi for data-storeMobile=${i}`);
+        
       }
       
     } catch (error) {
-      console.error(`❌ Do'kon ${i+1} hisoblashda xatolik:`, error);
+     
     }
   });
   
-  console.log("=== HISOBLASH TUGADI ===");
+  
 }
 
 
@@ -166,7 +162,7 @@ items.forEach(el => {
     );
 
     if (!loc) {
-      console.warn('Do‘kon koordinatasi topilmadi:', storeName);
+      
       return;
     }
 
@@ -241,22 +237,20 @@ document.getElementById("geo-btn").addEventListener("click", function() {
     return;
   }
 
-  console.log("🔍 Geolokatsiyani tekshirish...");
+
 
   navigator.geolocation.getCurrentPosition(function(pos) {
     const userLat = pos.coords.latitude;
     const userLng = pos.coords.longitude;
     const accuracy = pos.coords.accuracy;
 
-    console.log("📍 Geolokatsiya natijasi:");
-    console.log("Lat:", userLat, "Lng:", userLng);
-    console.log("Aniqlik:", accuracy, "metr");
+
 
     // Foydalanuvchi real koordinatasi bilan hisoblash
     calculateDistances(userLat, userLng, ``);
 
   }, function(err) {
-    console.error("❌ Geolokatsiya xatolik:", err);
+
     alert("Geolocation permission denied. Please enable location access in your browser settings.");
     // useManualCoordinates();
   }, {
@@ -271,9 +265,7 @@ document.getElementById("geo-btn").addEventListener("click", function() {
 
 // MASOFALARNI HISOBLASH FUNKSIYASI
 function calculateDistances(userLat, userLng, locationName) {
-  console.log("=== MASOFALAR HISOBLASH ===");
-  console.log("Foydalanuvchi:", locationName);
-  console.log("Koordinatalar:", userLat, userLng);
+ 
 
   // Foydalanuvchi markeri
   const userMarker = L.marker([userLat, userLng]).addTo(map)
@@ -283,29 +275,29 @@ function calculateDistances(userLat, userLng, locationName) {
 
   // Har bir do'kon uchun masofa hisoblash
   locations.forEach((loc, i) => {
-    console.log(`\n--- DO'KON ${i+1}: ${loc.name} ---`);
+    
     
     try {
       // Haversine formula bilan hisoblash
       const distanceKm = haversineKm(userLat, userLng, loc.lat, loc.lng);
       
-      console.log(`Masofa: ${distanceKm.toFixed(2)} km`);
+  
       
       // HTML da ko'rsatish
       const span = document.querySelector(`[data-store="${i}"]`);
       if (span) {
         span.textContent = distanceKm.toFixed(0) + " KM";
-        console.log(`✅ Do'kon ${i+1} yangilandi: ${distanceKm.toFixed(0)} km`);
+       
       } else {
-        console.warn(`❌ Span topilmadi for data-store=${i}`);
+        
       }
       
     } catch (error) {
-      console.error(`❌ Do'kon ${i+1} hisoblashda xatolik:`, error);
+     
     }
   });
   
-  console.log("=== HISOBLASH TUGADI ===");
+  
 }
 
 
@@ -353,7 +345,7 @@ items.forEach(el => {
     );
 
     if (!loc) {
-      console.warn('Do‘kon koordinatasi topilmadi:', storeName);
+  
       return;
     }
 

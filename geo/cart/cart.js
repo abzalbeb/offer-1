@@ -82,7 +82,6 @@ async function translateTextLibre(text, targetLang) {
     try {
         const res = await fetch(url);
         if (!res.ok) {
-            console.error('[translateText] MyMemory API non-OK', res.status);
             return text;
         }
         const j = await res.json();
@@ -100,12 +99,10 @@ async function translateTextLibre(text, targetLang) {
 
         // Agar javobda ruscha harflar bo'lsa — tarjimani bekor qilish
         if (/[а-яё]/i.test(translated)) {
-            console.warn('[translateText] Skipped non-English/Georgian translation:', translated);
             return text; 
         }
         return translated;
     } catch (err) {
-        console.error('[translateText] MyMemory request failed:', err);
         return text;
     }
 }
@@ -141,7 +138,6 @@ async function translateStorageUsingLibre() {
             // HAR IKKALA FORMAT UCHUN
             if (o && o.originalProduct) {
                 // YANGI FORMAT - originalProduct mavjud
-                console.log(`Processing order ${i} with originalProduct`);
                 
                 if (o.originalProduct.title) pushText('order', i, 'title', o.originalProduct.title);
                 if (o.originalProduct.description) pushText('order', i, 'description', o.originalProduct.description);
@@ -152,7 +148,6 @@ async function translateStorageUsingLibre() {
                 
             } else {
                 // ESKI FORMAT - originalProduct yo'q
-                console.log(`Processing order ${i} without originalProduct (legacy format)`);
                 
                 if (o && o.title) pushText('order', i, 'title', o.title);
                 if (o && o.description) pushText('order', i, 'description', o.description);
@@ -161,7 +156,6 @@ async function translateStorageUsingLibre() {
             // PIZZALAR - har ikkala format uchun
             if (Array.isArray(o.pizzas)) {
                 o.pizzas.forEach((p, pi) => {
-                    console.log(`Processing pizza ${pi} in order ${i}`);
                     
                     if (p && p.title) {
                         // Agar originalProduct mavjud bo'lsa, undagi pizza ma'lumotlarini qidirish
@@ -172,7 +166,6 @@ async function translateStorageUsingLibre() {
                             );
                             if (originalPizza && originalPizza.title) {
                                 originalPizzaTitle = originalPizza.title;
-                                console.log(`Found original pizza title: ${originalPizzaTitle}`);
                             }
                         }
                         pushText('order-pizza', i, 'title', originalPizzaTitle, pi);
@@ -213,7 +206,6 @@ async function translateStorageUsingLibre() {
                                         
                                         if (originalIngredient && originalIngredient.name) {
                                             originalIngredientName = originalIngredient.name;
-                                            console.log(`Using original ingredient name: ${originalIngredientName} for ${ing.name}`);
                                         }
                                     }
                                 }
@@ -239,13 +231,11 @@ async function translateStorageUsingLibre() {
         });
 
         if (uniqMap.size === 0) {
-            console.log('[translateStorage] No texts to translate');
             return;
         }
 
         // build unique text array
         const uniqTexts = Array.from(uniqMap.keys());
-        console.log(`[translateStorage] Translating ${uniqTexts.length} unique texts`);
 
         // translate sequentially to be gentle with the API
         const translated = [];
@@ -253,7 +243,6 @@ async function translateStorageUsingLibre() {
             const s = uniqTexts[i];
             const tr = await translateTextLibre(s, targetLang);
             translated.push(tr);
-            console.log(`[translateStorage] ${i+1}/${uniqTexts.length}: "${s}" -> "${tr}"`);
             // small delay (avoid rate limit)
             await new Promise(r => setTimeout(r, 150));
         }
@@ -298,15 +287,10 @@ async function translateStorageUsingLibre() {
         try {
             localStorage.setItem('orders', JSON.stringify(orders));
             localStorage.setItem('cart', JSON.stringify(cart));
-            console.log('[translateStorage] Successfully saved translated data to localStorage');
-            console.log('[translateStorage] Processed orders:', orders.length);
-            console.log('[translateStorage] Processed cart items:', cart.length);
         } catch (err) {
-            console.error('[translateStorage] saving to localStorage failed:', err);
         }
 
     } catch (err) {
-        console.error('[translateStorage] fatal error:', err);
     }
 }
 
@@ -328,7 +312,6 @@ function getOrdersFromLocalStorage() {
         const orders = localStorage.getItem('orders');
         return orders ? JSON.parse(orders) : [];
     } catch (error) {
-        console.error('Error loading orders from localStorage:', error);
         return [];
     }
 }
@@ -339,7 +322,6 @@ function getCartFromLocalStorage() {
         const cart = localStorage.getItem('cart');
         return cart ? JSON.parse(cart) : [];
     } catch (error) {
-        console.error('Error loading cart from localStorage:', error);
         return [];
     }
 }
@@ -662,7 +644,6 @@ function changeQuantity(orderId, change) {
         }
         
     } catch (error) {
-        console.error('changeQuantity error:', error);
         hideLoader();
     }
 }
@@ -721,7 +702,6 @@ function changeCartQuantity(itemId, change) {
             }
         }
     } catch (error) {
-        console.error('changeCartQuantity error:', error);
         hideLoader();
     }
 }
@@ -740,7 +720,6 @@ function deleteOrder(orderId) {
             hideLoader();
         }, 300);
     } catch (error) {
-        console.error('deleteOrder error:', error);
         hideLoader();
     }
     window.location.reload()
@@ -759,7 +738,6 @@ function deleteCartItem(itemId) {
             window.location.reload();
         }, 300);
     } catch (error) {
-        console.error('deleteCartItem error:', error);
         hideLoader();
     }
             window.location.reload();
@@ -774,7 +752,6 @@ function loadAndRenderAllItems() {
         const container = document.getElementById('ordersContainer');
         if (container) container.innerHTML = renderAllItemsHTML(orders, cartItems);
     } catch (error) {
-        console.error('loadAndRenderAllItems error:', error);
     }
 }
 
@@ -808,7 +785,6 @@ function removeAll() {
             window.location.reload();
         }, 500);
     } catch (error) {
-        console.error('removeAll error:', error);
         hideLoader();
     }
 }
@@ -860,11 +836,9 @@ function editOrder(orderId) {
                 }
             }, 300);
         } else {
-            console.error('Order not found with ID:', orderId);
             hideLoader();
         }
     } catch (error) {
-        console.error('editOrder error:', error);
         hideLoader();
     }
 }
@@ -983,12 +957,10 @@ let ordersTotal = orders.reduce((sum, item) => {
                     0
                 );
             }
-        //    console.log(ingPrice);
            
             return pSum + pizzaPrice + ingPrice;
         }, 0);
     }
-console.log(pizzasPrice);
     // umumiy hisob (count ga ko‘paytirilgan)
     return sum + ((basePrice * count) + pizzasPrice);
     
@@ -1013,7 +985,6 @@ function payment_page() {
             window.location="../../oplata";
         }, 300);
     } catch (error) {
-        console.error('payment_page error:', error);
         hideLoader();
     }
 }
@@ -1081,7 +1052,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // try translating storage items based on path language (MyMemory), then render
     translateStorageUsingLibre()
         .catch(err => { 
-            console.error('translateStorageUsingLibre error:', err); 
         })
         .finally(() => {
             try {
@@ -1093,7 +1063,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 500); // Small delay to show completion
                 
             } catch (e) {
-                console.error('loadAndRenderAllItems error:', e);
                 hideLoader();
             }
         });

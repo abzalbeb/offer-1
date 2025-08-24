@@ -65,7 +65,6 @@ document.getElementById("geo-btnMobile").addEventListener("click", function() {
     calculateDistances(userLat, userLng);
 
   }, function(err) {
-    console.error("❌ Geolokatsiya xatolik:", err);
     alert("გეოლოკაცია არ იმუშავა.");
     // useManualCoordinates();
   }, {
@@ -103,7 +102,6 @@ function calculateDistances(userLat, userLng, locationName) {
       }
       
     } catch (error) {
-      console.error(`❌ Do'kon ${i+1} hisoblashda xatolik:`, error);
     }
   });
   
@@ -154,7 +152,6 @@ items.forEach(el => {
     );
 
     if (!loc) {
-      console.warn('Do‘kon koordinatasi topilmadi:', storeName);
       return;
     }
 
@@ -240,7 +237,6 @@ document.getElementById("geo-btn").addEventListener("click", function() {
     calculateDistances(userLat, userLng, `🌍 Sizning joylashuvingiz m aniqlik)`);
 
   }, function(err) {
-    console.error("❌ Geolokatsiya xatolik:", err);
     alert("Geolokatsiya ishlamadi. Toshkent koordinatasi ishlatiladi.");
     // useManualCoordinates();
   }, {
@@ -275,11 +271,9 @@ function calculateDistances(userLat, userLng, locationName) {
       if (span) {
         span.textContent = distanceKm.toFixed(0) + " KM";
       } else {
-        console.warn(`❌ Span topilmadi for data-store=${i}`);
       }
       
     } catch (error) {
-      console.error(`❌ Do'kon ${i+1} hisoblashda xatolik:`, error);
     }
   });
   
@@ -330,7 +324,6 @@ items.forEach(el => {
     );
 
     if (!loc) {
-      console.warn('Do‘kon koordinatasi topilmadi:', storeName);
       return;
     }
 

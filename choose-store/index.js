@@ -65,8 +65,6 @@ document.getElementById("geo-btnMobile").addEventListener("click", function() {
     calculateDistances(userLat, userLng, `🌍 Sizning joylashuvingiz m aniqlik)`);
 
   }, function(err) {
-    console.error("❌ Geolokatsiya xatolik:", err);
-    alert("Geolocation permission denied. Please enable location access in your browser settings.");
     // useManualCoordinates();
   }, {
     enableHighAccuracy: true,
@@ -100,11 +98,9 @@ function calculateDistances(userLat, userLng, locationName) {
       if (span) {
         span.textContent = distanceKm.toFixed(0) + " KM";
       } else {
-        console.warn(`❌ Span topilmadi for data-storeMobile=${i}`);
       }
       
     } catch (error) {
-      console.error(`❌ Do'kon ${i+1} hisoblashda xatolik:`, error);
     }
   });
   
@@ -155,7 +151,6 @@ items.forEach(el => {
     );
 
     if (!loc) {
-      console.warn('Do‘kon koordinatasi topilmadi:', storeName);
       return;
     }
 
@@ -241,9 +236,6 @@ document.getElementById("geo-btn").addEventListener("click", function() {
     calculateDistances(userLat, userLng, ``);
 
   }, function(err) {
-    console.error("❌ Geolokatsiya xatolik:", err);
-    alert("Geolocation permission denied. Please enable location access in your browser settings.");
-    // useManualCoordinates();
   }, {
     enableHighAccuracy: true,
     maximumAge: 0,
@@ -276,11 +268,9 @@ function calculateDistances(userLat, userLng, locationName) {
       if (span) {
         span.textContent = distanceKm.toFixed(0) + " KM";
       } else {
-        console.warn(`❌ Span topilmadi for data-store=${i}`);
       }
       
     } catch (error) {
-      console.error(`❌ Do'kon ${i+1} hisoblashda xatolik:`, error);
     }
   });
   
@@ -331,7 +321,6 @@ items.forEach(el => {
     );
 
     if (!loc) {
-      console.warn('Do‘kon koordinatasi topilmadi:', storeName);
       return;
     }
 
