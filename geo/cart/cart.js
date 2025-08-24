@@ -114,6 +114,10 @@ async function translateTextLibre(text, targetLang) {
 // TRANSLATE STORAGE BY PATH (uses translateTextLibre -> MyMemory)
 // YANGILANGAN VERSIYA: originalProduct'dan tarjima qilish
 // -----------------------------
+// -----------------------------
+// TRANSLATE STORAGE BY PATH (uses translateTextLibre -> MyMemory)
+// YANGILANGAN VERSIYA: HAR IKKALA ORDER FORMATINI QO'LLAB-QUVVATLAYDI
+// -----------------------------
 async function translateStorageUsingLibre() {
     try {
         const targetLang = getCurrentLanguage();
@@ -134,19 +138,31 @@ async function translateStorageUsingLibre() {
         }
 
         orders.forEach((o, i) => {
-            // Order asosiy ma'lumotlari - originalProduct'dan olinadi
+            // HAR IKKALA FORMAT UCHUN
             if (o && o.originalProduct) {
+                // YANGI FORMAT - originalProduct mavjud
+                console.log(`Processing order ${i} with originalProduct`);
+                
                 if (o.originalProduct.title) pushText('order', i, 'title', o.originalProduct.title);
                 if (o.originalProduct.description) pushText('order', i, 'description', o.originalProduct.description);
+                
+                // Order-ning o'zidagi title/description ham tarjima qilinadi
+                if (o.title) pushText('order-self', i, 'title', o.title);
+                if (o.description) pushText('order-self', i, 'description', o.description);
+                
             } else {
-                // Fallback - agar originalProduct yo'q bo'lsa
+                // ESKI FORMAT - originalProduct yo'q
+                console.log(`Processing order ${i} without originalProduct (legacy format)`);
+                
                 if (o && o.title) pushText('order', i, 'title', o.title);
                 if (o && o.description) pushText('order', i, 'description', o.description);
             }
 
+            // PIZZALAR - har ikkala format uchun
             if (Array.isArray(o.pizzas)) {
                 o.pizzas.forEach((p, pi) => {
-                    // Pizza ma'lumotlari
+                    console.log(`Processing pizza ${pi} in order ${i}`);
+                    
                     if (p && p.title) {
                         // Agar originalProduct mavjud bo'lsa, undagi pizza ma'lumotlarini qidirish
                         let originalPizzaTitle = p.title;
@@ -156,6 +172,7 @@ async function translateStorageUsingLibre() {
                             );
                             if (originalPizza && originalPizza.title) {
                                 originalPizzaTitle = originalPizza.title;
+                                console.log(`Found original pizza title: ${originalPizzaTitle}`);
                             }
                         }
                         pushText('order-pizza', i, 'title', originalPizzaTitle, pi);
@@ -175,7 +192,7 @@ async function translateStorageUsingLibre() {
                         pushText('order-pizza', i, 'description', originalPizzaDescription, pi);
                     }
 
-                    // INGREDIENTLAR - originalProduct'dan olish
+                    // INGREDIENTLAR - har ikkala format uchun
                     if (Array.isArray(p.ingredients)) {
                         p.ingredients.forEach((ing, ii) => {
                             if (ing && ing.name) {
@@ -209,7 +226,7 @@ async function translateStorageUsingLibre() {
             }
         });
 
-        // Cart ma'lumotlari
+        // Cart ma'lumotlari - o'zgarishsiz
         cart.forEach((c, i) => {
             if (c && c.originalProduct) {
                 if (c.originalProduct.title) pushText('cart', i, 'title', c.originalProduct.title);
@@ -247,7 +264,18 @@ async function translateStorageUsingLibre() {
             const tr = translated[uniqIndex] || task.text;
             
             if (task.type === 'order') {
-                if (orders[task.idx]) orders[task.idx][task.field] = tr;
+                // ORIGINALPRODUCT mavjud format uchun
+                if (orders[task.idx] && orders[task.idx].originalProduct) {
+                    orders[task.idx].originalProduct[task.field] = tr;
+                } else if (orders[task.idx]) {
+                    // ESKI FORMAT uchun
+                    orders[task.idx][task.field] = tr;
+                }
+            } else if (task.type === 'order-self') {
+                // Order-ning o'zidagi ma'lumotlarni yangilash
+                if (orders[task.idx]) {
+                    orders[task.idx][task.field] = tr;
+                }
             } else if (task.type === 'order-pizza') {
                 if (orders[task.idx] && Array.isArray(orders[task.idx].pizzas) && orders[task.idx].pizzas[task.pizzaIdx]) {
                     orders[task.idx].pizzas[task.pizzaIdx][task.field] = tr;
@@ -271,6 +299,8 @@ async function translateStorageUsingLibre() {
             localStorage.setItem('orders', JSON.stringify(orders));
             localStorage.setItem('cart', JSON.stringify(cart));
             console.log('[translateStorage] Successfully saved translated data to localStorage');
+            console.log('[translateStorage] Processed orders:', orders.length);
+            console.log('[translateStorage] Processed cart items:', cart.length);
         } catch (err) {
             console.error('[translateStorage] saving to localStorage failed:', err);
         }
@@ -444,9 +474,9 @@ function renderOrdersHTML(orders) {
                                     <div>
                                         <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px; width: 100%">
                                             <div style="display: flex; align-items: center;">
-                                                <span class="fs-14" style="color: black; font-weight: 600; font-style: italic;">Promotion: ${productData.title || order.title || ''}</span>
+                                                <span class="fs-14" style="color: black; font-weight: 600; font-style: italic;">დაწინაურება: ${productData.title || order.title || ''}</span>
                                             </div>
-                                            <p class="fs-14 title_prices" style="color: black; font-weight: 600; font-style: italic;">starting with: ${productData.price ? productData.price.toFixed(2) + '₾' : (order.price ? order.price.toFixed(2) + '₾' : '')}</p>
+                                            <p class="fs-14 title_prices" style="color: black; font-weight: 600; font-style: italic;">დაწყებული: ${productData.price ? productData.price.toFixed(2) + '₾' : (order.price ? order.price.toFixed(2) + '₾' : '')}</p>
                                         </div>
                                         <div>
                                             ${renderPizzas(order.pizzas)}
@@ -713,6 +743,7 @@ function deleteOrder(orderId) {
         console.error('deleteOrder error:', error);
         hideLoader();
     }
+    window.location.reload()
 }
 
 // Function to delete cart item
@@ -731,6 +762,8 @@ function deleteCartItem(itemId) {
         console.error('deleteCartItem error:', error);
         hideLoader();
     }
+            window.location.reload();
+
 }
 
 // Main function to load and render all items (orders + cart)
