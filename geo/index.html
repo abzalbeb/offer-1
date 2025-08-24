@@ -16,6 +16,137 @@
     <link rel="stylesheet" href="../assets/css/addCart.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+     <style>
+
+        .adress_black{
+            width: 100%;
+            height: 100vh;
+            background-color: #0000006e;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 111111111;
+            display: none;
+        }
+
+        .for_flex_adres{
+            display: none;
+        }
+
+       
+        .css-yv7evq {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 11px 15px -7px, rgba(0, 0, 0, 0.14) 0px 24px 38px 3px, rgba(0, 0, 0, 0.12) 0px 9px 46px 8px;
+    background-image: none;
+    position: relative;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100% - 64px);
+    max-width: 400px;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 4px;
+    margin: 32px;
+    width: 90% !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1111111111111111;
+}
+
+.css-ohyacs {
+    margin: 0px;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+    padding: 16px 24px;
+    flex: 0 0 auto;
+}
+
+.css-1ty026z {
+    overflow-y: auto;
+    flex: 1 1 auto;
+    padding: 20px 24px;
+}
+
+.css-vubbuv {
+    user-select: none;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentcolor;
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.jss14 {
+    gap: 2rem;
+    display: flex
+;
+    margin-top: 1rem;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.jss15 {
+    width: 160px;
+    display: flex
+;
+    background: #E6233F;
+    border-radius: 12px;
+    justify-content: center;
+}
+
+.css-13z6b64 {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+    min-width: 64px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 120, 173);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+    width: 100%;
+    font-weight: 500;
+    outline: 0px;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    margin: 0px;
+    text-decoration: none;
+    padding: 6px 16px;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 4px;
+}
+    </style>
+
     <style>
         .css-k62kit {
             overflow: hidden;
@@ -1575,7 +1706,7 @@
                                             <div class="triangle"></div>
                                             <div class="cart-popup-img"
                                                 style="text-align: center; margin-bottom: 10px;">
-                                                <img src="https://dominospizza.ge/static/media/empty_cart.ce51a99a8179668c0c85.png"
+                                                <img src="../assets/image/image/empty_cart.ce51a99a8179668c0c85.png"
                                                     alt="Empty Cart">
                                             </div>
                                             <div class="cart-item-map-container" style="display: none;">
@@ -5143,6 +5274,38 @@
                 </div>
             </div>
         </div>
+
+        <div onclick="none_change()" class="adress_black"></div>
+    <div class="for_flex_adres"><div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm css-yv7evq"
+        role="dialog" aria-labelledby=":r3g:"
+        style="overflow: hidden; width: 400px; height: max-content; border-radius: 12px;">
+        <h2 class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-ohyacs" id=":r3g:"
+            style="padding: 10px 20px 0px 0px; display: flex; align-items: center; justify-content: flex-end;">
+            <svg onclick="none_change()"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true"
+                viewBox="0 0 24 24" data-testid="CloseIcon" style="cursor: pointer;">
+                <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                </path>
+            </svg></h2>
+        <div class="MuiDialogContent-root css-1ty026z" style="overflow: hidden; padding-block: 0px;">
+            <div class="jss14">
+                <div>
+                    <div class="jss15"><img src="../assets/image/bike-white.c750e44adb7ca082feca9c0ac6e6bd23.svg"
+                            alt="COME TO MY ADDRESS" style="height: 120px; width: 100px; object-fit: contain;"></div>
+                    <br>
+                    <p class="Kanit-SemiBold" style="color: rgb(230, 35, 63); text-align: center;">მოდი ჩემს მისამართზე<br></p>
+                </div>
+                <div>
+                    <p class="Kanit-SemiBold">თქვენს მიერ არჩეული მისამართი</p>
+                    <p>საქართველო, თბილისი, მერაბ კოსტავას ქ. 76</p>
+                </div><button onclick="window.location='./service-method'"
+                    class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-SemiBold css-13z6b64"
+                    tabindex="0" type="button">შეცვლა<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
+            </div>
+        </div>
+    </div>
+    </div>
     
 
     <script src="../assets/js/terms-main.js"></script>
@@ -5150,6 +5313,19 @@
 
 
     <script>
+
+             document.addEventListener('DOMContentLoaded', function () {
+            if (!(sessionStorage.getItem("selected_adres"))) {
+                document.querySelector(".for_flex_adres").style="display:flex"
+            document.querySelector(".adress_black").style="display:flex"
+            }
+        })
+
+        function none_change() {
+            sessionStorage.setItem("selected_adres", true)
+            document.querySelector(".for_flex_adres").style="display:none"
+            document.querySelector(".adress_black").style="display:none"
+        }
 
         function cartAddress() {
             window.location.href = './cart/'

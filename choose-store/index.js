@@ -343,5 +343,6 @@ items.forEach(el => {
 }
 
 function btnAddress(){
+  sessionStorage.setItem("selected_adres", true)
   window.location.href='../'
 }

@@ -346,5 +346,6 @@ items.forEach(el => {
 
 }
 function chooseAdd(){
+  sessionStorage.setItem("selected_adres", true)
   window.location.href='../'
 }
