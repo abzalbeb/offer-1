@@ -1010,7 +1010,7 @@ function payment_page() {
         sessionStorage.setItem("dataprice", grandTotal.toFixed(2) + "₾");
         
         setTimeout(() => {
-            window.location="../oplata";
+            window.location="../../oplata";
         }, 300);
     } catch (error) {
         console.error('payment_page error:', error);

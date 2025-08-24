@@ -342,8 +342,8 @@ function initAddToCartButtons() {
             let img = product.dataset.img;
             let title = product.dataset.title;
             let description = product.dataset.description;
-            let price = parseFloat(product.dataset.price);
-            let aksiyaPrice = parseFloat(product.dataset.aksiyaPrice) || null;
+            let aksiyaPrice = parseFloat(product.dataset.price);
+            let price = parseFloat(product.dataset.aksiyaPrice) || 0;
 
             let existing = cart.find(item => item.id === id);
 
@@ -397,11 +397,11 @@ function updateQuantityUI(product, id) {
 
     // for_price ga faqat price (asl narx) * count
     let totalPrice = cartItem.price * cartItem.count;
-    let totalAksiya = (cartItem.aksiyaPrice || cartItem.price) * cartItem.count;
+    let totalAksiya = (cartItem.aksiyaPrice) * cartItem.count;
 
     // for_price ga price (asl narx) ni qo'yish
     if (priceEl) {
-        priceEl.innerHTML = totalPrice.toFixed(2) + "<b></b>";
+        priceEl.innerHTML = totalPrice.toFixed(2) + "<b>₾</b>";
     }
     
     // for_aksiyaPrice ga aksiya narxini qo'yish
