@@ -1,6 +1,18 @@
-const order = localStorage.getItem("order")
+let orders = ""
 
-if (order == "medium_pizza") {
+if (localStorage.getItem('edit')) {
+    orders = JSON.parse(localStorage.getItem("orders")) || [];
+}else{
+    orders = [JSON.parse(localStorage.getItem("selectedProduct")) || {}]; 
+}
+
+
+orders.forEach(order => {
+
+    let title = order.originalProduct ? order.originalProduct.title : order.title;
+   
+
+if (title === "1+1 საშუალო ზომის პიცა") {
     document.querySelector('.for_display_tovars').innerHTML=`<div class="for_medium_pizza MuiGrid-root MuiGrid-container css-1d3bbye for_selects_cards">
                     <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12 css-15j76c0 for_selects_card pizza-block" data-id="0"
                         style="margin-top: 35px;">
@@ -2195,7 +2207,7 @@ if (order == "medium_pizza") {
                         </div>
                     </div>
                 </div>`
-}else if(order == "bread_souce"){
+}else if(title === "2x ყველის პური + სოუსი"){
 document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_souce MuiGrid-root MuiGrid-container css-1d3bbye for_selects_cards">
                     <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12 css-15j76c0 for_selects_card pizza-block" data-id="0"
                         style="margin-top: 35px;">
@@ -2397,7 +2409,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                         </div>
                     </div>
                 </div>`
-}else if(order == "large_pizza"){
+}else if(title === "1+1 დიდი პიცა"){
     document.querySelector(".for_display_tovars").innerHTML=` <div class="for_large_pizza MuiGrid-root MuiGrid-container css-1d3bbye for_selects_cards">
                     <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12 css-15j76c0 for_selects_card pizza-block" data-id="0"
                         style="margin-top: 35px;">
@@ -4595,7 +4607,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                     </div>
                 </div>
 `
-}else if(order == "garlic_bread_souce"){
+}else if(title === "2x ნივრის პური + სოუსი"){
     document.querySelector(".for_display_tovars").innerHTML=`<div class="for_garlic_souce MuiGrid-root MuiGrid-container css-1d3bbye for_selects_cards">
                     <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12 css-15j76c0 for_selects_card pizza-block" data-id="0"
                         style="margin-top: 35px;">
@@ -4739,7 +4751,7 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                         </div>
                     </div>
                 </div>`
-}else if(order == "mega_week"){
+}else if(title === "მეგა კვირა"){
     document.querySelector(".for_display_tovars").innerHTML=`<div class="for_mega_week MuiGrid-root MuiGrid-container css-1d3bbye for_selects_cards">
                     <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12 css-15j76c0 for_selects_card pizza-block" data-id="0"
                         style="margin-top: 35px;">
@@ -5479,3 +5491,5 @@ document.querySelector(".for_display_tovars").innerHTML=`<div class="for_bread_s
                     </div>
                 </div>`
 }
+
+});

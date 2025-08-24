@@ -51,7 +51,6 @@ function hideLoader() {
         document.body.style.overflow = '';
     }
 }
-
 // -----------------------------
 // PATH-BASED LANGUAGE DETECTOR
 // -----------------------------
@@ -113,6 +112,7 @@ async function translateTextLibre(text, targetLang) {
 
 // -----------------------------
 // TRANSLATE STORAGE BY PATH (uses translateTextLibre -> MyMemory)
+// YANGILANGAN VERSIYA: originalProduct'dan tarjima qilish
 // -----------------------------
 async function translateStorageUsingLibre() {
     try {
@@ -134,19 +134,74 @@ async function translateStorageUsingLibre() {
         }
 
         orders.forEach((o, i) => {
-            if (o && o.title) pushText('order', i, 'title', o.title);
-            if (o && o.description) pushText('order', i, 'description', o.description);
+            // Order asosiy ma'lumotlari - originalProduct'dan olinadi
+            if (o && o.originalProduct) {
+                if (o.originalProduct.title) pushText('order', i, 'title', o.originalProduct.title);
+                if (o.originalProduct.description) pushText('order', i, 'description', o.originalProduct.description);
+            } else {
+                // Fallback - agar originalProduct yo'q bo'lsa
+                if (o && o.title) pushText('order', i, 'title', o.title);
+                if (o && o.description) pushText('order', i, 'description', o.description);
+            }
 
             if (Array.isArray(o.pizzas)) {
                 o.pizzas.forEach((p, pi) => {
-                    if (p && p.title) pushText('order-pizza', i, 'title', p.title, pi);
-                    if (p && p.description) pushText('order-pizza', i, 'description', p.description, pi);
+                    // Pizza ma'lumotlari
+                    if (p && p.title) {
+                        // Agar originalProduct mavjud bo'lsa, undagi pizza ma'lumotlarini qidirish
+                        let originalPizzaTitle = p.title;
+                        if (o.originalProduct && Array.isArray(o.originalProduct.pizzas)) {
+                            const originalPizza = o.originalProduct.pizzas.find(op => 
+                                op.id === p.id || op.title === p.title
+                            );
+                            if (originalPizza && originalPizza.title) {
+                                originalPizzaTitle = originalPizza.title;
+                            }
+                        }
+                        pushText('order-pizza', i, 'title', originalPizzaTitle, pi);
+                    }
 
-                    // INGREDIENTLAR
+                    if (p && p.description) {
+                        // Description uchun ham xuddi shunday
+                        let originalPizzaDescription = p.description;
+                        if (o.originalProduct && Array.isArray(o.originalProduct.pizzas)) {
+                            const originalPizza = o.originalProduct.pizzas.find(op => 
+                                op.id === p.id || op.title === p.title
+                            );
+                            if (originalPizza && originalPizza.description) {
+                                originalPizzaDescription = originalPizza.description;
+                            }
+                        }
+                        pushText('order-pizza', i, 'description', originalPizzaDescription, pi);
+                    }
+
+                    // INGREDIENTLAR - originalProduct'dan olish
                     if (Array.isArray(p.ingredients)) {
                         p.ingredients.forEach((ing, ii) => {
                             if (ing && ing.name) {
-                                pushText('order-ingredient', i, 'name', ing.name, pi + ':' + ii);
+                                let originalIngredientName = ing.name;
+                                
+                                // originalProduct'dagi ingredient'ni topish
+                                if (o.originalProduct && Array.isArray(o.originalProduct.pizzas)) {
+                                    const originalPizza = o.originalProduct.pizzas.find(op => 
+                                        op.id === p.id || op.title === p.title
+                                    );
+                                    
+                                    if (originalPizza && Array.isArray(originalPizza.ingredients)) {
+                                        const originalIngredient = originalPizza.ingredients.find(oi => 
+                                            oi.id === ing.id || 
+                                            oi.name === ing.name ||
+                                            (oi.name && ing.name && oi.name.toLowerCase() === ing.name.toLowerCase())
+                                        );
+                                        
+                                        if (originalIngredient && originalIngredient.name) {
+                                            originalIngredientName = originalIngredient.name;
+                                            console.log(`Using original ingredient name: ${originalIngredientName} for ${ing.name}`);
+                                        }
+                                    }
+                                }
+                                
+                                pushText('order-ingredient', i, 'name', originalIngredientName, pi + ':' + ii);
                             }
                         });
                     }
@@ -154,17 +209,26 @@ async function translateStorageUsingLibre() {
             }
         });
 
+        // Cart ma'lumotlari
         cart.forEach((c, i) => {
-            if (c && c.title) pushText('cart', i, 'title', c.title);
-            if (c && c.description) pushText('cart', i, 'description', c.description);
+            if (c && c.originalProduct) {
+                if (c.originalProduct.title) pushText('cart', i, 'title', c.originalProduct.title);
+                if (c.originalProduct.description) pushText('cart', i, 'description', c.originalProduct.description);
+            } else {
+                // Fallback
+                if (c && c.title) pushText('cart', i, 'title', c.title);
+                if (c && c.description) pushText('cart', i, 'description', c.description);
+            }
         });
 
         if (uniqMap.size === 0) {
+            console.log('[translateStorage] No texts to translate');
             return;
         }
 
         // build unique text array
         const uniqTexts = Array.from(uniqMap.keys());
+        console.log(`[translateStorage] Translating ${uniqTexts.length} unique texts`);
 
         // translate sequentially to be gentle with the API
         const translated = [];
@@ -172,6 +236,7 @@ async function translateStorageUsingLibre() {
             const s = uniqTexts[i];
             const tr = await translateTextLibre(s, targetLang);
             translated.push(tr);
+            console.log(`[translateStorage] ${i+1}/${uniqTexts.length}: "${s}" -> "${tr}"`);
             // small delay (avoid rate limit)
             await new Promise(r => setTimeout(r, 150));
         }
@@ -180,6 +245,7 @@ async function translateStorageUsingLibre() {
         tasks.forEach(task => {
             const uniqIndex = uniqMap.get(task.text);
             const tr = translated[uniqIndex] || task.text;
+            
             if (task.type === 'order') {
                 if (orders[task.idx]) orders[task.idx][task.field] = tr;
             } else if (task.type === 'order-pizza') {
@@ -188,23 +254,23 @@ async function translateStorageUsingLibre() {
                 }
             } else if (task.type === 'cart') {
                 if (cart[task.idx]) cart[task.idx][task.field] = tr;
-            }
-                else if (task.type === 'order-ingredient') {
-           if (orders[task.idx] && Array.isArray(orders[task.idx].pizzas)) {
-            const [pi, ii] = String(task.pizzaIdx).split(':').map(Number);
-            if (orders[task.idx].pizzas[pi] && Array.isArray(orders[task.idx].pizzas[pi].ingredients)) {
-                if (orders[task.idx].pizzas[pi].ingredients[ii]) {
-                    orders[task.idx].pizzas[pi].ingredients[ii].name = tr;
+            } else if (task.type === 'order-ingredient') {
+                if (orders[task.idx] && Array.isArray(orders[task.idx].pizzas)) {
+                    const [pi, ii] = String(task.pizzaIdx).split(':').map(Number);
+                    if (orders[task.idx].pizzas[pi] && Array.isArray(orders[task.idx].pizzas[pi].ingredients)) {
+                        if (orders[task.idx].pizzas[pi].ingredients[ii]) {
+                            orders[task.idx].pizzas[pi].ingredients[ii].name = tr;
+                        }
+                    }
                 }
             }
-        }
-    }
         });
 
         // save back
         try {
             localStorage.setItem('orders', JSON.stringify(orders));
             localStorage.setItem('cart', JSON.stringify(cart));
+            console.log('[translateStorage] Successfully saved translated data to localStorage');
         } catch (err) {
             console.error('[translateStorage] saving to localStorage failed:', err);
         }
@@ -231,15 +297,6 @@ function getOrdersFromLocalStorage() {
     try {
         const orders = localStorage.getItem('orders');
         return orders ? JSON.parse(orders) : [];
-    } catch (error) {
-        console.error('Error loading orders from localStorage:', error);
-        return [];
-    }
-}
-function getOrders_pizzaFromLocalStorage() {
-    try {
-        const orders_pizza = localStorage.getItem('orders_pizza');
-        return orders_pizza ? JSON.parse(orders_pizza) : [];
     } catch (error) {
         console.error('Error loading orders from localStorage:', error);
         return [];
@@ -359,32 +416,37 @@ function renderCartHTML(cartItems) {
 }
 
 // Main function to render orders HTML
+// Main function to render orders HTML
 function renderOrdersHTML(orders) {
     if (!orders || orders.length === 0) return '';
 
-    return orders.map(order => `
+    return orders.map(order => {
+        // ORIGINALPRODUCT dan ma'lumotlarni olish
+        const productData = order.originalProduct || order;
+        
+        return `
         <div class="MuiBox-root css-1hnm6b6">
             <div class="MuiBox-root css-0">
                 <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-fgqxdv">
                     <div class="MuiGrid-root MuiGrid-container css-1d3bbye">
                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-3.5 MuiGrid-grid-md-2.2 MuiGrid-grid-lg-1.5 css-2g1k7u">
                             <div class="for_cart_img">
-                                <img src="${order.img || ''}" alt="${order.title || ''}" style="width: 156px; height: 68px; object-fit: contain;">
+                                <img src="${productData.img || order.img || ''}" alt="${productData.title || order.title || ''}" style="width: 156px; height: 68px; object-fit: contain;">
                             </div>
                         </div>
                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 MuiGrid-grid-md-9.8 MuiGrid-grid-lg-10.5 css-1br1bhk">
                             <div>
                                 <div style="margin-bottom: 12px;">
-                                    <p class="text-black IBM-Regular fs-20 capitalize tovar_title" style="font-weight: bold;">${order.title || ''}</p>
-                                    <span class=" fs-14 text-gray capitalize">${order.description || ''}</span>
+                                    <p class="text-black IBM-Regular fs-20 capitalize tovar_title" style="font-weight: bold;">${productData.title || order.title || ''}</p>
+                                    <span class=" fs-14 text-gray capitalize">${productData.description || order.description || ''}</span>
                                 </div>
                                 <div>
                                     <div>
                                         <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px; width: 100%">
                                             <div style="display: flex; align-items: center;">
-                                                <span class="fs-14" style="color: black; font-weight: 600; font-style: italic;">Promotion: ${order.title || ''}</span>
+                                                <span class="fs-14" style="color: black; font-weight: 600; font-style: italic;">Promotion: ${productData.title || order.title || ''}</span>
                                             </div>
-                                            <p class="fs-14 title_prices" style="color: black; font-weight: 600; font-style: italic;">starting with: ${order.price ? order.price.toFixed(2) + '₾' : ''}</p>
+                                            <p class="fs-14 title_prices" style="color: black; font-weight: 600; font-style: italic;">starting with: ${productData.price ? productData.price.toFixed(2) + '₾' : (order.price ? order.price.toFixed(2) + '₾' : '')}</p>
                                         </div>
                                         <div>
                                             ${renderPizzas(order.pizzas)}
@@ -395,7 +457,8 @@ function renderOrdersHTML(orders) {
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 12px;">
                                 <h3 class="text-grey fs-20"><s>
 ${(() => {
-    let basePrice = parseFloat(order.aksiyaPrice) || 0;
+    // ORIGINALPRODUCT dan asosiy narxlarni olish
+    let basePrice = parseFloat(productData.aksiyaPrice || order.aksiyaPrice) || 0;
     let additionalPrice = 0;
     
     // Pizzalar narxini qo'shish
@@ -413,7 +476,7 @@ ${(() => {
     }
     
     // Agar 1+1 aksiya bo'lsa
-    if (order.description && order.description.includes("get second for free")) {
+    if ((productData.description || order.description) && (productData.description || order.description).includes("get second for free")) {
         return ((basePrice * order.count) + additionalPrice).toFixed(2);
     } else {
         return ((basePrice + additionalPrice) * order.count).toFixed(2);
@@ -424,7 +487,8 @@ ${(() => {
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0px;">
                                 <h3 class="text-red fs-24" style="text-align: end;">
 ${(() => {
-    let basePrice = parseFloat(order.price) || 0;
+    // ORIGINALPRODUCT dan asosiy narxlarni olish
+    let basePrice = parseFloat(productData.price || order.price) || 0;
     let additionalPrice = 0;
     
     // Pizzalar narxini qo'shish
@@ -442,7 +506,7 @@ ${(() => {
     }
     
     // Agar 1+1 aksiya bo'lsa
-    if (order.description && order.description.includes("get second for free")) {
+    if ((productData.description || order.description) && (productData.description || order.description).includes("get second for free")) {
         return ((basePrice * order.count) + additionalPrice).toFixed(2);
     } else {
         return ((basePrice + additionalPrice) * order.count).toFixed(2);
@@ -480,7 +544,7 @@ ${(() => {
                 </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 }
 
 // Combined function to render all items (orders + cart)
@@ -718,39 +782,30 @@ function removeAll() {
 
 function editOrder(orderId) {
     showLoader(); // Loader ko'rsatish
-    
+   
     try {
         const orders = JSON.parse(localStorage.getItem('orders')) || [];
         const order = orders.find(o => o.id === orderId);
-        
+       
         if (order) {
             // Tahrirlash rejimini yoqamiz
             localStorage.setItem('edit', 'true');
             localStorage.setItem('for_id', orderId);
-            
+           
             // Pizza uchun ingredient countini saqlash
             if (order.pizzas && order.pizzas.length > 0) {
                 localStorage.setItem('ingredient', order.pizzas.length.toString());
             }
-            
-            // ASOSIY PRODUCT MA'LUMOTLARINI TO'G'RI SHAKLLANTIRISH
-            const productData = {
-                id: order.productId || order.id, // Asosiy mahsulot ID'si (order ID'si emas!)
-                title: order.title,
-                img: order.img,
-                img_1: order.img_1 || '',
-                description: order.description,
-                price: order.price || 0, // null o'rniga 0
-                aksiyaPrice: order.aksiyaPrice || 0, // null o'rniga 0
-                ingredients: order.ingredients || '',
-                type: order.type || '',
-                dataType: order.dataType || '',
-                language: order.language || 'en'
-            };
-            
-            // FAQAT BIR MARTA selectedProduct'ni set qilish
-            localStorage.setItem('selectedProduct', JSON.stringify(order));
-            
+           
+            // ORIGINALPRODUCT OBYEKTINI TO'G'RIDAN-TO'G'RI SELECTEDPRODUCTGA O'TKAZISH
+            if (order.originalProduct) {
+                // originalProduct obyektini to'g'ridan-to'g'ri o'tkazish
+                localStorage.setItem('selectedProduct', JSON.stringify(order.originalProduct));
+            } else {
+                // Fallback: originalProduct yo'q bo'lsa, orderning o'zini saqlash
+                localStorage.setItem('selectedProduct', JSON.stringify(order));
+            }
+           
             // Pizza uchun qo'shimcha ma'lumotlarni saqlaymiz
             if (order.dataType === 'pizza' && order.pizzas) {
                 // Birinchi pizzaning title'ini size sifatida saqlash (agar kerak bo'lsa)
@@ -759,10 +814,10 @@ function editOrder(orderId) {
                     localStorage.setItem('selectedPizzaSize', pizzaSize);
                 }
             }
-            
-            const hasPizza = order.dataType === 'pizza' || 
+           
+            const hasPizza = order.dataType === 'pizza' ||
                            (Array.isArray(order.items) && order.items.some(item => item.dataType === 'pizza'));
-            
+           
             setTimeout(() => {
                 hideLoader(); // Loader yashirish
                 if (hasPizza) {
@@ -872,14 +927,44 @@ let orders = JSON.parse(localStorage.getItem("orders")) || [];
 // cart subtotal
 let cartTotal = cart.reduce((sum, item) => sum + ((item.price || 0) * (item.count || 0)), 0);
 
-// orders subtotal (price * quantity)
-let ordersTotal = orders.reduce((sum, item) => sum + ((item.price || 0) * (item.count || 0)), 0);
+// orders subtotal (originalProduct boyicha)
+let ordersTotal = orders.reduce((sum, item) => {
+    let productData = item.originalProduct || item;
+    let count = item.count || 0;
+
+    // originalProduct narxi
+    let basePrice = productData.price || productData.aksiyaPrice || 0;
+
+    // pizzas narxi va ingredientlar narxi
+    let pizzasPrice = 0;
+    if (item.pizzas && Array.isArray(item.pizzas)) {
+        pizzasPrice = item.pizzas.reduce((pSum, pizza) => {
+            let pizzaPrice = pizza.price || 0;
+
+            // ingredient narxlari
+            let ingPrice = 0;
+            if (pizza.ingredients && Array.isArray(pizza.ingredients)) {
+                ingPrice = pizza.ingredients.reduce(
+                    (ingSum, ing) => ingSum + (ing.price || 0),
+                    0
+                );
+            }
+
+            return pSum + pizzaPrice + ingPrice;
+        }, 0);
+    }
+
+    // umumiy hisob (count ga ko‘paytirilgan)
+    return sum + ((basePrice + pizzasPrice) * count);
+}, 0);
 
 // umumiy total
 let grandTotal = cartTotal + ordersTotal;
+
 if (document.querySelector(".subTotal")) {
     document.querySelector(".subTotal").innerHTML = grandTotal.toFixed(2) + "₾";
 }
+
 
 function payment_page() {
     showLoader(); // Loader ko'rsatish
@@ -899,11 +984,41 @@ function payment_page() {
 let cartDiv = document.querySelector(".cart_cards");
 if (cartDiv) {
     cartDiv.innerHTML += orders.map(item => {
+
+        let productData = item.originalProduct || item;
+
         return `
              <div class="cart_card">
                                     <p class=" fs-20 capitalize"
-                                        style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${item.title}</p>
-                                    <span class="text-red " style="margin-left: auto; font-weight: 500;">${(item.price*item.count).toFixed(2)}₾</span>
+                                        style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${productData.title}</p>
+                                    <span class="text-red " style="margin-left: auto; font-weight: 500;">
+                                    ${(() => {
+    // ORIGINALPRODUCT dan asosiy narxlarni olish
+    let basePrice = parseFloat(productData.price || item.price) || 0;
+    let additionalPrice = 0;
+    
+    // Pizzalar narxini qo'shish
+    if (item.pizzas && item.pizzas.length > 0) {
+        item.pizzas.forEach(pizza => {
+            additionalPrice += parseFloat(pizza.price) || 0;
+            
+            // Ingredientlar narxini qo'shish
+            if (pizza.ingredients && pizza.ingredients.length > 0) {
+                pizza.ingredients.forEach(ingredient => {
+                    additionalPrice += parseFloat(ingredient.price) || 0;
+                });
+            }
+        });
+    }
+    
+    // Agar 1+1 aksiya bo'lsa
+    if ((productData.description || item.description) && (productData.description || item.description).includes("get second for free")) {
+        return ((basePrice * item.count) + additionalPrice).toFixed(2);
+    } else {
+        return ((basePrice + additionalPrice) * item.count).toFixed(2);
+    }
+})()}
+                                    ₾</span>
                                 </div>
         `;
     }).join("");

@@ -1362,7 +1362,7 @@ function handleIngredientVisibility(){
 
 if (localStorage.getItem("edit") == "true") {
     for (let i = 0; i < document.querySelectorAll(".addToCartBtn").length; i++) {
-        document.querySelectorAll(".addToCartBtn")[i].innerHTML = "კალათაში დამატება"
+        document.querySelectorAll(".addToCartBtn")[i].innerHTML = "ბარათის განახლება"
     }
 }
 

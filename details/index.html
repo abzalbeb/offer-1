@@ -4242,21 +4242,50 @@ function loadExistingOrder(orderId) {
 
     console.log("Found order:", existingOrder);
 
+    // ORIGINALPRODUCT dan ma'lumotlarni olish
+    const productData = existingOrder.originalProduct || existingOrder;
+    console.log("Using product data:", productData);
+
+    // selectedProduct ni originalProduct bilan to'ldirish
+    if (existingOrder.originalProduct) {
+        localStorage.setItem('selectedProduct', JSON.stringify(existingOrder.originalProduct));
+        console.log("Set selectedProduct from originalProduct");
+    }
+
     // Update count
     count = existingOrder.count;
     updateQuantity();
+
+    // Product ma'lumotlarini sahifaga yuklash (agar kerak bo'lsa)
+    if (document.getElementById("title")) {
+        document.getElementById("title").textContent = productData.title || '';
+    }
+    if (document.getElementById("img")) {
+        document.getElementById("img").src = productData.img || '';
+    }
+    if (document.getElementById("description")) {
+        document.getElementById("description").textContent = productData.description || '';
+    }
+    if (document.getElementById("price")) {
+        document.getElementById("price").textContent = (parseFloat(productData.price) || 0).toFixed(2) + "₾";
+    }
+    if (document.getElementById("aksiyaPrice")) {
+        document.getElementById("aksiyaPrice").textContent = (parseFloat(productData.aksiyaPrice) || 0).toFixed(2) + "₾";
+    }
 
     // Load pizzas
     if (existingOrder.pizzas && existingOrder.pizzas.length > 0) {
         existingOrder.pizzas.forEach((pizza, index) => {
             console.log(`Loading pizza ${index}:`, pizza);
             
-            // Pizza ma'lumotlarini saqlash
+            // Pizza ma'lumotlarini saqlash (originalProduct dan olingan ma'lumotlar bilan)
             pizzaSelectionData.set(index.toString(), {
                 id: pizza.id, // Pizza'ning o'z ID'si
                 title: pizza.title,
                 price: pizza.price,
-                originalIngredients: pizza.ingredients || []
+                originalIngredients: pizza.ingredients || [],
+                // qo'shimcha: original product ma'lumotlari
+                originalProductData: productData
             });
 
             // Pizza tanlash - ID orqali topish
@@ -4297,13 +4326,32 @@ function loadExistingOrder(orderId) {
                     }
                 } else {
                     console.log(`No matching card found for pizza: ${pizza.title} with ID: ${pizza.id}`);
+                    
+                    // QIDIRUV KENGAYTIRILDI: Agar hech narsa topilmasa, barcha cardlarni ko'rib chiqish
+                    console.log("Available cards in block:", 
+                        Array.from(cards).map(card => ({
+                            id: card.dataset.id,
+                            title: card.querySelector('h2')?.textContent
+                        }))
+                    );
                 }
+            } else {
+                console.log(`Pizza block not found for index: ${index}`);
             }
         });
     }
-}
 
+    // Global product o'zgaruvchisini ham yangilash (agar mavjud bo'lsa)
+    if (typeof product !== 'undefined') {
+        Object.assign(product, productData);
+        console.log("Updated global product variable with originalProduct data");
+    }
+
+    console.log("Finished loading existing order with originalProduct data");
+}
 // YANGILANGAN selectPizza funksiyasi
+
+
 function selectPizza(id, card) {
     console.log(`Selecting pizza for ID: ${id}`);
 
@@ -4667,7 +4715,7 @@ function addToCart() {
     }
 
     orders.push(newOrder);
-    localStorage.setItem('orders_pizza', JSON.stringify(orders));
+    localStorage.setItem('orders', JSON.stringify(orders));
     updateCartDisplay();
 
     // Clear data
@@ -4678,6 +4726,7 @@ function addToCart() {
         window.location.href = "../cart";
     }, 1000);
 }
+
 
 function updateCartDisplay() {
     const cartItems = document.getElementById('cartItems');

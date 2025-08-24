@@ -783,7 +783,6 @@ function updateCartPopup() {
     const emptyImg = document.querySelector(".cart-popup-img");
     const totalEl = document.querySelector(".cart-total .redflag");
 
-
     if (!container || !cartItemMap || !emptyImg || !totalEl) return;
 
     container.innerHTML = ""; // eski elementlarni tozalash
@@ -804,7 +803,7 @@ function updateCartPopup() {
 
     // Avval cart itemlarini qo'shish
     cart.forEach(item => {
-        const itemTotal = item.price*item.count;
+        const itemTotal = item.price * item.count;
         total += itemTotal;
         
         const div = document.createElement("div");
@@ -819,37 +818,89 @@ function updateCartPopup() {
             </div>
             <div class="card-price-item">
                 <p class="fs-18 text-red redflag" style="font-size:15px;">
-                    ${(item.price*item.count).toFixed(2)}<b>₾</b>
+                    ${(item.price * item.count).toFixed(2)}<b>₾</b>
                 </p>
             </div>
         `;
         container.appendChild(div);
     });
 
-    // Keyin orders itemlarini qo'shish
+    // Keyin orders itemlarini qo'shish (originalProduct bilan)
     orders.forEach(item => {
-        // Orders strukturasi boshqacha bo'lgani uchun
+        // originalProduct'dan ma'lumotlarni olish
+        let productData = item.originalProduct || item; // Fallback: originalProduct yo'q bo'lsa item'dan olish
+        
         let itemTotal = 0;
-         if (item.price) {
-            itemTotal = item.price * (item.count);
-            
-        }
+if (productData.price || productData.aksiyaPrice) {
+    // aksiyaPrice mavjud bo'lsa uni ishlatish, aks holda price
+    const price = productData.price || productData.aksiyaPrice || 0;
 
-        total += itemTotal;
+    // asosiy narxni hisoblash (price * count)
+    itemTotal = price * (item.count || 1);
+
+    // agar pizzas bo'lsa, ularning narxlari va ingredientlarini qo‘shamiz
+    if (item.pizzas && Array.isArray(item.pizzas)) {
+        let pizzasExtra = item.pizzas.reduce((sum, pizza) => {
+            let pizzaPrice = pizza.price || 0;
+
+            // ingredient narxlari
+            let ingPrice = 0;
+            if (pizza.ingredients && Array.isArray(pizza.ingredients)) {
+                ingPrice = pizza.ingredients.reduce(
+                    (ingSum, ing) => ingSum + (ing.price || 0), 
+                    0
+                );
+            }
+
+            return sum + pizzaPrice + ingPrice;
+        }, 0);
+
+        // pizzalarning umumiy summasini ham count ga ko‘paytiramiz
+        itemTotal += pizzasExtra * (item.count || 1);
+    }
+}
+
+total += itemTotal;
+
 
         const div = document.createElement("div");
         div.className = "item-card-container";
         div.innerHTML = `
             <div class="img-cart-item">
-                <img src="${item.img}" alt="${item.title}">
+                <img src="${productData.img}" alt="${productData.title}">
             </div>
             <div class="card-text-info-item">
-                <p>${item.title}</p>
-                <span>${item.description || ''}</span>
+                <p>${productData.title}</p>
+                <span>${productData.description || ''}</span>
             </div>
             <div class="card-price-item">
                 <p class="fs-18 text-red redflag" style="font-size:15px;">
-                    ${(item.price*item.count).toFixed(2)}<b>₾</b>
+                    ${(() => {
+    // ORIGINALPRODUCT dan asosiy narxlarni olish
+    let basePrice = parseFloat(productData.price || item.price) || 0;
+    let additionalPrice = 0;
+    
+    // Pizzalar narxini qo'shish
+    if (item.pizzas && item.pizzas.length > 0) {
+        item.pizzas.forEach(pizza => {
+            additionalPrice += parseFloat(pizza.price) || 0;
+            
+            // Ingredientlar narxini qo'shish
+            if (pizza.ingredients && pizza.ingredients.length > 0) {
+                pizza.ingredients.forEach(ingredient => {
+                    additionalPrice += parseFloat(ingredient.price) || 0;
+                });
+            }
+        });
+    }
+    
+    // Agar 1+1 aksiya bo'lsa
+    if ((productData.description || item.description) && (productData.description || item.description).includes("get second for free")) {
+        return ((basePrice * item.count) + additionalPrice).toFixed(2);
+    } else {
+        return ((basePrice + additionalPrice) * item.count).toFixed(2);
+    }
+})()}<b>₾</b>
                 </p>
             </div>
         `;
