@@ -344,5 +344,14 @@ items.forEach(el => {
 
 function btnAddress(){
   sessionStorage.setItem("selected_adres", true)
-  window.location.href='../'
+
+  if (sessionStorage.getItem("addresses")) {
+    window.location.href='../'
+  }else{
+    document.querySelector("#login_banner_11").style="display:block !important"
+    document.querySelector(".login_banner").style="display:none"
+    document.querySelector("#mobileChooseContainer ").style="display:none !important"
+  }
+
+  
 }
