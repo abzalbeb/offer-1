@@ -71,13 +71,20 @@ window.getCurrentLanguage = getCurrentLanguage; // for testing in console
 
 // -----------------------------
 
-// MyMemory-based translate function (replaces previous LibreTranslate usage)
-// Uses: https://api.mymemory.translated.net/get?q=...&langpair=... 
+// Microsoft Translator API-based translate function
+// Uses: https://api.cognitive.microsofttranslator.com/translate
 // -----------------------------
 const translationCache = new Map();
 const BATCH_SIZE = 5;
 const MAX_CONCURRENT_REQUESTS = 3;
 const DELAY_BETWEEN_BATCHES = 100;
+
+// Microsoft Translator API konfiguratsiyasi
+const MS_TRANSLATOR_CONFIG = {
+    subscriptionKey: 'SIZNING_SUBSCRIPTION_KEY_INGIZ', // Bu yerga o'z kalitingizni qo'ying
+    endpoint: 'https://api.cognitive.microsofttranslator.com',
+    region: 'global' // yoki sizning regioningiz
+};
 
 async function translateTextLibre(text, targetLang) {
     if (!text || !String(text).trim()) return text;
@@ -88,22 +95,42 @@ async function translateTextLibre(text, targetLang) {
         return translationCache.get(cacheKey);
     }
 
-    const langpair = (targetLang === 'geo') ? 'en|ka' : 'ka|en';
-    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langpair}`;
+    // Microsoft Translator API til kodlari
+    const fromLang = (targetLang === 'geo') ? 'en' : 'ka';
+    const toLang = (targetLang === 'geo') ? 'ka' : 'en';
+    
+    const url = `${MS_TRANSLATOR_CONFIG.endpoint}/translate?api-version=3.0&from=${fromLang}&to=${toLang}`;
 
     try {
-        const res = await fetch(url);
-        if (!res.ok) {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Ocp-Apim-Subscription-Key': MS_TRANSLATOR_CONFIG.subscriptionKey,
+                'Ocp-Apim-Subscription-Region': MS_TRANSLATOR_CONFIG.region,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify([{
+                'text': text
+            }])
+        });
+
+        if (!response.ok) {
+            console.error('Microsoft Translator API error:', response.status, response.statusText);
             return text;
         }
-        const j = await res.json();
-        let translated = (j && j.responseData && j.responseData.translatedText) 
-            ? j.responseData.translatedText 
-            : null;
 
-        if (!translated && Array.isArray(j.matches) && j.matches.length > 0) {
-            translated = j.matches[0].translation || j.matches[0].translationText || null;
+        const result = await response.json();
+        
+        if (!result || !Array.isArray(result) || result.length === 0) {
+            return text;
         }
+
+        const translations = result[0].translations;
+        if (!translations || !Array.isArray(translations) || translations.length === 0) {
+            return text;
+        }
+
+        let translated = translations[0].text;
         if (!translated) return text;
 
         // HTML entitylarni ochirish
@@ -117,7 +144,9 @@ async function translateTextLibre(text, targetLang) {
         // Cache the result
         translationCache.set(cacheKey, translated);
         return translated;
+
     } catch (err) {
+        console.error('Microsoft Translator API request failed:', err);
         return text;
     }
 }
@@ -134,11 +163,11 @@ function updateTranslationProgress(current, total) {
 }
 
 // -----------------------------
-// TRANSLATE STORAGE BY PATH (uses translateTextLibre -> MyMemory)
+// TRANSLATE STORAGE BY PATH (uses translateTextLibre -> Microsoft Translator)
 // YANGILANGAN VERSIYA: originalProduct'dan tarjima qilish
 // -----------------------------
 // -----------------------------
-// TRANSLATE STORAGE BY PATH (uses translateTextLibre -> MyMemory)
+// TRANSLATE STORAGE BY PATH (uses translateTextLibre -> Microsoft Translator)
 // YANGILANGAN VERSIYA: HAR IKKALA ORDER FORMATINI QO'LLAB-QUVVATLAYDI
 // 4. TO'RTINCHI: translateStorageUsingLibre funksiyasini to'liq almashtiring
 async function translateStorageUsingLibre() {
@@ -337,7 +366,6 @@ window.translateStorageNow = function() {
         hideLoader();
     });
 };
-
 // -----------------------------
 // ORIGINAL USER CODE (kept intact, but deduplicated helpers only once)
 // -----------------------------
