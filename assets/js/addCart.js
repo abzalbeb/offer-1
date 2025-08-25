@@ -1424,7 +1424,7 @@ window.updateCartFromOrders = function() {
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
-  const oldUrl = '../assets/image/empty_cart.ce51a99a8179668c0c85.png';
+  const oldUrl = 'https://dominospizza.ge/static/media/empty_cart.ce51a99a8179668c0c85.png';
   const newUrl = '../assets/image/empty_cart.ce51a99a8179668c0c85.png';
 
   // Sahifadagi barcha <img> elementlarni tekshiramiz
@@ -1436,122 +1436,27 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".view-cart-btn1").forEach(btn => {
+  document.querySelectorAll(".view-cart-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      let currentPath = window.location.pathname;
-      // Masalan: /offer-1/geo/ yoki /offer-1/sandwich/
-
-      // Agar oxirida fayl bo‘lsa (index.html va h.k.) → olib tashlaymiz
-      if (currentPath.endsWith(".html")) {
-        currentPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
-      }
-
-      // Oxirida "/" bo‘lmasa → qo‘shib qo‘yamiz
-      if (!currentPath.endsWith("/")) {
-        currentPath += "/";
-      }
-
-      // path’ni bo‘laklarga bo‘lib olish
-      let parts = currentPath.split("/").filter(Boolean);
-      // ["offer-1"] yoki ["offer-1","geo"]
-
-      let targetPath;
-
-      if (parts.length === 1) {
-        // faqat offer-1 => umumiy cart
-        targetPath = "/" + parts[0] + "/cart/";
-      } else if (parts[1] === "geo") {
-        // offer-1/geo => geo ichidagi cart
-        targetPath = "/" + parts[0] + "/geo/cart/";
-      } else {
-        // boshqa barcha hollarda (sandwich, pizza, ...) => umumiy cart
-        targetPath = "/" + parts[0] + "/cart/";
-      }
-
-      window.location.href = targetPath;
+      window.location.href = "../cart/";
     });
   });
 });
-
-
-
 document.addEventListener("click", (e) => {
-  const badge = e.target.closest(".MuiBadge-root");
+  const badge = e.target.closest(".MuiBadge-root.css-1rzb3uu");
   if (badge) {
-    let currentPath = window.location.pathname;
-    // Masalan: /offer-1/geo/ yoki /offer-1/sandwich/
-
-    // Agar oxirida fayl bo‘lsa → olib tashlaymiz
-    if (currentPath.endsWith(".html")) {
-      currentPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
-    }
-
-    // Oxirida "/" bo‘lmasa → qo‘shamiz
-    if (!currentPath.endsWith("/")) {
-      currentPath += "/";
-    }
-
-    // bo‘laklarga bo‘lamiz
-    let parts = currentPath.split("/").filter(Boolean);
-    // ["offer-1"], ["offer-1","geo"], ["offer-1","sandwich"]
-
-    let targetPath;
-
-    if (parts.length === 1) {
-      // faqat offer-1 => umumiy cart
-      targetPath = "/" + parts[0] + "/cart/";
-    } else if (parts[1] === "geo") {
-      // offer-1/geo => geo ichidagi cart
-      targetPath = "/" + parts[0] + "/geo/cart/";
-    } else {
-      // boshqa barcha hollarda (sandwich, pizza, ...) => umumiy cart
-      targetPath = "/" + parts[0] + "/cart/";
-    }
-
-    window.location.href = targetPath;
+    window.location.href = "../cart/";
   }
 });
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const capa = document.getElementById("Capa_1");
   if (capa) {
     capa.addEventListener("click", () => {
-      let currentPath = window.location.pathname;
-      // Masalan: /offer-1/geo/ yoki /offer-1/sandwich/
-
-      // Agar oxirida fayl bo‘lsa → olib tashlaymiz
-      if (currentPath.endsWith(".html")) {
-        currentPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
-      }
-
-      // Oxirida "/" bo‘lmasa → qo‘shamiz
-      if (!currentPath.endsWith("/")) {
-        currentPath += "/";
-      }
-
-      // path bo‘laklarga bo‘linadi
-      let parts = currentPath.split("/").filter(Boolean);
-      // ["offer-1"], ["offer-1","geo"], ["offer-1","sandwich"]
-
-      let targetPath;
-
-      if (parts.length === 1) {
-        // faqat offer-1 => umumiy tracking
-        targetPath = "/" + parts[0] + "/tracking/";
-      } else if (parts[1] === "geo") {
-        // offer-1/geo => geo ichidagi tracking
-        targetPath = "/" + parts[0] + "/geo/tracking/";
-      } else {
-        // boshqa hollarda (sandwich, pizza, ...) => umumiy tracking
-        targetPath = "/" + parts[0] + "/tracking/";
-      }
-
-      window.location.href = targetPath;
+      window.location.href = "../tracking/";
     });
   }
 });
-
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("img").forEach(img => {
@@ -1570,119 +1475,29 @@ document.addEventListener("click", (e) => {
       style.width === "38px" &&
       style.objectFit === "contain"
     ) {
-      let currentPath = window.location.pathname;
-
-      // Agar oxirida fayl bo‘lsa → olib tashlaymiz
-      if (currentPath.endsWith(".html")) {
-        currentPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
-      }
-
-      // Oxirida "/" bo‘lmasa → qo‘shamiz
-      if (!currentPath.endsWith("/")) {
-        currentPath += "/";
-      }
-
-      // bo‘laklarga ajratamiz
-      let parts = currentPath.split("/").filter(Boolean);
-      // ["offer-1"], ["offer-1","geo"], ["offer-1","sandwich"]
-
-      let targetPath;
-
-      if (parts.length === 1) {
-        // faqat offer-1 => umumiy stores
-        targetPath = "/" + parts[0] + "/stores/";
-      } else if (parts[1] === "geo") {
-        // offer-1/geo => geo ichidagi stores
-        targetPath = "/" + parts[0] + "/geo/stores/";
-      } else {
-        // boshqa hollarda (sandwich, pizza, ...) => umumiy stores
-        targetPath = "/" + parts[0] + "/stores/";
-      }
-
-      window.location.href = targetPath;
+      window.location.href = "../stores/";
     }
   }
 });
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
   const capa = document.getElementById("Layer_1");
   if (capa) {
     capa.addEventListener("click", () => {
-      let currentPath = window.location.pathname;
-
-      // Fayl bo‘lsa olib tashlaymiz
-      if (currentPath.endsWith(".html")) {
-        currentPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
-      }
-
-      // Oxirida "/" bo‘lmasa qo‘shamiz
-      if (!currentPath.endsWith("/")) {
-        currentPath += "/";
-      }
-
-      let parts = currentPath.split("/").filter(Boolean);
-      // ["offer-1"], ["offer-1","geo"], ["offer-1","sandwich"]
-
-      let targetPath;
-
-      if (parts.length === 1) {
-        // faqat offer-1
-        targetPath = "/" + parts[0] + "/";
-      } else if (parts[1] === "geo") {
-        // offer-1/geo => geo asosiy sahifasi
-        targetPath = "/" + parts[0] + "/geo/";
-      } else {
-        // boshqa (sandwich, pizza, ...) => offer-1 asosiy sahifasi
-        targetPath = "/" + parts[0] + "/";
-      }
-
-      window.location.href = targetPath;
+      window.location.href = "../";
     });
   }
 });
 
 
-
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".cart-icon").forEach(icon => {
     icon.addEventListener("click", () => {
-      let currentPath = window.location.pathname;
-      // Masalan: /offer-1/sandwich/ yoki /offer-1/geo/
-
-      // Oxirida fayl bo‘lsa, papkani olish uchun kesib tashlaymiz
-      if (currentPath.endsWith(".html")) {
-        currentPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
-      }
-
-      // Oxirida "/" bo‘lmasa, qo‘shamiz
-      if (!currentPath.endsWith("/")) {
-        currentPath += "/";
-      }
-
-      // path’ni bo‘laklarga bo‘lib olish
-      let parts = currentPath.split("/").filter(Boolean);
-      // ["offer-1", "sandwich"]
-
-      let targetPath;
-
-      if (parts.length === 1) {
-        // faqat offer-1 => umumiy cart
-        targetPath = "/" + parts[0] + "/cart/";
-      } else if (parts[1] === "geo") {
-        // offer-1/geo => geo ichidagi cart
-        targetPath = "/" + parts[0] + "/geo/cart/";
-      } else {
-        // boshqa barcha hollarda (sandwich, pizza, ...) => umumiy cart
-        targetPath = "/" + parts[0] + "/cart/";
-      }
-
-      window.location.href = targetPath;
+      window.location.href = "../cart/";
     });
   });
 });
-
 
 document.addEventListener("DOMContentLoaded", function() {
     const geDivs = document.querySelectorAll('.lang_Ge');
