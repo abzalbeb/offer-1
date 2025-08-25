@@ -70,11 +70,23 @@ function getCurrentLanguage() {
 window.getCurrentLanguage = getCurrentLanguage; // for testing in console
 
 // -----------------------------
+
 // MyMemory-based translate function (replaces previous LibreTranslate usage)
 // Uses: https://api.mymemory.translated.net/get?q=...&langpair=... 
 // -----------------------------
+const translationCache = new Map();
+const BATCH_SIZE = 5;
+const MAX_CONCURRENT_REQUESTS = 3;
+const DELAY_BETWEEN_BATCHES = 100;
+
 async function translateTextLibre(text, targetLang) {
     if (!text || !String(text).trim()) return text;
+
+    // Check cache first
+    const cacheKey = `${text}_${targetLang}`;
+    if (translationCache.has(cacheKey)) {
+        return translationCache.get(cacheKey);
+    }
 
     const langpair = (targetLang === 'geo') ? 'en|ka' : 'ka|en';
     const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langpair}`;
@@ -101,9 +113,23 @@ async function translateTextLibre(text, targetLang) {
         if (/[а-яё]/i.test(translated)) {
             return text; 
         }
+
+        // Cache the result
+        translationCache.set(cacheKey, translated);
         return translated;
     } catch (err) {
         return text;
+    }
+}
+
+// 3. UCHINCHI: Progress indicator funksiyasini qo'shing
+function updateTranslationProgress(current, total) {
+    const percentage = Math.round((current / total) * 100);
+    
+    // Update loader text if element exists
+    const loaderElement = document.querySelector('.ctn-preloader div');
+    if (loaderElement) {
+        
     }
 }
 
@@ -114,187 +140,195 @@ async function translateTextLibre(text, targetLang) {
 // -----------------------------
 // TRANSLATE STORAGE BY PATH (uses translateTextLibre -> MyMemory)
 // YANGILANGAN VERSIYA: HAR IKKALA ORDER FORMATINI QO'LLAB-QUVVATLAYDI
-// -----------------------------
+// 4. TO'RTINCHI: translateStorageUsingLibre funksiyasini to'liq almashtiring
+async function translateStorageUsingLibre() {
+    try {
+        const targetLang = getCurrentLanguage();
 
+        // read current storage
+        const orders = (typeof getOrdersFromLocalStorage === 'function') ? getOrdersFromLocalStorage() : JSON.parse(localStorage.getItem('orders') || '[]');
+        const cart = (typeof getCartFromLocalStorage === 'function') ? getCartFromLocalStorage() : JSON.parse(localStorage.getItem('cart') || '[]');
 
-// async function translateStorageUsingLibre() {
-//     try {
-//         const targetLang = getCurrentLanguage();
+        // gather texts (deduped)
+        const tasks = []; 
+        const uniqTexts = new Set(); // Use Set for better performance
 
-//         // read current storage using helper funcs defined later (they exist)
-//         const orders = (typeof getOrdersFromLocalStorage === 'function') ? getOrdersFromLocalStorage() : JSON.parse(localStorage.getItem('orders') || '[]');
-//         const cart = (typeof getCartFromLocalStorage === 'function') ? getCartFromLocalStorage() : JSON.parse(localStorage.getItem('cart') || '[]');
+        function pushText(type, idx, field, text, pizzaIdx) {
+            if (!text || !String(text).trim()) return;
+            const t = String(text);
+            uniqTexts.add(t);
+            tasks.push({ type, idx, field, text: t, pizzaIdx });
+        }
 
-//         // gather texts (deduped)
-//         const tasks = []; // {type, idx, field, text, pizzaIdx?}
-//         const uniqMap = new Map(); // text -> index in uniqTexts
+        // Collect all texts (same logic as before)
+        orders.forEach((o, i) => {
+            if (o && o.originalProduct) {
+                if (o.originalProduct.title) pushText('order', i, 'title', o.originalProduct.title);
+                if (o.originalProduct.description) pushText('order', i, 'description', o.originalProduct.description);
+                if (o.title) pushText('order-self', i, 'title', o.title);
+                if (o.description) pushText('order-self', i, 'description', o.description);
+            } else {
+                if (o && o.title) pushText('order', i, 'title', o.title);
+                if (o && o.description) pushText('order', i, 'description', o.description);
+            }
 
-//         function pushText(type, idx, field, text, pizzaIdx) {
-//             if (!text || !String(text).trim()) return;
-//             const t = String(text);
-//             if (!uniqMap.has(t)) uniqMap.set(t, uniqMap.size);
-//             tasks.push({ type, idx, field, text: t, pizzaIdx });
-//         }
+            if (Array.isArray(o.pizzas)) {
+                o.pizzas.forEach((p, pi) => {
+                    if (p && p.title) {
+                        let originalPizzaTitle = p.title;
+                        if (o.originalProduct && Array.isArray(o.originalProduct.pizzas)) {
+                            const originalPizza = o.originalProduct.pizzas.find(op => 
+                                op.id === p.id || op.title === p.title
+                            );
+                            if (originalPizza && originalPizza.title) {
+                                originalPizzaTitle = originalPizza.title;
+                            }
+                        }
+                        pushText('order-pizza', i, 'title', originalPizzaTitle, pi);
+                    }
 
-//         orders.forEach((o, i) => {
-//             // HAR IKKALA FORMAT UCHUN
-//             if (o && o.originalProduct) {
-//                 // YANGI FORMAT - originalProduct mavjud
-                
-//                 if (o.originalProduct.title) pushText('order', i, 'title', o.originalProduct.title);
-//                 if (o.originalProduct.description) pushText('order', i, 'description', o.originalProduct.description);
-                
-//                 // Order-ning o'zidagi title/description ham tarjima qilinadi
-//                 if (o.title) pushText('order-self', i, 'title', o.title);
-//                 if (o.description) pushText('order-self', i, 'description', o.description);
-                
-//             } else {
-//                 // ESKI FORMAT - originalProduct yo'q
-                
-//                 if (o && o.title) pushText('order', i, 'title', o.title);
-//                 if (o && o.description) pushText('order', i, 'description', o.description);
-//             }
+                    if (p && p.description) {
+                        let originalPizzaDescription = p.description;
+                        if (o.originalProduct && Array.isArray(o.originalProduct.pizzas)) {
+                            const originalPizza = o.originalProduct.pizzas.find(op => 
+                                op.id === p.id || op.title === p.title
+                            );
+                            if (originalPizza && originalPizza.description) {
+                                originalPizzaDescription = originalPizza.description;
+                            }
+                        }
+                        pushText('order-pizza', i, 'description', originalPizzaDescription, pi);
+                    }
 
-//             // PIZZALAR - har ikkala format uchun
-//             if (Array.isArray(o.pizzas)) {
-//                 o.pizzas.forEach((p, pi) => {
-                    
-//                     if (p && p.title) {
-//                         // Agar originalProduct mavjud bo'lsa, undagi pizza ma'lumotlarini qidirish
-//                         let originalPizzaTitle = p.title;
-//                         if (o.originalProduct && Array.isArray(o.originalProduct.pizzas)) {
-//                             const originalPizza = o.originalProduct.pizzas.find(op => 
-//                                 op.id === p.id || op.title === p.title
-//                             );
-//                             if (originalPizza && originalPizza.title) {
-//                                 originalPizzaTitle = originalPizza.title;
-//                             }
-//                         }
-//                         pushText('order-pizza', i, 'title', originalPizzaTitle, pi);
-//                     }
-
-//                     if (p && p.description) {
-//                         // Description uchun ham xuddi shunday
-//                         let originalPizzaDescription = p.description;
-//                         if (o.originalProduct && Array.isArray(o.originalProduct.pizzas)) {
-//                             const originalPizza = o.originalProduct.pizzas.find(op => 
-//                                 op.id === p.id || op.title === p.title
-//                             );
-//                             if (originalPizza && originalPizza.description) {
-//                                 originalPizzaDescription = originalPizza.description;
-//                             }
-//                         }
-//                         pushText('order-pizza', i, 'description', originalPizzaDescription, pi);
-//                     }
-
-//                     // INGREDIENTLAR - har ikkala format uchun
-//                     if (Array.isArray(p.ingredients)) {
-//                         p.ingredients.forEach((ing, ii) => {
-//                             if (ing && ing.name) {
-//                                 let originalIngredientName = ing.name;
+                    if (Array.isArray(p.ingredients)) {
+                        p.ingredients.forEach((ing, ii) => {
+                            if (ing && ing.name) {
+                                let originalIngredientName = ing.name;
                                 
-//                                 // originalProduct'dagi ingredient'ni topish
-//                                 if (o.originalProduct && Array.isArray(o.originalProduct.pizzas)) {
-//                                     const originalPizza = o.originalProduct.pizzas.find(op => 
-//                                         op.id === p.id || op.title === p.title
-//                                     );
+                                if (o.originalProduct && Array.isArray(o.originalProduct.pizzas)) {
+                                    const originalPizza = o.originalProduct.pizzas.find(op => 
+                                        op.id === p.id || op.title === p.title
+                                    );
                                     
-//                                     if (originalPizza && Array.isArray(originalPizza.ingredients)) {
-//                                         const originalIngredient = originalPizza.ingredients.find(oi => 
-//                                             oi.id === ing.id || 
-//                                             oi.name === ing.name ||
-//                                             (oi.name && ing.name && oi.name.toLowerCase() === ing.name.toLowerCase())
-//                                         );
+                                    if (originalPizza && Array.isArray(originalPizza.ingredients)) {
+                                        const originalIngredient = originalPizza.ingredients.find(oi => 
+                                            oi.id === ing.id || 
+                                            oi.name === ing.name ||
+                                            (oi.name && ing.name && oi.name.toLowerCase() === ing.name.toLowerCase())
+                                        );
                                         
-//                                         if (originalIngredient && originalIngredient.name) {
-//                                             originalIngredientName = originalIngredient.name;
-//                                         }
-//                                     }
-//                                 }
+                                        if (originalIngredient && originalIngredient.name) {
+                                            originalIngredientName = originalIngredient.name;
+                                        }
+                                    }
+                                }
                                 
-//                                 pushText('order-ingredient', i, 'name', originalIngredientName, pi + ':' + ii);
-//                             }
-//                         });
-//                     }
-//                 });
-//             }
-//         });
+                                pushText('order-ingredient', i, 'name', originalIngredientName, pi + ':' + ii);
+                            }
+                        });
+                    }
+                });
+            }
+        });
 
-//         // Cart ma'lumotlari - o'zgarishsiz
-//         cart.forEach((c, i) => {
-//             if (c && c.originalProduct) {
-//                 if (c.originalProduct.title) pushText('cart', i, 'title', c.originalProduct.title);
-//                 if (c.originalProduct.description) pushText('cart', i, 'description', c.originalProduct.description);
-//             } else {
-//                 // Fallback
-//                 if (c && c.title) pushText('cart', i, 'title', c.title);
-//                 if (c && c.description) pushText('cart', i, 'description', c.description);
-//             }
-//         });
+        cart.forEach((c, i) => {
+            if (c && c.originalProduct) {
+                if (c.originalProduct.title) pushText('cart', i, 'title', c.originalProduct.title);
+                if (c.originalProduct.description) pushText('cart', i, 'description', c.originalProduct.description);
+            } else {
+                if (c && c.title) pushText('cart', i, 'title', c.title);
+                if (c && c.description) pushText('cart', i, 'description', c.description);
+            }
+        });
 
-//         if (uniqMap.size === 0) {
-//             return;
-//         }
+        if (uniqTexts.size === 0) {
+            return;
+        }
 
-//         // build unique text array
-//         const uniqTexts = Array.from(uniqMap.keys());
+        // Convert Set to Array for batch processing
+        const uniqTextsArray = Array.from(uniqTexts);
+        
+        // Show initial progress
+        updateTranslationProgress(0, uniqTextsArray.length);
 
-//         // translate sequentially to be gentle with the API
-//         const translated = [];
-//         for (let i = 0; i < uniqTexts.length; i++) {
-//             const s = uniqTexts[i];
-//             const tr = await translateTextLibre(s, targetLang);
-//             translated.push(tr);
-//             // small delay (avoid rate limit)
-//             await new Promise(r => setTimeout(r, 150));
-//         }
+        // Translate in optimized batches
+        const translated = [];
+        const batches = [];
+        
+        for (let i = 0; i < uniqTextsArray.length; i += BATCH_SIZE) {
+            batches.push(uniqTextsArray.slice(i, i + BATCH_SIZE));
+        }
 
-//         // apply translations back using maps
-//         tasks.forEach(task => {
-//             const uniqIndex = uniqMap.get(task.text);
-//             const tr = translated[uniqIndex] || task.text;
+        for (let i = 0; i < batches.length; i += MAX_CONCURRENT_REQUESTS) {
+            const currentBatches = batches.slice(i, i + MAX_CONCURRENT_REQUESTS);
             
-//             if (task.type === 'order') {
-//                 // ORIGINALPRODUCT mavjud format uchun
-//                 if (orders[task.idx] && orders[task.idx].originalProduct) {
-//                     orders[task.idx].originalProduct[task.field] = tr;
-//                 } else if (orders[task.idx]) {
-//                     // ESKI FORMAT uchun
-//                     orders[task.idx][task.field] = tr;
-//                 }
-//             } else if (task.type === 'order-self') {
-//                 // Order-ning o'zidagi ma'lumotlarni yangilash
-//                 if (orders[task.idx]) {
-//                     orders[task.idx][task.field] = tr;
-//                 }
-//             } else if (task.type === 'order-pizza') {
-//                 if (orders[task.idx] && Array.isArray(orders[task.idx].pizzas) && orders[task.idx].pizzas[task.pizzaIdx]) {
-//                     orders[task.idx].pizzas[task.pizzaIdx][task.field] = tr;
-//                 }
-//             } else if (task.type === 'cart') {
-//                 if (cart[task.idx]) cart[task.idx][task.field] = tr;
-//             } else if (task.type === 'order-ingredient') {
-//                 if (orders[task.idx] && Array.isArray(orders[task.idx].pizzas)) {
-//                     const [pi, ii] = String(task.pizzaIdx).split(':').map(Number);
-//                     if (orders[task.idx].pizzas[pi] && Array.isArray(orders[task.idx].pizzas[pi].ingredients)) {
-//                         if (orders[task.idx].pizzas[pi].ingredients[ii]) {
-//                             orders[task.idx].pizzas[pi].ingredients[ii].name = tr;
-//                         }
-//                     }
-//                 }
-//             }
-//         });
+            const batchPromises = currentBatches.map(batch => 
+                Promise.all(batch.map(text => translateTextLibre(text, targetLang)))
+            );
+            
+            const batchResults = await Promise.all(batchPromises);
+            translated.push(...batchResults.flat());
+            
+            // Update progress
+            const currentProgress = Math.min(translated.length, uniqTextsArray.length);
+            updateTranslationProgress(currentProgress, uniqTextsArray.length);
+            
+            // Small delay between batch groups
+            if (i + MAX_CONCURRENT_REQUESTS < batches.length) {
+                await new Promise(r => setTimeout(r, DELAY_BETWEEN_BATCHES));
+            }
+        }
 
-//         // save back
-//         try {
-//             localStorage.setItem('orders', JSON.stringify(orders));
-//             localStorage.setItem('cart', JSON.stringify(cart));
-//         } catch (err) {
-//         }
+        // Create translation map for quick lookup
+        const translationMap = new Map();
+        uniqTextsArray.forEach((text, index) => {
+            translationMap.set(text, translated[index] || text);
+        });
 
-//     } catch (err) {
-//     }
-// }
+        // Apply translations back using maps
+        tasks.forEach(task => {
+            const tr = translationMap.get(task.text) || task.text;
+            
+            if (task.type === 'order') {
+                if (orders[task.idx] && orders[task.idx].originalProduct) {
+                    orders[task.idx].originalProduct[task.field] = tr;
+                } else if (orders[task.idx]) {
+                    orders[task.idx][task.field] = tr;
+                }
+            } else if (task.type === 'order-self') {
+                if (orders[task.idx]) {
+                    orders[task.idx][task.field] = tr;
+                }
+            } else if (task.type === 'order-pizza') {
+                if (orders[task.idx] && Array.isArray(orders[task.idx].pizzas) && orders[task.idx].pizzas[task.pizzaIdx]) {
+                    orders[task.idx].pizzas[task.pizzaIdx][task.field] = tr;
+                }
+            } else if (task.type === 'cart') {
+                if (cart[task.idx]) cart[task.idx][task.field] = tr;
+            } else if (task.type === 'order-ingredient') {
+                if (orders[task.idx] && Array.isArray(orders[task.idx].pizzas)) {
+                    const [pi, ii] = String(task.pizzaIdx).split(':').map(Number);
+                    if (orders[task.idx].pizzas[pi] && Array.isArray(orders[task.idx].pizzas[pi].ingredients)) {
+                        if (orders[task.idx].pizzas[pi].ingredients[ii]) {
+                            orders[task.idx].pizzas[pi].ingredients[ii].name = tr;
+                        }
+                    }
+                }
+            }
+        });
+
+        // save back
+        try {
+            localStorage.setItem('orders', JSON.stringify(orders));
+            localStorage.setItem('cart', JSON.stringify(cart));
+        } catch (err) {
+            console.error('Error saving to localStorage:', err);
+        }
+
+    } catch (err) {
+        console.error('Translation error:', err);
+    }
+}
 
 // expose quick runner
 window.translateStorageNow = function() {
@@ -355,7 +389,7 @@ function renderPizzas(pizzas) {
         <div>
             <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px; width: 100%; margin-top: 15px;">
                 <div style="display: flex; align-items: center;">
-                    <span class="fs-16 text-black" style="text-decoration: none;">Product ${index + 1} : ${pizza.title || ''}</span>
+                    <span class="fs-16 text-black" style="text-decoration: none;">product: ${index + 1} : ${pizza.title || ''}</span>
                 </div>
                 <p class="fs-16 text-black">${pizza.price ? pizza.price.toFixed(2) + '₾' : ''}</p>
             </div>
@@ -430,6 +464,7 @@ function renderCartHTML(cartItems) {
 }
 
 // Main function to render orders HTML
+// Main function to render orders HTML
 function renderOrdersHTML(orders) {
     if (!orders || orders.length === 0) return '';
 
@@ -459,7 +494,7 @@ function renderOrdersHTML(orders) {
                                             <div style="display: flex; align-items: center;">
                                                 <span class="fs-14" style="color: black; font-weight: 600; font-style: italic;">Promotion: ${productData.title || order.title || ''}</span>
                                             </div>
-                                            <p class="fs-14 title_prices" style="color: black; font-weight: 600; font-style: italic;">starting with: ${productData.price ? productData.price.toFixed(2) + '₾' : (order.price ? order.price.toFixed(2) + '₾' : '')}</p>
+                                            <p class="fs-14 title_prices" style="color: black; font-weight: 600; font-style: italic;">starting: ${productData.price ? productData.price.toFixed(2) + '₾' : (order.price ? order.price.toFixed(2) + '₾' : '')}</p>
                                         </div>
                                         <div>
                                             ${renderPizzas(order.pizzas)}
@@ -635,8 +670,14 @@ function changeQuantity(orderId, change) {
             }
         }
 
-       
-        
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // total larni yig'ish
+        let subTotal = cart.reduce((sum, item) => sum + (item.total || 0), 0);
+
+        if (document.querySelector(".subTotal")) {
+            document.querySelector(".subTotal").innerHTML = subTotal.toFixed(2)
+        }
         
     } catch (error) {
         hideLoader();
@@ -718,7 +759,6 @@ function deleteOrder(orderId) {
         hideLoader();
     }
     window.location.reload()
-
 }
 
 // Function to delete cart item
@@ -737,6 +777,7 @@ function deleteCartItem(itemId) {
         hideLoader();
     }
             window.location.reload();
+
 }
 
 // Main function to load and render all items (orders + cart)
@@ -922,6 +963,7 @@ function createOrderWithOriginalProduct(productData, pizzasArray, count, totalPr
     return newOrder;
 }
 
+
 // existing subtotal calc & cart_cards rendering
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
@@ -964,8 +1006,6 @@ let ordersTotal = orders.reduce((sum, item) => {
 // umumiy total
 let grandTotal = cartTotal + ordersTotal;
 
-
-
 if (document.querySelector(".subTotal")) {
     document.querySelector(".subTotal").innerHTML = grandTotal.toFixed(2) + "₾";
 }
@@ -978,7 +1018,7 @@ function payment_page() {
         sessionStorage.setItem("dataprice", grandTotal.toFixed(2) + "₾");
         
         setTimeout(() => {
-            window.location="../oplata";
+            window.location="../../oplata";
         }, 300);
     } catch (error) {
         hideLoader();
@@ -994,7 +1034,7 @@ if (cartDiv) {
         return `
              <div class="cart_card">
                                     <p class=" fs-20 capitalize"
-                                        style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${productData.title}</p>
+                                        style="color: rgb(73, 73, 73);font-weight: 300; text-decoration: none;">${item.title}</p>
                                     <span class="text-red " style="margin-left: auto; font-weight: 500;">
                                     ${(() => {
     // ORIGINALPRODUCT dan asosiy narxlarni olish
@@ -1041,13 +1081,15 @@ if (cartDiv) {
 // -----------------------------
 // DOMContentLoaded: run translation then render WITH LOADER
 // -----------------------------
+// 5. BESHINCHI: DOMContentLoaded qismini yangilash
 document.addEventListener('DOMContentLoaded', function() {
     // Show loader at the beginning
     showLoader();
     
-    // try translating storage items based on path language (MyMemory), then render
+    // Use optimized translation function
     translateStorageUsingLibre()
         .catch(err => { 
+            console.error('Translation failed:', err);
         })
         .finally(() => {
             try {
@@ -1056,9 +1098,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Hide loader after everything is done
                 setTimeout(() => {
                     hideLoader();
-                }, 500); // Small delay to show completion
+                }, 300); // Reduced delay from 500ms to 300ms
                 
             } catch (e) {
+                console.error('Rendering failed:', e);
                 hideLoader();
             }
         });

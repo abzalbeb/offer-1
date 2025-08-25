@@ -1706,8 +1706,8 @@
                                             <div class="triangle"></div>
                                             <div class="cart-popup-img"
                                                 style="text-align: center; margin-bottom: 10px;">
-                                                <img src="../assets/image/image/empty_cart.ce51a99a8179668c0c85.png"
-                                                    alt="Empty Cart">
+                                                
+                                                    <img src="../assets/image/empty_cart.ce51a99a8179668c0c85.png" alt="">
                                             </div>
                                             <div class="cart-item-map-container" style="display: none;">
                                                 <div class="item-card-container" style="display:block !important">
@@ -5086,7 +5086,7 @@
             id="massage-mobile">
             <div style="display: flex; flex-direction: column; align-items: center;">
                 <div><a href=""  rel="noopener noreferrer"><img
-                            src="https://dominospizza.ge/static/media/messenger.bdb78ff46cdfba34c11a.png" height="40"
+                            src="../assets/image/messenger.bdb78ff46cdfba34c11a.png" height="40"
                             width="40" alt="messenger" loading="lazy"></a></div>
                 <p style="font-size: 12px; " class="footer-p-style">დაგვიკავშირდით</p>
             </div>
@@ -5297,9 +5297,8 @@
                     <p class="Kanit-SemiBold" style="color: rgb(230, 35, 63); text-align: center;">მოდი ჩემს მისამართზე<br></p>
                 </div>
                 <div>
-                    <p class="Kanit-SemiBold">თქვენს მიერ არჩეული მისამართი</p>
-                    <p>საქართველო, თბილისი, მერაბ კოსტავას ქ. 76</p>
-                </div><button onclick="window.location='./service-method'"
+                    <p class="Kanit-SemiBold address-map" ></p>
+                </div><button onclick="window.location='./service-method/'"
                     class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-SemiBold css-13z6b64"
                     tabindex="0" type="button">შეცვლა<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
             </div>
@@ -5314,18 +5313,45 @@
 
     <script>
 
-             document.addEventListener('DOMContentLoaded', function () {
+            function syncAddresses() {
+                const sessionAddress = JSON.parse(sessionStorage.getItem('addresses') || 'null');
+
+                if (!sessionAddress) {
+                    window.location.href = './service-method/';
+                    return;
+                }
+
+                // Agar massiv bo'lsa birinchi elementni olamiz
+                const addressObj = Array.isArray(sessionAddress) ? sessionAddress[0] : sessionAddress;
+
+                const container = document.querySelector('.address-map');
+                if (container) {
+                    container.innerHTML = `<div>${addressObj.display_name || ''}</div>`;
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', syncAddresses);
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
             if (!(sessionStorage.getItem("selected_adres"))) {
                 document.querySelector(".for_flex_adres").style="display:flex"
             document.querySelector(".adress_black").style="display:flex"
             }
         })
 
-        function none_change() {
-            sessionStorage.setItem("selected_adres", true)
-            document.querySelector(".for_flex_adres").style="display:none"
-            document.querySelector(".adress_black").style="display:none"
-        }
+            function none_change() {
+                const sessionAddress = JSON.parse(sessionStorage.getItem('addresses') || 'null');
+                if(sessionAddress){
+                    sessionStorage.setItem("selected_adres",true);
+                    document.querySelector(".for_flex_adres").style.display = "none";
+                    document.querySelector(".adress_black").style.display = "none";
+                }
+
+            }
 
         function cartAddress() {
             window.location.href = './cart/'

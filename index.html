@@ -5190,7 +5190,7 @@
             style="position: absolute; font-size: 300px; width: auto; height: auto; margin: 0px; padding: 0px; font-family: Roboto, Arial, sans-serif;">BESbswy</span>
     </div> -->
 
-    <div onclick="none_change()" class="adress_black"></div>
+    <div  class="adress_black"></div>
     <div class="for_flex_adres"><div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm css-yv7evq"
         role="dialog" aria-labelledby=":r3g:"
         style="overflow: hidden; width: 400px; height: max-content; border-radius: 12px;">
@@ -5214,7 +5214,7 @@
                 </div>
                 <div>
                     <p class="Kanit-SemiBold">Your Current Selected Address</p>
-                    <p>76 Merab Kostava St, T'bilisi, Georgia</p>
+                    <p class="address-map"></p>
                 </div><button onclick="window.location='./service-method'"
                     class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Kanit-SemiBold css-13z6b64"
                     tabindex="0" type="button">Change<span class="MuiTouchRipple-root css-w0pj6f"></span></button>
@@ -5229,6 +5229,29 @@
 
     <script>
 
+            function syncAddresses() {
+                const sessionAddress = JSON.parse(sessionStorage.getItem('addresses') || 'null');
+
+                if (!sessionAddress) {
+                    window.location.href = './service-method/';
+                    return;
+                }
+
+                // Agar massiv bo'lsa birinchi elementni olamiz
+                const addressObj = Array.isArray(sessionAddress) ? sessionAddress[0] : sessionAddress;
+
+                const container = document.querySelector('.address-map');
+                if (container) {
+                    container.innerHTML = `<div>${addressObj.display_name || ''}</div>`;
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', syncAddresses);
+
+
+
+
+
         document.addEventListener('DOMContentLoaded', function () {
             if (!(sessionStorage.getItem("selected_adres"))) {
                 document.querySelector(".for_flex_adres").style="display:flex"
@@ -5236,11 +5259,18 @@
             }
         })
 
-        function none_change() {
-            sessionStorage.setItem("selected_adres", true)
-            document.querySelector(".for_flex_adres").style="display:none"
-            document.querySelector(".adress_black").style="display:none"
-        }
+            function none_change() {
+                const sessionAddress = JSON.parse(sessionStorage.getItem('addresses') || 'null');
+                if(sessionAddress){
+                    sessionStorage.setItem("selected_adres",true);
+                    document.querySelector(".for_flex_adres").style.display = "none";
+                    document.querySelector(".adress_black").style.display = "none";
+                }
+
+            }
+
+
+
 
         function cartAddress() {
             window.location.href = './cart/'

@@ -49,7 +49,7 @@ function haversineKm(lat1, lon1, lat2, lon2) {
 // TUZATILGAN: Manual va Geolokatsiya variantlari
 document.getElementById("geo-btnMobile").addEventListener("click", function() {
   if (!navigator.geolocation) {
-    alert("Brauzer geolokatsiyani qo'llab-quvvatlamaydi. Manual koordinata ishlatiladi.");
+    alert("Geolocation permission denied.Please enable location access in your browser settings.");
     useManualCoordinates();
     return;
   }
@@ -232,7 +232,7 @@ function haversineKm(lat1, lon1, lat2, lon2) {
 // TUZATILGAN: Manual va Geolokatsiya variantlari
 document.getElementById("geo-btn").addEventListener("click", function() {
   if (!navigator.geolocation) {
-    alert("Brauzer geolokatsiyani qo'llab-quvvatlamaydi. Manual koordinata ishlatiladi.");
+    alert("Geolocation permission denied.Please enable location access in your browser settings.");
     useManualCoordinates();
     return;
   }

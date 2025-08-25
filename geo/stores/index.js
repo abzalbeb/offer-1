@@ -49,7 +49,7 @@ function haversineKm(lat1, lon1, lat2, lon2) {
 // TUZATILGAN: Manual va Geolokatsiya variantlari
 document.getElementById("geo-btnMobile").addEventListener("click", function() {
   if (!navigator.geolocation) {
-    alert("Brauzer geolokatsiyani qo'llab-quvvatlamaydi. Manual koordinata ishlatiladi.");
+    alert("გთხოვთ, ჩართოთ მდებარეობაზე წვდომა თქვენი ბრაუზერის პარამეტრებში.");
     useManualCoordinates();
     return;
   }
@@ -64,11 +64,11 @@ document.getElementById("geo-btnMobile").addEventListener("click", function() {
   
 
     // Foydalanuvchi real koordinatasi bilan hisoblash
-    calculateDistances(userLat, userLng, `🌍 Sizning joylashuvingiz m aniqlik)`);
+    calculateDistances(userLat, userLng, ``);
 
   }, function(err) {
     
-    alert("Geolokatsiya ishlamadi. Toshkent koordinatasi ishlatiladi.");
+    alert("გეოლოკაცია არ მუშაობდა.");
     // useManualCoordinates();
   }, {
     enableHighAccuracy: true,
@@ -232,7 +232,7 @@ function haversineKm(lat1, lon1, lat2, lon2) {
 // TUZATILGAN: Manual va Geolokatsiya variantlari
 document.getElementById("geo-btn").addEventListener("click", function() {
   if (!navigator.geolocation) {
-    alert("Brauzer geolokatsiyani qo'llab-quvvatlamaydi. Manual koordinata ishlatiladi.");
+    alert("გთხოვთ, ჩართოთ მდებარეობაზე წვდომა თქვენი ბრაუზერის პარამეტრებში.");
     useManualCoordinates();
     return;
   }
@@ -247,11 +247,11 @@ document.getElementById("geo-btn").addEventListener("click", function() {
    
 
     // Foydalanuvchi real koordinatasi bilan hisoblash
-    calculateDistances(userLat, userLng, `🌍 Sizning joylashuvingiz m aniqlik)`);
+    calculateDistances(userLat, userLng, ``);
 
   }, function(err) {
    
-    alert("Geolokatsiya ishlamadi. Toshkent koordinatasi ishlatiladi.");
+    alert("გეოლოკაცია არ მუშაობდა.");
     // useManualCoordinates();
   }, {
     enableHighAccuracy: true,

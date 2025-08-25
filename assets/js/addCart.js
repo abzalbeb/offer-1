@@ -267,7 +267,7 @@ function addToOrders(item) {
 // Cart dan orders ga ko'chirish
 function moveCartToOrders() {
     if (cart.length === 0) {
-        alert('Savatingiz bo\'sh!');
+        alert('Your cart is empty!');
         return;
     }
 
@@ -306,7 +306,7 @@ function moveCartToOrders() {
         loadAndRenderOrders();
     }
     
-    alert("Buyurtma muvaffaqiyatli berildi!");
+    alert("Order placed successfully!");
 }
 
 // ===================
@@ -946,7 +946,7 @@ function addToOrders(item) {
 // Cart dan orders ga ko'chirish
 function moveCartToOrders() {
     if (cart.length === 0) {
-        alert('Savatingiz bo\'sh!');
+        alert('Your cart is empty!');
         return;
     }
 
@@ -985,7 +985,7 @@ function moveCartToOrders() {
         loadAndRenderOrders();
     }
     
-    alert("Buyurtma muvaffaqiyatli berildi!");
+    alert("Order placed successfully!");
 }
 
 // ===================

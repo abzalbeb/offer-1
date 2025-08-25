@@ -45,7 +45,7 @@ if (window.matchMedia("(max-width: 600px)").matches) {
   if (continueBtn) {
     continueBtn.addEventListener("click", () => {
       if (!activeLocation) {
-        alert("Iltimos, biror location tanlang.");
+        alert("გთხოვთ, აირჩიოთ მდებარეობა.");
         return;
       }
 
@@ -165,7 +165,7 @@ if (window.matchMedia("(max-width: 600px)").matches) {
   if (continueBtn) {
     continueBtn.addEventListener("click", () => {
       if (!activeLocation) {
-        alert("Iltimos, biror location tanlang.");
+        alert("გთხოვთ, აირჩიოთ მდებარეობა.");
         return;
       }
 

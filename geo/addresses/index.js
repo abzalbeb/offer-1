@@ -245,7 +245,6 @@ function getDistance(lat1, lon1, lat2, lon2) {
 document.querySelector('#searchLocation').addEventListener('click', () => {
   const addressStr = sessionStorage.getItem('addresses');
   if (!addressStr) {
-    alert("Foydalanuvchi manzili topilmadi sessionStorage-da!");
     return;
   }
 
@@ -253,12 +252,10 @@ document.querySelector('#searchLocation').addEventListener('click', () => {
   try {
     addresses = JSON.parse(addressStr);
   } catch (e) {
-    alert("SessionStorage-da manzil noto‘g‘ri formatda!");
     return;
   }
 
   if (!Array.isArray(addresses) || addresses.length === 0) {
-    alert("Foydalanuvchi manzili topilmadi!");
     return;
   }
 
@@ -280,6 +277,8 @@ document.querySelector('#searchLocation').addEventListener('click', () => {
 
   // Toastify elementini olish
   const toast = document.querySelector('#Toastify');
+  const login_banner = document.querySelector('#login_banner_11');
+
 
   if (farStores.length > 0) {
     toast.style.setProperty('display', 'flex', 'important');
@@ -287,16 +286,15 @@ document.querySelector('#searchLocation').addEventListener('click', () => {
       toast.style.setProperty('display', 'none', 'important'); 
     }, 2000);
   } else {
-    // toast.innerHTML = `Siz barcha do‘konlarga ${maxDistance} km ichidasiz!`;
-    // toast.style.display = 'flex'; // shuningdek display:flex qilamiz
-    alert('salom')
+    login_banner.style.setProperty('display', 'block', 'important');
+    document.querySelector('#login_banner_3').style='display:none'
+    sessionStorage.setItem('selected_adres',true)
   }
 });
 
 document.querySelector('.btnasdd').addEventListener('click', () => {
   const addressStr = sessionStorage.getItem('addresses');
   if (!addressStr) {
-    alert("Foydalanuvchi manzili topilmadi sessionStorage-da!");
     return;
   }
 
@@ -304,12 +302,10 @@ document.querySelector('.btnasdd').addEventListener('click', () => {
   try {
     addresses = JSON.parse(addressStr);
   } catch (e) {
-    alert("SessionStorage-da manzil noto‘g‘ri formatda!");
     return;
   }
 
   if (!Array.isArray(addresses) || addresses.length === 0) {
-    alert("Foydalanuvchi manzili topilmadi!");
     return;
   }
 
@@ -331,6 +327,8 @@ document.querySelector('.btnasdd').addEventListener('click', () => {
 
   // Toastify elementini olish
   const toast = document.querySelector('#Toastify-nostore');
+  const login_banner = document.querySelector('#login_banner_11');
+
 
   if (farStores.length > 0) {
     toast.style.setProperty('display', 'flex', 'important');
@@ -338,9 +336,9 @@ document.querySelector('.btnasdd').addEventListener('click', () => {
       toast.style.setProperty('display', 'none', 'important'); 
     }, 2000);
   } else {
-    // toast.innerHTML = `Siz barcha do‘konlarga ${maxDistance} km ichidasiz!`;
-    // toast.style.display = 'flex'; // shuningdek display:flex qilamiz
-    alert('salom')
+    login_banner.style.setProperty('display', 'block', 'important');
+    document.querySelector('#login_banner_3').style='display:none'
+    sessionStorage.setItem('selected_adres',true)
   }
 });
 
